@@ -18,10 +18,26 @@ public class Island {
 
 	private TowerColor TowersColor;
 
-	private int HasMotherNature;
+	private boolean HasMotherNature;
 
-	public void AddStudent() {
+	public Island() {
+		this.YellowStudents=0;
+		this.GreenStudents=0;
+		this.PinkStudents=0;
+		this.RedStudents=0;
+		this.BlueStudents=0;
+		this.NumberOfTowers=0;
+		this.HasMotherNature=false;
+	}
 
+	public void AddStudent(Color StudentColor) {
+		switch (StudentColor){
+			case GREEN:GreenStudents++;
+			case RED:RedStudents++;
+			case BLUE:BlueStudents++;
+			case PINK:PinkStudents++;
+			case YELLOW:YellowStudents++;
+		}
 	}
 
 	public void BuilldTower() {

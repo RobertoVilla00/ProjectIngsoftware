@@ -12,6 +12,11 @@ public class Match {
 
 	private CharacterCard[] CharacterCardOnTable;
 
+	public Match(int numberOfPlayers) {
+		NumberOfPlayers = numberOfPlayers;
+
+	}
+
 	public void PlanningPhase() {
 
 	}
