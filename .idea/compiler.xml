@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ing-sw-2022-stefanizzi-scortecci-villa" />
+        <module name="softeng-GC57" />
       </profile>
     </annotationProcessing>
   </component>
