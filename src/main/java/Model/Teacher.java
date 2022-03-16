@@ -8,12 +8,17 @@ public class Teacher {
 
 	private TowerColor ControllingPlayer;
 
-	public int getHighestNumberOfStudents() {
-		return 0;
+	public Teacher(Color teacherColor) {
+		TeacherColor = teacherColor;
+		HighestNumberOfStudents = 0;
 	}
 
-	public void ChangeController() {
+	public int getHighestNumberOfStudents() {   //gives the attribute to Match
+		return this.HighestNumberOfStudents;
+	}
 
+	public void ChangeController(TowerColor NewControllingPlayer) { //changes the attribute if requested by Match
+		ControllingPlayer = NewControllingPlayer;
 	}
 
 }

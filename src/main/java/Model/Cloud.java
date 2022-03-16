@@ -8,12 +8,19 @@ public class Cloud {
 
 	private ArrayList<Color> CloudStudents;
 
-	public void AddStudent() {
-
+	public Cloud(int Id){
+			IdCloud = Id;
+			CloudStudents = new ArrayList<Color>();
 	}
 
-	public void MoveStudentsFromCloud() {
+	public void AddStudent(Color StudentColor) {
+		CloudStudents.add(StudentColor);
+	}
 
+	public Color MoveStudentsFromCloud(int index) {
+		Color StudentColor = CloudStudents.get(index);
+		CloudStudents.remove(index);
+		return StudentColor;
 	}
 
 }
