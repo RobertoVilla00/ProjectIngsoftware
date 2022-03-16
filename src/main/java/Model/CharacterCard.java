@@ -6,8 +6,22 @@ public class CharacterCard {
 
 	private int CardCost;
 
-	public void PlayCard() {
 
+	public CharacterCard(int idCharacterCard, int cardCost) {
+		IdCharacterCard = idCharacterCard;
+		CardCost = cardCost;
+	}
+
+	public int getIdCharacterCard() {
+		return IdCharacterCard;
+	}
+
+	public int getCardCost() {
+		return CardCost;
+	}
+
+	public void PlayCard() {
+		CardCost++;
 	}
 
 }

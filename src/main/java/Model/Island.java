@@ -41,11 +41,10 @@ public class Island {
 	}
 
 	public void BuilldTower() {
-
+		NumberOfTowers++;
 	}
-
 	public int CountStudents() {
-		return 0;
+		return GreenStudents+YellowStudents+PinkStudents+RedStudents+BlueStudents;
 	}
 
 }
