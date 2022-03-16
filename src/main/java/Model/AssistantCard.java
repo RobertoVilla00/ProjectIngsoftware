@@ -6,12 +6,18 @@ public class AssistantCard {
 
 	private int Movements;
 
+	public AssistantCard(int orderValue, int movements) {
+		OrderValue = orderValue;
+		Movements = movements;
+	}
+
 	public int getOrderValue() {
-		return 0;
+
+		return OrderValue;
 	}
 
 	public int getMovement() {
-		return 0;
+		return Movements;
 	}
 
 }

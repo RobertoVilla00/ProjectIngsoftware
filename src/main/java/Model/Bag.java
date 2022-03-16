@@ -9,7 +9,6 @@ public class Bag {
 
 	private ArrayList<Color> Students;
 
-	private int UsedStudents;
 
 
 	public Bag() {
@@ -32,9 +31,6 @@ public class Bag {
 		Collections.shuffle(Students);
 	}
 
-	public void FillClouds() {
-
-	}
 
 	public Color getFirstElement(){
 		return Students.get(0);
@@ -42,6 +38,13 @@ public class Bag {
 	public void RemoveFirstElement(){
 		Students.remove(0);
 	}
+
+	public Color FillClouds() {
+		Color StudentColor=getFirstElement();
+		RemoveFirstElement();
+		return StudentColor;
+	}
+
 	public Color FillIsland() {
 		Color StudentColor=getFirstElement();
 		RemoveFirstElement();
