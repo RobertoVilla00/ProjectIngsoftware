@@ -18,7 +18,7 @@ public class Island {
 
 	private TowerColor TowersColor;
 
-	private boolean HasMotherNature;
+	private boolean NoEntryTile;
 
 	public Island() {
 		this.YellowStudents=0;
@@ -27,7 +27,7 @@ public class Island {
 		this.RedStudents=0;
 		this.BlueStudents=0;
 		this.NumberOfTowers=0;
-		this.HasMotherNature=false;
+		this.NoEntryTile=false;
 	}
 
 	public void AddStudent(Color StudentColor) {
@@ -40,11 +40,27 @@ public class Island {
 		}
 	}
 
-	public void BuilldTower() {
-		NumberOfTowers++;
+	public void BuildTower(TowerColor Color) {
+		if (NumberOfTowers == 0) {
+			NumberOfTowers++;
+		}
+		TowersColor= Color;
 	}
-	public int CountStudents() {
-		return GreenStudents+YellowStudents+PinkStudents+RedStudents+BlueStudents;
+
+	public void IncreasedTower(){
+		 NumberOfTowers++;
+	}
+
+	public int CountStudents(Color StudentColor) {
+		int StudentNumber = 0;
+		switch (StudentColor){
+			case YELLOW:StudentNumber = YellowStudents;
+			case PINK:StudentNumber = PinkStudents;
+			case BLUE:StudentNumber = BlueStudents;
+			case RED:StudentNumber = RedStudents;
+			case GREEN:StudentNumber = GreenStudents;
+		}
+		return StudentNumber;
 	}
 
 }

@@ -21,7 +21,9 @@ public class CharacterCardDeck {
 		Cards.add(new CharacterCard(8,0));
 	}
 	public CharacterCard SelectCard() {
-		return null;
+		CharacterCard temp=Cards.get(0);
+		Cards.remove(0);
+		return temp;
 	}
 
 	public void ShuffleCharacterCardDeck() {

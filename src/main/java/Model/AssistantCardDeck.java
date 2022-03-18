@@ -23,5 +23,7 @@ public class AssistantCardDeck {
 		Cards.remove(index);
 	}
 
-
+    public AssistantCard GetCard (int index){
+		return Cards.get(index);
+	}
 }

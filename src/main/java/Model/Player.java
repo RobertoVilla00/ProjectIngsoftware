@@ -1,8 +1,13 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Player {
 
 	private TowerColor PlayerColor;
+
+	private AssistantCardDeck Deck;
 
 	private String Name;
 
@@ -12,15 +17,19 @@ public class Player {
 
 	private int Coins;
 
-	private AssistantCard LastPlayedCard;
+	private int PlayedOrderValue;
 
-	public Player(TowerColor playerColor, String name, School playersSchool, int towersPlaced, AssistantCard lastPlayedCard) {
+	private int PlayedMovements;
+
+	public Player(TowerColor playerColor, String name) {
+
 		PlayerColor = playerColor;
 		Name = name;
-		PlayersSchool = playersSchool;
-		TowersPlaced = towersPlaced;
-		Coins=0;
-		LastPlayedCard = lastPlayedCard;
+		PlayersSchool =new School();
+		TowersPlaced = 0;
+		Coins=1;
+		Deck= new AssistantCardDeck();
+
 	}
 
 	public TowerColor getPlayerColor() {
@@ -43,12 +52,20 @@ public class Player {
 		return Coins;
 	}
 
-	public AssistantCard getLastPlayedCard() {
-		return LastPlayedCard;
+	public int GetPlayedOrderValue() {
+		return PlayedOrderValue;
 	}
 
-	public AssistantCard PlayAssistantCard() {
-             return null;
+	public int GetPlayedMovements() {
+		return PlayedMovements;
 	}
+
+	public void PlayAssistantCard(int index) {   // update last played card
+		this.PlayedOrderValue=Deck.GetCard(index).getOrderValue();
+		this.PlayedMovements=Deck.GetCard(index).getMovement();
+	}
+
+
+
 
 }

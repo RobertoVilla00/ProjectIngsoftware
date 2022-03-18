@@ -17,6 +17,10 @@ public class Teacher {
 		return this.HighestNumberOfStudents;
 	}
 
+	public void IncreasedHighestNumberOfStudents(){
+		HighestNumberOfStudents++;
+	}
+
 	public void ChangeController(TowerColor NewControllingPlayer) { //changes the attribute if requested by Match
 		ControllingPlayer = NewControllingPlayer;
 	}
