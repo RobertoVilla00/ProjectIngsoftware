@@ -33,12 +33,32 @@ public class School {
 		Color StudentColor=Entrance.get(index);
 		switch (StudentColor){
 			case GREEN:GreenStudents++;
+			break;
 			case RED:RedStudents++;
+			break;
 			case BLUE:BlueStudents++;
+			break;
 			case PINK:PinkStudents++;
+			break;
 			case YELLOW:YellowStudents++;
+			break;
 		}
 		Entrance.remove(index);
+	}
+
+	public void RemoveStudentFromDiningRoom(Color StudentColor) {
+		switch (StudentColor){
+			case GREEN:GreenStudents--;
+			break;
+			case RED:RedStudents--;
+			break;
+			case BLUE:BlueStudents--;
+			break;
+			case PINK:PinkStudents--;
+			break;
+			case YELLOW:YellowStudents--;
+			break;
+		}
 	}
 
 	public Color MoveStudentToIsland(int index) {
@@ -51,10 +71,15 @@ public class School {
 		int StudentNumber = 0;
 		switch (StudentColor){
 			case YELLOW:StudentNumber = YellowStudents;
+			break;
 			case PINK:StudentNumber = PinkStudents;
+			break;
 			case BLUE:StudentNumber = BlueStudents;
+			break;
 			case RED:StudentNumber = RedStudents;
+			break;
 			case GREEN:StudentNumber = GreenStudents;
+			break;
 		}
 		return StudentNumber;
 	}

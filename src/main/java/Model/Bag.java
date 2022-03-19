@@ -51,9 +51,20 @@ public class Bag {
 
 	}
 
+	public Color FillCard() {
+		Color StudentColor=getFirstElement();
+		RemoveFirstElement();
+		return StudentColor;
+
+	}
+
 	public void ShuffleBag() {
 		Collections.shuffle(Students);
 	}
 
+	public void AddStudent(Color color){
+		Students.add(color);
+		Collections.shuffle(Students);
+	}
 
 }

@@ -33,10 +33,15 @@ public class Island {
 	public void AddStudent(Color StudentColor) {
 		switch (StudentColor){
 			case GREEN:GreenStudents++;
+			break;
 			case RED:RedStudents++;
+			break;
 			case BLUE:BlueStudents++;
+			break;
 			case PINK:PinkStudents++;
+			break;
 			case YELLOW:YellowStudents++;
+			break;
 		}
 	}
 
@@ -55,10 +60,15 @@ public class Island {
 		int StudentNumber = 0;
 		switch (StudentColor){
 			case YELLOW:StudentNumber = YellowStudents;
+			break;
 			case PINK:StudentNumber = PinkStudents;
+			break;
 			case BLUE:StudentNumber = BlueStudents;
+			break;
 			case RED:StudentNumber = RedStudents;
+			break;
 			case GREEN:StudentNumber = GreenStudents;
+			break;
 		}
 		return StudentNumber;
 	}
