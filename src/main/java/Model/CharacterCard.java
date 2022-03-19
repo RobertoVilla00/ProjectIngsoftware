@@ -24,4 +24,15 @@ public class CharacterCard {
 		CardCost++;
 	}
 
+	public CharacterCard(){};
+
+	public void SetCardCost(int Cost){
+		this.CardCost = Cost;
+	}
 }
+
+
+
+
+
+

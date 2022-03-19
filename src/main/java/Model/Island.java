@@ -2,8 +2,6 @@ package Model;
 
 public class Island {
 
-	private int IdIsland;
-
 	private int GreenStudents;
 
 	private int RedStudents;
