@@ -138,6 +138,38 @@ public class Match {
 
 	}
 
+	public void MergeIslands(int IslandIndex, int IslandToMergeIndex) {
+		int StudentNumber;
+		int TowersNumber;
+		StudentNumber = Table.get(IslandToMergeIndex).CountStudents(Color.GREEN); //update students of the island
+		for(int i=0;i<StudentNumber;i++){
+			Table.get(IslandIndex).AddStudent(Color.GREEN);
+		}
+		StudentNumber = Table.get(IslandToMergeIndex).CountStudents(Color.RED);
+		for(int i=0;i<StudentNumber;i++){
+			Table.get(IslandIndex).AddStudent(Color.RED);
+		}
+		StudentNumber = Table.get(IslandToMergeIndex).CountStudents(Color.BLUE);
+		for(int i=0;i<StudentNumber;i++){
+			Table.get(IslandIndex).AddStudent(Color.BLUE);
+		}
+		StudentNumber = Table.get(IslandToMergeIndex).CountStudents(Color.YELLOW);
+		for(int i=0;i<StudentNumber;i++){
+			Table.get(IslandIndex).AddStudent(Color.YELLOW);
+		}
+		StudentNumber = Table.get(IslandToMergeIndex).CountStudents(Color.PINK);
+		for(int i=0;i<StudentNumber;i++){
+			Table.get(IslandIndex).AddStudent(Color.PINK);
+		}
+
+		TowersNumber = Table.get(IslandToMergeIndex).CountTowers();				//update towers of the island
+		for(int i=0;i<TowersNumber;i++){
+			Table.get(IslandIndex).IncreasedTower();
+		}
+
+		Table.remove(IslandToMergeIndex);
+	}
+
 	public void ActionPhase() {
 
 	}

@@ -54,6 +54,10 @@ public class Island {
 		 NumberOfTowers++;
 	}
 
+	public int CountTowers(){
+		return NumberOfTowers;
+	}
+
 	public int CountStudents(Color StudentColor) {
 		int StudentNumber = 0;
 		switch (StudentColor){
