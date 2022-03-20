@@ -30,4 +30,5 @@ public class CharacterCardDeck {
 		Collections.shuffle(Cards);
 	}
 
+
 }

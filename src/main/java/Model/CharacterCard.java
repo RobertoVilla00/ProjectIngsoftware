@@ -21,13 +21,16 @@ public class CharacterCard {
 	}
 
 	public void PlayCard() {
-		CardCost++;
 	}
 
 	public CharacterCard(){};
 
 	public void SetCardCost(int Cost){
 		this.CardCost = Cost;
+	}
+
+	public void IncreaseCardCost(){
+		CardCost++;
 	}
 }
 

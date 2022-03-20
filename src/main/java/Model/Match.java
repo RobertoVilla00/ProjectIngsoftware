@@ -1,6 +1,9 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Match {
 
@@ -131,14 +134,17 @@ public class Match {
 			int CardIndex = i;    					//example, how to get card index ????
 			Players[i].PlayAssistantCard(CardIndex);
 		}
-		//sorting method missing here
+		Arrays.sort(Players);
+
 	}
 
 	public void ActionPhase() {
 
 	}
 
+	public static void  ResolveMotherNature(int index){
 
+	}
 
 	public void AddCharacterCard() {
 
