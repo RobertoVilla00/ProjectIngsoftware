@@ -84,4 +84,25 @@ public class School {
 		return StudentNumber;
 	}
 
+	public void AddStudentToDiningRoom(Color StudentColor){
+		switch (StudentColor){
+			case GREEN:GreenStudents++;
+				break;
+			case RED:RedStudents++;
+				break;
+			case BLUE:BlueStudents++;
+				break;
+			case PINK:PinkStudents++;
+				break;
+			case YELLOW:YellowStudents++;
+				break;
+		}
+	}
+
+	public Color RemoveStudentFromEntrance(int index){
+		Color StudentColor;
+		StudentColor=Entrance.get(index);
+		Entrance.remove(index);
+		return StudentColor;
+	}
 }

@@ -50,7 +50,7 @@ public class Island {
 		TowersColor= Color;
 	}
 
-	public void IncreasedTower(){
+	public void IncreaseTower(){
 		 NumberOfTowers++;
 	}
 
@@ -75,4 +75,7 @@ public class Island {
 		return StudentNumber;
 	}
 
+	public void setNoEntryTile(){
+		this.NoEntryTile=true;
+	}
 }

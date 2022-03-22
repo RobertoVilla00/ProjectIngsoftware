@@ -1,5 +1,8 @@
 package Model;
 
+import jdk.javadoc.internal.doclets.formats.html.Table;
+import sun.tools.jconsole.Tab;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,7 +35,7 @@ public class Match {
 		Clouds = new ArrayList<Cloud>();
 		Table = new ArrayList<Island>();
 		Teachers = new ArrayList<Teacher>();
-		CharacterDeck = new CharacterCardDeck();
+		CharacterDeck = new CharacterCardDeck(this);
 
 		for(int i=0; i<3; i++){										//initialize CharacterCardOnTable
 			CharacterCardOnTable[i] = CharacterDeck.SelectCard();
@@ -77,6 +80,11 @@ public class Match {
 			}
 		}
 	}
+
+	public Bag getBag(){
+		return this.bag;
+	}
+
 
 	public void MoveStudentsBagToIsland(int index){
 		Color StudentColor = bag.FillIsland();
@@ -164,7 +172,7 @@ public class Match {
 
 		TowersNumber = Table.get(IslandToMergeIndex).CountTowers();				//update towers of the island
 		for(int i=0;i<TowersNumber;i++){
-			Table.get(IslandIndex).IncreasedTower();
+			Table.get(IslandIndex).IncreaseTower();
 		}
 
 		Table.remove(IslandToMergeIndex);
@@ -174,12 +182,35 @@ public class Match {
 
 	}
 
-	public static void  ResolveMotherNature(int index){
+	public static void  ResolveMotherNature(int index){							//find island dominant player
 
 	}
 
 	public void AddCharacterCard() {
 
+	}
+
+	public void ResolveCard4(Color StudentColor) {
+		for (Player p : Players) {
+			for (int i = 0; i < 3; i++) {
+				if (p.getPlayersSchool().getStudentNumber(StudentColor) != 0) {
+					p.getPlayersSchool().RemoveStudentFromDiningRoom(StudentColor);
+					bag.AddStudent(StudentColor);
+				}
+			}
+		}
+	}
+
+	public void ResolveCard5(int index){
+		Table.get(index).setNoEntryTile();
+	}
+
+	public ArrayList<Island> getTable(){
+		return this.Table;
+	}
+
+	public Player[] getPlayers(){
+		return this.Players;
 	}
 
 

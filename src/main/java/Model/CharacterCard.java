@@ -6,24 +6,25 @@ public class CharacterCard {
 
 	private int CardCost;
 
+	private Match match;
 
-	public CharacterCard(int idCharacterCard, int cardCost) {
-		IdCharacterCard = idCharacterCard;
-		CardCost = cardCost;
+	public CharacterCard(int idCharacterCard, int cardCost, Match currentMatch) {
+		this.IdCharacterCard = idCharacterCard;
+		this.CardCost = cardCost;
 	}
 
 	public int getIdCharacterCard() {
-		return IdCharacterCard;
+		return this.IdCharacterCard;
 	}
 
 	public int getCardCost() {
-		return CardCost;
+		return this.CardCost;
 	}
 
-	public void PlayCard() {
+	public void PlayCard(Player CardPlayer) {  				//identify the player who played the card
 	}
 
-	public CharacterCard(){};
+	public CharacterCard(){}
 
 	public void SetCardCost(int Cost){
 		this.CardCost = Cost;
@@ -31,6 +32,10 @@ public class CharacterCard {
 
 	public void IncreaseCardCost(){
 		CardCost++;
+	}
+
+	public Match getMatch(){
+		return this.match;
 	}
 }
 

@@ -74,6 +74,7 @@ public class Player implements Comparable<Player> {
 		this.PlayedMovements=Deck.GetCard(index).getMovement();
 	}
 
-
-
+	public void IncreaseMovements(int NumberOfMOvements){
+		this.PlayedMovements=PlayedMovements+NumberOfMOvements;
+	}
 }
