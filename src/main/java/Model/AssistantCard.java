@@ -12,7 +12,6 @@ public class AssistantCard {
 	}
 
 	public int getOrderValue() {
-
 		return OrderValue;
 	}
 

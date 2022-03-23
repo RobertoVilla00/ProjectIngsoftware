@@ -13,6 +13,10 @@ public class Cloud {
 			CloudStudents = new ArrayList<Color>();
 	}
 
+	public int getIdCloud(){
+		return this.IdCloud;
+	}
+
 	public void AddStudent(Color StudentColor) {
 		CloudStudents.add(StudentColor);
 	}

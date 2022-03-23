@@ -6,22 +6,26 @@ public class Teacher {
 
 	private int HighestNumberOfStudents;
 
-	private TowerColor ControllingPlayer;
+	private Player ControllingPlayer;
 
 	public Teacher(Color teacherColor) {
 		TeacherColor = teacherColor;
 		HighestNumberOfStudents = 0;
 	}
 
+	public TowerColor getControllingPlayerColor(){
+		return this.ControllingPlayer.getPlayerColor();
+	}
+
 	public int getHighestNumberOfStudents() {   //gives the attribute to Match
 		return this.HighestNumberOfStudents;
 	}
 
-	public void IncreasedHighestNumberOfStudents(){
+	public void IncreaseHighestNumberOfStudents(){
 		HighestNumberOfStudents++;
 	}
 
-	public void ChangeController(TowerColor NewControllingPlayer) { //changes the attribute if requested by Match
+	public void ChangeController(Player NewControllingPlayer) { //changes the attribute if requested by Match
 		ControllingPlayer = NewControllingPlayer;
 	}
 

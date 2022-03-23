@@ -23,6 +23,8 @@ public class Player implements Comparable<Player> {
 
 	private int PlayedMovements;
 
+	private ArrayList <TowerColor> Teacher;
+
 	public Player(TowerColor playerColor, String name) {
 
 		PlayerColor = playerColor;
