@@ -105,4 +105,10 @@ public class School {
 		Entrance.remove(index);
 		return StudentColor;
 	}
+
+	public Color GetEntranceStudentColor (int index){
+		Color StudentColor;
+		StudentColor=Entrance.get(index);
+		return StudentColor;
+	}
 }
