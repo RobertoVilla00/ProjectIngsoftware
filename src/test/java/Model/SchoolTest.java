@@ -99,8 +99,4 @@ public class SchoolTest {
         Color studentColor= school.GetEntranceStudentColor(0);
         assertEquals(Color.GREEN,studentColor);
     }
-
-
-
-
 }

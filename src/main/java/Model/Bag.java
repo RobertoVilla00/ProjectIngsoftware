@@ -27,7 +27,7 @@ public class Bag {
 		for(int i=0;i<26;i++){
 			Students.add(Color.RED);
 		}
-		Collections.shuffle(Students);
+		this.ShuffleBag();
 	}
 
 
@@ -64,7 +64,7 @@ public class Bag {
 
 	public void AddStudent(Color color){
 		Students.add(color);
-		Collections.shuffle(Students);
+		this.ShuffleBag();
 	}
 
 }

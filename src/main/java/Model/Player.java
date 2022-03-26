@@ -79,4 +79,19 @@ public class Player implements Comparable<Player> {
 	public void IncreaseMovements(int NumberOfMOvements){
 		this.PlayedMovements=PlayedMovements+NumberOfMOvements;
 	}
+
+	public void IncreaseTowersPlaced(int numberOfTowers){
+		this.TowersPlaced=this.TowersPlaced+numberOfTowers;
+	}
+
+	public void DecreaseTowersPlaced(int numberOfTowers){
+		this.TowersPlaced=this.TowersPlaced-numberOfTowers;
+	}
+
+	public void AddCoin(int numberOfCoins){
+		this.Coins=this.Coins + numberOfCoins;
+	}
+	public void RemoveCoins(int numberOfCoins){
+		this.Coins=this.Coins - numberOfCoins;
+	}
 }
