@@ -27,4 +27,13 @@ public class Cloud {
 		return StudentColor;
 	}
 
+	public int countStudents(Color color){
+		int students=0;
+		for(Color c:CloudStudents){
+			if(c==color){
+				students++;
+			}
+		}
+		return students;
+	}
 }

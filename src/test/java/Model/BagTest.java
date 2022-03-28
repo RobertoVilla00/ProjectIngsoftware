@@ -91,11 +91,4 @@ public class BagTest {
         }
         assertEquals(27,RedStudents);
     }
-
 }
-
-
-
-
-
-

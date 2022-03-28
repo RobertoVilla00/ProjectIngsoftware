@@ -34,6 +34,8 @@ public class Match {
 		Table = new ArrayList<Island>();
 		Teachers = new ArrayList<Teacher>();
 		CharacterDeck = new CharacterCardDeck(this);
+		CharacterCardOnTable = new CharacterCard[3];
+		Players = new Player[numberOfPlayers];
 
 		for(int i=0; i<3; i++){										//initialize CharacterCardOnTable
 			CharacterCardOnTable[i] = CharacterDeck.SelectCard();
@@ -89,6 +91,8 @@ public class Match {
 		Table.get(index).AddStudent(StudentColor);
 	}
 
+
+	/*metodo sbagliato
 	public void MoveStudentsFromEntrance(){
 		String Decision;
 		int StudentIndex;
@@ -114,7 +118,7 @@ public class Match {
 			}
 
 		}
-	}
+	}*/
 
 	public void MoveStudentsBagToCloud(int index){
 		if(NumberOfPlayers == 2) {
@@ -211,6 +215,8 @@ public class Match {
 		return this.Players;
 	}
 
-
+	public ArrayList<Cloud> getClouds(){
+		return this.Clouds;
+	}
 }
 

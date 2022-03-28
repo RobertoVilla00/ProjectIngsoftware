@@ -19,4 +19,15 @@ public class CloudTest {
         Color StudentColor = cloud.MoveStudentsFromCloud(0);
         assertEquals(StudentColor, Color.GREEN);
     }
+
+    @Test
+    public void CountStudents(){
+        Cloud cloud = new Cloud(0);
+        cloud.AddStudent(Color.BLUE);
+        cloud.AddStudent(Color.BLUE);
+        cloud.AddStudent(Color.BLUE);
+        cloud.AddStudent(Color.RED);
+        int BlueStudents=cloud.countStudents(Color.BLUE);
+        assertEquals(3,BlueStudents);
+    }
 }
