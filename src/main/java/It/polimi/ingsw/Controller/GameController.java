@@ -17,7 +17,7 @@ public class GameController implements Observer {
     }
 
     public void InitializeGame(){
-        //model = new Match();
+        //model = new Match();     hope it works :c
     }
 
     @Override
