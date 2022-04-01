@@ -10,7 +10,7 @@ public class MatchTest {
 
     @Test
     public void NumberOfPlayers(){
-        Match match= new Match(3);
+        Match match= new Match(3, 0);
         Player [] players =new Player[3];
         players=match.getPlayers();
         assertNotNull(players[2]);
@@ -18,7 +18,7 @@ public class MatchTest {
 
     @Test
     public void MoveStudentsBagToIsland(){
-        Match match = new Match(2);
+        Match match = new Match(2, 1);
         match.MoveStudentsBagToIsland(0);
         int Blues=match.getTable().get(0).CountStudents(Color.BLUE);
         int Reds=match.getTable().get(0).CountStudents(Color.RED);
@@ -31,7 +31,7 @@ public class MatchTest {
 
     @Test
     public void MoveStudentBagToCloud(){
-        Match match = new Match(2);
+        Match match = new Match(2, 1);
         match.MoveStudentsBagToCloud(1);
         ArrayList<Cloud> clouds=new ArrayList<Cloud>();
         clouds=match.getClouds();

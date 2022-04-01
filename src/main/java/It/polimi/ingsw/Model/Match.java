@@ -7,6 +7,8 @@ public class Match {
 
 	private int NumberOfPlayers;
 
+	private boolean ExpertMode;
+
 	private Player[] Players;
 
 	private ArrayList<Island> Table;
@@ -23,19 +25,28 @@ public class Match {
 
 	private ArrayList<Teacher> Teachers;
 
-	public Match(int numberOfPlayers) {
+	public Match(int numberOfPlayers, int GameMode) {
 		this.NumberOfPlayers = numberOfPlayers;
+
+		if(GameMode == 1) this.ExpertMode = true;
+			else this.ExpertMode = false;
 
 		bag = new Bag(2);
 		Clouds = new ArrayList<Cloud>();
 		Table = new ArrayList<Island>();
 		Teachers = new ArrayList<Teacher>();
-		CharacterDeck = new CharacterCardDeck(this);
-		CharacterCardOnTable = new CharacterCard[3];
+
+
 		Players = new Player[numberOfPlayers];
 
-		for(int i=0; i<3; i++){										//initialize CharacterCardOnTable
-			CharacterCardOnTable[i] = CharacterDeck.SelectCard();
+		CharacterCardOnTable = new CharacterCard[3];
+
+		if(GameMode == 1) {
+			CharacterDeck = new CharacterCardDeck(this);
+
+			for (int i = 0; i < 3; i++) {                                        //initialize CharacterCardOnTable
+				CharacterCardOnTable[i] = CharacterDeck.SelectCard();
+			}
 		}
 
 		for (int i = 0; i < 12; i++) {                              //initialize Table (create islands)
@@ -191,6 +202,10 @@ public class Match {
 				}
 			}
 		}
+	}
+
+	public int getMotherNaturePosition() {
+		return MotherNaturePosition;
 	}
 
 	public void ResolveCard5(int index){
