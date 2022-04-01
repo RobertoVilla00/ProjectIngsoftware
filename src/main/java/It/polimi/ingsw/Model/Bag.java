@@ -11,21 +11,21 @@ public class Bag {
 
 
 
-	public Bag() {
+	public Bag(int dimesion) {
 		Students= new ArrayList<Color>();
-		for(int i=0;i<26;i++){
+		for(int i=0;i<dimesion;i++){
 			Students.add(Color.GREEN);
 		}
-		for(int i=0;i<26;i++){
+		for(int i=0;i<dimesion;i++){
 			Students.add(Color.BLUE);
 		}
-		for(int i=0;i<26;i++){
+		for(int i=0;i<dimesion;i++){
 			Students.add(Color.YELLOW);
 		}
-		for(int i=0;i<26;i++){
+		for(int i=0;i<dimesion;i++){
 			Students.add(Color.PINK);
 		}
-		for(int i=0;i<26;i++){
+		for(int i=0;i<dimesion;i++){
 			Students.add(Color.RED);
 		}
 		this.ShuffleBag();

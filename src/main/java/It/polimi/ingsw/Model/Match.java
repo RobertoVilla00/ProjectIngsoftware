@@ -26,7 +26,7 @@ public class Match {
 	public Match(int numberOfPlayers) {
 		this.NumberOfPlayers = numberOfPlayers;
 
-		bag = new Bag();
+		bag = new Bag(2);
 		Clouds = new ArrayList<Cloud>();
 		Table = new ArrayList<Island>();
 		Teachers = new ArrayList<Teacher>();
@@ -44,6 +44,7 @@ public class Match {
 		for (int i = 1; i < 12; i++) {								//fill Table at start
 			if(i !=6) MoveStudentsBagToIsland(i);
 		}
+		bag = new Bag(24);
 
 		Teachers.add(new Teacher(Color.BLUE));						//initialize Teachers
 		Teachers.add(new Teacher(Color.GREEN));
@@ -154,16 +155,12 @@ public class Match {
 		Table.get(MotherNaturePosition).ResolveMotherNature();
 	}
 
-	public void PlayAssistantCard(Player player, int CardIndex){
-		player.PlayAssistantCard(CardIndex);
-	}
-
-	public void GetStudentsFromCloud(Player player,int CloudIndex ){
+	public void GetStudentsFromCloud(int PlayerIndex,int CloudIndex ){
 		Color StudentColor;
 		int NumberOfStudents=getClouds().get(CloudIndex).CloudSize();
 		for(int i=0;i<NumberOfStudents;i++) {
 			StudentColor = getClouds().get(CloudIndex).MoveStudentFromCloud(i);
-			player.getPlayersSchool().AddEntranceStudents(StudentColor);
+			Players[PlayerIndex].getPlayersSchool().AddEntranceStudents(StudentColor);
 		}
 	}
 

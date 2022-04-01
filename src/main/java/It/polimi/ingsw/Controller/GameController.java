@@ -2,8 +2,8 @@ package It.polimi.ingsw.Controller;
 
 import It.polimi.ingsw.Model.Match;
 
-import sun.jvm.hotspot.utilities.Observable;
-import sun.jvm.hotspot.utilities.Observer;
+import java.util.Observable;
+import java.util.Observer;
 
 public class GameController implements Observer {
 
