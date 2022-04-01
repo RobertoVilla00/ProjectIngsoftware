@@ -17,7 +17,7 @@ public class CloudTest {
     public void MoveStudentsFromCloud(){
         Cloud cloud = new Cloud(1);
         cloud.AddStudent(Color.GREEN);
-        Color StudentColor = cloud.MoveStudentsFromCloud(0);
+        Color StudentColor = cloud.MoveStudentFromCloud(0);
         assertEquals(StudentColor, Color.GREEN);
     }
 

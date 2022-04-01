@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model;
 
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -92,35 +90,6 @@ public class Match {
 		Table.get(index).AddStudent(StudentColor);
 	}
 
-
-	/*metodo sbagliato
-	public void MoveStudentsFromEntrance(){
-		String Decision;
-		int StudentIndex;
-		int IslandIndex;
-		Color StudentColor;
-
-		for(int i=0; i<NumberOfPlayers; i++){
-			for(int j=0; j<3; j++) {
-				//player chooses where to move student, gives index        ?????
-				Decision = "DiningRoom"; //example
-				if(Decision.equals("DiningRoom")){
-					//player gives StudentIndex                                  ??????
-					StudentIndex = 2;  //example
-					Players[i].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
-				}
-				if(Decision.equals("Island")) {
-					//player gives StudentIndex and IslandIndex				?????
-					StudentIndex = 2;  //example
-					IslandIndex = 3; 	//example
-					StudentColor = Players[i].getPlayersSchool().MoveStudentToIsland(StudentIndex);
-					Table.get(IslandIndex).AddStudent(StudentColor);
-				}
-			}
-
-		}
-	}*/
-
 	public void MoveStudentsBagToCloud(int index){
 		if(NumberOfPlayers == 2) {
 			for (int i = 0; i < 3; i++) {
@@ -141,12 +110,10 @@ public class Match {
 		for(int i=0; i<NumberOfPlayers; i++) {
 			MoveStudentsBagToCloud(i);
 		}
-		for(int i=0;i<NumberOfPlayers; i++){
-			int CardIndex = i;    					//example, how to get card index ????
-			Players[i].PlayAssistantCard(CardIndex);
-		}
-		Arrays.sort(Players);
+	}
 
+	public void PlayAssistantCard(int CardIndex,int PlayerIndex){
+		Players[PlayerIndex].PlayAssistantCard(CardIndex);
 	}
 
 	public void MergeIslands(int IslandIndex, int IslandToMergeIndex) {
@@ -181,16 +148,42 @@ public class Match {
 		Table.remove(IslandToMergeIndex);
 	}
 
-	public void ActionPhase() {
-
+	public void MoveMotherNature(int movements){
+		this.MotherNaturePosition=MotherNaturePosition+movements;
+		if(MotherNaturePosition>=Table.size()){							//secure the circularity of the table
+			MotherNaturePosition=MotherNaturePosition-Table.size();
+		}
+		Table.get(MotherNaturePosition).ResolveMotherNature();
 	}
 
-	public static void  ResolveMotherNature(int index){							//find island dominant player
-
+	public void PlayAssistantCard(Player player, int CardIndex){
+		player.PlayAssistantCard(CardIndex);
 	}
 
-	public void AddCharacterCard() {
+	public void GetStudentsFromCloud(Player player,int CloudIndex ){
+		Color StudentColor;
+		int NumberOfStudents=getClouds().get(CloudIndex).CloudSize();
+		for(int i=0;i<NumberOfStudents;i++) {
+			StudentColor = getClouds().get(CloudIndex).MoveStudentFromCloud(i);
+			player.getPlayersSchool().AddEntranceStudents(StudentColor);
+		}
+	}
 
+	public void MoveStudentsFromEntrance(String Decision,int StudentIndex,int IslandIndex,int PlayerIndex){
+
+		Color StudentColor;
+
+		if(Decision.equals("DiningRoom")){
+			Players[PlayerIndex].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
+		}
+		if (Decision.equals(("Island"))){
+			StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(StudentIndex);
+			Table.get(IslandIndex).AddStudent(StudentColor);
+		}
+	}
+
+	public void SortPlayersByOrderValue(){
+		Arrays.sort(Players);
 	}
 
 	public void ResolveCard4(Color StudentColor) {

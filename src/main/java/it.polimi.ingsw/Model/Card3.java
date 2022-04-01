@@ -7,7 +7,7 @@ public class Card3 extends CharacterCard{                       //Count the infl
     }
 
     public void Playcard3(int index){
-        Match.ResolveMotherNature(index);
+        getMatch().getTable().get(index).ResolveMotherNature();
         this.IncreaseCardCost();
     }
 

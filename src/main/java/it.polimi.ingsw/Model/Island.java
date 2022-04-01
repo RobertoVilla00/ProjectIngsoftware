@@ -79,4 +79,10 @@ public class Island {
 	public void setNoEntryTile(){
 		this.NoEntryTile=true;
 	}
+
+	public void ResolveMotherNature(){
+
+	}
+
+
 }

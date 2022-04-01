@@ -22,7 +22,7 @@ public class Cloud {
 		CloudStudents.add(StudentColor);
 	}
 
-	public Color MoveStudentsFromCloud(int index) {
+	public Color MoveStudentFromCloud(int index) {
 		Color StudentColor = CloudStudents.get(index);
 		CloudStudents.remove(index);
 		return StudentColor;
@@ -36,5 +36,9 @@ public class Cloud {
 			}
 		}
 		return students;
+	}
+
+	public int CloudSize(){
+		return this.CloudStudents.size();
 	}
 }
