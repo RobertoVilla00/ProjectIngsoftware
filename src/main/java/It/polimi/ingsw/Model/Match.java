@@ -52,6 +52,7 @@ public class Match {
 		Teachers.add(new Teacher(Color.PINK));
 		Teachers.add(new Teacher(Color.RED));
 
+
 		if(numberOfPlayers == 2)
 		{
 			//getname 															??????
