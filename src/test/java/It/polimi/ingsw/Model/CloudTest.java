@@ -31,4 +31,14 @@ public class CloudTest {
         int BlueStudents=cloud.countStudents(Color.BLUE);
         assertEquals(3,BlueStudents);
     }
+
+    @Test
+    public void CloudSize() {
+        Cloud cloud = new Cloud(0);
+        cloud.AddStudent(Color.RED);
+        cloud.AddStudent(Color.BLUE);
+        cloud.AddStudent(Color.YELLOW);
+        int NumberOfStudents = cloud.CloudSize();
+        assertEquals(3, NumberOfStudents);
+    }
 }

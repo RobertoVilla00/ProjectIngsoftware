@@ -155,8 +155,25 @@ public class Match {
 		for(int i=0;i<TowersNumber;i++){
 			Table.get(IslandIndex).IncreaseTower();
 		}
-
 		Table.remove(IslandToMergeIndex);
+		int MaximumIndex;
+		if(IslandIndex<IslandToMergeIndex){
+			MaximumIndex=IslandToMergeIndex;
+		}
+		else{
+			MaximumIndex=IslandIndex;
+		}
+		if(this.MotherNaturePosition>=MaximumIndex){
+			if(MotherNaturePosition==Table.size() && IslandToMergeIndex== Table.size()){
+				this.MotherNaturePosition=0;
+			}
+			else {
+				this.MotherNaturePosition--;
+			}
+		}
+		else if(this.MotherNaturePosition==0 && IslandToMergeIndex==0 && IslandIndex==Table.size()){
+			this.MotherNaturePosition= Table.size();
+		}
 	}
 
 	public void MoveMotherNature(int movements){
@@ -193,7 +210,7 @@ public class Match {
 		Arrays.sort(Players);
 	}
 
-	public void ResolveCard4(Color StudentColor) {
+	/*public void ResolveCard4(Color StudentColor) {
 		for (Player p : Players) {
 			for (int i = 0; i < 3; i++) {
 				if (p.getPlayersSchool().getStudentNumber(StudentColor) != 0) {
@@ -202,15 +219,15 @@ public class Match {
 				}
 			}
 		}
-	}
+	}*/
 
 	public int getMotherNaturePosition() {
 		return MotherNaturePosition;
 	}
 
-	public void ResolveCard5(int index){
+	/*public void ResolveCard5(int index){
 		Table.get(index).setNoEntryTile();
-	}
+	}*/
 
 	public ArrayList<Island> getTable(){
 		return this.Table;

@@ -10,7 +10,7 @@ public class Card5 extends CharacterCard{                       //Put no entry t
     }
 
     public void PlayCard5(int index){
-        getMatch().ResolveCard5(index);
+        //getMatch().ResolveCard5(index);
         this.IncreaseCardCost();
     }
 

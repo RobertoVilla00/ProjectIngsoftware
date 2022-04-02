@@ -7,7 +7,7 @@ public class Card4 extends CharacterCard{                   //put 3 students of 
     }
 
     public void PlayCard4(Color StudentColor){
-        getMatch().ResolveCard4(StudentColor);
+        //getMatch().ResolveCard4(StudentColor);
         this.IncreaseCardCost();
     }
 }
