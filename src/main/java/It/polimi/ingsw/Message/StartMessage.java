@@ -2,9 +2,9 @@ package It.polimi.ingsw.Message;
 
 public class StartMessage extends Message{
     private int NumberOfPlayers;
-    private char GameMode;
+    private int GameMode;
 
-    public StartMessage(int Number, char Mode){
+    public StartMessage(int Number, int Mode){
         super(MessageContent.START);
         this.NumberOfPlayers = Number;
         this.GameMode = Mode;
@@ -14,7 +14,7 @@ public class StartMessage extends Message{
         return NumberOfPlayers;
     }
 
-    public char getGameMode() {
+    public int getGameMode() {
         return GameMode;
     }
 
