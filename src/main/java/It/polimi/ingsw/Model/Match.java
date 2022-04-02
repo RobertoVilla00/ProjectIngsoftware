@@ -164,7 +164,7 @@ public class Match {
 			MaximumIndex=IslandIndex;
 		}
 		if(this.MotherNaturePosition>=MaximumIndex){
-			if(MotherNaturePosition==Table.size() && IslandToMergeIndex== Table.size()){
+			if(MotherNaturePosition==Table.size() && IslandToMergeIndex== Table.size()){				//the island is already removed so size is reduced by 1
 				this.MotherNaturePosition=0;
 			}
 			else {
@@ -239,6 +239,20 @@ public class Match {
 
 	public ArrayList<Cloud> getClouds(){
 		return this.Clouds;
+	}
+
+	public ArrayList<Teacher> getTeachers(){return this.Teachers;}
+
+	public Teacher getTeacherByColor(Color color){
+		int index=0;
+		for(int i=0;i<5;i++){
+			Color TeacherColor=Teachers.get(i).getTeacherColor();
+			if (TeacherColor==color){
+				index=i;
+				break;
+			}
+		}
+		return Teachers.get(index);
 	}
 }
 

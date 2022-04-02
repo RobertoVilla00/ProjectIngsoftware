@@ -59,6 +59,14 @@ public class GameController implements Observer {
         if (match.getTable().size() <= 3) EndGame();
     }
 
+    public void CheckTeacherControl(Color color,Player playerPlacingStudent){
+        Teacher ColorTeacher =match.getTeacherByColor(color);
+        int highestNumberOfStudents=ColorTeacher.getHighestNumberOfStudents();
+        if(playerPlacingStudent.getPlayersSchool().getStudentNumber(color)>highestNumberOfStudents){
+            ColorTeacher.IncreaseHighestNumberOfStudents();
+            ColorTeacher.ChangeController(playerPlacingStudent);
+        }
+    }
 
     public void EndGame(){}
 

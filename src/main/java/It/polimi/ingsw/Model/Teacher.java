@@ -30,4 +30,5 @@ public class Teacher {
 		ControllingPlayer = NewControllingPlayer;
 	}
 
+	public Color getTeacherColor(){return this.TeacherColor;}
 }
