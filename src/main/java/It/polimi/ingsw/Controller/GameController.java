@@ -15,8 +15,7 @@ public class GameController implements Observer {
         match = new Match(startMessage.getNumberOfPlayers(), startMessage.getGameMode());
     }
 
-    public void CheckIslandMerge(){
-        int IslandIndex = match.getMotherNaturePosition();
+    public void CheckIslandMerge(int IslandIndex){
 
         if(match.getTable().get(IslandIndex).isEmpty()) return;     //if island has no towers end check
 
@@ -42,11 +41,11 @@ public class GameController implements Observer {
             match.MergeIslands(IslandIndex, PreviousIslandIndex);
 
             //eventually update indexes
-            if(IslandIndex != 0 && IslandIndex !=  match.getTable().size() - 1) { //if island is not first or last
+            if(IslandIndex != 0 && IslandIndex !=  match.getTable().size()) { //if island is not first or last
                 IslandIndex--;
                 NextIslandIndex--;
             }
-            else if(IslandIndex == match.getTable().size() - 1) { //if island is last
+            else if(IslandIndex == match.getTable().size()) { //if island is last
                 IslandIndex--;
             }
         }
@@ -69,6 +68,8 @@ public class GameController implements Observer {
     }
 
     public void EndGame(){}
+
+    public Match getMatch(){return this.match;}
 
     @Override
     public void update(Observable o, Object arg){
