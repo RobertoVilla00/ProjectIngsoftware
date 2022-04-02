@@ -51,6 +51,22 @@ public class Island {
 		TowersColor= Color;
 	}
 
+	public boolean SameTowerColor(TowerColor PlayerColor){
+		if(!isEmpty() && TowersColor == PlayerColor){
+			return true;
+		}
+		else return false;
+	}
+
+	public boolean isEmpty(){
+		if(NumberOfTowers==0) return true;
+		else return false;
+	}
+
+	public TowerColor getTowersColor(){
+		return TowersColor;
+	}
+
 	public void IncreaseTower(){
 		 NumberOfTowers++;
 	}

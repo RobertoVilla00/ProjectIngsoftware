@@ -15,9 +15,14 @@ public class GameController implements Observer {
         match = new Match(startMessage.getNumberOfPlayers(), startMessage.getGameMode());
     }
 
-    public void CheckIslandDominance(){
+    public void CheckIslandMerge(){
         int IslandIndex = match.getMotherNaturePosition();
+
+        if(match.getTable().get(IslandIndex).isEmpty()) return;     //if island has no towers end check
+
+        TowerColor CurrentColor = match.getTable().get(IslandIndex).getTowersColor();      //tower color of the island
         int PreviousIslandIndex, NextIslandIndex;
+
 
         if(IslandIndex==0){ //if island is first element of the list
             PreviousIslandIndex = match.getTable().size() - 1; //previous island is last element of the list
@@ -32,15 +37,30 @@ public class GameController implements Observer {
             NextIslandIndex = IslandIndex + 1;
         }
 
-        //TO BE CONTINUED
+        //Previous island check
+        if(match.getTable().get(PreviousIslandIndex).SameTowerColor(CurrentColor)){
+            match.MergeIslands(IslandIndex, PreviousIslandIndex);
 
-        //eventually merge islands and update indexes
+            //eventually update indexes
+            if(IslandIndex != 0 && IslandIndex !=  match.getTable().size() - 1) { //if island is not first or last
+                IslandIndex--;
+                NextIslandIndex--;
+            }
+            else if(IslandIndex == match.getTable().size() - 1) { //if island is last
+                IslandIndex--;
+            }
+        }
+        //Next island check
+        if(match.getTable().get(NextIslandIndex).SameTowerColor(CurrentColor)){
+            match.MergeIslands(IslandIndex, NextIslandIndex);
+        }
 
         //number of islands = 3 -> endgame
+        if (match.getTable().size() <= 3) EndGame();
     }
 
 
-
+    public void EndGame(){}
 
     @Override
     public void update(Observable o, Object arg){
