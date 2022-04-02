@@ -15,8 +15,7 @@ public class GameController implements Observer {
         match = new Match(startMessage.getNumberOfPlayers(), startMessage.getGameMode());
     }
 
-    public void CheckIslandMerge(){
-        int IslandIndex = match.getMotherNaturePosition();
+    public void CheckIslandMerge(int IslandIndex){
 
         if(match.getTable().get(IslandIndex).isEmpty()) return;     //if island has no towers end check
 
