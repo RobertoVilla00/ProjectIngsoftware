@@ -96,6 +96,8 @@ public class Island {
 		this.NoEntryTile=true;
 	}
 
+	public boolean GetNoEntryTile(){return this.NoEntryTile;}
+
 	public void ResolveMotherNature(){
 
 	}

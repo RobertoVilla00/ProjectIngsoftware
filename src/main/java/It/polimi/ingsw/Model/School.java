@@ -112,4 +112,8 @@ public class School {
 		StudentColor=Entrance.get(index);
 		return StudentColor;
 	}
+
+	public int getEntranceStudentsNumber(){
+		return this.Entrance.size();
+	}
 }

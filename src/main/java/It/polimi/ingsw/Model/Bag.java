@@ -68,4 +68,7 @@ public class Bag {
 		this.ShuffleBag();
 	}
 
+	public int BagSize(){
+		return Students.size();
+	}
 }

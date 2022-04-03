@@ -169,4 +169,83 @@ public class MatchTest {
         int position=match.getMotherNaturePosition();
         assertEquals(0,position);
     }
+
+    @Test
+    public void PlanningPhase(){
+        Match match = new Match(3,1);
+        match.PlanningPhase();
+        int studentsOnCloud3=match.getClouds().get(2).CloudSize();
+        assertEquals(4,studentsOnCloud3);
+    }
+
+    @Test
+    public void GetStudentsFromCloud(){
+        Match match = new Match(3,1);
+        match.PlanningPhase();
+        match.GetStudentsFromCloud(0,0);
+        int numberOfEntranceStudents= match.getPlayers()[0].getPlayersSchool().getEntranceStudentsNumber();
+        assertEquals(13,numberOfEntranceStudents);
+    }
+
+    @Test
+    public void MoveStudentFromEntrance(){
+        Match match = new Match(2,1);
+        match.MoveStudentsFromEntrance("DiningRoom",4,3,1);
+        int entranceStudents= match.getPlayers()[1].getPlayersSchool().getEntranceStudentsNumber();
+        assertEquals(6,entranceStudents);
+    }
+
+    @Test
+    public void MoveStudentFromEntranceToDiningRoom(){
+        Match match = new Match(2,1);
+        Color studentColor= match.getPlayers()[1].getPlayersSchool().GetEntranceStudentColor(4);
+        match.MoveStudentsFromEntrance("DiningRoom",4,3,1);
+        int Students=match.getPlayers()[1].getPlayersSchool().getStudentNumber(studentColor);
+        assertEquals(1,Students);
+    }
+
+    @Test
+    public void MoveStudentsFromEntranceToIsland(){
+        Match match = new Match(2,1);
+        Color studentColor= match.getPlayers()[1].getPlayersSchool().GetEntranceStudentColor(4);
+        match.MoveStudentsFromEntrance("Island",4,6,1);
+        int Students=match.getTable().get(6).CountStudents(studentColor);
+        assertEquals(1,Students);
+    }
+
+    @Test
+    public void SortPlayersByOrderValue(){
+        Match match = new Match(3,1);
+        match.PlayAssistantCard(2,0);
+        match.PlayAssistantCard(0,1);
+        match.PlayAssistantCard(4,2);
+        match.SortPlayersByOrderValue();
+        int orderValue=match.getPlayers()[2].GetPlayedOrderValue();
+        assertEquals(5,orderValue);
+    }
+
+    @Test
+    public void getTeacherByColor(){
+        Match match = new Match(3,1);
+        Teacher BlueTeacher=match.getTeacherByColor(Color.BLUE);
+        Color color=BlueTeacher.getTeacherColor();
+        assertEquals(Color.BLUE,color);
+    }
+
+    @Test
+    public void getTeachers(){
+        Match match = new Match(3,1);
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        teachers=match.getTeachers();
+        int numberOfTeachers=teachers.size();
+        assertEquals(5,numberOfTeachers);
+    }
+
+    @Test
+    public void getBag(){
+        Match match = new Match(2,1);
+        Bag students =match.getBag();
+        int numberOfStudents=students.BagSize();
+        assertEquals(106,numberOfStudents);
+    }
 }

@@ -3,7 +3,7 @@ package It.polimi.ingsw.Model;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class IslandTest {
 
@@ -108,8 +108,42 @@ public class IslandTest {
     public void setNoEntryTile(){
         Island i =new Island();
         i.setNoEntryTile();
-        //assertEquals(true,i.GetNoEntryTile);
+        assertTrue(i.GetNoEntryTile());
     }
+
+    @Test
+    public void SameTowerColor(){
+        Island i =new Island();
+        i.BuildTower(TowerColor.BLACK);
+        assertTrue(i.SameTowerColor(TowerColor.BLACK));
     }
+
+    @Test
+    public void SameTowerColorFalse(){
+        Island i =new Island();
+        i.BuildTower(TowerColor.BLACK);
+        assertFalse(i.SameTowerColor(TowerColor.WHITE));
+    }
+
+    @Test
+    public void isEmpty(){
+        Island i = new Island();
+        assertTrue(i.isEmpty());
+    }
+
+    @Test
+    public void isEmptyFalse(){
+        Island i = new Island();
+        i.BuildTower(TowerColor.BLACK);
+        assertFalse(i.isEmpty());
+    }
+
+    @Test public void getTowerColor(){
+        Island i = new Island();
+        i.BuildTower(TowerColor.WHITE);
+        TowerColor color = i.getTowersColor();
+        assertEquals(TowerColor.WHITE,color);
+    }
+}
 
 

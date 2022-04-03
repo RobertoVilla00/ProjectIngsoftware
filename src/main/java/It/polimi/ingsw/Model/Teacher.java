@@ -31,4 +31,6 @@ public class Teacher {
 	}
 
 	public Color getTeacherColor(){return this.TeacherColor;}
+
+	public Player getControllingPlayer(){return ControllingPlayer;}
 }

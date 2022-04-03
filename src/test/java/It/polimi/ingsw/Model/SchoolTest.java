@@ -100,4 +100,13 @@ public class SchoolTest {
         Color studentColor= school.GetEntranceStudentColor(0);
         assertEquals(Color.GREEN,studentColor);
     }
+
+    @Test
+    public void EntranceStudentsNumber(){
+        School school = new School();
+        school.AddEntranceStudents(Color.PINK);
+        school.AddEntranceStudents(Color.YELLOW);
+        int numberOfStudents = school.getEntranceStudentsNumber();
+        assertEquals(2,numberOfStudents);
+    }
 }

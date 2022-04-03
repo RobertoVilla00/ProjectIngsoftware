@@ -63,15 +63,25 @@ public class Match {
 		Teachers.add(new Teacher(Color.PINK));
 		Teachers.add(new Teacher(Color.RED));
 
-
+		Color studentColor;
 		if(numberOfPlayers == 2)
 		{
 			//getname 															??????
 			//temporary name String
 			String name1 = "examplePlayer1";					//initialize players
 			Players[0] = new Player(TowerColor.WHITE, name1);
+			for(int i=0;i<7;i++) {
+				studentColor=bag.getFirstElement();
+				bag.RemoveFirstElement();
+				Players[0].getPlayersSchool().AddEntranceStudents(studentColor);
+			}
 			String name2 = "examplePlayer2";
 			Players[1] = new Player(TowerColor.BLACK, name2);
+			for(int i=0;i<7;i++) {
+				studentColor=bag.getFirstElement();
+				bag.RemoveFirstElement();
+				Players[1].getPlayersSchool().AddEntranceStudents(studentColor);
+			}
 
 			for(int j=0; j<2; j++){								//initialize Clouds
 				Clouds.add(new Cloud(j));
@@ -80,10 +90,25 @@ public class Match {
 		else if(numberOfPlayers == 3){
 			String name1 = "examplePlayer1";					//initialize players
 			Players[0] = new Player(TowerColor.WHITE, name1);
+			for(int i=0;i<9;i++) {
+				studentColor=bag.getFirstElement();
+				bag.RemoveFirstElement();
+				Players[0].getPlayersSchool().AddEntranceStudents(studentColor);
+			}
 			String name2 = "examplePlayer2";
 			Players[1] = new Player(TowerColor.BLACK, name2);
+			for(int i=0;i<9;i++) {
+				studentColor=bag.getFirstElement();
+				bag.RemoveFirstElement();
+				Players[1].getPlayersSchool().AddEntranceStudents(studentColor);
+			}
 			String name3 = "examplePlayer3";
 			Players[2] = new Player(TowerColor.GREY, name3);
+			for(int i=0;i<9;i++) {
+				studentColor=bag.getFirstElement();
+				bag.RemoveFirstElement();
+				Players[2].getPlayersSchool().AddEntranceStudents(studentColor);
+			}
 
 			for(int j=0; j<3; j++) {                                //initialize Clouds
 				Clouds.add(new Cloud(j));
@@ -188,7 +213,7 @@ public class Match {
 		Color StudentColor;
 		int NumberOfStudents=getClouds().get(CloudIndex).CloudSize();
 		for(int i=0;i<NumberOfStudents;i++) {
-			StudentColor = getClouds().get(CloudIndex).MoveStudentFromCloud(i);
+			StudentColor = getClouds().get(CloudIndex).MoveStudentFromCloud(0);
 			Players[PlayerIndex].getPlayersSchool().AddEntranceStudents(StudentColor);
 		}
 	}
