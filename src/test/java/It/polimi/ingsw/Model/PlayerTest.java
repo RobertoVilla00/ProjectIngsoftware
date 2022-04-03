@@ -101,4 +101,14 @@ public class PlayerTest {
         Arrays.sort(players);
         assertTrue(players[1].getPlayerColor()==TowerColor.BLACK);
     }
+
+    @Test
+    public void getPlayerId(){
+        Player[] players=new Player[3];
+        players[0]=new Player(TowerColor.BLACK,"Mario",0);
+        players[1]=new Player(TowerColor.WHITE,"Sandro",1);
+        players[2]=new Player(TowerColor.GREY,"Giulio",2);
+        int playerId=players[1].getPlayerId();
+        assertEquals(1,playerId);
+    }
 }

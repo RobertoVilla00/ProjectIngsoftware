@@ -67,7 +67,7 @@ public class GameController implements Observer {
         }
     }
 
-    public void CheckIslandControl(int IslandIndex){
+    public void CheckIslandInfluence(int IslandIndex){
         int InfluencePoints[]=new int[match.getNumberOfPlayers()];
         for (int i : InfluencePoints){
             i=0;
@@ -76,10 +76,12 @@ public class GameController implements Observer {
         Player TeacherController;
         int ControllingPlayerId;
         for(Color color:Color.values()){
-            numberOfStudents=match.getTable().get(IslandIndex).CountStudents(color);            //count the number of students for each color
-            TeacherController=match.getTeacherByColor(color).getControllingPlayer();
-            ControllingPlayerId=TeacherController.getPlayerId();
-            InfluencePoints[ControllingPlayerId]+=numberOfStudents;
+            numberOfStudents=match.getTable().get(IslandIndex).CountStudents(color);//count the number of students for each color
+            if(match.getTeacherByColor(color).getHighestNumberOfStudents()!=0){
+                TeacherController = match.getTeacherByColor(color).getControllingPlayer();
+                ControllingPlayerId = TeacherController.getPlayerId();
+                InfluencePoints[ControllingPlayerId] += numberOfStudents;
+            }
         }
         int numberOfTowers=match.getTable().get(IslandIndex).CountTowers();
         if(numberOfTowers!=0){
@@ -92,7 +94,7 @@ public class GameController implements Observer {
         int maximum=0;
         int idMax=0;
         boolean isTied=true;
-        for (int i : InfluencePoints){
+        for (int i=0; i<match.getNumberOfPlayers();i++){
             if(InfluencePoints[i]>maximum){
                 maximum=InfluencePoints[i];
                 isTied=false;

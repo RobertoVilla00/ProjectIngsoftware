@@ -248,4 +248,26 @@ public class MatchTest {
         int numberOfStudents=students.BagSize();
         assertEquals(106,numberOfStudents);
     }
+
+    @Test
+    public void getPlayerId(){
+        Match match = new Match(3,1);
+        int Id= match.getPlayers()[1].getPlayerId();
+        assertEquals(1,Id);
+    }
+
+    @Test
+    public void getPlayerByTowerColor(){
+        Match match = new Match(3,1);
+        Player greyPlayer=match.getPlayerByTowerColor(TowerColor.GREY);
+        int greyId=greyPlayer.getPlayerId();
+        assertEquals(2,greyId);
+    }
+
+    @Test
+    public void getNumberOfPlayers(){
+        Match match = new Match(3,1);
+        int numberOfPlayers=match.getNumberOfPlayers();
+        assertEquals(3,numberOfPlayers);
+    }
 }
