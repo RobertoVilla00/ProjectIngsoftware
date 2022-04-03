@@ -67,6 +67,48 @@ public class GameController implements Observer {
         }
     }
 
+    public void CheckIslandControl(int IslandIndex){
+        int InfluencePoints[]=new int[match.getNumberOfPlayers()];
+        for (int i : InfluencePoints){
+            i=0;
+        }
+        int numberOfStudents;
+        Player TeacherController;
+        int ControllingPlayerId;
+        for(Color color:Color.values()){
+            numberOfStudents=match.getTable().get(IslandIndex).CountStudents(color);            //count the number of students for each color
+            TeacherController=match.getTeacherByColor(color).getControllingPlayer();
+            ControllingPlayerId=TeacherController.getPlayerId();
+            InfluencePoints[ControllingPlayerId]+=numberOfStudents;
+        }
+        int numberOfTowers=match.getTable().get(IslandIndex).CountTowers();
+        if(numberOfTowers!=0){
+            Player TowerController;
+            TowerColor towerColor=match.getTable().get(IslandIndex).getTowersColor();
+            TowerController=match.getPlayerByTowerColor(towerColor);
+            ControllingPlayerId=TowerController.getPlayerId();
+            InfluencePoints[ControllingPlayerId]+=numberOfTowers;
+        }
+        int maximum=0;
+        int idMax=0;
+        boolean isTied=true;
+        for (int i : InfluencePoints){
+            if(InfluencePoints[i]>maximum){
+                maximum=InfluencePoints[i];
+                isTied=false;
+                idMax=i;
+            }
+            else if(InfluencePoints[i]==maximum){
+                isTied=true;
+            }
+        }
+        if(!isTied){                //if the count is tied no one build the tower
+            TowerColor BuildedTowerColor=match.getPlayers()[idMax].getPlayerColor();         //find color of the tower to build
+            match.getTable().get(IslandIndex).BuildTower(BuildedTowerColor);
+            CheckIslandMerge(IslandIndex);
+        }
+    }
+
     public void EndGame(){}
 
     public Match getMatch(){return this.match;}

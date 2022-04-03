@@ -10,7 +10,7 @@ public class TeacherTest {
 
     @Test
     public void getControllingPlayerColor(){
-        Player player = new Player(TowerColor.BLACK, "Tullio");
+        Player player = new Player(TowerColor.BLACK, "Tullio",0);
         Teacher teacher = new Teacher(Color.BLUE);
         teacher.ChangeController(player);
         TowerColor towerColor = teacher.getControllingPlayerColor();
@@ -28,7 +28,7 @@ public class TeacherTest {
     @Test
     public void getControllingPlayer(){
         Teacher teacher= new Teacher(Color.YELLOW);
-        Player controllingPlayer= new Player(TowerColor.WHITE,"Giulio");
+        Player controllingPlayer= new Player(TowerColor.WHITE,"Giulio",0);
         teacher.ChangeController(controllingPlayer);
         assertEquals(controllingPlayer,teacher.getControllingPlayer());
     }

@@ -69,14 +69,14 @@ public class Match {
 			//getname 															??????
 			//temporary name String
 			String name1 = "examplePlayer1";					//initialize players
-			Players[0] = new Player(TowerColor.WHITE, name1);
+			Players[0] = new Player(TowerColor.WHITE, name1,0);
 			for(int i=0;i<7;i++) {
 				studentColor=bag.getFirstElement();
 				bag.RemoveFirstElement();
 				Players[0].getPlayersSchool().AddEntranceStudents(studentColor);
 			}
 			String name2 = "examplePlayer2";
-			Players[1] = new Player(TowerColor.BLACK, name2);
+			Players[1] = new Player(TowerColor.BLACK, name2,1);
 			for(int i=0;i<7;i++) {
 				studentColor=bag.getFirstElement();
 				bag.RemoveFirstElement();
@@ -89,21 +89,21 @@ public class Match {
 		}
 		else if(numberOfPlayers == 3){
 			String name1 = "examplePlayer1";					//initialize players
-			Players[0] = new Player(TowerColor.WHITE, name1);
+			Players[0] = new Player(TowerColor.WHITE, name1,0);
 			for(int i=0;i<9;i++) {
 				studentColor=bag.getFirstElement();
 				bag.RemoveFirstElement();
 				Players[0].getPlayersSchool().AddEntranceStudents(studentColor);
 			}
 			String name2 = "examplePlayer2";
-			Players[1] = new Player(TowerColor.BLACK, name2);
+			Players[1] = new Player(TowerColor.BLACK, name2,1);
 			for(int i=0;i<9;i++) {
 				studentColor=bag.getFirstElement();
 				bag.RemoveFirstElement();
 				Players[1].getPlayersSchool().AddEntranceStudents(studentColor);
 			}
 			String name3 = "examplePlayer3";
-			Players[2] = new Player(TowerColor.GREY, name3);
+			Players[2] = new Player(TowerColor.GREY, name3,2);
 			for(int i=0;i<9;i++) {
 				studentColor=bag.getFirstElement();
 				bag.RemoveFirstElement();
@@ -278,6 +278,23 @@ public class Match {
 			}
 		}
 		return Teachers.get(index);
+	}
+
+	public Player getPlayerByTowerColor(TowerColor towerColor){
+		int index=0;
+		for(int i=0; i<NumberOfPlayers;i++){
+			TowerColor PlayerTowerColor=Players[i].getPlayerColor();
+			if(PlayerTowerColor==towerColor){
+				index=i;
+				break;
+			}
+		}
+		return Players[index];
+	}
+
+
+	public int getNumberOfPlayers(){
+		return this.NumberOfPlayers;
 	}
 }
 

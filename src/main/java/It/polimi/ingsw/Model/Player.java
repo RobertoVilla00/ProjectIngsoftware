@@ -13,6 +13,8 @@ public class Player implements Comparable<Player> {
 
 	private School PlayersSchool;
 
+	private int PlayerId;
+
 	private int TowersPlaced;
 
 	private int Coins;
@@ -23,8 +25,8 @@ public class Player implements Comparable<Player> {
 
 	private ArrayList <TowerColor> Teacher;
 
-	public Player(TowerColor playerColor, String name) {
-
+	public Player(TowerColor playerColor, String name,int playerId) {
+		PlayerId=playerId;
 		PlayerColor = playerColor;
 		Name = name;
 		PlayersSchool =new School();
@@ -89,7 +91,10 @@ public class Player implements Comparable<Player> {
 	public void AddCoin(int numberOfCoins){
 		this.Coins=this.Coins + numberOfCoins;
 	}
+
 	public void RemoveCoins(int numberOfCoins){
 		this.Coins=this.Coins - numberOfCoins;
 	}
+
+	public int getPlayerId(){ return this.PlayerId; }
 }
