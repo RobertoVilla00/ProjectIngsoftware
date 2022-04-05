@@ -187,7 +187,7 @@ public class MatchTest {
         assertEquals(13,numberOfEntranceStudents);
     }
 
-    @Test
+  /*  @Test
     public void MoveStudentFromEntrance(){
         Match match = new Match(2,1);
         match.MoveStudentsFromEntrance("DiningRoom",4,3,1);
@@ -211,7 +211,7 @@ public class MatchTest {
         match.MoveStudentsFromEntrance("Island",4,6,1);
         int Students=match.getTable().get(6).CountStudents(studentColor);
         assertEquals(1,Students);
-    }
+    }*/
 
     @Test
     public void SortPlayersByOrderValue(){

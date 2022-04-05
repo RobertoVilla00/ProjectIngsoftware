@@ -8,6 +8,6 @@ public class CloudChoiceMessageTest {
     public void getCloudIndex(){
         CloudChoiceMessage cloudChoiceMessage=new CloudChoiceMessage(2);
         int index=cloudChoiceMessage.getCloudIndex();
-        assertEquals(2,index);
+        assertEquals(1,index);
     }
 }

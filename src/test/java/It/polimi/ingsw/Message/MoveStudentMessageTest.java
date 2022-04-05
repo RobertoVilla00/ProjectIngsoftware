@@ -8,7 +8,7 @@ public class MoveStudentMessageTest {
     public void getEntrancePosition(){
         MoveStudentMessage moveStudentMessage=new MoveStudentMessage(3,1);
         int entranceIndex=moveStudentMessage.getEntrancePosition();
-        assertEquals(3,entranceIndex);
+        assertEquals(2,entranceIndex);
     }
 
     @Test
