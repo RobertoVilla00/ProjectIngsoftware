@@ -141,6 +141,9 @@ public class Match {
 		}
 	}
 
+	public Player getPlayerById(int PlayerId){
+		return this.Players[PlayerId];
+	}
 
 	public void PlanningPhase() {
 		for(int i=0; i<NumberOfPlayers; i++) {
@@ -218,16 +221,21 @@ public class Match {
 		}
 	}
 
-	public void MoveStudentsFromEntrance(String Decision,int StudentIndex,int IslandIndex,int PlayerIndex){
+	public void MoveStudentsFromEntranceToDiningRoom(int StudentIndex, int PlayerIndex){
+		Players[PlayerIndex].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
+	}
 
-		Color StudentColor;
+	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerIndex, int IslandIndex){
+		Color StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(PlayerIndex);
+		Table.get(IslandIndex).AddStudent(StudentColor);
+	}
 
-		if(Decision.equals("DiningRoom")){
-			Players[PlayerIndex].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
-		}
-		if (Decision.equals(("Island"))){
-			StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(StudentIndex);
-			Table.get(IslandIndex).AddStudent(StudentColor);
+	public void MoveStudentsFromCloudToEntrance(int CloudIndex, int PlayerIndex){
+		int StudentsInCloud;
+		if(NumberOfPlayers == 2) StudentsInCloud = 3;
+		else StudentsInCloud = 4;
+		for(int i=0; i< StudentsInCloud;i++){
+			Players[PlayerIndex].getPlayersSchool().AddEntranceStudents(Clouds.get(CloudIndex).MoveStudentFromCloud(i));
 		}
 	}
 

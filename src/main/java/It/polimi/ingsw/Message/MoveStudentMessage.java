@@ -7,7 +7,7 @@ public class MoveStudentMessage extends Message {
 
     public MoveStudentMessage(int entrancePosition, int destination){
         super(MessageContent.MOVESTUDENT);
-        this.EntrancePosition = entrancePosition;
+        this.EntrancePosition = entrancePosition -1;
         this.Destination = destination-1;    //negative -> dining room
     }
 

@@ -105,13 +105,46 @@ public class GameController implements Observer {
             }
         }
         if(!isTied){                //if the count is tied no one build the tower
-            TowerColor BuildedTowerColor=match.getPlayers()[idMax].getPlayerColor();         //find color of the tower to build
-            match.getTable().get(IslandIndex).BuildTower(BuildedTowerColor);
+            TowerColor BuiltTowerColor=match.getPlayers()[idMax].getPlayerColor();         //find color of the tower to build
+            match.getTable().get(IslandIndex).BuildTower(BuiltTowerColor);
             CheckIslandMerge(IslandIndex);
         }
     }
 
+    public void MoveStudent(MoveStudentMessage moveStudentMessage){
+        int activePlayerId = ActivePlayer();
+        int StudentIndex = moveStudentMessage.getEntrancePosition();
+        int Destination = moveStudentMessage.getDestination();
+
+        if(Destination == - 1) {                     //if destination is not an island
+            match.MoveStudentsFromEntranceToDiningRoom(StudentIndex, activePlayerId);
+        }
+        else{                                        //if destination is an island
+            match.MoveStudentsFromEntranceToIsland(StudentIndex, activePlayerId, Destination);
+        }
+    }
+
+    public void MoveMotherNature(MotherNatureMessage motherNatureMessage){
+        //check if its possible + additional steps
+        match.MoveMotherNature(motherNatureMessage.getSteps());
+    }
+
+    public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage){
+        match.MoveStudentsFromCloudToEntrance(cloudChoiceMessage.getCloudIndex(), ActivePlayer());
+    }
+
+
+    public void PlayAssistantCard(Message assistantCardMessage){
+        //check if it's playable then calls model
+    }
+
     public void EndGame(){}
+
+    public int ActivePlayer(){
+        return this.match.getPlayerById(2).getPlayerId(); //EXAMPLE!!! IsActive boolean in Model??
+    }
+
+
 
     public Match getMatch(){return this.match;}
 

@@ -5,7 +5,7 @@ public class CloudChoiceMessage extends Message{
 
     public CloudChoiceMessage(int cloudIndex){
         super(MessageContent.CLOUDCHOICE);
-        this.CloudIndex = cloudIndex;
+        this.CloudIndex = cloudIndex-1;
     }
 
     public int getCloudIndex() {
