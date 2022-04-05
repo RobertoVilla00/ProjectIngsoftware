@@ -23,6 +23,8 @@ public class Player implements Comparable<Player> {
 
 	private int PlayedMovements;
 
+	private boolean AdditionalPoints;
+
 	private ArrayList <TowerColor> Teacher;
 
 	public Player(TowerColor playerColor, String name,int playerId) {
@@ -34,6 +36,13 @@ public class Player implements Comparable<Player> {
 		Coins=1;
 		Deck= new AssistantCardDeck();
 
+	}
+
+	public boolean getAdditionalPoints(){
+		return this.AdditionalPoints;
+	}
+	public void setAdditionalPoints(boolean value){
+		this.AdditionalPoints = value;
 	}
 
 	public TowerColor getPlayerColor() {
