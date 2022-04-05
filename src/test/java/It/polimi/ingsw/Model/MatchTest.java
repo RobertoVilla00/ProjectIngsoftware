@@ -182,7 +182,7 @@ public class MatchTest {
     public void GetStudentsFromCloud(){
         Match match = new Match(3,1);
         match.PlanningPhase();
-        match.GetStudentsFromCloud(0,0);
+        match.MoveStudentsFromCloudToEntrance(0,0);
         int numberOfEntranceStudents= match.getPlayers()[0].getPlayersSchool().getEntranceStudentsNumber();
         assertEquals(13,numberOfEntranceStudents);
     }

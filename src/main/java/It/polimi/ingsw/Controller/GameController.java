@@ -8,7 +8,7 @@ import java.util.Observer;
 public class GameController implements Observer {
 
     private Match match;
-
+    private CharacterCardController characterCardController;
     /*private View view;*/
 
     public void InitializeGame(StartMessage startMessage){
@@ -67,7 +67,7 @@ public class GameController implements Observer {
         }
     }
 
-    public void CheckIslandInfluence(int IslandIndex){
+    public void CheckIslandInfluence(int IslandIndex){                  //aggiungere controllo NoEntryTile
         int InfluencePoints[]=new int[match.getNumberOfPlayers()];
         for (int i : InfluencePoints){
             i=0;
@@ -130,7 +130,7 @@ public class GameController implements Observer {
     }
 
     public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage){
-        match.MoveStudentsFromCloudToEntrance(cloudChoiceMessage.getCloudIndex(), ActivePlayer());
+        match.MoveStudentsFromCloudToEntrance(ActivePlayer(),cloudChoiceMessage.getCloudIndex());
     }
 
 

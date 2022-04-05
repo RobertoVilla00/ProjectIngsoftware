@@ -12,14 +12,14 @@ public class CharacterCardDeck {
 
 	public CharacterCardDeck(Match CurrentMatch) {
 		Cards= new ArrayList<CharacterCard>();
-		Cards.add(new CharacterCard(1,0,this.match));
-		Cards.add(new CharacterCard(2,0,this.match));
-		Cards.add(new CharacterCard(3,0,this.match));
-		Cards.add(new CharacterCard(4,0,this.match));
-		Cards.add(new CharacterCard(5,0,this.match));
-		Cards.add(new CharacterCard(6,0,this.match));
-		Cards.add(new CharacterCard(7,0,this.match));
-		Cards.add(new CharacterCard(8,0,this.match));
+		Cards.add(new Cards1and7and10(1,1,this.match));
+		Cards.add(new CharacterCard(3,3,this.match));
+		Cards.add(new CharacterCard(4,1,this.match));
+		Cards.add(new Card5(5,2,this.match));
+		Cards.add(new Cards1and7and10(7,1,this.match));
+		Cards.add(new CharacterCard(8,1,this.match));
+		Cards.add(new Cards1and7and10(10,2,this.match));
+		Cards.add(new CharacterCard(12,3,this.match));
 		this.match=CurrentMatch;
 	}
 	public CharacterCard SelectCard() {

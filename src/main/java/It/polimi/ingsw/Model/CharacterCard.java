@@ -22,11 +22,6 @@ public class CharacterCard {
 		return this.CardCost;
 	}
 
-	public void PlayCard(Player CardPlayer) {  				//identify the player who played the card
-	}
-
-	public CharacterCard(){}
-
 	public void SetCardCost(int Cost){
 		this.CardCost = Cost;
 	}
@@ -38,6 +33,8 @@ public class CharacterCard {
 	public Match getMatch(){
 		return this.match;
 	}
+
+	public CharacterCard(){};
 }
 
 

@@ -1,18 +1,23 @@
 package It.polimi.ingsw.Model;
 
+import java.util.ArrayList;
 
-public class Card5 extends CharacterCard{                       //Put no entry tiles on island
-    private int NumberOfNoEntryTiles;
+public class Card5 extends CharacterCard{
+    private int NoEntryTilesOnCard;
 
-    public Card5(){
-        SetCardCost(2);
-        this.NumberOfNoEntryTiles=4;
+    public Card5(int idCharacterCard, int cardCost, Match currentMatch){
+        super(idCharacterCard,cardCost,currentMatch);
+        NoEntryTilesOnCard =4;
+    }
+    public int getNoEntryTilesOnCard(){
+        return this.NoEntryTilesOnCard;
     }
 
-    public void PlayCard5(int index){
-        //getMatch().ResolveCard5(index);
-        this.IncreaseCardCost();
+    public void AddNoEntryTile(){
+        NoEntryTilesOnCard++;
     }
 
+    public void RemoveNoEntryTile(){
+        NoEntryTilesOnCard--;
+    }
 }
-

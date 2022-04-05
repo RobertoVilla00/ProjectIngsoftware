@@ -43,7 +43,6 @@ public class Match {
 
 		if(GameMode == 1) {
 			CharacterDeck = new CharacterCardDeck(this);
-
 			for (int i = 0; i < 3; i++) {                                        //initialize CharacterCardOnTable
 				CharacterCardOnTable[i] = CharacterDeck.SelectCard();
 			}
@@ -212,7 +211,7 @@ public class Match {
 		Table.get(MotherNaturePosition).ResolveMotherNature();
 	}
 
-	public void GetStudentsFromCloud(int PlayerIndex,int CloudIndex ){
+	public void MoveStudentsFromCloudToEntrance(int PlayerIndex, int CloudIndex ){
 		Color StudentColor;
 		int NumberOfStudents=getClouds().get(CloudIndex).CloudSize();
 		for(int i=0;i<NumberOfStudents;i++) {
@@ -228,15 +227,6 @@ public class Match {
 	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerIndex, int IslandIndex){
 		Color StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(PlayerIndex);
 		Table.get(IslandIndex).AddStudent(StudentColor);
-	}
-
-	public void MoveStudentsFromCloudToEntrance(int CloudIndex, int PlayerIndex){
-		int StudentsInCloud;
-		if(NumberOfPlayers == 2) StudentsInCloud = 3;
-		else StudentsInCloud = 4;
-		for(int i=0; i< StudentsInCloud;i++){
-			Players[PlayerIndex].getPlayersSchool().AddEntranceStudents(Clouds.get(CloudIndex).MoveStudentFromCloud(i));
-		}
 	}
 
 	public void SortPlayersByOrderValue(){
