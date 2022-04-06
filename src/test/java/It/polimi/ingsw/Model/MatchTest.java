@@ -187,19 +187,20 @@ public class MatchTest {
         assertEquals(13,numberOfEntranceStudents);
     }
 
-  /*  @Test
-    public void MoveStudentFromEntrance(){
+    @Test
+    public void MoveStudentFromEntranceToDiningRoom(){
         Match match = new Match(2,1);
-        match.MoveStudentsFromEntrance("DiningRoom",4,3,1);
+        Color studentColor=match.getPlayers()[1].getPlayersSchool().GetEntranceStudentColor(4);
+        match.MoveStudentsFromEntranceToDiningRoom(4,1);
         int entranceStudents= match.getPlayers()[1].getPlayersSchool().getEntranceStudentsNumber();
         assertEquals(6,entranceStudents);
     }
 
     @Test
-    public void MoveStudentFromEntranceToDiningRoom(){
+    public void MoveStudentFromEntranceToDiningRoom2(){
         Match match = new Match(2,1);
         Color studentColor= match.getPlayers()[1].getPlayersSchool().GetEntranceStudentColor(4);
-        match.MoveStudentsFromEntrance("DiningRoom",4,3,1);
+        match.MoveStudentsFromEntranceToDiningRoom(4,1);
         int Students=match.getPlayers()[1].getPlayersSchool().getStudentNumber(studentColor);
         assertEquals(1,Students);
     }
@@ -208,10 +209,10 @@ public class MatchTest {
     public void MoveStudentsFromEntranceToIsland(){
         Match match = new Match(2,1);
         Color studentColor= match.getPlayers()[1].getPlayersSchool().GetEntranceStudentColor(4);
-        match.MoveStudentsFromEntrance("Island",4,6,1);
+        match.MoveStudentsFromEntranceToIsland(4,1,6);
         int Students=match.getTable().get(6).CountStudents(studentColor);
         assertEquals(1,Students);
-    }*/
+    }
 
     @Test
     public void SortPlayersByOrderValue(){
@@ -269,5 +270,26 @@ public class MatchTest {
         Match match = new Match(3,1);
         int numberOfPlayers=match.getNumberOfPlayers();
         assertEquals(3,numberOfPlayers);
+    }
+
+    @Test
+    public void getCharacterCardsOnTable(){
+        Match match=new Match(3,1);
+        assertNotNull(match.getCharacterCardsOnTable()[1]);
+    }
+
+    @Test
+    public void SimpleGame(){
+        Match match= new Match(3,0);
+        assertNull(match.getCharacterCardsOnTable()[0]);
+    }
+
+    @Test
+    public void getPlayerbyId(){
+        Match match= new Match(3,0);
+        int id=match.getPlayers()[1].getPlayerId();
+        Player player=match.getPlayers()[1];
+        Player foundPlayer=match.getPlayerById(id);
+        assertEquals(player,foundPlayer);
     }
 }

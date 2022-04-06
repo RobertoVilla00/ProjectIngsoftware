@@ -43,8 +43,9 @@ public class Match {
 
 		if(GameMode == 1) {
 			CharacterDeck = new CharacterCardDeck(this);
+			CharacterDeck.ShuffleCharacterCardDeck();
 			for (int i = 0; i < 3; i++) {                                        //initialize CharacterCardOnTable
-				CharacterCardOnTable[i] = CharacterDeck.SelectCard();
+				CharacterCardOnTable[i] = CharacterDeck.SelectCard(0);
 			}
 		}
 
@@ -225,7 +226,7 @@ public class Match {
 	}
 
 	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerIndex, int IslandIndex){
-		Color StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(PlayerIndex);
+		Color StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(StudentIndex);
 		Table.get(IslandIndex).AddStudent(StudentColor);
 	}
 
@@ -293,6 +294,10 @@ public class Match {
 
 	public int getNumberOfPlayers(){
 		return this.NumberOfPlayers;
+	}
+
+	public CharacterCard[] getCharacterCardsOnTable(){
+		return this.CharacterCardOnTable;
 	}
 }
 

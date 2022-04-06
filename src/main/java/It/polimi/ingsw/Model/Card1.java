@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Card1 extends CharacterCard{
     private ArrayList<Color> StudentsOnCard;
     public Card1(){
-        SetCardCost(1);
+        //SetCardCost(1);
         StudentsOnCard= new ArrayList<Color>();
         for (int i=0;i<4;i++){
             AddCard1Student();

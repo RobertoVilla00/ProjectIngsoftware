@@ -12,6 +12,7 @@ public class CharacterCard {
 	public CharacterCard(int idCharacterCard, int cardCost, Match currentMatch) {
 		this.IdCharacterCard = idCharacterCard;
 		this.CardCost = cardCost;
+		this.match=currentMatch;
 	}
 
 	public int getIdCharacterCard() {
@@ -22,10 +23,6 @@ public class CharacterCard {
 		return this.CardCost;
 	}
 
-	public void SetCardCost(int Cost){
-		this.CardCost = Cost;
-	}
-
 	public void IncreaseCardCost(){
 		CardCost++;
 	}
@@ -34,7 +31,7 @@ public class CharacterCard {
 		return this.match;
 	}
 
-	public CharacterCard(){};
+	public CharacterCard(){};//da rimuovere dopo rimozione delle carte vecchie
 }
 
 
