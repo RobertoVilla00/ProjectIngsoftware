@@ -1,5 +1,6 @@
 package It.polimi.ingsw.Message;
 
+
 public abstract class Message {
     private MessageContent Content;
 

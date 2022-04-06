@@ -25,6 +25,8 @@ public class Match {
 
 	private ArrayList<Teacher> Teachers;
 
+	private boolean PlaysCard6;
+
 	public Match(int numberOfPlayers, int GameMode) {
 		this.NumberOfPlayers = numberOfPlayers;
 
@@ -41,6 +43,7 @@ public class Match {
 
 		CharacterCardOnTable = new CharacterCard[3];
 
+		PlaysCard6 = false;
 		if(GameMode == 1) {
 			CharacterDeck = new CharacterCardDeck(this);
 			CharacterDeck.ShuffleCharacterCardDeck();
@@ -291,6 +294,13 @@ public class Match {
 		return Players[index];
 	}
 
+	public boolean getPlaysCard6(){
+		return PlaysCard6;
+	}
+
+	public void setPlaysCard6(boolean value){
+		PlaysCard6 = value;
+	}
 
 	public int getNumberOfPlayers(){
 		return this.NumberOfPlayers;

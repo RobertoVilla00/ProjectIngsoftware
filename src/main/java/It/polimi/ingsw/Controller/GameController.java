@@ -69,8 +69,11 @@ public class GameController implements Observer {
 
     public void CheckIslandInfluence(int IslandIndex){                  //aggiungere controllo NoEntryTile
         int InfluencePoints[]=new int[match.getNumberOfPlayers()];
-        for (int i : InfluencePoints){
-            i=0;
+        for (int i =0;i<match.getNumberOfPlayers();i++){
+            InfluencePoints[i]=0;
+            if(match.getPlayerById(i).getAdditionalPoints()) {
+                InfluencePoints[i]=2;
+            }
         }
         int numberOfStudents;
         Player TeacherController;
@@ -84,13 +87,14 @@ public class GameController implements Observer {
             }
         }
         int numberOfTowers=match.getTable().get(IslandIndex).CountTowers();
-        if(numberOfTowers!=0){
+        if(numberOfTowers!=0 && !match.getPlaysCard6()) {
             Player TowerController;
             TowerColor towerColor=match.getTable().get(IslandIndex).getTowersColor();
             TowerController=match.getPlayerByTowerColor(towerColor);
             ControllingPlayerId=TowerController.getPlayerId();
             InfluencePoints[ControllingPlayerId]+=numberOfTowers;
         }
+        match.setPlaysCard6(false);                                         //TO BE DONE AT THE END OF THE TURN TOO!!
         int maximum=0;
         int idMax=0;
         boolean isTied=true;
