@@ -11,8 +11,14 @@ public class GameController implements Observer {
     private CharacterCardController characterCardController;
     /*private View view;*/
 
+    public GameController(){
+    }
+
     public void InitializeGame(StartMessage startMessage){
         match = new Match(startMessage.getNumberOfPlayers(), startMessage.getGameMode());
+        if(match.isExpertMode()){
+            characterCardController = new CharacterCardController(this);
+        }
     }
 
     public void CheckIslandMerge(int IslandIndex){

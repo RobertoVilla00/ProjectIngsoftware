@@ -16,6 +16,10 @@ public class Cards1and10 extends CharacterCard{
         StudentsOnCard.add(StudentColor);
     }
 
+    public int getNumberOfStudents(){
+        return StudentsOnCard.size();
+    }
+
     public Color RemoveStudent(int index){
         Color StudentColor=StudentsOnCard.get(index);
         StudentsOnCard.remove(index);

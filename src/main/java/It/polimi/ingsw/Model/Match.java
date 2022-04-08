@@ -282,6 +282,26 @@ public class Match {
 		return Teachers.get(index);
 	}
 
+	public boolean isCharacterCardOnTable(int CharacterCardId){
+		for(int i=0;i<3;i++){
+			if(CharacterCardId == CharacterCardOnTable[i].getIdCharacterCard()){    //if id matches
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public CharacterCard getCharacterCardById(int CharacterCardId){
+		int index=0;
+		for(int i=0;i<3;i++){
+			if(CharacterCardId == CharacterCardOnTable[i].getIdCharacterCard()){    //if id matches
+				index = i;
+				break;
+			}
+		}
+		return CharacterCardOnTable[index];
+	}
+
 	public Player getPlayerByTowerColor(TowerColor towerColor){
 		int index=0;
 		for(int i=0; i<NumberOfPlayers;i++){
@@ -292,6 +312,10 @@ public class Match {
 			}
 		}
 		return Players[index];
+	}
+
+	public boolean isExpertMode(){
+		return ExpertMode;
 	}
 
 	public boolean getPlaysCard6(){
