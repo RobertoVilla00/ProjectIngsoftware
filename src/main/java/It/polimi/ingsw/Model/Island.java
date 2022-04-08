@@ -58,6 +58,9 @@ public class Island {
 		else return false;
 	}
 
+	public void ResetNoEntryTile(){
+		this.NoEntryTile = false;
+	}
 	public boolean isEmpty(){
 		if(NumberOfTowers==0) return true;
 		else return false;

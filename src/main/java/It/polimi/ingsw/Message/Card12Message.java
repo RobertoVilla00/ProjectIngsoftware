@@ -1,5 +1,5 @@
 package It.polimi.ingsw.Message;
-import Exceptions.InvalidInputException;
+import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Model.Color;
 
 public class Card12Message extends Message{

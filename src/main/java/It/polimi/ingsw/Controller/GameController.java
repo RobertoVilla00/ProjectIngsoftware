@@ -73,51 +73,57 @@ public class GameController implements Observer {
         }
     }
 
-    public void CheckIslandInfluence(int IslandIndex){                  //aggiungere controllo NoEntryTile
-        int InfluencePoints[]=new int[match.getNumberOfPlayers()];
-        for (int i =0;i<match.getNumberOfPlayers();i++){
-            InfluencePoints[i]=0;
-            if(match.getPlayerById(i).getAdditionalPoints()) {
-                InfluencePoints[i]=2;
-            }
+    public void CheckIslandInfluence(int IslandIndex){
+        if(match.getTable().get(IslandIndex).GetNoEntryTile()){
+            match.getTable().get(IslandIndex).ResetNoEntryTile();
         }
-        int numberOfStudents;
-        Player TeacherController;
-        int ControllingPlayerId;
-        for(Color color:Color.values()){
-            numberOfStudents=match.getTable().get(IslandIndex).CountStudents(color);//count the number of students for each color
-            if(match.getTeacherByColor(color).getHighestNumberOfStudents()!=0){
-                TeacherController = match.getTeacherByColor(color).getControllingPlayer();
-                ControllingPlayerId = TeacherController.getPlayerId();
-                InfluencePoints[ControllingPlayerId] += numberOfStudents;
+        else {
+            int InfluencePoints[] = new int[match.getNumberOfPlayers()];
+            for (int i = 0; i < match.getNumberOfPlayers(); i++) {
+                InfluencePoints[i] = 0;
+                if (match.getPlayerById(i).getAdditionalPoints()) {
+                    InfluencePoints[i] = 2;
+                    match.getPlayerById(i).setAdditionalPoints(false);
+                }
             }
-        }
-        int numberOfTowers=match.getTable().get(IslandIndex).CountTowers();
-        if(numberOfTowers!=0 && !match.getPlaysCard6()) {
-            Player TowerController;
-            TowerColor towerColor=match.getTable().get(IslandIndex).getTowersColor();
-            TowerController=match.getPlayerByTowerColor(towerColor);
-            ControllingPlayerId=TowerController.getPlayerId();
-            InfluencePoints[ControllingPlayerId]+=numberOfTowers;
-        }
-        match.setPlaysCard6(false);                                         //TO BE DONE AT THE END OF THE TURN TOO!!
-        int maximum=0;
-        int idMax=0;
-        boolean isTied=true;
-        for (int i=0; i<match.getNumberOfPlayers();i++){
-            if(InfluencePoints[i]>maximum){
-                maximum=InfluencePoints[i];
-                isTied=false;
-                idMax=i;
+            int numberOfStudents;
+            Player TeacherController;
+            int ControllingPlayerId;
+            for (Color color : Color.values()) {
+                numberOfStudents = match.getTable().get(IslandIndex).CountStudents(color);//count the number of students for each color
+                if (match.getTeacherByColor(color).getHighestNumberOfStudents() != 0) {
+                    TeacherController = match.getTeacherByColor(color).getControllingPlayer();
+                    ControllingPlayerId = TeacherController.getPlayerId();
+                    InfluencePoints[ControllingPlayerId] += numberOfStudents;
+                }
             }
-            else if(InfluencePoints[i]==maximum){
-                isTied=true;
+            int numberOfTowers = match.getTable().get(IslandIndex).CountTowers();
+            if (numberOfTowers != 0 && !match.getPlaysCard6()) {
+                Player TowerController;
+                TowerColor towerColor = match.getTable().get(IslandIndex).getTowersColor();
+                TowerController = match.getPlayerByTowerColor(towerColor);
+                ControllingPlayerId = TowerController.getPlayerId();
+                InfluencePoints[ControllingPlayerId] += numberOfTowers;
             }
-        }
-        if(!isTied){                //if the count is tied no one build the tower
-            TowerColor BuiltTowerColor=match.getPlayers()[idMax].getPlayerColor();         //find color of the tower to build
-            match.getTable().get(IslandIndex).BuildTower(BuiltTowerColor);
-            CheckIslandMerge(IslandIndex);
+            match.setPlaysCard6(false);                                         //TO BE DONE AT THE END OF THE TURN TOO!!
+
+            int maximum = 0;
+            int idMax = 0;
+            boolean isTied = true;
+            for (int i = 0; i < match.getNumberOfPlayers(); i++) {
+                if (InfluencePoints[i] > maximum) {
+                    maximum = InfluencePoints[i];
+                    isTied = false;
+                    idMax = i;
+                } else if (InfluencePoints[i] == maximum) {
+                    isTied = true;
+                }
+            }
+            if (!isTied) {                //if the count is tied no one build the tower
+                TowerColor BuiltTowerColor = match.getPlayers()[idMax].getPlayerColor();         //find color of the tower to build
+                match.getTable().get(IslandIndex).BuildTower(BuiltTowerColor);
+                CheckIslandMerge(IslandIndex);
+            }
         }
     }
 

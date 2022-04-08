@@ -1,4 +1,4 @@
-package Exceptions;
+package It.polimi.ingsw.Exceptions;
 
 public class InvalidInputException extends Exception{
     public InvalidInputException(String message){
