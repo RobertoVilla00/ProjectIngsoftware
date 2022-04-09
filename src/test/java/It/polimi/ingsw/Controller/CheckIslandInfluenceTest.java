@@ -5,8 +5,7 @@ import It.polimi.ingsw.Model.Color;
 import It.polimi.ingsw.Model.TowerColor;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class CheckIslandInfluenceTest {
 
@@ -139,5 +138,60 @@ public class CheckIslandInfluenceTest {
         controller.CheckIslandInfluence(0);
         TowerColor towerColor=controller.getMatch().getTable().get(0).getTowersColor();
         assertEquals(TowerColor.BLACK,towerColor);
+    }
+
+    @Test
+    public void CheckIslandInfluenceWithAdditionalPoints(){
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.BLUE);
+        controller.CheckTeacherControl(Color.BLUE,controller.getMatch().getPlayers()[0]);
+        controller.getMatch().getTable().get(0).AddStudent(Color.BLUE);
+        controller.getMatch().getPlayers()[1].setAdditionalPoints(true);
+        controller.CheckIslandInfluence(0);
+        TowerColor towerColor=controller.getMatch().getTable().get(0).getTowersColor();
+        assertEquals(TowerColor.BLACK,towerColor);
+    }
+
+    @Test
+    public void CheckIslandWithCard6Played(){
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.BLUE);
+        controller.CheckTeacherControl(Color.BLUE,controller.getMatch().getPlayers()[0]);
+        controller.getMatch().getTable().get(0).AddStudent(Color.BLUE);
+        controller.getMatch().getTable().get(0).BuildTower(TowerColor.BLACK);
+        controller.getMatch().getTable().get(0).IncreaseTower();
+        controller.getMatch().setPlaysCard6(true);
+        controller.CheckIslandInfluence(0);
+        TowerColor towerColor=controller.getMatch().getTable().get(0).getTowersColor();
+        assertEquals(TowerColor.WHITE,towerColor);
+    }
+
+    @Test public void CheckIslandNoEntryTile(){
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.BLUE);
+        controller.CheckTeacherControl(Color.BLUE,controller.getMatch().getPlayers()[0]);
+        controller.getMatch().getTable().get(0).AddStudent(Color.BLUE);
+        controller.getMatch().getTable().get(0).BuildTower(TowerColor.BLACK);
+        controller.getMatch().getTable().get(0).IncreaseTower();
+        controller.getMatch().getTable().get(0).setNoEntryTile();
+        controller.CheckIslandInfluence(0);
+        assertFalse(controller.getMatch().getTable().get(0).GetNoEntryTile());
+    }
+
+    @Test public void CheckIslandNoEntryTile2(){
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.BLUE);
+        controller.CheckTeacherControl(Color.BLUE,controller.getMatch().getPlayers()[0]);
+        controller.getMatch().getTable().get(0).setNoEntryTile();
+        controller.CheckIslandInfluence(0);
+        assertNull(controller.getMatch().getTable().get(0).getTowersColor());
     }
 }

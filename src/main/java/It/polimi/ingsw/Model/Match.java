@@ -212,7 +212,6 @@ public class Match {
 		if(MotherNaturePosition>=Table.size()){							//secure the circularity of the table
 			MotherNaturePosition=MotherNaturePosition-Table.size();
 		}
-		Table.get(MotherNaturePosition).ResolveMotherNature();
 	}
 
 	public void MoveStudentsFromCloudToEntrance(int PlayerIndex, int CloudIndex ){
@@ -237,24 +236,9 @@ public class Match {
 		Arrays.sort(Players);
 	}
 
-	/*public void ResolveCard4(Color StudentColor) {
-		for (Player p : Players) {
-			for (int i = 0; i < 3; i++) {
-				if (p.getPlayersSchool().getStudentNumber(StudentColor) != 0) {
-					p.getPlayersSchool().RemoveStudentFromDiningRoom(StudentColor);
-					bag.AddStudent(StudentColor);
-				}
-			}
-		}
-	}*/
-
 	public int getMotherNaturePosition() {
 		return MotherNaturePosition;
 	}
-
-	/*public void ResolveCard5(int index){
-		Table.get(index).setNoEntryTile();
-	}*/
 
 	public ArrayList<Island> getTable(){
 		return this.Table;

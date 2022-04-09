@@ -143,6 +143,7 @@ public class GameController implements Observer {
     public void MoveMotherNature(MotherNatureMessage motherNatureMessage){
         //check if its possible + additional steps
         match.MoveMotherNature(motherNatureMessage.getSteps());
+        CheckIslandInfluence(match.getMotherNaturePosition());
     }
 
     public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage){
@@ -157,7 +158,7 @@ public class GameController implements Observer {
     public void EndGame(){}
 
     public int ActivePlayer(){
-        return this.match.getPlayerById(2).getPlayerId(); //EXAMPLE!!! IsActive boolean in Model??
+        return this.match.getPlayerById(1).getPlayerId(); //EXAMPLE!!! IsActive boolean in Model??
     }
 
 

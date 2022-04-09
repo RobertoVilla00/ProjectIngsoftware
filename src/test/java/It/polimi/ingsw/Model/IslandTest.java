@@ -144,6 +144,14 @@ public class IslandTest {
         TowerColor color = i.getTowersColor();
         assertEquals(TowerColor.WHITE,color);
     }
+
+    @Test
+    public void resetNoEntryTile(){
+        Island i = new Island();
+        i.setNoEntryTile();
+        i.ResetNoEntryTile();
+        assertFalse(i.GetNoEntryTile());
+    }
 }
 
 

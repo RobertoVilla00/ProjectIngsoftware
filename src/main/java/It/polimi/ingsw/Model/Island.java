@@ -61,6 +61,7 @@ public class Island {
 	public void ResetNoEntryTile(){
 		this.NoEntryTile = false;
 	}
+
 	public boolean isEmpty(){
 		if(NumberOfTowers==0) return true;
 		else return false;
@@ -100,10 +101,6 @@ public class Island {
 	}
 
 	public boolean GetNoEntryTile(){return this.NoEntryTile;}
-
-	public void ResolveMotherNature(){
-
-	}
 
 
 }

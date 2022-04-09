@@ -24,4 +24,13 @@ public class Cards1and10Test {
         assertEquals(studentColor,color);
     }
 
+    @Test
+    public void getNumberOfStudents(){
+        Match match = new Match(3,1);
+        Cards1and10 cards1and10= new Cards1and10(1,1,match);
+        cards1and10.AddStudent();
+        cards1and10.AddStudent();
+        int nuberOfStudents=cards1and10.getNumberOfStudents();
+        assertEquals(2,nuberOfStudents);
+    }
 }

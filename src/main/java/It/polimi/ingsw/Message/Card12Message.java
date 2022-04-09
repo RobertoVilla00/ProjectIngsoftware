@@ -9,7 +9,7 @@ public class Card12Message extends Message{
     public Card12Message(String studentColor) throws InvalidInputException {
         super(MessageContent.CARD12);
 
-        studentColor.toUpperCase();
+        studentColor=studentColor.toUpperCase();
         switch (studentColor){
             case("GREEN"):
                 this.StudentColor=Color.GREEN;

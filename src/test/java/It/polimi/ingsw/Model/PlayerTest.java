@@ -111,4 +111,11 @@ public class PlayerTest {
         int playerId=players[1].getPlayerId();
         assertEquals(1,playerId);
     }
+
+    @Test
+    public void setAdditionalPoints(){
+        Player carlo=new Player(TowerColor.BLACK,"Carlo",0);
+        carlo.setAdditionalPoints(true);
+        assertTrue(carlo.getAdditionalPoints());
+    }
 }

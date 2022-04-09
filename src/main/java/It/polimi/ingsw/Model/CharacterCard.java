@@ -31,7 +31,6 @@ public class CharacterCard {
 		return this.match;
 	}
 
-	public CharacterCard(){};//da rimuovere dopo rimozione delle carte vecchie
 }
 
 

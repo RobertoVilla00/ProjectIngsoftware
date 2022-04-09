@@ -41,6 +41,7 @@ public class Player implements Comparable<Player> {
 	public boolean getAdditionalPoints(){
 		return this.AdditionalPoints;
 	}
+
 	public void setAdditionalPoints(boolean value){
 		this.AdditionalPoints = value;
 	}

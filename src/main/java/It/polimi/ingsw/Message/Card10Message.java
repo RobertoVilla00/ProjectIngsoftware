@@ -4,7 +4,7 @@ public class Card10Message extends Message{
 
     private int StudentIndex;
 
-    public Card10Message(MessageContent Content, int studentIndex) {
+    public Card10Message(int studentIndex) {
         super(MessageContent.CARD10);
         StudentIndex = studentIndex-1;
     }

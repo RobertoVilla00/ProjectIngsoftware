@@ -285,11 +285,36 @@ public class MatchTest {
     }
 
     @Test
-    public void getPlayerbyId(){
+    public void getPlayerById(){
         Match match= new Match(3,0);
         int id=match.getPlayers()[1].getPlayerId();
         Player player=match.getPlayers()[1];
         Player foundPlayer=match.getPlayerById(id);
         assertEquals(player,foundPlayer);
     }
+
+    @Test
+    public void isCharacterCardOnTable(){
+        Match match = new Match(2,1);
+        int id=match.getCharacterCardsOnTable()[1].getIdCharacterCard();
+        boolean hasCard=match.isCharacterCardOnTable(id);
+        assertTrue(hasCard);
+    }
+
+    @Test
+    public void isCharacterCardOnTableFalse(){
+        Match match = new Match(2,1);
+        boolean hasCard=match.isCharacterCardOnTable(13);
+        assertFalse(hasCard);
+    }
+
+    @Test
+    public void getCharacterCardById(){
+        Match match = new Match(2,1);
+        int id=match.getCharacterCardsOnTable()[1].getIdCharacterCard();
+        CharacterCard characterCard=match.getCharacterCardsOnTable()[1];
+        CharacterCard characterCardById=match.getCharacterCardById(id);
+        assertEquals(characterCard,characterCardById);
+    }
+
 }
