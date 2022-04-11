@@ -14,7 +14,7 @@ public class CharacterCardController{
         this.Game = gController;
     }
 
-    public void PlayCard1 (Card1Message message) throws InvalidInputException {
+    public void PlayCard1 (Card1Message message) throws InvalidInputException {                     //students from card to Island
         if(Game.getMatch().isCharacterCardOnTable(1)){
             Cards1and10 card1 = (Cards1and10)Game.getMatch().getCharacterCardById(1);
             if(message.getStudentOnCardIndex() >= card1.getNumberOfStudents()){
@@ -34,7 +34,7 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard3(Card3and5Message message) throws InvalidInputException {
+    public void PlayCard3(Card3and5Message message) throws InvalidInputException {              //count the influence on an island
         if(Game.getMatch().isCharacterCardOnTable(3)){
             if(message.getIslandIndex() >= Game.getMatch().getTable().size()) {
                 throw new InvalidInputException("Given Island Index is not Available, please give another one");
@@ -46,14 +46,14 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard4() throws InvalidInputException{
+    public void PlayCard4() throws InvalidInputException{               //increase maximum mother nature movement
         if(Game.getMatch().isCharacterCardOnTable(4)){
             Game.getMatch().getPlayerById(Game.ActivePlayer()).IncreaseMovements(2);
         }
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard5(Card3and5Message message) throws InvalidInputException, NoEntryTilesException{
+    public void PlayCard5(Card3and5Message message) throws InvalidInputException, NoEntryTilesException{        //no entry tiles
         if(Game.getMatch().isCharacterCardOnTable(5)){
             Card5 card =(Card5)Game.getMatch().getCharacterCardById(5);
             if(card.getNoEntryTilesOnCard() == 0) throw new NoEntryTilesException();
@@ -70,21 +70,21 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard6() throws InvalidInputException{
+    public void PlayCard6() throws InvalidInputException{               //no towers counted in influence
         if(Game.getMatch().isCharacterCardOnTable(6)){
             Game.getMatch().setPlaysCard6(true);
         }
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard9() throws InvalidInputException{
+    public void PlayCard9() throws InvalidInputException{                   //2 bonus points
         if(Game.getMatch().isCharacterCardOnTable(9)){
             Game.getMatch().getPlayerById(Game.ActivePlayer()).setAdditionalPoints(true);
         }
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard10(Card10Message message) throws InvalidInputException{
+    public void PlayCard10(Card10Message message) throws InvalidInputException{             //move student to dining room
         if(Game.getMatch().isCharacterCardOnTable(10)){
             Cards1and10 card = (Cards1and10)Game.getMatch().getCharacterCardById(10);
             if(message.getStudentIndex()>= card.getNumberOfStudents()){
@@ -103,8 +103,8 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard12(Card12Message message) throws InvalidInputException{
-        if(Game.getMatch().isCharacterCardOnTable(10)){
+    public void PlayCard12(Card12Message message) throws InvalidInputException{         //remove 3 students from every school
+        if(Game.getMatch().isCharacterCardOnTable(12)){
             for(Player p: Game.getMatch().getPlayers()){
                 for(int i=0; i < 3; i++) {
                     if (p.getPlayersSchool().getStudentNumber(message.getStudentColor()) > 0) {
@@ -113,6 +113,6 @@ public class CharacterCardController{
                 }
             }
         }
-        else throw new InvalidInputException("Dining Room is full, you cannot play this Card");
+        else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 }

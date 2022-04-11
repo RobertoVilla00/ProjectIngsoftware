@@ -44,13 +44,6 @@ public class Match {
 		CharacterCardOnTable = new CharacterCard[3];
 
 		PlaysCard6 = false;
-		if(GameMode == 1) {
-			CharacterDeck = new CharacterCardDeck(this);
-			CharacterDeck.ShuffleCharacterCardDeck();
-			for (int i = 0; i < 3; i++) {                                        //initialize CharacterCardOnTable
-				CharacterCardOnTable[i] = CharacterDeck.SelectCard(0);
-			}
-		}
 
 		for (int i = 0; i < 12; i++) {                              //initialize Table (create islands)
 			Table.add(new Island());
@@ -59,6 +52,10 @@ public class Match {
 			if(i !=6) MoveStudentsBagToIsland(i);
 		}
 		bag = new Bag(24);
+
+		if(GameMode == 1) {
+			this.InitializeCharacterCardOnTable();
+		}
 
 		Teachers.add(new Teacher(Color.BLUE));						//initialize Teachers
 		Teachers.add(new Teacher(Color.GREEN));
@@ -316,6 +313,20 @@ public class Match {
 
 	public CharacterCard[] getCharacterCardsOnTable(){
 		return this.CharacterCardOnTable;
+	}
+
+	public void InitializeCharacterCardOnTable() {
+		CharacterDeck = new CharacterCardDeck(this);
+		CharacterDeck.ShuffleCharacterCardDeck();
+		for (int i = 0; i < 3; i++) {
+			CharacterCardOnTable[i] = CharacterDeck.SelectCard(0);
+			if(CharacterCardOnTable[i].getIdCharacterCard()==1 || CharacterCardOnTable[i].getIdCharacterCard()==10 ){
+				Cards1and10 card=(Cards1and10)CharacterCardOnTable[i];
+				for(int j=0;j<4;j++){
+					card.AddStudent();
+				}
+			}
+		}
 	}
 }
 

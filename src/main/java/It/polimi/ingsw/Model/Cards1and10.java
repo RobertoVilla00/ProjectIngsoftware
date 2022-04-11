@@ -9,6 +9,7 @@ public class Cards1and10 extends CharacterCard{
     public Cards1and10(int idCharacterCard, int cardCost, Match currentMatch){
         super(idCharacterCard,cardCost,currentMatch);
         StudentsOnCard =new ArrayList<Color>();
+        Color studentColor;
     }
 
     public void AddStudent(){

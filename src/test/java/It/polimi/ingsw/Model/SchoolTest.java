@@ -45,7 +45,16 @@ public class SchoolTest {
         school.RemoveStudentFromDiningRoom(Color.PINK);
         int PinkStudents = school.getStudentNumber(Color.PINK);
         assertEquals(4,PinkStudents);
+    }
 
+    @Test
+    public void RemoveStudents2(){
+        School school = new School();
+        school.AddStudentToDiningRoom(Color.GREEN);
+        school.AddStudentToDiningRoom(Color.BLUE);
+        school.RemoveStudentFromDiningRoom(Color.BLUE);
+        school.RemoveStudentFromDiningRoom(Color.GREEN);
+        assertEquals(0,school.getStudentNumber(Color.GREEN));
     }
 
     @Test

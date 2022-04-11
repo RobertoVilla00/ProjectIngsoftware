@@ -247,7 +247,17 @@ public class MatchTest {
         Match match = new Match(2,1);
         Bag students =match.getBag();
         int numberOfStudents=students.BagSize();
-        assertEquals(106,numberOfStudents);
+        boolean correctStudentInBag=false;
+        if(match.isCharacterCardOnTable(1)&&match.isCharacterCardOnTable(10)){
+            correctStudentInBag=(numberOfStudents==98);
+        }
+        if(match.isCharacterCardOnTable(1)^match.isCharacterCardOnTable(10)){
+            correctStudentInBag=(numberOfStudents==102);
+        }
+        if(!match.isCharacterCardOnTable(1)&&!match.isCharacterCardOnTable(10)){
+            correctStudentInBag=(numberOfStudents==106);
+        }
+        assertTrue(correctStudentInBag);
     }
 
     @Test
