@@ -48,7 +48,7 @@ public class CharacterCardController{
 
     public void PlayCard4() throws InvalidInputException{               //increase maximum mother nature movement
         if(Game.getMatch().isCharacterCardOnTable(4)){
-            Game.getMatch().getPlayerById(Game.ActivePlayer()).IncreaseMovements(2);
+            Game.getMatch().getPlayerById(Game.getActivePlayer()).IncreaseMovements(2);
         }
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
@@ -79,7 +79,7 @@ public class CharacterCardController{
 
     public void PlayCard9() throws InvalidInputException{                   //2 bonus points
         if(Game.getMatch().isCharacterCardOnTable(9)){
-            Game.getMatch().getPlayerById(Game.ActivePlayer()).setAdditionalPoints(true);
+            Game.getMatch().getPlayerById(Game.getActivePlayer()).setAdditionalPoints(true);
         }
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
@@ -92,11 +92,11 @@ public class CharacterCardController{
             }
             else{
                 Color StudentColor = card.RemoveStudent(message.getStudentIndex());
-                if(Game.getMatch().getPlayerById(Game.ActivePlayer()).getPlayersSchool().getStudentNumber(StudentColor)==10){
+                if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().getStudentNumber(StudentColor)==10){
                     throw new InvalidInputException("Dining Room is full, you cannot play this Card");
                 }
                 else {
-                    Game.getMatch().getPlayerById(Game.ActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(StudentColor);
+                    Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(StudentColor);
                 }
             }
         }

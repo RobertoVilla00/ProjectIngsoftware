@@ -152,7 +152,7 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
         characterCardController.PlayCard4();
-        int maximumMovements=controller.getMatch().getPlayerById(controller.ActivePlayer()).GetPlayedMovements();
+        int maximumMovements=controller.getMatch().getPlayerById(controller.getActivePlayer()).GetPlayedMovements();
         assertEquals(2,maximumMovements);
     }
 
@@ -264,7 +264,7 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
         characterCardController.PlayCard9();
-        boolean bonusPoints=controller.getMatch().getPlayerById(controller.ActivePlayer()).getAdditionalPoints();
+        boolean bonusPoints=controller.getMatch().getPlayerById(controller.getActivePlayer()).getAdditionalPoints();
         assertTrue(bonusPoints);
     }
 
@@ -293,7 +293,7 @@ public class CharacterCardControllerTest {
         Color studentColor = card10.GetStudentColor(1);
         Card10Message card10Message = new Card10Message(2);
         characterCardController.PlayCard10(card10Message);
-        int studentsNumber = controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().getStudentNumber(studentColor);
+        int studentsNumber = controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getStudentNumber(studentColor);
         assertEquals(1,studentsNumber);
     }
 
@@ -308,11 +308,11 @@ public class CharacterCardControllerTest {
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Cards1and10 card10 = (Cards1and10) controller.getMatch().getCharacterCardById(10);
         for(int i =0; i<10;i++){
-            controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.BLUE);
-            controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.RED);
-            controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.GREEN);
-            controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
-            controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.PINK);
+            controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.BLUE);
+            controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.RED);
+            controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.GREEN);
+            controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+            controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.PINK);
         }
         Card10Message card10Message = new Card10Message(2);
         characterCardController.PlayCard10(card10Message);

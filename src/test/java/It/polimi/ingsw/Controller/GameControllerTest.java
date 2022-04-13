@@ -61,10 +61,10 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
-        Color studentColor=controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
+        Color studentColor=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(2,0);
         controller.MoveStudent(moveStudentMessage);
-        int numberOfStudents=controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().getEntranceStudentsNumber();
+        int numberOfStudents=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber();
         assertEquals(8,numberOfStudents);
     }
 
@@ -73,10 +73,10 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
-        Color studentColor=controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
+        Color studentColor=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(2,0);
         controller.MoveStudent(moveStudentMessage);
-        int numberOfStudents=controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().getStudentNumber(studentColor);
+        int numberOfStudents=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getStudentNumber(studentColor);
         assertEquals(1,numberOfStudents);
     }
 
@@ -85,7 +85,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
-        Color studentColor=controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
+        Color studentColor=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(2,7);
         controller.MoveStudent(moveStudentMessage);
         int numberOfStudents=controller.getMatch().getTable().get(6).CountStudents(studentColor);
@@ -123,7 +123,7 @@ public class GameControllerTest {
         controller.getMatch().PlanningPhase();
         CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(3);
         controller.ChooseCloud(cloudChoiceMessage);
-        int entranceStudents=controller.getMatch().getPlayerById(controller.ActivePlayer()).getPlayersSchool().getEntranceStudentsNumber();
+        int entranceStudents=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber();
         assertEquals(13,entranceStudents);
     }
 }

@@ -10,6 +10,7 @@ public class GameController implements Observer {
 
     private Match match;
     private CharacterCardController characterCardController;
+    private int activePlayer;
     /*private View view;*/
 
     public GameController(){
@@ -138,7 +139,7 @@ public class GameController implements Observer {
     }
 
     public void MoveStudent(MoveStudentMessage moveStudentMessage) throws InvalidInputException{
-        int activePlayerId = ActivePlayer();
+        int activePlayerId = getActivePlayer();
         int StudentIndex = moveStudentMessage.getEntrancePosition();
         int Destination = moveStudentMessage.getDestination();
         Color StudentColor = match.getPlayerById(activePlayerId).getPlayersSchool().GetEntranceStudentColor(StudentIndex);
@@ -165,18 +166,18 @@ public class GameController implements Observer {
 
         if(motherNatureMessage.getSteps() == 0) throw new InvalidInputException("MotherNature has to do at least one step");
         else if(motherNatureMessage.getSteps() < 1) throw new InvalidInputException("You can't put a negative number");
-        else if(match.getPlayerById(ActivePlayer()).GetPlayedMovements() >= motherNatureMessage.getSteps()) {
+        else if(match.getPlayerById(getActivePlayer()).GetPlayedMovements() >= motherNatureMessage.getSteps()) {
             match.MoveMotherNature(motherNatureMessage.getSteps());
             CheckIslandInfluence(match.getMotherNaturePosition());
         }
-        else throw new InvalidInputException("Too many steps, max is"+match.getPlayerById(ActivePlayer()).GetPlayedMovements());
+        else throw new InvalidInputException("Too many steps, max is"+match.getPlayerById(getActivePlayer()).GetPlayedMovements());
     }
 
     public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage) throws InvalidInputException{
         if( cloudChoiceMessage.getCloudIndex() > match.getNumberOfPlayers()-1 || cloudChoiceMessage.getCloudIndex() < 0){
             throw new InvalidInputException("invalid Cloud index");
         }
-        else match.MoveStudentsFromCloudToEntrance(ActivePlayer(),cloudChoiceMessage.getCloudIndex());
+        else match.MoveStudentsFromCloudToEntrance(getActivePlayer(),cloudChoiceMessage.getCloudIndex());
     }
 
 
@@ -185,26 +186,26 @@ public class GameController implements Observer {
         boolean notPlayable = false;
         boolean Played=false;
 
-        if(card >= match.getPlayerById(ActivePlayer()).getDeck().CardCount() || card < 0){
+        if(card >= match.getPlayerById(getActivePlayer()).getDeck().CardCount() || card < 0){
             throw new InvalidInputException("invalid card index");
         }
 
         for(Player p: match.getPlayers()){
-            if(p == match.getPlayerById(ActivePlayer())) break;
+            if(p == match.getPlayerById(getActivePlayer())) break;
             else{
-                if(match.getPlayerById(ActivePlayer()).getDeck().GetCard(card).getOrderValue() == p.GetPlayedOrderValue()){
+                if(match.getPlayerById(getActivePlayer()).getDeck().GetCard(card).getOrderValue() == p.GetPlayedOrderValue()){
                     notPlayable = true;
                 }
             }
         }
         if(notPlayable){
             notPlayable = false;
-            for(int i = 0; i<match.getPlayerById(ActivePlayer()).getDeck().CardCount();i++){
+            for(int i = 0; i<match.getPlayerById(getActivePlayer()).getDeck().CardCount(); i++){
                 Played = false;
                 for(Player p: match.getPlayers()){
-                    if(p == match.getPlayerById(ActivePlayer())) break;
+                    if(p == match.getPlayerById(getActivePlayer())) break;
                     else{
-                        if(match.getPlayerById(ActivePlayer()).getDeck().GetCard(i).getOrderValue() == p.GetPlayedOrderValue()) {
+                        if(match.getPlayerById(getActivePlayer()).getDeck().GetCard(i).getOrderValue() == p.GetPlayedOrderValue()) {
                             Played = true;
                         }
                     }
@@ -217,15 +218,15 @@ public class GameController implements Observer {
         }
         if(notPlayable) throw new InvalidInputException("Selected Assistant Card is not Playable");
         else{
-            match.getPlayerById(ActivePlayer()).PlayAssistantCard(card);
+            match.getPlayerById(getActivePlayer()).PlayAssistantCard(card);
         }
 
     }
 
     public void EndGame(){}
 
-    public int ActivePlayer(){
-        return this.match.getPlayerById(1).getPlayerId(); //EXAMPLE!!! IsActive boolean in Model??
+    public int getActivePlayer(){
+        return this.activePlayer;
     }
 
 
