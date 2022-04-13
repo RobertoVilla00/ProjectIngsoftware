@@ -16,7 +16,7 @@ public class GameController implements Observer {
     }
 
     public void InitializeGame(StartMessage startMessage) throws InvalidInputException {
-        match = new Match(startMessage.getNumberOfPlayers(), startMessage.getNumberOfPlayers());
+        match = new Match(startMessage.getNumberOfPlayers(), startMessage.getGameMode());
         if(startMessage.getNumberOfPlayers() < 2 || startMessage.getNumberOfPlayers() > 3){
             throw new InvalidInputException("Player Numbers can only be 2 or 3");
         }
