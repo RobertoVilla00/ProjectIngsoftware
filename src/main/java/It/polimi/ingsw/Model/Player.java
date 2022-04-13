@@ -106,5 +106,9 @@ public class Player implements Comparable<Player> {
 		this.Coins=this.Coins - numberOfCoins;
 	}
 
+	public AssistantCardDeck getDeck(){
+		return this.Deck;
+	}
+
 	public int getPlayerId(){ return this.PlayerId; }
 }

@@ -153,28 +153,73 @@ public class GameController implements Observer {
                         throw new InvalidInputException("Dining Room is full, you cannot play this Card");
                     }
                     else match.MoveStudentsFromEntranceToDiningRoom(StudentIndex, activePlayerId);
-                } else {                                        //if destination is an island
+                }
+                else {                                        //if destination is an island
                     match.MoveStudentsFromEntranceToIsland(StudentIndex, activePlayerId, Destination);
                 }
             } else throw new InvalidInputException("Invalid Student index");
         }
     }
 
-    public void MoveMotherNature(MotherNatureMessage motherNatureMessage){
-        //check if its possible
-        
-        match.MoveMotherNature(motherNatureMessage.getSteps());
-        CheckIslandInfluence(match.getMotherNaturePosition());
+    public void MoveMotherNature(MotherNatureMessage motherNatureMessage)throws InvalidInputException{
+
+        if(motherNatureMessage.getSteps() == 0) throw new InvalidInputException("MotherNature has to do at least one step");
+        else if(motherNatureMessage.getSteps() < 1) throw new InvalidInputException("You can't put a negative number");
+        else if(match.getPlayerById(ActivePlayer()).GetPlayedMovements() >= motherNatureMessage.getSteps()) {
+            match.MoveMotherNature(motherNatureMessage.getSteps());
+            CheckIslandInfluence(match.getMotherNaturePosition());
+        }
+        else throw new InvalidInputException("Too many steps, max is"+match.getPlayerById(ActivePlayer()).GetPlayedMovements());
     }
 
-    public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage){
-
-        match.MoveStudentsFromCloudToEntrance(ActivePlayer(),cloudChoiceMessage.getCloudIndex());
+    public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage) throws InvalidInputException{
+        if( cloudChoiceMessage.getCloudIndex() > match.getNumberOfPlayers()-1 || cloudChoiceMessage.getCloudIndex() < 0){
+            throw new InvalidInputException("invalid Cloud index");
+        }
+        else match.MoveStudentsFromCloudToEntrance(ActivePlayer(),cloudChoiceMessage.getCloudIndex());
     }
 
 
-    public void PlayAssistantCard(Message assistantCardMessage){
-        //check if it's playable then calls model
+    public void PlayAssistantCard(AssistantCardMessage assistantCardMessage) throws InvalidInputException{
+        int card = assistantCardMessage.getCardIndex();
+        boolean notPlayable = false;
+        boolean Played=false;
+
+        if(card >= match.getPlayerById(ActivePlayer()).getDeck().CardCount() || card < 0){
+            throw new InvalidInputException("invalid card index");
+        }
+
+        for(Player p: match.getPlayers()){
+            if(p == match.getPlayerById(ActivePlayer())) break;
+            else{
+                if(match.getPlayerById(ActivePlayer()).getDeck().GetCard(card).getOrderValue() == p.GetPlayedOrderValue()){
+                    notPlayable = true;
+                }
+            }
+        }
+        if(notPlayable){
+            notPlayable = false;
+            for(int i = 0; i<match.getPlayerById(ActivePlayer()).getDeck().CardCount();i++){
+                Played = false;
+                for(Player p: match.getPlayers()){
+                    if(p == match.getPlayerById(ActivePlayer())) break;
+                    else{
+                        if(match.getPlayerById(ActivePlayer()).getDeck().GetCard(i).getOrderValue() == p.GetPlayedOrderValue()) {
+                            Played = true;
+                        }
+                    }
+                }
+                if(!Played){
+                    notPlayable = true;
+                    break;
+                }
+            }
+        }
+        if(notPlayable) throw new InvalidInputException("Selected Assistant Card is not Playable");
+        else{
+            match.getPlayerById(ActivePlayer()).PlayAssistantCard(card);
+        }
+
     }
 
     public void EndGame(){}
