@@ -1,4 +1,5 @@
 package It.polimi.ingsw.Controller;
+import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 
@@ -14,10 +15,19 @@ public class GameController implements Observer {
     public GameController(){
     }
 
-    public void InitializeGame(StartMessage startMessage){
-        match = new Match(startMessage.getNumberOfPlayers(), startMessage.getGameMode());
-        if(match.isExpertMode()){
-            characterCardController = new CharacterCardController(this);
+    public void InitializeGame(StartMessage startMessage) throws InvalidInputException {
+        match = new Match(startMessage.getNumberOfPlayers(), startMessage.getNumberOfPlayers());
+        if(startMessage.getNumberOfPlayers() < 2 || startMessage.getNumberOfPlayers() > 3){
+            throw new InvalidInputException("Player Numbers can only be 2 or 3");
+        }
+        else {
+            if (startMessage.getGameMode() < 0 || startMessage.getGameMode() > 1) {
+                throw new InvalidInputException("Gamemode can only be 0 or 1");
+            } else {
+                if (match.isExpertMode()) {
+                    characterCardController = new CharacterCardController(this);
+                }
+            }
         }
     }
 
@@ -127,26 +137,38 @@ public class GameController implements Observer {
         }
     }
 
-    public void MoveStudent(MoveStudentMessage moveStudentMessage){
+    public void MoveStudent(MoveStudentMessage moveStudentMessage) throws InvalidInputException{
         int activePlayerId = ActivePlayer();
         int StudentIndex = moveStudentMessage.getEntrancePosition();
         int Destination = moveStudentMessage.getDestination();
+        Color StudentColor = match.getPlayerById(activePlayerId).getPlayersSchool().GetEntranceStudentColor(StudentIndex);
 
-        if(Destination == - 1) {                     //if destination is not an island
-            match.MoveStudentsFromEntranceToDiningRoom(StudentIndex, activePlayerId);
+        if(Destination <-1 || Destination >= match.getTable().size()){
+            throw new InvalidInputException("Invalid Destination");
         }
-        else{                                        //if destination is an island
-            match.MoveStudentsFromEntranceToIsland(StudentIndex, activePlayerId, Destination);
+        else {
+            if (StudentIndex >= 0 && StudentIndex < match.getPlayerById(activePlayerId).getPlayersSchool().getEntranceStudentsNumber()) {
+                if (Destination == -1) {                     //if destination is not an island
+                    if(match.getPlayerById(activePlayerId).getPlayersSchool().getStudentNumber(StudentColor)==10) {
+                        throw new InvalidInputException("Dining Room is full, you cannot play this Card");
+                    }
+                    else match.MoveStudentsFromEntranceToDiningRoom(StudentIndex, activePlayerId);
+                } else {                                        //if destination is an island
+                    match.MoveStudentsFromEntranceToIsland(StudentIndex, activePlayerId, Destination);
+                }
+            } else throw new InvalidInputException("Invalid Student index");
         }
     }
 
     public void MoveMotherNature(MotherNatureMessage motherNatureMessage){
-        //check if its possible + additional steps
+        //check if its possible
+        
         match.MoveMotherNature(motherNatureMessage.getSteps());
         CheckIslandInfluence(match.getMotherNaturePosition());
     }
 
     public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage){
+
         match.MoveStudentsFromCloudToEntrance(ActivePlayer(),cloudChoiceMessage.getCloudIndex());
     }
 

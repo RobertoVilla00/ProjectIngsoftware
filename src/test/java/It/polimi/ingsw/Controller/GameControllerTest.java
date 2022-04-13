@@ -1,5 +1,6 @@
 package It.polimi.ingsw.Controller;
 
+import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Message.CloudChoiceMessage;
 import It.polimi.ingsw.Message.MotherNatureMessage;
 import It.polimi.ingsw.Message.MoveStudentMessage;
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class GameControllerTest {
 
     @Test
-    public void CheckTeacherControl(){
+    public void CheckTeacherControl() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -26,7 +27,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void CheckTeacherControlWithDraw(){
+    public void CheckTeacherControlWithDraw() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -40,7 +41,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void CheckTeacherControlWithChange(){
+    public void CheckTeacherControlWithChange() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -56,7 +57,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void MoveStudent(){
+    public void MoveStudent() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -68,7 +69,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void MoveStudentToDiningRoom(){
+    public void MoveStudentToDiningRoom() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -80,7 +81,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void MoveStudentToIsland(){
+    public void MoveStudentToIsland() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -92,7 +93,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void MoveMotherNature(){
+    public void MoveMotherNature() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -103,7 +104,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void ChooseCloud(){
+    public void ChooseCloud() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -115,7 +116,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void ChooseCloud2(){
+    public void ChooseCloud2() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);

@@ -1,5 +1,6 @@
 package It.polimi.ingsw.Controller;
 
+import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Message.StartMessage;
 import It.polimi.ingsw.Model.TowerColor;
 import org.junit.Test;
@@ -8,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class CheckIslandMergeTest {
 
     @Test
-    public void checkIslandMerge(){
+    public void checkIslandMerge() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -21,7 +22,7 @@ public class CheckIslandMergeTest {
     }
 
     @Test
-    public void checkIslandMerge2(){
+    public void checkIslandMerge2() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -34,7 +35,7 @@ public class CheckIslandMergeTest {
     }
 
     @Test
-    public void checkIslandMergeLimit(){
+    public void checkIslandMergeLimit() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -47,7 +48,7 @@ public class CheckIslandMergeTest {
     }
 
     @Test
-    public void checkIslandMergeLimit2(){
+    public void checkIslandMergeLimit2() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -60,7 +61,7 @@ public class CheckIslandMergeTest {
     }
 
     @Test
-    public void checkIslandMergeLimit3(){
+    public void checkIslandMergeLimit3() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -73,7 +74,7 @@ public class CheckIslandMergeTest {
     }
 
     @Test
-    public void checkIslandMergeLimit4(){
+    public void checkIslandMergeLimit4() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -86,7 +87,7 @@ public class CheckIslandMergeTest {
     }
 
     @Test
-    public void checkIslandMergeLimit5(){
+    public void checkIslandMergeLimit5() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -99,7 +100,7 @@ public class CheckIslandMergeTest {
     }
 
     @Test
-    public void checkIslandMergeLimit6(){
+    public void checkIslandMergeLimit6() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -112,7 +113,7 @@ public class CheckIslandMergeTest {
     }
 
     @Test
-    public void checkIslandMergeLimit7(){
+    public void checkIslandMergeLimit7() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);

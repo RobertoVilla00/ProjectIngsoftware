@@ -1,5 +1,6 @@
 package It.polimi.ingsw.Controller;
 
+import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Message.StartMessage;
 import It.polimi.ingsw.Model.Color;
 import It.polimi.ingsw.Model.TowerColor;
@@ -10,7 +11,7 @@ import static org.junit.Assert.*;
 public class CheckIslandInfluenceTest {
 
     @Test
-    public void CheckIslandInfluence(){
+    public void CheckIslandInfluence() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -28,7 +29,7 @@ public class CheckIslandInfluenceTest {
     }
 
     @Test
-    public void CheckIslandInfluenceWithTower(){
+    public void CheckIslandInfluenceWithTower() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -51,7 +52,7 @@ public class CheckIslandInfluenceTest {
     }
 
     @Test
-    public void CheckIslandInfluenceMultiStudents(){
+    public void CheckIslandInfluenceMultiStudents() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -76,7 +77,7 @@ public class CheckIslandInfluenceTest {
     }
 
     @Test
-    public void CheckIslandInfluenceMultiTowers(){
+    public void CheckIslandInfluenceMultiTowers() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -101,7 +102,7 @@ public class CheckIslandInfluenceTest {
     }
 
     @Test
-    public void CheckIslandInfluenceDraw(){
+    public void CheckIslandInfluenceDraw() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -117,7 +118,7 @@ public class CheckIslandInfluenceTest {
     }
 
     @Test
-    public void CheckIslandInfluenceWithTowersAndDraw(){
+    public void CheckIslandInfluenceWithTowersAndDraw() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -141,7 +142,7 @@ public class CheckIslandInfluenceTest {
     }
 
     @Test
-    public void CheckIslandInfluenceWithAdditionalPoints(){
+    public void CheckIslandInfluenceWithAdditionalPoints() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -155,7 +156,7 @@ public class CheckIslandInfluenceTest {
     }
 
     @Test
-    public void CheckIslandWithCard6Played(){
+    public void CheckIslandWithCard6Played() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -170,7 +171,7 @@ public class CheckIslandInfluenceTest {
         assertEquals(TowerColor.WHITE,towerColor);
     }
 
-    @Test public void CheckIslandNoEntryTile(){
+    @Test public void CheckIslandNoEntryTile() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -184,7 +185,7 @@ public class CheckIslandInfluenceTest {
         assertFalse(controller.getMatch().getTable().get(0).GetNoEntryTile());
     }
 
-    @Test public void CheckIslandNoEntryTile2(){
+    @Test public void CheckIslandNoEntryTile2() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
