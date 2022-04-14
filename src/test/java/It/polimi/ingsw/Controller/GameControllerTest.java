@@ -5,19 +5,99 @@ import It.polimi.ingsw.Message.CloudChoiceMessage;
 import It.polimi.ingsw.Message.MotherNatureMessage;
 import It.polimi.ingsw.Message.MoveStudentMessage;
 import It.polimi.ingsw.Message.StartMessage;
-import It.polimi.ingsw.Model.Color;
-import It.polimi.ingsw.Model.Player;
-import It.polimi.ingsw.Model.Teacher;
+import It.polimi.ingsw.Model.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class GameControllerTest {
 
+    @Test(expected = InvalidInputException.class)
+    public void InitializeGame() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(1,1);
+        controller.InitializeGame(startMessage);
+    }
+    @Test(expected = InvalidInputException.class)
+    public void InitializeGame1() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,4);
+        controller.InitializeGame(startMessage);
+    }
+
+    @Test
+    public void CheckIslandMergeWithNoTower() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        controller.CheckIslandMerge(1);
+        assertEquals(controller.getMatch().getTable().size(), 12);
+    }
+    @Test
+    public void CheckIslandMergeWithAdjacentIndexAndSameTowerColor() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getTable().get(4).BuildTower(TowerColor.BLACK);
+        controller.getMatch().getTable().get(5).BuildTower(TowerColor.BLACK);
+        controller.CheckIslandMerge(5);
+        assertEquals(controller.getMatch().getTable().size(), 11);
+    }
+    @Test
+    public void CheckIslandMergeWithAdjacentIndexAndNotSameTowerColor() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getTable().get(4).BuildTower(TowerColor.BLACK);
+        controller.getMatch().getTable().get(5).BuildTower(TowerColor.WHITE);
+        controller.CheckIslandMerge(4);
+        assertEquals(controller.getMatch().getTable().size(), 12);
+    }
+    @Test
+    public void CheckIslandMergeWithNotAdjacentIndexAndSameTowerColor() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getTable().get(2).BuildTower(TowerColor.GREY);
+        controller.getMatch().getTable().get(8).BuildTower(TowerColor.GREY);
+        controller.CheckIslandMerge(2);
+        assertEquals(controller.getMatch().getTable().size(), 12);
+    }
+    @Test
+    public void CheckIslandMergeWithFirstAndLastIndexAndSameTowerColor() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getTable().get(0).BuildTower(TowerColor.GREY);
+        controller.getMatch().getTable().get(11).BuildTower(TowerColor.GREY);
+        controller.CheckIslandMerge(0);
+        assertEquals(controller.getMatch().getTable().size(), 11);
+    }
+    @Test
+    public void CheckIslandMergeWithFirstAndLastIndexAndSameTowerColor1() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getTable().get(0).BuildTower(TowerColor.GREY);
+        controller.getMatch().getTable().get(11).BuildTower(TowerColor.GREY);
+        controller.CheckIslandMerge(11);
+        assertEquals(controller.getMatch().getTable().size(), 11);
+    }
+    @Test
+    public void CheckIslandMergeWithNotFirstAndLastIndexAndSameTowerColor2() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getTable().get(10).BuildTower(TowerColor.GREY);
+        controller.getMatch().getTable().get(11).BuildTower(TowerColor.GREY);
+        controller.CheckIslandMerge(11);
+        assertEquals(controller.getMatch().getTable().size(), 11);
+    }
+
+
     @Test
     public void CheckTeacherControl() throws InvalidInputException {
-        GameController controller=new GameController();
-        StartMessage startMessage=new StartMessage(3,1);
+        GameController controller=new GameController();StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
         controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.BLUE);
         controller.CheckTeacherControl(Color.BLUE,controller.getMatch().getPlayers()[0]);
