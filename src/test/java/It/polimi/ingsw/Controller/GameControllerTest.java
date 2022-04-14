@@ -135,6 +135,48 @@ public class GameControllerTest {
         Player controllingPlayer = teacher.getControllingPlayer();
         assertEquals(controller.getMatch().getPlayers()[1],controllingPlayer);
     }
+    @Test(expected = InvalidInputException.class)
+    public void MoveStudentWithInvalidDestination() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        MoveStudentMessage moveStudentMessage = new MoveStudentMessage(2,-2);
+        controller.MoveStudent(moveStudentMessage);
+    }
+
+    @Test (expected = InvalidInputException.class)
+    public void MoveStudentToDiningRoomFull() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddEntranceStudents(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        MoveStudentMessage moveStudentMessage = new MoveStudentMessage(10,0);
+        controller.MoveStudent(moveStudentMessage);
+    }
+    /*
+    @Test (expected = InvalidInputException.class)
+    public void MoveStudentWithInvalidStudentIndex() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        int numberOfStudents=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber();
+        assertEquals(9,numberOfStudents);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().RemoveStudentFromEntrance(0);
+        MoveStudentMessage moveStudentMessage = new MoveStudentMessage(5,0);
+        controller.MoveStudent(moveStudentMessage);
+        // line 161 of GameController
+    }
+    */
 
     @Test
     public void MoveStudent() throws InvalidInputException {
@@ -172,15 +214,50 @@ public class GameControllerTest {
         assertEquals(1,numberOfStudents);
     }
 
-    @Test
-    public void MoveMotherNature() throws InvalidInputException {
+    @Test(expected = InvalidInputException.class)
+    public void MoveMotherNatureWith0Steps() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        MotherNatureMessage motherNatureMessage=new MotherNatureMessage(0);
+        controller.MoveMotherNature(motherNatureMessage);
+    }
+    @Test(expected = InvalidInputException.class)
+    public void MoveMotherNatureWithNegativeSteps() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        MotherNatureMessage motherNatureMessage=new MotherNatureMessage(-1);
+        controller.MoveMotherNature(motherNatureMessage);
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void MoveMotherNatureWithTooManySteps() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(1);
         MotherNatureMessage motherNatureMessage=new MotherNatureMessage(4);
         controller.MoveMotherNature(motherNatureMessage);
-        int position=controller.getMatch().getMotherNaturePosition();
-        assertEquals(4,position);
+    }
+    @Test
+    public void MoveMotherNatureWithCorrectSteps() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(6); // 4 movements
+        MotherNatureMessage motherNatureMessage=new MotherNatureMessage(4);
+        controller.MoveMotherNature(motherNatureMessage);
+        assertEquals(4,controller.getMatch().getMotherNaturePosition());
+    }
+    @Test(expected = InvalidInputException.class)
+    public void ChooseCloudInvalidCloudIndex() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().PlanningPhase();
+        CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(4);
+        controller.ChooseCloud(cloudChoiceMessage);
     }
 
     @Test
@@ -206,4 +283,5 @@ public class GameControllerTest {
         int entranceStudents=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber();
         assertEquals(13,entranceStudents);
     }
+
 }

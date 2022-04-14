@@ -170,7 +170,7 @@ public class GameController implements Observer {
             match.MoveMotherNature(motherNatureMessage.getSteps());
             CheckIslandInfluence(match.getMotherNaturePosition());
         }
-        else throw new InvalidInputException("Too many steps, max is"+match.getPlayerById(getActivePlayer()).GetPlayedMovements());
+        else throw new InvalidInputException("Too many steps, max is "+match.getPlayerById(getActivePlayer()).GetPlayedMovements());
     }
 
     public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage) throws InvalidInputException{
