@@ -229,7 +229,7 @@ public class GameController implements Observer {
         return this.activePlayer;
     }
 
-    public void setActivePlayer(int activePlayer){
+     public void setActivePlayer(int activePlayer){
          this.activePlayer=activePlayer;
     }
 

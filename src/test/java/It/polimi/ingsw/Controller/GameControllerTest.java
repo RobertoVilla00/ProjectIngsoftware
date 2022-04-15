@@ -394,7 +394,6 @@ public class GameControllerTest {
         controller.InitializeGame(startMessage);
         controller.setActivePlayer(1);
         assertEquals(1,controller.getActivePlayer());
-
     }
 
 
