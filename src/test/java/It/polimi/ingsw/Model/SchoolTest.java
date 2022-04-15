@@ -70,6 +70,10 @@ public class SchoolTest {
         school.RemoveStudentFromDiningRoom(Color.RED);
         int RedStudents = school.getStudentNumber(Color.RED);
         assertEquals(2,RedStudents);
+        school.RemoveStudentFromDiningRoom(Color.YELLOW);
+        int YellowStudents = school.getStudentNumber(Color.YELLOW);
+        assertEquals(2,YellowStudents);
+
     }
 
     @Test

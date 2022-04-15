@@ -118,4 +118,9 @@ public class PlayerTest {
         carlo.setAdditionalPoints(true);
         assertTrue(carlo.getAdditionalPoints());
     }
+    @Test
+    public void getDeck(){
+        Player player=new Player(TowerColor.BLACK,"Mario",0);
+        assertEquals(10,player.getDeck().CardCount());
+    }
 }

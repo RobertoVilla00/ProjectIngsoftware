@@ -84,10 +84,16 @@ public class MatchTest {
         if(match.getTable().get(7).CountStudents(Color.BLUE)==1){
             hasBlue=true;
         }
+        match.getTable().get(6).AddStudent(Color.YELLOW);
+        match.getTable().get(6).AddStudent(Color.PINK);
+        match.getTable().get(6).AddStudent(Color.RED);
+        match.getTable().get(6).AddStudent(Color.GREEN);
         match.getTable().get(6).AddStudent(Color.BLUE);
         match.getTable().get(6).AddStudent(Color.BLUE);
         match.getTable().get(7).AddStudent(Color.BLUE);
         match.getTable().get(7).AddStudent(Color.BLUE);
+
+
         match.MergeIslands(7,6);
         int BlueStudents=match.getTable().get(6).CountStudents(Color.BLUE);
         if(!hasBlue){
@@ -317,7 +323,6 @@ public class MatchTest {
         boolean hasCard=match.isCharacterCardOnTable(13);
         assertFalse(hasCard);
     }
-
     @Test
     public void getCharacterCardById(){
         Match match = new Match(2,1);
@@ -326,5 +331,20 @@ public class MatchTest {
         CharacterCard characterCardById=match.getCharacterCardById(id);
         assertEquals(characterCard,characterCardById);
     }
-
+    @Test
+    public void isExpertMode(){
+        Match match = new Match(2,1);
+        assertTrue(match.isExpertMode());
+    }
+    @Test
+    public void getPlaysCard6() {
+        Match match = new Match(2, 1);
+        assertFalse(match.getPlaysCard6());
+    }
+    @Test
+    public void setPlaysCard6() {
+        Match match = new Match(2, 1);
+        match.setPlaysCard6(true);
+        assertTrue(match.getPlaysCard6());
+    }
 }

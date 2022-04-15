@@ -91,4 +91,9 @@ public class BagTest {
         }
         assertEquals(25,RedStudents);
     }
+    @Test
+    public void bagSize(){
+        Bag bag = new Bag(24);
+        assertEquals(120,bag.BagSize());
+    }
 }
