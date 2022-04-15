@@ -84,6 +84,7 @@ public class Player implements Comparable<Player> {
 	public void PlayAssistantCard(int index) {   // update last played card
 		this.PlayedOrderValue=Deck.GetCard(index).getOrderValue();
 		this.PlayedMovements=Deck.GetCard(index).getMovement();
+		Deck.RemoveCard(index); // not sure
 	}
 
 	public void IncreaseMovements(int NumberOfMOvements){

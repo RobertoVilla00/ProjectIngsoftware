@@ -229,7 +229,9 @@ public class GameController implements Observer {
         return this.activePlayer;
     }
 
-
+    public void setActivePlayer(int activePlayer){
+         this.activePlayer=activePlayer;
+    }
 
     public Match getMatch(){return this.match;}
 
