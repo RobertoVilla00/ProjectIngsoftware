@@ -160,20 +160,15 @@ public class GameControllerTest {
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(10,0);
         controller.MoveStudent(moveStudentMessage);
     }
-    /*
+
     @Test (expected = InvalidInputException.class)
     public void MoveStudentWithInvalidStudentIndex() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
-        int numberOfStudents=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber();
-        assertEquals(9,numberOfStudents);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().RemoveStudentFromEntrance(0);
-        MoveStudentMessage moveStudentMessage = new MoveStudentMessage(5,0);
+        MoveStudentMessage moveStudentMessage = new MoveStudentMessage(-1,0);
         controller.MoveStudent(moveStudentMessage);
-        // line 161 of GameController
     }
-    */
 
     @Test
     public void MoveStudent() throws InvalidInputException {

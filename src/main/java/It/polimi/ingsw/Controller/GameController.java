@@ -142,13 +142,13 @@ public class GameController implements Observer {
         int activePlayerId = getActivePlayer();
         int StudentIndex = moveStudentMessage.getEntrancePosition();
         int Destination = moveStudentMessage.getDestination();
-        Color StudentColor = match.getPlayerById(activePlayerId).getPlayersSchool().GetEntranceStudentColor(StudentIndex);
 
-        if(Destination <-1 || Destination >= match.getTable().size()){
+        if(Destination <-1 || Destination >= match.getTable().size()) {
             throw new InvalidInputException("Invalid Destination");
         }
         else {
             if (StudentIndex >= 0 && StudentIndex < match.getPlayerById(activePlayerId).getPlayersSchool().getEntranceStudentsNumber()) {
+                Color StudentColor = match.getPlayerById(activePlayerId).getPlayersSchool().GetEntranceStudentColor(StudentIndex);
                 if (Destination == -1) {                     //if destination is not an island
                     if(match.getPlayerById(activePlayerId).getPlayersSchool().getStudentNumber(StudentColor)==10) {
                         throw new InvalidInputException("Dining Room is full, you cannot play this Card");
