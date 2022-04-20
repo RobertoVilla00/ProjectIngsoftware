@@ -28,6 +28,20 @@ public class CharacterCardControllerTest {
         assertEquals(4,studentsNumber);
     }
 
+    @Test(expected = InvalidInputException.class)
+    public void PlayCard1NoCoins() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(1)){
+            controller.InitializeGame(startMessage);
+        }
+        CharacterCardController characterCardController=new CharacterCardController(controller);
+        Card1Message card1Message=new Card1Message(3,7);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).RemoveCoins(1);
+        characterCardController.PlayCard1(card1Message);
+    }
+
     @Test
     public void PlayCard1Bag() throws InvalidInputException {
         GameController controller=new GameController();
@@ -110,8 +124,23 @@ public class CharacterCardControllerTest {
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3Message=new Card3and5Message(1);
         controller.getMatch().getPlayers()[0].setAdditionalPoints(true);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard3(card3Message);
         assertEquals(TowerColor.WHITE,controller.getMatch().getTable().get(0).getTowersColor());
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayCard3NoCoins() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(3)){
+            controller.InitializeGame(startMessage);
+        }
+        CharacterCardController characterCardController=new CharacterCardController(controller);
+        Card3and5Message card3Message=new Card3and5Message(1);
+        controller.getMatch().getPlayers()[0].setAdditionalPoints(true);
+        characterCardController.PlayCard3(card3Message);
     }
 
     @Test(expected = InvalidInputException.class)
@@ -125,6 +154,7 @@ public class CharacterCardControllerTest {
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3Message=new Card3and5Message(1);
         controller.getMatch().getPlayers()[0].setAdditionalPoints(true);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard3(card3Message);
     }
 
@@ -139,6 +169,7 @@ public class CharacterCardControllerTest {
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3Message=new Card3and5Message(18);
         controller.getMatch().getPlayers()[0].setAdditionalPoints(true);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard3(card3Message);
     }
 
@@ -154,6 +185,19 @@ public class CharacterCardControllerTest {
         characterCardController.PlayCard4();
         int maximumMovements=controller.getMatch().getPlayerById(controller.getActivePlayer()).GetPlayedMovements();
         assertEquals(2,maximumMovements);
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayCard4NoCoins() throws InvalidInputException{
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(4)){
+            controller.InitializeGame(startMessage);
+        }
+        CharacterCardController characterCardController=new CharacterCardController(controller);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).RemoveCoins(1);
+        characterCardController.PlayCard4();
     }
 
     @Test (expected = InvalidInputException.class)
@@ -178,8 +222,22 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(1);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard5(card3and5Message);
         assertTrue(controller.getMatch().getTable().get(0).GetNoEntryTile());
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayCard5NoCoins() throws InvalidInputException, NoEntryTilesException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(5)){
+            controller.InitializeGame(startMessage);
+        }
+        CharacterCardController characterCardController=new CharacterCardController(controller);
+        Card3and5Message card3and5Message=new Card3and5Message(1);
+        characterCardController.PlayCard5(card3and5Message);
     }
 
     @Test(expected = InvalidInputException.class)
@@ -192,6 +250,7 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(1);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard5(card3and5Message);
     }
 
@@ -205,6 +264,7 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(13);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard5(card3and5Message);
     }
 
@@ -218,19 +278,38 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(1);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard5(card3and5Message);
         Card3and5Message card3and5Message1=new Card3and5Message(3);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard5(card3and5Message);
         Card3and5Message card3and5Message2=new Card3and5Message(5);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard5(card3and5Message);
         Card3and5Message card3and5Message3=new Card3and5Message(10);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard5(card3and5Message);
         Card3and5Message card3and5Message4=new Card3and5Message(11);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard5(card3and5Message);
     }
 
     @Test
     public void PlayCard6() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(6)){
+            controller.InitializeGame(startMessage);
+        }
+        CharacterCardController characterCardController=new CharacterCardController(controller);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
+        characterCardController.PlayCard6();
+        assertTrue(controller.getMatch().getPlaysCard6());
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayCard6NoCoins() throws InvalidInputException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -251,6 +330,7 @@ public class CharacterCardControllerTest {
             controller.InitializeGame(startMessage);
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard6();
     }
 
@@ -263,9 +343,22 @@ public class CharacterCardControllerTest {
             controller.InitializeGame(startMessage);
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard9();
         boolean bonusPoints=controller.getMatch().getPlayerById(controller.getActivePlayer()).getAdditionalPoints();
         assertTrue(bonusPoints);
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayCard9NoCoins() throws InvalidInputException{
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(9)){
+            controller.InitializeGame(startMessage);
+        }
+        CharacterCardController characterCardController=new CharacterCardController(controller);
+        characterCardController.PlayCard9();
     }
 
     @Test(expected = InvalidInputException.class)
@@ -277,11 +370,30 @@ public class CharacterCardControllerTest {
             controller.InitializeGame(startMessage);
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard9();
     }
 
     @Test
     public void PlayCard10() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        while (!controller.getMatch().isCharacterCardOnTable(10)) {
+            controller.InitializeGame(startMessage);
+        }
+        CharacterCardController characterCardController = new CharacterCardController(controller);
+        Cards1and10 card10 = (Cards1and10) controller.getMatch().getCharacterCardById(10);
+        Color studentColor = card10.GetStudentColor(1);
+        Card10Message card10Message = new Card10Message(2);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
+        characterCardController.PlayCard10(card10Message);
+        int studentsNumber = controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getStudentNumber(studentColor);
+        assertEquals(1,studentsNumber);
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayCard10NoCoins() throws InvalidInputException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -315,6 +427,7 @@ public class CharacterCardControllerTest {
             controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.PINK);
         }
         Card10Message card10Message = new Card10Message(2);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard10(card10Message);
     }
 
@@ -328,6 +441,7 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Card10Message card10Message = new Card10Message(2);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard10(card10Message);
     }
 
@@ -341,11 +455,30 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Card10Message card10Message = new Card10Message(6);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard10(card10Message);
     }
 
     @Test
     public void PlayCard12() throws InvalidInputException {
+        GameController controller = new GameController();
+        StartMessage startMessage = new StartMessage(3, 1);
+        controller.InitializeGame(startMessage);
+        while (!controller.getMatch().isCharacterCardOnTable(12)) {
+            controller.InitializeGame(startMessage);
+        }
+        CharacterCardController characterCardController = new CharacterCardController(controller);
+        Card12Message card12Message = new Card12Message("YElloW");
+        controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.PINK);
+        controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
+        characterCardController.PlayCard12(card12Message);
+        int yellowStudents=controller.getMatch().getPlayers()[0].getPlayersSchool().getStudentNumber(Color.YELLOW);
+        assertEquals(0,yellowStudents);
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayCard12NoCoins() throws InvalidInputException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -373,8 +506,7 @@ public class CharacterCardControllerTest {
         Card12Message card12Message = new Card12Message("PiNk");
         controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
         controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard12(card12Message);
-        int pinkStudents=controller.getMatch().getPlayers()[0].getPlayersSchool().getStudentNumber(Color.YELLOW);
-        assertEquals(0,pinkStudents);
     }
 }
