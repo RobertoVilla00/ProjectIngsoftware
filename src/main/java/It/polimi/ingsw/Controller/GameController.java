@@ -1,8 +1,10 @@
 package It.polimi.ingsw.Controller;
 import It.polimi.ingsw.Exceptions.InvalidInputException;
+import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 
+import java.io.NotActiveException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -138,7 +140,7 @@ public class GameController implements Observer {
         }
     }
 
-    public void MoveStudent(MoveStudentMessage moveStudentMessage) throws InvalidInputException{
+    public void MoveStudent(MoveStudentMessage moveStudentMessage) throws InvalidInputException, NoActivePlayerException {
         int activePlayerId = getActivePlayer();
         int StudentIndex = moveStudentMessage.getEntrancePosition();
         int Destination = moveStudentMessage.getDestination();
@@ -162,7 +164,7 @@ public class GameController implements Observer {
         }
     }
 
-    public void MoveMotherNature(MotherNatureMessage motherNatureMessage)throws InvalidInputException{
+    public void MoveMotherNature(MotherNatureMessage motherNatureMessage) throws InvalidInputException, NoActivePlayerException {
 
         if(motherNatureMessage.getSteps() == 0) throw new InvalidInputException("MotherNature has to do at least one step");
         else if(motherNatureMessage.getSteps() < 1) throw new InvalidInputException("You can't put a negative number");
@@ -173,7 +175,7 @@ public class GameController implements Observer {
         else throw new InvalidInputException("Too many steps, max is "+match.getPlayerById(getActivePlayer()).GetPlayedMovements());
     }
 
-    public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage) throws InvalidInputException{
+    public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage) throws InvalidInputException, NoActivePlayerException {
         if( cloudChoiceMessage.getCloudIndex() > match.getNumberOfPlayers()-1 || cloudChoiceMessage.getCloudIndex() < 0){
             throw new InvalidInputException("invalid Cloud index");
         }
@@ -181,7 +183,7 @@ public class GameController implements Observer {
     }
 
 
-    public void PlayAssistantCard(AssistantCardMessage assistantCardMessage) throws InvalidInputException{
+    public void PlayAssistantCard(AssistantCardMessage assistantCardMessage) throws InvalidInputException, NoActivePlayerException {
         int card = assistantCardMessage.getCardIndex();
         boolean notPlayable = false;
         boolean Played=false;
@@ -225,8 +227,12 @@ public class GameController implements Observer {
 
     public void EndGame(){}
 
-    public int getActivePlayer(){
-        return this.activePlayer;
+    public int getActivePlayer() throws NoActivePlayerException{
+        int id = 0;
+        for(Player p: match.getPlayers()){
+            if(p.IsActive()) id = p.getPlayerId();
+        }
+        throw new NoActivePlayerException();
     }
 
      public void setActivePlayer(int activePlayer){
@@ -234,6 +240,13 @@ public class GameController implements Observer {
     }
 
     public Match getMatch(){return this.match;}
+
+    public int getActivePlayerPosition() throws NoActivePlayerException {
+        for(int i=0; i< match.getNumberOfPlayers(); i++){
+            if(match.getPlayers()[i].IsActive()) return i;
+        }
+        throw new NoActivePlayerException();
+    }
 
     @Override
     public void update(Observable o, Object arg){

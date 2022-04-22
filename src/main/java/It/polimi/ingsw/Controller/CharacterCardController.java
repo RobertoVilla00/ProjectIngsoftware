@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Controller;
 
 import It.polimi.ingsw.Exceptions.InvalidInputException;
+import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
@@ -14,7 +15,7 @@ public class CharacterCardController{
         this.Game = gController;
     }
 
-    public void PlayCard1 (Card1Message message) throws InvalidInputException {                     //students from card to Island
+    public void PlayCard1 (Card1Message message) throws InvalidInputException, NoActivePlayerException {                     //students from card to Island
         if(Game.getMatch().isCharacterCardOnTable(1)) {
             Cards1and10 card1 = (Cards1and10) Game.getMatch().getCharacterCardById(1);
             if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins()>=card1.getCardCost()){
@@ -36,7 +37,7 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard3(Card3and5Message message) throws InvalidInputException {              //count the influence on an island
+    public void PlayCard3(Card3and5Message message) throws InvalidInputException, NoActivePlayerException {              //count the influence on an island
         if(Game.getMatch().isCharacterCardOnTable(3)) {
             CharacterCard card3 = Game.getMatch().getCharacterCardById(3);
             if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins()>=card3.getCardCost()){
@@ -52,7 +53,7 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard4() throws InvalidInputException{               //increase maximum mother nature movement
+    public void PlayCard4() throws InvalidInputException, NoActivePlayerException {               //increase maximum mother nature movement
         if(Game.getMatch().isCharacterCardOnTable(4)) {
             CharacterCard card4 = Game.getMatch().getCharacterCardById(4);
             if (Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card4.getCardCost()) {
@@ -64,7 +65,7 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard5(Card3and5Message message) throws InvalidInputException, NoEntryTilesException{        //no entry tiles
+    public void PlayCard5(Card3and5Message message) throws InvalidInputException, NoEntryTilesException, NoActivePlayerException {        //no entry tiles
         if(Game.getMatch().isCharacterCardOnTable(5)) {
             Card5 card = (Card5) Game.getMatch().getCharacterCardById(5);
             if (Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card.getCardCost()) {
@@ -84,7 +85,7 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard6() throws InvalidInputException{               //no towers counted in influence
+    public void PlayCard6() throws InvalidInputException, NoActivePlayerException {               //no towers counted in influence
         if(Game.getMatch().isCharacterCardOnTable(6)) {
             CharacterCard card6 = Game.getMatch().getCharacterCardById(6);
             if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card6.getCardCost()){
@@ -98,7 +99,7 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard9() throws InvalidInputException{                   //2 bonus points
+    public void PlayCard9() throws InvalidInputException, NoActivePlayerException {                   //2 bonus points
         if(Game.getMatch().isCharacterCardOnTable(9)){
             CharacterCard card9=Game.getMatch().getCharacterCardById(9);
             if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card9.getCardCost()) {
@@ -110,7 +111,7 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard10(Card10Message message) throws InvalidInputException{             //move student to dining room
+    public void PlayCard10(Card10Message message) throws InvalidInputException, NoActivePlayerException {             //move student to dining room
         if(Game.getMatch().isCharacterCardOnTable(10)){
             Cards1and10 card = (Cards1and10)Game.getMatch().getCharacterCardById(10);
             if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card.getCardCost()) {
@@ -131,7 +132,7 @@ public class CharacterCardController{
         else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
-    public void PlayCard12(Card12Message message) throws InvalidInputException{         //remove 3 students from every school
+    public void PlayCard12(Card12Message message) throws InvalidInputException, NoActivePlayerException {         //remove 3 students from every school
         if(Game.getMatch().isCharacterCardOnTable(12)) {
             CharacterCard card12 = Game.getMatch().getCharacterCardById(12);
             if (Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card12.getCardCost()) {

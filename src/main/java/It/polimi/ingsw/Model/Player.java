@@ -23,6 +23,8 @@ public class Player implements Comparable<Player> {
 
 	private int PlayedMovements;
 
+	private boolean IsActive;
+
 	private boolean AdditionalPoints;
 
 	private ArrayList <TowerColor> Teacher;
@@ -35,7 +37,7 @@ public class Player implements Comparable<Player> {
 		TowersPlaced = 0;
 		Coins=1;
 		Deck= new AssistantCardDeck();
-
+		IsActive = false;
 	}
 
 	public boolean getAdditionalPoints(){
@@ -107,6 +109,15 @@ public class Player implements Comparable<Player> {
 		this.Coins=this.Coins - numberOfCoins;
 	}
 
+	public void setActive(){
+		this.IsActive=true;
+	}
+	public void setInactive(){
+		this.IsActive=false;
+	}
+	public boolean IsActive(){
+		return IsActive;
+	}
 	public AssistantCardDeck getDeck(){
 		return this.Deck;
 	}
