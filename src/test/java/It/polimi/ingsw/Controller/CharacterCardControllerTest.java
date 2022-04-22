@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Controller;
 
 import It.polimi.ingsw.Exceptions.InvalidInputException;
+import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.Cards1and10;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class CharacterCardControllerTest {
     @Test
-    public void PlayCard1CardStudents() throws InvalidInputException {
+    public void PlayCard1CardStudents() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -29,7 +30,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard1NoCoins() throws InvalidInputException {
+    public void PlayCard1NoCoins() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -43,7 +44,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard1Bag() throws InvalidInputException {
+    public void PlayCard1Bag() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -59,7 +60,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard1Island() throws InvalidInputException {
+    public void PlayCard1Island() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -75,7 +76,7 @@ public class CharacterCardControllerTest {
         assertEquals(1,studentsNumber);
     }
     @Test (expected = InvalidInputException.class)
-    public void PlayCard1WrongCard() throws InvalidInputException{
+    public void PlayCard1WrongCard() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -88,7 +89,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test (expected = InvalidInputException.class)
-    public void PlayCard1WrongStudent() throws InvalidInputException{
+    public void PlayCard1WrongStudent() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -101,7 +102,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test (expected = InvalidInputException.class)
-    public void PlayCard1WrongIsland() throws InvalidInputException{
+    public void PlayCard1WrongIsland() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -114,7 +115,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard3() throws InvalidInputException {
+    public void PlayCard3() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -130,7 +131,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard3NoCoins() throws InvalidInputException {
+    public void PlayCard3NoCoins() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -144,7 +145,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard3WrongCard() throws InvalidInputException {
+    public void PlayCard3WrongCard() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -159,7 +160,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard3WrongIsland() throws InvalidInputException {
+    public void PlayCard3WrongIsland() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -174,7 +175,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard4() throws InvalidInputException{
+    public void PlayCard4() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -188,7 +189,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard4NoCoins() throws InvalidInputException{
+    public void PlayCard4NoCoins() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -201,7 +202,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test (expected = InvalidInputException.class)
-    public void PlayCard4WrongCard() throws InvalidInputException{
+    public void PlayCard4WrongCard() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -213,7 +214,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard5() throws InvalidInputException, NoEntryTilesException {
+    public void PlayCard5() throws InvalidInputException, NoEntryTilesException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -228,7 +229,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard5NoCoins() throws InvalidInputException, NoEntryTilesException {
+    public void PlayCard5NoCoins() throws InvalidInputException, NoEntryTilesException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -241,7 +242,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard5WrongCard() throws InvalidInputException, NoEntryTilesException {
+    public void PlayCard5WrongCard() throws InvalidInputException, NoEntryTilesException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -255,7 +256,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard5WrongIsland() throws InvalidInputException, NoEntryTilesException {
+    public void PlayCard5WrongIsland() throws InvalidInputException, NoEntryTilesException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -269,7 +270,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = NoEntryTilesException.class)
-    public void PlayCard5NoTilesLeft() throws InvalidInputException, NoEntryTilesException {
+    public void PlayCard5NoTilesLeft() throws InvalidInputException, NoEntryTilesException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -295,7 +296,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard6() throws InvalidInputException {
+    public void PlayCard6() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -309,7 +310,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard6NoCoins() throws InvalidInputException {
+    public void PlayCard6NoCoins() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -322,7 +323,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard6NoCard() throws InvalidInputException {
+    public void PlayCard6NoCard() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -335,7 +336,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard9() throws InvalidInputException{
+    public void PlayCard9() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -350,7 +351,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard9NoCoins() throws InvalidInputException{
+    public void PlayCard9NoCoins() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -362,7 +363,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard9NoCard() throws InvalidInputException{
+    public void PlayCard9NoCard() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -375,7 +376,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard10() throws InvalidInputException {
+    public void PlayCard10() throws InvalidInputException, NoActivePlayerException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -393,7 +394,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard10NoCoins() throws InvalidInputException {
+    public void PlayCard10NoCoins() throws InvalidInputException, NoActivePlayerException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -410,7 +411,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard10FullDiningRoom() throws InvalidInputException {
+    public void PlayCard10FullDiningRoom() throws InvalidInputException, NoActivePlayerException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -432,7 +433,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard10NoCard() throws InvalidInputException {
+    public void PlayCard10NoCard() throws InvalidInputException, NoActivePlayerException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -446,7 +447,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard10WrongStudent() throws InvalidInputException {
+    public void PlayCard10WrongStudent() throws InvalidInputException, NoActivePlayerException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -460,7 +461,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test
-    public void PlayCard12() throws InvalidInputException {
+    public void PlayCard12() throws InvalidInputException, NoActivePlayerException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -478,7 +479,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard12NoCoins() throws InvalidInputException {
+    public void PlayCard12NoCoins() throws InvalidInputException, NoActivePlayerException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
@@ -495,7 +496,7 @@ public class CharacterCardControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void PlayCard12NoCard() throws InvalidInputException {
+    public void PlayCard12NoCard() throws InvalidInputException, NoActivePlayerException {
         GameController controller = new GameController();
         StartMessage startMessage = new StartMessage(3, 1);
         controller.InitializeGame(startMessage);
