@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Controller;
 
 import It.polimi.ingsw.Exceptions.InvalidInputException;
+import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 import org.junit.Test;
@@ -133,7 +134,7 @@ public class GameControllerTest {
         assertEquals(controller.getMatch().getPlayers()[1],controllingPlayer);
     }
     @Test(expected = InvalidInputException.class)
-    public void MoveStudentWithInvalidDestination() throws InvalidInputException {
+    public void MoveStudentWithInvalidDestination() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -142,7 +143,7 @@ public class GameControllerTest {
     }
 
     @Test (expected = InvalidInputException.class)
-    public void MoveStudentToDiningRoomFull() throws InvalidInputException {
+    public void MoveStudentToDiningRoomFull() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -162,7 +163,7 @@ public class GameControllerTest {
     }
 
     @Test (expected = InvalidInputException.class)
-    public void MoveStudentWithInvalidStudentIndex() throws InvalidInputException {
+    public void MoveStudentWithInvalidStudentIndex() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -171,7 +172,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void MoveStudent() throws InvalidInputException {
+    public void MoveStudent() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -183,7 +184,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void MoveStudentToDiningRoom() throws InvalidInputException {
+    public void MoveStudentToDiningRoom() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -195,7 +196,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void MoveStudentToIsland() throws InvalidInputException {
+    public void MoveStudentToIsland() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -207,7 +208,7 @@ public class GameControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void MoveMotherNatureWith0Steps() throws InvalidInputException {
+    public void MoveMotherNatureWith0Steps() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -215,7 +216,7 @@ public class GameControllerTest {
         controller.MoveMotherNature(motherNatureMessage);
     }
     @Test(expected = InvalidInputException.class)
-    public void MoveMotherNatureWithNegativeSteps() throws InvalidInputException {
+    public void MoveMotherNatureWithNegativeSteps() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -224,7 +225,7 @@ public class GameControllerTest {
     }
 
     @Test(expected = InvalidInputException.class)
-    public void MoveMotherNatureWithTooManySteps() throws InvalidInputException {
+    public void MoveMotherNatureWithTooManySteps() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -233,7 +234,7 @@ public class GameControllerTest {
         controller.MoveMotherNature(motherNatureMessage);
     }
     @Test
-    public void MoveMotherNatureWithCorrectSteps() throws InvalidInputException {
+    public void MoveMotherNatureWithCorrectSteps() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -243,7 +244,7 @@ public class GameControllerTest {
         assertEquals(4,controller.getMatch().getMotherNaturePosition());
     }
     @Test(expected = InvalidInputException.class)
-    public void ChooseCloudInvalidCloudIndex() throws InvalidInputException {
+    public void ChooseCloudInvalidCloudIndex() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -252,7 +253,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void ChooseCloud() throws InvalidInputException {
+    public void ChooseCloud() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -264,7 +265,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void ChooseCloud2() throws InvalidInputException {
+    public void ChooseCloud2() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -275,7 +276,7 @@ public class GameControllerTest {
         assertEquals(13,entranceStudents);
     }
     @Test(expected = InvalidInputException.class)
-    public void PlayAssistantCardNegativeIndex() throws InvalidInputException {
+    public void PlayAssistantCardNegativeIndex() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -284,7 +285,7 @@ public class GameControllerTest {
 
     }
     @Test(expected = InvalidInputException.class)
-    public void PlayAssistantCardIndexGreaterThenCardCount() throws InvalidInputException {
+    public void PlayAssistantCardIndexGreaterThenCardCount() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -292,7 +293,7 @@ public class GameControllerTest {
         controller.PlayAssistantCard(assistantCardMessage);
     }
     @Test(expected = InvalidInputException.class)
-    public void PlayAssistantCardTwoPlayerWithSameValue() throws InvalidInputException {
+    public void PlayAssistantCardTwoPlayerWithSameValue() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -302,7 +303,7 @@ public class GameControllerTest {
         controller.PlayAssistantCard(assistantCardMessage);
     }
     @Test
-    public void PlayAssistantCardTwoPlayerWithDifferentValue() throws InvalidInputException {
+    public void PlayAssistantCardTwoPlayerWithDifferentValue() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -312,7 +313,7 @@ public class GameControllerTest {
         controller.PlayAssistantCard(assistantCardMessage);
     }
     @Test(expected = InvalidInputException.class)
-    public void PlayAssistantCardThreePlayerSameValue() throws InvalidInputException {
+    public void PlayAssistantCardThreePlayerSameValue() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
@@ -326,7 +327,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void PlayAssistantCardTwoPlayerWithValue() throws InvalidInputException {
+    public void PlayAssistantCardTwoPlayerWithValue() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(2,1);
         controller.InitializeGame(startMessage);
@@ -383,7 +384,7 @@ public class GameControllerTest {
 
     }
     @Test
-    public void setActivePlayer() throws InvalidInputException{
+    public void setActivePlayer() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(2,1);
         controller.InitializeGame(startMessage);
