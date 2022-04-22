@@ -9,6 +9,10 @@ public class RoundController {
     private boolean ReceivedMessage;
     private Message msg;                                                            //TODO: TEST THIS PART !!
 
+
+    public RoundController(GameController gameController){
+        this.Game = new GameController();
+    }
     public void ReceiveMessage(Message message){
         this.msg = message;
     }
@@ -49,7 +53,7 @@ public class RoundController {
                         GamePhaseHandler(GamePhase.MOVE_MN);
 
                     }
-                    else if(msg.getMessageContent() == MessageContent.CARD10){ //TODO: EXAMPLE, messages need to be changed
+                    else if(msg.getMessageContent() == MessageContent.CHARACTERCARD){ //TODO: EXAMPLE, messages need to be changed
 
                     }
                     else throw new WrongMessageException();
@@ -61,7 +65,7 @@ public class RoundController {
                         GamePhaseHandler(GamePhase.CHOOSE_CLOUD);
 
                     }
-                    else if(msg.getMessageContent() == MessageContent.CARD10){ //TODO: EXAMPLE, messages need to be changed
+                    else if(msg.getMessageContent() == MessageContent.CHARACTERCARD){ //TODO: EXAMPLE, messages need to be changed
 
                     }
                     else throw new WrongMessageException();
@@ -76,7 +80,7 @@ public class RoundController {
                     else GamePhaseHandler(GamePhase.FILL_CLOUDS);
 
                 }
-                else if(msg.getMessageContent() == MessageContent.CARD10){ //TODO: EXAMPLE, messages need to be changed
+                else if(msg.getMessageContent() == MessageContent.CHARACTERCARD){ //TODO: EXAMPLE, messages need to be changed
 
                 }
                 else throw new WrongMessageException();
@@ -84,14 +88,21 @@ public class RoundController {
     }
 
     public void setFirstActivePlayer(){
-        Game.getMatch().getPlayers()[0].setActive();        //TODO: OTHER PLAYERS BECOME INACTIVE
-
+        Game.getMatch().getPlayers()[0].setActive();
+        for(int i=1;i<Game.getMatch().getNumberOfPlayers();i++){
+            Game.getMatch().getPlayers()[i].setInactive();
+        }
     }   //first player of the new list becomes active
-    public void setNextActivePlayer(){
 
+    public void setNextActivePlayer() throws NoActivePlayerException {
+        int PresentActive = Game.getActivePlayerPosition();
+        Game.getMatch().getPlayers()[PresentActive].setInactive();
+        Game.getMatch().getPlayers()[PresentActive+1].setActive();
     }    //next player becomes active
-    public boolean FinishedPlayers(){   //return true if active player is last element of players list
-        return true;
+
+    public boolean FinishedPlayers() throws NoActivePlayerException {   //return true if active player is last element of players list
+        if(Game.getActivePlayerPosition()==Game.getMatch().getNumberOfPlayers()-1) return true;
+        else return false;
     }
 
 }
