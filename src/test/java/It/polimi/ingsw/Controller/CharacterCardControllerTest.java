@@ -23,6 +23,7 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card1Message card1Message=new Card1Message(3,7);
+        controller.getMatch().getPlayerById(0).setActive();
         characterCardController.PlayCard1(card1Message);
         Cards1and10 cards1and10=(Cards1and10) controller.getMatch().getCharacterCardById(1);
         int studentsNumber=cards1and10.getNumberOfStudents();
@@ -39,6 +40,7 @@ public class CharacterCardControllerTest {
         }
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card1Message card1Message=new Card1Message(3,7);
+        controller.getMatch().getPlayerById(0).setActive();
         controller.getMatch().getPlayerById(controller.getActivePlayer()).RemoveCoins(1);
         characterCardController.PlayCard1(card1Message);
     }
@@ -51,6 +53,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(1)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         int studentsNumber=controller.getMatch().getBag().BagSize();
         Card1Message card1Message=new Card1Message(3,7);
@@ -67,6 +70,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(1)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card1Message card1Message=new Card1Message(3,7);
         Cards1and10 cards1and10=(Cards1and10) controller.getMatch().getCharacterCardById(1);
@@ -83,6 +87,7 @@ public class CharacterCardControllerTest {
         while(controller.getMatch().isCharacterCardOnTable(1)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card1Message card1Message=new Card1Message(3,7);
         characterCardController.PlayCard1(card1Message);
@@ -96,6 +101,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(1)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card1Message card1Message=new Card1Message(5,7);
         characterCardController.PlayCard1(card1Message);
@@ -109,6 +115,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(1)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card1Message card1Message=new Card1Message(4,15);
         characterCardController.PlayCard1(card1Message);
@@ -122,6 +129,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(3)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3Message=new Card3and5Message(1);
         controller.getMatch().getPlayers()[0].setAdditionalPoints(true);
@@ -138,6 +146,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(3)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3Message=new Card3and5Message(1);
         controller.getMatch().getPlayers()[0].setAdditionalPoints(true);
@@ -152,6 +161,7 @@ public class CharacterCardControllerTest {
         while(controller.getMatch().isCharacterCardOnTable(3)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3Message=new Card3and5Message(1);
         controller.getMatch().getPlayers()[0].setAdditionalPoints(true);
@@ -167,6 +177,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(3)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3Message=new Card3and5Message(18);
         controller.getMatch().getPlayers()[0].setAdditionalPoints(true);
@@ -182,6 +193,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(4)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         characterCardController.PlayCard4();
         int maximumMovements=controller.getMatch().getPlayerById(controller.getActivePlayer()).GetPlayedMovements();
@@ -196,6 +208,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(4)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).RemoveCoins(1);
         characterCardController.PlayCard4();
@@ -209,6 +222,7 @@ public class CharacterCardControllerTest {
         while(controller.getMatch().isCharacterCardOnTable(4)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         characterCardController.PlayCard4();
     }
@@ -221,6 +235,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(5)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(1);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
@@ -236,6 +251,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(5)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(1);
         characterCardController.PlayCard5(card3and5Message);
@@ -249,6 +265,7 @@ public class CharacterCardControllerTest {
         while(controller.getMatch().isCharacterCardOnTable(5)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(1);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
@@ -263,6 +280,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(5)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(13);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
@@ -277,6 +295,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(5)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         Card3and5Message card3and5Message=new Card3and5Message(1);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
@@ -303,6 +322,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(6)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard6();
@@ -317,6 +337,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(6)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         characterCardController.PlayCard6();
         assertTrue(controller.getMatch().getPlaysCard6());
@@ -330,6 +351,7 @@ public class CharacterCardControllerTest {
         while(controller.getMatch().isCharacterCardOnTable(6)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard6();
@@ -343,6 +365,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(9)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard9();
@@ -358,6 +381,7 @@ public class CharacterCardControllerTest {
         while(!controller.getMatch().isCharacterCardOnTable(9)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         characterCardController.PlayCard9();
     }
@@ -370,6 +394,7 @@ public class CharacterCardControllerTest {
         while(controller.getMatch().isCharacterCardOnTable(9)){
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController=new CharacterCardController(controller);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
         characterCardController.PlayCard9();
@@ -383,6 +408,7 @@ public class CharacterCardControllerTest {
         while (!controller.getMatch().isCharacterCardOnTable(10)) {
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Cards1and10 card10 = (Cards1and10) controller.getMatch().getCharacterCardById(10);
         Color studentColor = card10.GetStudentColor(1);
@@ -401,6 +427,7 @@ public class CharacterCardControllerTest {
         while (!controller.getMatch().isCharacterCardOnTable(10)) {
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Cards1and10 card10 = (Cards1and10) controller.getMatch().getCharacterCardById(10);
         Color studentColor = card10.GetStudentColor(1);
@@ -418,6 +445,7 @@ public class CharacterCardControllerTest {
         while (!controller.getMatch().isCharacterCardOnTable(10)) {
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Cards1and10 card10 = (Cards1and10) controller.getMatch().getCharacterCardById(10);
         for(int i =0; i<10;i++){
@@ -440,6 +468,7 @@ public class CharacterCardControllerTest {
         while (controller.getMatch().isCharacterCardOnTable(10)) {
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Card10Message card10Message = new Card10Message(2);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
@@ -454,6 +483,7 @@ public class CharacterCardControllerTest {
         while (!controller.getMatch().isCharacterCardOnTable(10)) {
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Card10Message card10Message = new Card10Message(6);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
@@ -468,6 +498,7 @@ public class CharacterCardControllerTest {
         while (!controller.getMatch().isCharacterCardOnTable(12)) {
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Card12Message card12Message = new Card12Message("YElloW");
         controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.PINK);
@@ -486,6 +517,7 @@ public class CharacterCardControllerTest {
         while (!controller.getMatch().isCharacterCardOnTable(12)) {
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Card12Message card12Message = new Card12Message("YElloW");
         controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.PINK);
@@ -503,6 +535,7 @@ public class CharacterCardControllerTest {
         while (controller.getMatch().isCharacterCardOnTable(12)) {
             controller.InitializeGame(startMessage);
         }
+        controller.getMatch().getPlayerById(0).setActive();
         CharacterCardController characterCardController = new CharacterCardController(controller);
         Card12Message card12Message = new Card12Message("PiNk");
         controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);

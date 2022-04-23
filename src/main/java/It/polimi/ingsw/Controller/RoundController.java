@@ -7,10 +7,10 @@ public class RoundController {
 
     private GameController Game;
     private boolean ReceivedMessage;
-    private Message msg;                                                            //TODO: TEST THIS PART !!
+    private Message msg;
 
 
-    public RoundController(GameController gameController){
+    public RoundController(){
         this.Game = new GameController();
     }
     public void ReceiveMessage(Message message){
@@ -105,4 +105,7 @@ public class RoundController {
         else return false;
     }
 
+    public GameController getGameController(){
+        return this.Game;
+    }
 }

@@ -9,7 +9,7 @@ public class AssistantCardMessageTest {
     public void getCardIndex(){
         AssistantCardMessage assistantCardMessage=new AssistantCardMessage(5);
         int index=assistantCardMessage.getCardIndex();
-        assertEquals(5,index);
+        assertEquals(4,index);
     }
 
     @Test
