@@ -230,14 +230,11 @@ public class GameController implements Observer {
     public int getActivePlayer() throws NoActivePlayerException{
         int id = 0;
         for(Player p: match.getPlayers()){
-            if(p.IsActive()) id = p.getPlayerId();
+            if(p.IsActive()) return id = p.getPlayerId();
         }
         throw new NoActivePlayerException();
     }
 
-     public void setActivePlayer(int activePlayer){
-         this.activePlayer=activePlayer;
-    }
 
     public Match getMatch(){return this.match;}
 

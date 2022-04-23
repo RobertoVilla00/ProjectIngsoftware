@@ -9,6 +9,6 @@ public class AssistantCardMessage extends Message{
     }
 
     public int getCardIndex() {
-        return CardIndex;
+        return CardIndex-1;
     }
 }

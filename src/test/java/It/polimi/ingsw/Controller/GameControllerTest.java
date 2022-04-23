@@ -138,6 +138,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(2,-2);
         controller.MoveStudent(moveStudentMessage);
     }
@@ -147,6 +148,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddEntranceStudents(Color.YELLOW);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
         controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(Color.YELLOW);
@@ -167,6 +169,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(-1,0);
         controller.MoveStudent(moveStudentMessage);
     }
@@ -176,6 +179,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         Color studentColor=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(2,0);
         controller.MoveStudent(moveStudentMessage);
@@ -188,6 +192,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         Color studentColor=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(2,0);
         controller.MoveStudent(moveStudentMessage);
@@ -200,6 +205,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         Color studentColor=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().GetEntranceStudentColor(1);
         MoveStudentMessage moveStudentMessage = new MoveStudentMessage(2,7);
         controller.MoveStudent(moveStudentMessage);
@@ -229,6 +235,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(1);
         MotherNatureMessage motherNatureMessage=new MotherNatureMessage(4);
         controller.MoveMotherNature(motherNatureMessage);
@@ -238,6 +245,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(6); // 4 movements
         MotherNatureMessage motherNatureMessage=new MotherNatureMessage(4);
         controller.MoveMotherNature(motherNatureMessage);
@@ -258,6 +266,7 @@ public class GameControllerTest {
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
         controller.getMatch().PlanningPhase();
+        controller.getMatch().getPlayerById(0).setActive();
         CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(3);
         controller.ChooseCloud(cloudChoiceMessage);
         int studentsOnCloud=controller.getMatch().getClouds().get(2).CloudSize();
@@ -270,6 +279,7 @@ public class GameControllerTest {
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
         controller.getMatch().PlanningPhase();
+        controller.getMatch().getPlayerById(0).setActive();
         CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(3);
         controller.ChooseCloud(cloudChoiceMessage);
         int entranceStudents=controller.getMatch().getPlayerById(controller.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber();
@@ -280,6 +290,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         AssistantCardMessage assistantCardMessage=new AssistantCardMessage(-1);
         controller.PlayAssistantCard(assistantCardMessage);
 
@@ -289,6 +300,7 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
         AssistantCardMessage assistantCardMessage=new AssistantCardMessage(11);
         controller.PlayAssistantCard(assistantCardMessage);
     }
@@ -297,8 +309,11 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(6);
-        controller.setActivePlayer(1);
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage1=new AssistantCardMessage(6);
+        controller.PlayAssistantCard(assistantCardMessage1);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
         AssistantCardMessage assistantCardMessage=new AssistantCardMessage(6);
         controller.PlayAssistantCard(assistantCardMessage);
     }
@@ -307,23 +322,54 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(6);
-        controller.setActivePlayer(1);
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage1=new AssistantCardMessage(6);
+        controller.PlayAssistantCard(assistantCardMessage1);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
         AssistantCardMessage assistantCardMessage=new AssistantCardMessage(7);
         controller.PlayAssistantCard(assistantCardMessage);
     }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayAssistantCardTwoPlayerWithDifferentValue1() throws InvalidInputException, NoActivePlayerException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(2,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage1=new AssistantCardMessage(10);
+        controller.PlayAssistantCard(assistantCardMessage1);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage=new AssistantCardMessage(7);
+        controller.PlayAssistantCard(assistantCardMessage);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage2=new AssistantCardMessage(9);
+        controller.PlayAssistantCard(assistantCardMessage2);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage3=new AssistantCardMessage(8);
+        controller.PlayAssistantCard(assistantCardMessage3);
+        controller.getMatch().getPlayerById(1).setInactive();
+    }
+
     @Test(expected = InvalidInputException.class)
     public void PlayAssistantCardThreePlayerSameValue() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(6);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage=new AssistantCardMessage(7);
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage=new AssistantCardMessage(6);
         controller.PlayAssistantCard(assistantCardMessage);
-        controller.setActivePlayer(2);
-        AssistantCardMessage assistantCardMessage1=new AssistantCardMessage(6);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage1=new AssistantCardMessage(7);
         controller.PlayAssistantCard(assistantCardMessage1);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(2).setActive();
+        AssistantCardMessage assistantCardMessage2=new AssistantCardMessage(6);
+        controller.PlayAssistantCard(assistantCardMessage2);
     }
 
     @Test
@@ -331,66 +377,122 @@ public class GameControllerTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(2,1);
         controller.InitializeGame(startMessage);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(1);
-        controller.setActivePlayer(1);
+        controller.getMatch().getPlayerById(0).setActive();
         AssistantCardMessage assistantCardMessage=new AssistantCardMessage(2);
         controller.PlayAssistantCard(assistantCardMessage);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(2);
-        controller.setActivePlayer(1);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
         AssistantCardMessage assistantCardMessage1=new AssistantCardMessage(3);
         controller.PlayAssistantCard(assistantCardMessage1);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(3);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage2=new AssistantCardMessage(4);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage2=new AssistantCardMessage(3);
         controller.PlayAssistantCard(assistantCardMessage2);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(4);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage3=new AssistantCardMessage(5);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage3=new AssistantCardMessage(4);
         controller.PlayAssistantCard(assistantCardMessage3);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(4);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage4=new AssistantCardMessage(3);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage4=new AssistantCardMessage(4);
         controller.PlayAssistantCard(assistantCardMessage4);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(3);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage5=new AssistantCardMessage(2);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage5=new AssistantCardMessage(5);
         controller.PlayAssistantCard(assistantCardMessage5);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(2);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage6=new AssistantCardMessage(1);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage6=new AssistantCardMessage(5);
         controller.PlayAssistantCard(assistantCardMessage6);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(0);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage7=new AssistantCardMessage(1);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage7=new AssistantCardMessage(6);
         controller.PlayAssistantCard(assistantCardMessage7);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(0);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage8=new AssistantCardMessage(0);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage8=new AssistantCardMessage(5);
         controller.PlayAssistantCard(assistantCardMessage8);
-        controller.setActivePlayer(0);
-        controller.getMatch().getPlayerById(controller.getActivePlayer()).PlayAssistantCard(0);
-        controller.setActivePlayer(1);
-        AssistantCardMessage assistantCardMessage9=new AssistantCardMessage(0);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage9=new AssistantCardMessage(4);
         controller.PlayAssistantCard(assistantCardMessage9);
-
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage10=new AssistantCardMessage(4);
+        controller.PlayAssistantCard(assistantCardMessage10);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage11=new AssistantCardMessage(3);
+        controller.PlayAssistantCard(assistantCardMessage11);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage12=new AssistantCardMessage(3);
+        controller.PlayAssistantCard(assistantCardMessage12);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage13=new AssistantCardMessage(2);
+        controller.PlayAssistantCard(assistantCardMessage13);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage14=new AssistantCardMessage(1);
+        controller.PlayAssistantCard(assistantCardMessage14);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage15=new AssistantCardMessage(2);
+        controller.PlayAssistantCard(assistantCardMessage15);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage16=new AssistantCardMessage(1);
+        controller.PlayAssistantCard(assistantCardMessage16);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage17=new AssistantCardMessage(1);
+        controller.PlayAssistantCard(assistantCardMessage17);
+        controller.getMatch().getPlayerById(1).setInactive();
+        controller.getMatch().getPlayerById(0).setActive();
+        AssistantCardMessage assistantCardMessage18=new AssistantCardMessage(1);
+        controller.PlayAssistantCard(assistantCardMessage18);
+        controller.getMatch().getPlayerById(0).setInactive();
+        controller.getMatch().getPlayerById(1).setActive();
+        AssistantCardMessage assistantCardMessage19=new AssistantCardMessage(1);
+        controller.PlayAssistantCard(assistantCardMessage19);
+        controller.getMatch().getPlayerById(1).setInactive();
     }
+
     @Test
-    public void setActivePlayer() throws InvalidInputException, NoActivePlayerException {
+    public void getActivePlayer() throws InvalidInputException, NoActivePlayerException {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(2,1);
         controller.InitializeGame(startMessage);
-        controller.setActivePlayer(1);
+        controller.getMatch().getPlayerById(1).setActive();
         assertEquals(1,controller.getActivePlayer());
     }
+
+    @Test(expected = NoActivePlayerException.class)
+    public void getActivePlayerWithNoPlayer() throws InvalidInputException, NoActivePlayerException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(2,1);
+        controller.InitializeGame(startMessage);
+        controller.getActivePlayer();
+    }
+
+    @Test
+    public void getActivePlayerPosition() throws InvalidInputException, NoActivePlayerException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(2,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(1).setActive();
+        assertEquals(1,controller.getActivePlayerPosition());
+    }
+
+    @Test(expected = NoActivePlayerException.class)
+    public void getActivePlayerPositionWithNoPlayer() throws InvalidInputException, NoActivePlayerException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(2,1);
+        controller.InitializeGame(startMessage);
+        controller.getActivePlayerPosition();
+    }
+
 
 
 
