@@ -245,10 +245,37 @@ public class GameController implements Observer {
         throw new NoActivePlayerException();
     }
 
+    public void FillClouds(){
+        for(int i=0;i< getMatch().getNumberOfPlayers();i++){
+            if(match.getBag().BagSize()!=0){
+            match.MoveStudentsBagToCloud(i);
+            }
+        }
+    }
+
+    public void PlayCharacterCard(CharacterCardMessage cardMessage) throws InvalidInputException, NoActivePlayerException {
+        if(cardMessage.getCardIndex()<0 || cardMessage.getCardIndex()>2){
+            throw new InvalidInputException("Invalid Card Index");
+        }
+        else{
+            int CardId=match.getCharacterCardsOnTable()[cardMessage.getCardIndex()].getIdCharacterCard();
+            switch (CardId){
+                case 4:
+                    characterCardController.PlayCard4();
+                    break;
+                case 6:
+                    characterCardController.PlayCard6();
+                    break;
+                case 9:
+                    characterCardController.PlayCard9();
+                    break;
+                default:
+            }
+        }
+    }
     @Override
     public void update(Observable o, Object arg){
     }
-
 
 }
 

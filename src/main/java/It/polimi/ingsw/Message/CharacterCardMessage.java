@@ -7,7 +7,7 @@ public class CharacterCardMessage extends Message{
 
     public CharacterCardMessage(int cardIndex){
         super(MessageContent.CHARACTERCARD);
-        this.CardIndex = cardIndex;
+        this.CardIndex = cardIndex-1;
     }
 
     public int getCardIndex() {
