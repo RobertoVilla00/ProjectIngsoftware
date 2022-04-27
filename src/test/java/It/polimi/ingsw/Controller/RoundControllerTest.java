@@ -2,6 +2,8 @@ package It.polimi.ingsw.Controller;
 
 import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Exceptions.NoActivePlayerException;
+import It.polimi.ingsw.Exceptions.WrongMessageException;
+import It.polimi.ingsw.Message.AssistantCardMessage;
 import It.polimi.ingsw.Message.StartMessage;
 import org.junit.Test;
 
@@ -55,4 +57,14 @@ public class RoundControllerTest {
 		assertFalse(roundController.FinishedPlayers());
 	}
 
+	/*@Test
+	public void ReceiveMessage() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController=new RoundController();
+		StartMessage startMessage=new StartMessage(2,1);
+		roundController.ReceiveMessage(startMessage);
+		roundController.GamePhaseHandler(GamePhase.GAME_INIT);
+		boolean active=roundController.getGameController().getMatch().getPlayers()[0].IsActive();
+		assertTrue(active);
+	}
+*/
 }

@@ -7,6 +7,7 @@ import It.polimi.ingsw.Model.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GameControllerTest {
 
@@ -493,7 +494,90 @@ public class GameControllerTest {
         controller.getActivePlayerPosition();
     }
 
+    @Test
+    public void FillClouds() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.FillClouds();
+        int numberOfStudents=controller.getMatch().getClouds().get(2).CloudSize();
+        assertEquals(4,numberOfStudents);
+    }
 
+    @Test
+    public void PlayCharacterCard4() throws InvalidInputException, NoActivePlayerException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(4)){
+            controller.InitializeGame(startMessage);
+        }
+        int position=0;
+        for(int i=0;i<3;i++){
+            if(controller.getMatch().getCharacterCardsOnTable()[i].getIdCharacterCard()==4){
+                position=i;
+                break;
+            }
+        }
+        controller.getMatch().getPlayerById(0).setActive();
+        CharacterCardMessage cardMessage=new CharacterCardMessage(position+1);
+        controller.PlayCharacterCard(cardMessage);
+        int maximumMovements=controller.getMatch().getPlayerById(controller.getActivePlayer()).GetPlayedMovements();
+        assertEquals(2,maximumMovements);
+    }
 
+    @Test
+    public void PlayCharacterCard6() throws InvalidInputException, NoActivePlayerException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(6)){
+            controller.InitializeGame(startMessage);
+        }
+        int position=0;
+        for(int i=0;i<3;i++){
+            if(controller.getMatch().getCharacterCardsOnTable()[i].getIdCharacterCard()==6){
+                position=i;
+                break;
+            }
+        }
+        controller.getMatch().getPlayerById(0).setActive();
+        CharacterCardMessage cardMessage=new CharacterCardMessage(position+1);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
+        controller.PlayCharacterCard(cardMessage);
+        assertTrue(controller.getMatch().getPlaysCard6());
+    }
 
+    @Test
+    public void PlayCharacterCard9() throws InvalidInputException, NoActivePlayerException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        while(!controller.getMatch().isCharacterCardOnTable(9)){
+            controller.InitializeGame(startMessage);
+        }
+        int position=0;
+        for(int i=0;i<3;i++){
+            if(controller.getMatch().getCharacterCardsOnTable()[i].getIdCharacterCard()==9){
+                position=i;
+                break;
+            }
+        }
+        controller.getMatch().getPlayerById(0).setActive();
+        CharacterCardMessage cardMessage=new CharacterCardMessage(position+1);
+        controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
+        controller.PlayCharacterCard(cardMessage);
+        boolean bonusPoints=controller.getMatch().getPlayerById(controller.getActivePlayer()).getAdditionalPoints();
+        assertTrue(bonusPoints);
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void PlayInvalidCharacterCard() throws InvalidInputException, NoActivePlayerException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayerById(0).setActive();
+        CharacterCardMessage cardMessage=new CharacterCardMessage(-2);
+        controller.PlayCharacterCard(cardMessage);
+    }
 }

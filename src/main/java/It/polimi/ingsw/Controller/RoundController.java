@@ -15,6 +15,7 @@ public class RoundController {
     }
     public void ReceiveMessage(Message message){
         this.msg = message;
+        ReceivedMessage=true;
     }
 
     public void GamePhaseHandler(GamePhase gamePhase) throws InvalidInputException, WrongMessageException, NoActivePlayerException {
