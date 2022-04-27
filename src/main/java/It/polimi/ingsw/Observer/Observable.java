@@ -6,24 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Observable {
+public class Observable<T> {
 
-    private final List<Observer> observers = new ArrayList<>();
+    private final List<Observer<T>> observers = new ArrayList<>();
 
 
-    public void addObserver(Observer obs) {
+    public void addObserver(Observer<T> obs) {
         observers.add(obs);
     }
 
 
-    public void removeObserver(Observer obs) {
+    public void removeObserver(Observer<T> obs) {
+
         observers.remove(obs);
     }
 
 
-    protected void notifyObserver(Message message) {
-        for (Observer observer : observers) {
-            observer.update(message);
+    protected void notifyObserver(T message) {
+        for (Observer<T> observer : observers) {
+            observer.update((Message) message);
         }
     }
 }
