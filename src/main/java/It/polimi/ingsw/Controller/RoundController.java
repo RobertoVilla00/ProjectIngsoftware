@@ -6,108 +6,103 @@ import It.polimi.ingsw.Message.*;
 public class RoundController {
 
     private GameController Game;
-    private boolean ReceivedMessage;
+    private GamePhase gamePhase;
     private Message msg;
 
 
     public RoundController(){
         this.Game = new GameController();
     }
-    public void ReceiveMessage(Message message){
-        this.msg = message;
-        ReceivedMessage=true;
+
+    public void MessageHandler(Message msg) throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+        switch (msg.getMessageContent()){
+            case START:
+                if(gamePhase == GamePhase.IDLE){
+                    GamePhaseHandler(GamePhase.GAME_INIT);
+                }
+                else throw new WrongMessageException();
+            case ASSISTANTCARD:
+                if(gamePhase == GamePhase.ASSISTANT_CARD){
+                    GamePhaseHandler(GamePhase.ASSISTANT_CARD);
+                }
+                else throw new WrongMessageException();
+            case MOVESTUDENT:
+                if(gamePhase == GamePhase.MOVE_STUDENT){
+                    GamePhaseHandler(GamePhase.MOVE_STUDENT);
+                }
+                else throw new WrongMessageException();
+            case MOTHERNATURE:
+                if(gamePhase == GamePhase.MOVE_MN){
+                    GamePhaseHandler(GamePhase.MOVE_MN);
+                }
+                else throw new WrongMessageException();
+            case CHARACTERCARD:
+                if(gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD){
+                    Game.PlayCharacterCard((CharacterCardMessage) msg);
+                }//TODO: play cards with parameters
+        }
     }
 
     public void GamePhaseHandler(GamePhase gamePhase) throws InvalidInputException, WrongMessageException, NoActivePlayerException {
         switch (gamePhase) {
             case GAME_INIT:
-                if (ReceivedMessage) {
-                    try {
-                        if (msg.getMessageContent() == MessageContent.START) {
-                            Game.InitializeGame((StartMessage) msg);
-                            setFirstActivePlayer();
-                            GamePhaseHandler(GamePhase.FILL_CLOUDS);                //TODO: TEST THIS PART !!
-                        } else throw new WrongMessageException();
-                    } catch (InvalidInputException e) {
-                        GamePhaseHandler(GamePhase.GAME_INIT);
-                        System.out.println(e.getMessage());
-                    }
+                try {
+                    Game.InitializeGame((StartMessage) msg);
+                    setFirstActivePlayer();
+                    GamePhaseHandler(GamePhase.FILL_CLOUDS);
+                }
+                catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
                 }
 
             case FILL_CLOUDS:
                 Game.FillClouds();
-                GamePhaseHandler(GamePhase.ASSISTANT_CARD);
+                gamePhase = GamePhase.ASSISTANT_CARD;
 
             case ASSISTANT_CARD:
-                if (ReceivedMessage) {
-                    try {
-                        if (msg.getMessageContent() == MessageContent.ASSISTANTCARD) {
-                            Game.PlayAssistantCard((AssistantCardMessage) msg);
-                            if (!FinishedPlayers()) {
-                                setNextActivePlayer();
-                                GamePhaseHandler(GamePhase.ASSISTANT_CARD);
-                            } else {
-                                Game.getMatch().SortPlayersByOrderValue();
-                                setFirstActivePlayer();
-                                GamePhaseHandler(GamePhase.MOVE_STUDENT);
-                            }
-                        } else throw new WrongMessageException();
-                    } catch (InvalidInputException e) {
-                        GamePhaseHandler(GamePhase.ASSISTANT_CARD);
-                        System.out.println(e.getMessage());
+                try {
+                    Game.PlayAssistantCard((AssistantCardMessage) msg);
+                    if (!FinishedPlayers()) {
+                        setNextActivePlayer();
+                    }
+                    else {
+                        Game.getMatch().SortPlayersByOrderValue();
+                        setFirstActivePlayer();
+                        gamePhase = GamePhase.MOVE_STUDENT;
                     }
                 }
+                catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
+                }
+
             case MOVE_STUDENT:
-                if (ReceivedMessage) {
-
-                    if (msg.getMessageContent() == MessageContent.MOVESTUDENT) {
-                        try {
-
-                            Game.MoveStudent((MoveStudentMessage) msg);
-                            GamePhaseHandler(GamePhase.MOVE_MN);
-                        } catch (InvalidInputException e) {
-                            GamePhaseHandler(GamePhase.MOVE_STUDENT);
-                            System.out.println(e.getMessage());
-                        }
-                        if (msg.getMessageContent() == MessageContent.CHARACTERCARD) { //TODO: EXAMPLE, messages need to be changed
-
-                        } else throw new WrongMessageException();
-                    }
+                try {
+                    Game.MoveStudent((MoveStudentMessage) msg);
+                    gamePhase = GamePhase.MOVE_MN;
+                } catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
                 }
+
             case MOVE_MN:
-                if (ReceivedMessage) {
-                    if (msg.getMessageContent() == MessageContent.MOTHERNATURE) {
-                        try {
-                            Game.MoveMotherNature((MotherNatureMessage) msg);
-                            GamePhaseHandler(GamePhase.CHOOSE_CLOUD);
-                        } catch (InvalidInputException e) {
-                            GamePhaseHandler(GamePhase.MOVE_MN);
-                            System.out.println(e.getMessage());
-                        }
-                        if (msg.getMessageContent() == MessageContent.CHARACTERCARD) { //TODO: EXAMPLE, messages need to be changed
-
-                        } else throw new WrongMessageException();
-                    }
+                try {
+                    Game.MoveMotherNature((MotherNatureMessage) msg);
+                    gamePhase = GamePhase.CHOOSE_CLOUD;
                 }
+                catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
+                }
+
             case CHOOSE_CLOUD:
-                if (ReceivedMessage) {
-                    if (msg.getMessageContent() == MessageContent.CLOUDCHOICE) {
-                        try {
-                            Game.ChooseCloud((CloudChoiceMessage) msg);
-                            if (!FinishedPlayers()) {
-                                setNextActivePlayer();
-                                GamePhaseHandler(GamePhase.MOVE_STUDENT);
-                            } else GamePhaseHandler(GamePhase.FILL_CLOUDS);
-
-                        } catch (InvalidInputException e) {
-                            GamePhaseHandler(GamePhase.MOVE_MN);
-                            System.out.println(e.getMessage());
-                        }
+                try {
+                    Game.ChooseCloud((CloudChoiceMessage) msg);
+                    if (!FinishedPlayers()) {
+                        setNextActivePlayer();
+                        gamePhase = GamePhase.MOVE_STUDENT;
                     }
-
-                    if (msg.getMessageContent() == MessageContent.CHARACTERCARD) { //TODO: EXAMPLE, messages need to be changed
-
-                    } else throw new WrongMessageException();
+                    else GamePhaseHandler(GamePhase.FILL_CLOUDS);
+                }
+                catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
                 }
         }
     }
