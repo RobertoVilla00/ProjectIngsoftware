@@ -2,6 +2,7 @@ package It.polimi.ingsw.Model;
 
 import org.junit.Test;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -346,5 +347,17 @@ public class MatchTest {
         Match match = new Match(2, 1);
         match.setPlaysCard6(true);
         assertTrue(match.getPlaysCard6());
+    }
+
+    @Test
+    public void AddCoinsWithStudents(){
+        Match match = new Match(2,1);
+        for(int i=0; i<6;i++){
+            match.getPlayerById(1).getPlayersSchool().RemoveStudentFromEntrance(6-i);
+            match.getPlayerById(1).getPlayersSchool().AddEntranceStudents(Color.BLUE);
+            match.MoveStudentsFromEntranceToDiningRoom(6-i,1);
+        }
+        int numberOfMoney=match.getPlayerById(1).getCoins();
+        assertEquals(3,numberOfMoney);
     }
 }

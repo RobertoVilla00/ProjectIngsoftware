@@ -5,7 +5,6 @@ import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 
-import java.io.NotActiveException;
 import java.util.Observable;
 import java.util.Observer;
 

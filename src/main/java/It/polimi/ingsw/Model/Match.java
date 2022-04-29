@@ -221,7 +221,11 @@ public class Match {
 	}
 
 	public void MoveStudentsFromEntranceToDiningRoom(int StudentIndex, int PlayerIndex){
+		Color studentColor= Players[PlayerIndex].getPlayersSchool().GetEntranceStudentColor(StudentIndex);
 		Players[PlayerIndex].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
+		if(Players[PlayerIndex].getPlayersSchool().getStudentNumber(studentColor)%3==0  && ExpertMode){
+			Players[PlayerIndex].AddCoin(1);
+		}
 	}
 
 	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerIndex, int IslandIndex){
