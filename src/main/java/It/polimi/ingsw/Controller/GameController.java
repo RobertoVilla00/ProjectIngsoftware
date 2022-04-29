@@ -253,7 +253,7 @@ public class GameController implements Observer {
         }
     }
 
-    public void PlayCharacterCard(CharacterCardMessage cardMessage) throws InvalidInputException, NoActivePlayerException {
+    public int PlayCharacterCard(CharacterCardMessage cardMessage) throws InvalidInputException, NoActivePlayerException {
         if(cardMessage.getCardIndex()<0 || cardMessage.getCardIndex()>2){
             throw new InvalidInputException("Invalid Card Index");
         }
@@ -262,14 +262,14 @@ public class GameController implements Observer {
             switch (CardId){
                 case 4:
                     characterCardController.PlayCard4();
-                    break;
+                    return 0;
                 case 6:
                     characterCardController.PlayCard6();
-                    break;
+                    return 0;
                 case 9:
                     characterCardController.PlayCard9();
-                    break;
-                default:
+                    return 0;
+                default: return CardId;
             }
         }
     }

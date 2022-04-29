@@ -7,6 +7,7 @@ public class RoundController {
 
     private GameController Game;
     private GamePhase gamePhase;
+    private int ExpectedCardMsg;
     private Message msg;
 
 
@@ -17,7 +18,7 @@ public class RoundController {
     public void MessageHandler(Message msg) throws NoActivePlayerException, InvalidInputException, WrongMessageException {
         switch (msg.getMessageContent()){
             case START:
-                if(gamePhase == GamePhase.IDLE){
+                if(gamePhase == GamePhase.GAME_INIT){
                     GamePhaseHandler(GamePhase.GAME_INIT);
                 }
                 else throw new WrongMessageException();
@@ -37,9 +38,21 @@ public class RoundController {
                 }
                 else throw new WrongMessageException();
             case CHARACTERCARD:
-                if(gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD){
-                    Game.PlayCharacterCard((CharacterCardMessage) msg);
-                }//TODO: play cards with parameters
+                if(gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD) {
+                    int CardId = Game.PlayCharacterCard((CharacterCardMessage) msg); //plays character card if parameters are not needed
+                    if (CardId != 0) {                                               //parameters needed
+                        ExpectedCardMsg = CardId;
+                    }
+                }
+                else throw new WrongMessageException();
+            case CARD1:
+                if(gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD && ExpectedCardMsg == 1) {
+                //TODO: think about view and messages
+                }
+                else throw new WrongMessageException();
+            case CARD3AND5:
+            case CARD10:
+            case CARD12:
         }
     }
 
