@@ -1,9 +1,5 @@
 package It.polimi.ingsw.Network;
 
-import It.polimi.ingsw.Model.Match;
-import It.polimi.ingsw.Controller.GameController;
-import It.polimi.ingsw.Observer.Observer;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;

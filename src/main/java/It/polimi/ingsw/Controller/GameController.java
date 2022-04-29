@@ -6,7 +6,6 @@ import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 import It.polimi.ingsw.Observer.Observer;
 
-import java.io.NotActiveException;
 import java.util.Observable;
 
 public class GameController implements Observer {
