@@ -6,6 +6,9 @@ import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 import It.polimi.ingsw.Observer.Observer;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Observable;
 
 public class GameController implements Observer {
@@ -13,6 +16,7 @@ public class GameController implements Observer {
     private Match match;
     private CharacterCardController characterCardController;
     private int activePlayer;
+    private int ranking[][];
     /*private View view;*/
 
     public GameController(){
@@ -241,8 +245,25 @@ public class GameController implements Observer {
 
     }
 
-    public void EndGame(){
-
+    public int EndGame(){                                   //return the id of the winner
+        ranking=new int[match.getNumberOfPlayers()][2];
+        for(Player p:match.getPlayers()){
+            ranking[p.getPlayerId()][0]=p.getPlayerId();
+            ranking[p.getPlayerId()][1]=p.getTowersPlaced();
+        }
+        int temp[]=new int[2];                                       //sorting of the ranking
+        for(int i=0;i<match.getNumberOfPlayers()-1;i++){
+            for(int j=0;j< match.getNumberOfPlayers()-i-1;j++){
+                if(ranking[j][1]>ranking[j+1][1]){
+                    temp=ranking[j];
+                    ranking[j]=ranking[j+1];
+                    ranking[j+1]=temp;
+                }
+            }
+        }
+        //TODO: add teacher control in case of draw on towers number
+        int winnerId=ranking[match.getNumberOfPlayers()-1][0];
+        return winnerId;
     }
 
     public int getActivePlayer() throws NoActivePlayerException{

@@ -580,4 +580,17 @@ public class GameControllerTest {
         CharacterCardMessage cardMessage=new CharacterCardMessage(-2);
         controller.PlayCharacterCard(cardMessage);
     }
+
+    @Test
+    public void EndGame() throws InvalidInputException {
+        GameController controller=new GameController();
+        StartMessage startMessage=new StartMessage(3,1);
+        controller.InitializeGame(startMessage);
+        controller.getMatch().getPlayers()[0].IncreaseTowersPlaced(3);
+        controller.getMatch().getPlayers()[1].IncreaseTowersPlaced(5);
+        controller.getMatch().getPlayers()[2].IncreaseTowersPlaced(4);
+        int winnerId=controller.EndGame();
+        assertEquals(1,winnerId);
+    }
+
 }
