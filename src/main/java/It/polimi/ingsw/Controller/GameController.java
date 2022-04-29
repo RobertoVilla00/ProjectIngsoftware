@@ -4,10 +4,10 @@ import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
+import It.polimi.ingsw.Observer.Observer;
 
 import java.io.NotActiveException;
 import java.util.Observable;
-import java.util.Observer;
 
 public class GameController implements Observer {
 
@@ -311,7 +311,7 @@ public class GameController implements Observer {
         }
     }
     @Override
-    public void update(Observable o, Object arg){
+    public void update(Message message){
     }
 
 }
