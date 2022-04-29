@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Controller;
 import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Exceptions.NoActivePlayerException;
+import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 
@@ -135,7 +136,23 @@ public class GameController implements Observer {
             if (!isTied) {                //if the count is tied no one build the tower
                 TowerColor BuiltTowerColor = match.getPlayers()[idMax].getPlayerColor();         //find color of the tower to build
                 match.getTable().get(IslandIndex).BuildTower(BuiltTowerColor);
+                checkEndGame();
                 CheckIslandMerge(IslandIndex);
+            }
+        }
+    }
+
+    public void checkEndGame(){
+        for(Player p:match.getPlayers()){
+            if(match.getNumberOfPlayers()==2){
+                if(p.getTowersPlaced()==8){
+                    EndGame();
+                }
+            }
+            if (match.getNumberOfPlayers()==3){
+                if(p.getTowersPlaced()==6){
+                    EndGame();
+                }
             }
         }
     }
@@ -225,7 +242,9 @@ public class GameController implements Observer {
 
     }
 
-    public void EndGame(){}
+    public void EndGame(){
+
+    }
 
     public int getActivePlayer() throws NoActivePlayerException{
         int id = 0;
@@ -271,6 +290,24 @@ public class GameController implements Observer {
                     return 0;
                 default: return CardId;
             }
+        }
+    }
+
+    public void PlayCharacterCardById(int id, Message msg) throws NoActivePlayerException, InvalidInputException, NoEntryTilesException {
+        if(id==1){
+            characterCardController.PlayCard1((Card1Message) msg);
+        }
+        if(id==3){
+            characterCardController.PlayCard3((Card3and5Message) msg);
+        }
+        if(id==5){
+            characterCardController.PlayCard5((Card3and5Message) msg);
+        }
+        if(id==10){
+            characterCardController.PlayCard10((Card10Message) msg);
+        }
+        if(id==12){
+            characterCardController.PlayCard12((Card12Message) msg);
         }
     }
     @Override

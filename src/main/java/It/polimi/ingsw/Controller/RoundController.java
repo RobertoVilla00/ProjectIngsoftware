@@ -1,12 +1,14 @@
 package It.polimi.ingsw.Controller;
 import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Exceptions.NoActivePlayerException;
+import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Exceptions.WrongMessageException;
 import It.polimi.ingsw.Message.*;
 public class RoundController {
 
     private GameController Game;
     private GamePhase gamePhase;
+    private GamePhase previousPhase;
     private int ExpectedCardMsg;
     private Message msg;
 
@@ -39,20 +41,39 @@ public class RoundController {
                 else throw new WrongMessageException();
             case CHARACTERCARD:
                 if(gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD) {
-                    int CardId = Game.PlayCharacterCard((CharacterCardMessage) msg); //plays character card if parameters are not needed
-                    if (CardId != 0) {                                               //parameters needed
-                        ExpectedCardMsg = CardId;
+                    try {
+                        int CardId = Game.PlayCharacterCard((CharacterCardMessage) msg); //plays character card if parameters are not needed
+                        if (CardId != 0) {                                               //parameters neededExpectedCardMsg = CardId;
+                            previousPhase = gamePhase;
+                            gamePhase = GamePhase.CHARACTER_CARD;
+                        }
+                    }
+                    catch(InvalidInputException e){
+                        System.out.println(e.getMessage());
                     }
                 }
                 else throw new WrongMessageException();
             case CARD1:
-                if(gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD && ExpectedCardMsg == 1) {
-                //TODO: think about view and messages
+                if(gamePhase==GamePhase.CHARACTER_CARD && ExpectedCardMsg==1){
+                    GamePhaseHandler(GamePhase.CHARACTER_CARD);
                 }
                 else throw new WrongMessageException();
             case CARD3AND5:
+                if(gamePhase==GamePhase.CHARACTER_CARD && ExpectedCardMsg==3 || ExpectedCardMsg==5 ){
+                    GamePhaseHandler(GamePhase.CHARACTER_CARD);
+                }
+                else throw new WrongMessageException();
             case CARD10:
+                if(gamePhase==GamePhase.CHARACTER_CARD && ExpectedCardMsg==10){
+                    GamePhaseHandler(GamePhase.CHARACTER_CARD);
+                }
+                else throw new WrongMessageException();
+
             case CARD12:
+                if(gamePhase==GamePhase.CHARACTER_CARD && ExpectedCardMsg==12){
+                    GamePhaseHandler(GamePhase.CHARACTER_CARD);
+                }
+                else throw new WrongMessageException();
         }
     }
 
@@ -117,6 +138,26 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
+
+            case CHARACTER_CARD:
+                try{
+                    if(msg.getMessageContent()==MessageContent.CARD1){
+                        Game.PlayCharacterCardById(1, msg);
+                    }
+                    if(msg.getMessageContent()==MessageContent.CARD3AND5){
+                        Game.PlayCharacterCardById(ExpectedCardMsg, msg);
+                    }
+                    if(msg.getMessageContent()==MessageContent.CARD10){
+                        Game.PlayCharacterCardById(10, msg);
+                    }
+                    if(msg.getMessageContent()==MessageContent.CARD12) {
+                        Game.PlayCharacterCardById(12, msg);
+                    }
+                }
+                catch (InvalidInputException | NoEntryTilesException e){
+                    System.out.println(e.getMessage());
+                }
+                gamePhase = previousPhase;
         }
     }
 
