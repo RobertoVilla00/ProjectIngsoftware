@@ -18,27 +18,43 @@ public class RoundController {
     }
 
     public void MessageHandler(Message msg) throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+        this.msg=msg;
         switch (msg.getMessageContent()){
             case START:
                 if(gamePhase == GamePhase.GAME_INIT){
                     GamePhaseHandler(GamePhase.GAME_INIT);
                 }
                 else throw new WrongMessageException();
+                break;
+
             case ASSISTANTCARD:
                 if(gamePhase == GamePhase.ASSISTANT_CARD){
                     GamePhaseHandler(GamePhase.ASSISTANT_CARD);
                 }
                 else throw new WrongMessageException();
+                break;
+
             case MOVESTUDENT:
                 if(gamePhase == GamePhase.MOVE_STUDENT){
                     GamePhaseHandler(GamePhase.MOVE_STUDENT);
                 }
                 else throw new WrongMessageException();
+                break;
+
             case MOTHERNATURE:
                 if(gamePhase == GamePhase.MOVE_MN){
                     GamePhaseHandler(GamePhase.MOVE_MN);
                 }
                 else throw new WrongMessageException();
+                break;
+
+            case CLOUDCHOICE:
+                if (gamePhase==GamePhase.CHOOSE_CLOUD){
+                    GamePhaseHandler(GamePhase.CHOOSE_CLOUD);
+                }
+                else throw new WrongMessageException();
+                break;
+
             case CHARACTERCARD:
                 if(gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD) {
                     try {
@@ -58,27 +74,35 @@ public class RoundController {
                     }
                 }
                 else throw new WrongMessageException();
+                break;
+
             case CARD1:
                 if(gamePhase==GamePhase.CHARACTER_CARD && ExpectedCardMsg==1){
                     GamePhaseHandler(GamePhase.CHARACTER_CARD);
                 }
                 else throw new WrongMessageException();
+                break;
+
             case CARD3AND5:
                 if(gamePhase==GamePhase.CHARACTER_CARD && ExpectedCardMsg==3 || ExpectedCardMsg==5 ){
                     GamePhaseHandler(GamePhase.CHARACTER_CARD);
                 }
                 else throw new WrongMessageException();
+                break;
+
             case CARD10:
                 if(gamePhase==GamePhase.CHARACTER_CARD && ExpectedCardMsg==10){
                     GamePhaseHandler(GamePhase.CHARACTER_CARD);
                 }
                 else throw new WrongMessageException();
+                break;
 
             case CARD12:
                 if(gamePhase==GamePhase.CHARACTER_CARD && ExpectedCardMsg==12){
                     GamePhaseHandler(GamePhase.CHARACTER_CARD);
                 }
                 else throw new WrongMessageException();
+                break;
         }
     }
 
@@ -93,10 +117,12 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
+                break;
 
             case FILL_CLOUDS:
                 Game.FillClouds();
                 gamePhase = GamePhase.ASSISTANT_CARD;
+                break;
 
             case ASSISTANT_CARD:
                 try {
@@ -113,6 +139,7 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
+                break;
 
             case MOVE_STUDENT:
                 try {
@@ -121,6 +148,7 @@ public class RoundController {
                 } catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
+                break;
 
             case MOVE_MN:
                 try {
@@ -130,6 +158,7 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
+                break;
 
             case CHOOSE_CLOUD:
                 try {
@@ -146,6 +175,7 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
+                break;
 
             case CHARACTER_CARD:
                 try{
@@ -165,7 +195,10 @@ public class RoundController {
                 catch (InvalidInputException | NoEntryTilesException e){
                     System.out.println(e.getMessage());
                 }
-                gamePhase = previousPhase;
+                finally {
+                    gamePhase = previousPhase;
+                }
+                break;
         }
     }
 
@@ -189,5 +222,9 @@ public class RoundController {
 
     public GameController getGameController(){
         return this.Game;
+    }
+
+    public void setGamePhase(GamePhase gamePhase) {
+        this.gamePhase = gamePhase;
     }
 }

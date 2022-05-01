@@ -158,6 +158,15 @@ public class GameController implements Observer {
                 }
             }
         }
+        if(match.getBag().BagSize()==0){
+            EndGame();
+        }
+        for(Player p:match.getPlayers()){
+            if(p.getDeck().CardCount()==0){
+                EndGame();
+            }
+        }
+
     }
 
     public void MoveStudent(MoveStudentMessage moveStudentMessage) throws InvalidInputException, NoActivePlayerException {
