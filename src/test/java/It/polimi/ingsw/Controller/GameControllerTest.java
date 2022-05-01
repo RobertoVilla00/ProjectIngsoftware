@@ -597,7 +597,7 @@ public class GameControllerTest {
     @Test
     public void EndGameZeroStudent() throws InvalidInputException{
         GameController controller=new GameController();
-        StartMessage startMessage=new StartMessage(2,1);
+        StartMessage startMessage=new StartMessage(2,0);
         controller.InitializeGame(startMessage);
         assertEquals(106,controller.getMatch().getBag().BagSize());
         controller.getMatch().getPlayers()[0].IncreaseTowersPlaced(2);

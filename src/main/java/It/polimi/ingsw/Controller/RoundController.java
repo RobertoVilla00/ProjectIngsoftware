@@ -117,7 +117,9 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case FILL_CLOUDS:
                 Game.FillClouds();
@@ -139,7 +141,9 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case MOVE_STUDENT:
                 try {
@@ -148,7 +152,9 @@ public class RoundController {
                 } catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case MOVE_MN:
                 try {
@@ -158,7 +164,9 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case CHOOSE_CLOUD:
                 try {
@@ -169,13 +177,16 @@ public class RoundController {
                     }
                     else{
                         Game.EndOfRound();
+                        setFirstActivePlayer();
                         GamePhaseHandler(GamePhase.FILL_CLOUDS);
                     }
                 }
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case CHARACTER_CARD:
                 try{
@@ -197,8 +208,8 @@ public class RoundController {
                 }
                 finally {
                     gamePhase = previousPhase;
+                    break;
                 }
-                break;
         }
     }
 
@@ -226,5 +237,13 @@ public class RoundController {
 
     public void setGamePhase(GamePhase gamePhase) {
         this.gamePhase = gamePhase;
+    }
+
+    public void setExpectedCardMsg(int expectedCardMsg){
+        this.ExpectedCardMsg=expectedCardMsg;
+    }
+
+    public GamePhase getGamePhase(){
+        return this.gamePhase;
     }
 }
