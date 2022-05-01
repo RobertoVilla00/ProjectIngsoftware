@@ -122,7 +122,7 @@ public class GameController implements Observer {
                 ControllingPlayerId = TowerController.getPlayerId();
                 InfluencePoints[ControllingPlayerId] += numberOfTowers;
             }
-            match.setPlaysCard6(false);                                         //TO BE DONE AT THE END OF THE TURN TOO!!
+            match.setPlaysCard6(false);                                         //TODO: TO BE DONE AT THE END OF THE TURN TOO!! OR ROUND?
 
             int maximum = 0;
             int idMax = 0;
@@ -313,6 +313,17 @@ public class GameController implements Observer {
         }
     }
 
+
+
+    public void EndOfRound(){       //executes all the actions needed at the end of every round
+        //match.setPlaysCard6(false); ??
+
+        for(Player p: match.getPlayers()){
+            p.setPlayedCharacterCard(false);
+        }
+
+    }
+
     public void PlayCharacterCardById(int id, Message msg) throws NoActivePlayerException, InvalidInputException, NoEntryTilesException {
         if(id==1){
             characterCardController.PlayCard1((Card1Message) msg);
@@ -330,6 +341,7 @@ public class GameController implements Observer {
             characterCardController.PlayCard12((Card12Message) msg);
         }
     }
+
     @Override
     public void update(Message message){
     }

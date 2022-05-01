@@ -42,10 +42,15 @@ public class RoundController {
             case CHARACTERCARD:
                 if(gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD) {
                     try {
-                        int CardId = Game.PlayCharacterCard((CharacterCardMessage) msg); //plays character card if parameters are not needed
-                        if (CardId != 0) {                                               //parameters neededExpectedCardMsg = CardId;
-                            previousPhase = gamePhase;
-                            gamePhase = GamePhase.CHARACTER_CARD;
+                        if(Game.getMatch().getPlayerById(Game.getActivePlayer()).HasPlayedCharacterCard()){
+                            System.out.println("you have already played a character card in this round, wait for the next round");
+                        }
+                        else {
+                            int CardId = Game.PlayCharacterCard((CharacterCardMessage) msg); //plays character card if parameters are not needed
+                            if (CardId != 0) {                                               //parameters neededExpectedCardMsg = CardId;
+                                previousPhase = gamePhase;
+                                gamePhase = GamePhase.CHARACTER_CARD;
+                            }
                         }
                     }
                     catch(InvalidInputException e){
@@ -133,7 +138,10 @@ public class RoundController {
                         setNextActivePlayer();
                         gamePhase = GamePhase.MOVE_STUDENT;
                     }
-                    else GamePhaseHandler(GamePhase.FILL_CLOUDS);
+                    else{
+                        Game.EndOfRound();
+                        GamePhaseHandler(GamePhase.FILL_CLOUDS);
+                    }
                 }
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());

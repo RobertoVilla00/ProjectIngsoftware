@@ -16,9 +16,10 @@ public class CharacterCardController{
     }
 
     public void PlayCard1 (Card1Message message) throws InvalidInputException, NoActivePlayerException {                     //students from card to Island
-        if(Game.getMatch().isCharacterCardOnTable(1)) {
+
+        if (Game.getMatch().isCharacterCardOnTable(1)) {
             Cards1and10 card1 = (Cards1and10) Game.getMatch().getCharacterCardById(1);
-            if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins()>=card1.getCardCost()){
+            if (Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card1.getCardCost()) {
                 if (message.getStudentOnCardIndex() >= card1.getNumberOfStudents()) {
                     throw new InvalidInputException("Given Student Index is not Available, please give another one");
                 } else {
@@ -29,28 +30,27 @@ public class CharacterCardController{
                         Game.getMatch().getTable().get(message.getIslandIndex()).AddStudent(StudentColor);
                         card1.AddStudent();
                         Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card1.getCardCost());
+                        Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
                     }
                 }
-            }
-            else throw new InvalidInputException("You do not have enough coins to play this card");
-        }
-        else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
+            } else throw new InvalidInputException("You do not have enough coins to play this card");
+        } else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
     public void PlayCard3(Card3and5Message message) throws InvalidInputException, NoActivePlayerException {              //count the influence on an island
-        if(Game.getMatch().isCharacterCardOnTable(3)) {
+
+        if (Game.getMatch().isCharacterCardOnTable(3)) {
             CharacterCard card3 = Game.getMatch().getCharacterCardById(3);
-            if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins()>=card3.getCardCost()){
+            if (Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card3.getCardCost()) {
                 if (message.getIslandIndex() >= Game.getMatch().getTable().size()) {
                     throw new InvalidInputException("Given Island Index is not Available, please give another one");
                 } else {
                     Game.CheckIslandInfluence(message.getIslandIndex());
                     Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card3.getCardCost());
+                    Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
                 }
-            }
-            else throw new InvalidInputException("You do not have enough coins to play this card");
-        }
-        else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
+            } else throw new InvalidInputException("You do not have enough coins to play this card");
+        } else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
     }
 
     public void PlayCard4() throws InvalidInputException, NoActivePlayerException {               //increase maximum mother nature movement
@@ -59,6 +59,7 @@ public class CharacterCardController{
             if (Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card4.getCardCost()) {
                 Game.getMatch().getPlayerById(Game.getActivePlayer()).IncreaseMovements(2);
                 Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card4.getCardCost());
+                Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
             }
             else throw new InvalidInputException("You do not have enough coins to play this card");
         }
@@ -73,10 +74,12 @@ public class CharacterCardController{
                 else {
                     if (message.getIslandIndex() >= Game.getMatch().getTable().size()) {
                         throw new InvalidInputException("Given Island Index is not Available, please give another one");
-                    } else {
+                    }
+                    else {
                         card.RemoveNoEntryTile();
                         Game.getMatch().getTable().get(message.getIslandIndex()).setNoEntryTile();
                         Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card.getCardCost());
+                        Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
                     }
                 }
             }
@@ -92,6 +95,7 @@ public class CharacterCardController{
                 if (Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card6.getCardCost()) {
                     Game.getMatch().setPlaysCard6(true);
                     Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card6.getCardCost());
+                    Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
                 }
             }
             else throw new InvalidInputException("You do not have enough coins to play this card");
@@ -105,6 +109,7 @@ public class CharacterCardController{
             if(Game.getMatch().getPlayerById(Game.getActivePlayer()).getCoins() >= card9.getCardCost()) {
                 Game.getMatch().getPlayerById(Game.getActivePlayer()).setAdditionalPoints(true);
                 Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card9.getCardCost());
+                Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
             }
             else throw new InvalidInputException("You do not have enough coins to play this card");
         }
@@ -124,6 +129,7 @@ public class CharacterCardController{
                     } else {
                         Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(StudentColor);
                         Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card.getCardCost());
+                        Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
                     }
                 }
             }
@@ -144,6 +150,7 @@ public class CharacterCardController{
                     }
                 }
                 Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card12.getCardCost());
+                Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
             }
             else throw new InvalidInputException("You do not have enough coins to play this card");
         }
