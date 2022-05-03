@@ -4,8 +4,6 @@ import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Exceptions.WrongMessageException;
 import It.polimi.ingsw.Message.*;
-import It.polimi.ingsw.Observer.Observer;
-
 public class RoundController {
 
     private GameController Game;
@@ -119,7 +117,9 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case FILL_CLOUDS:
                 Game.FillClouds();
@@ -141,7 +141,9 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case MOVE_STUDENT:
                 try {
@@ -150,7 +152,9 @@ public class RoundController {
                 } catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case MOVE_MN:
                 try {
@@ -160,7 +164,9 @@ public class RoundController {
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case CHOOSE_CLOUD:
                 try {
@@ -171,13 +177,16 @@ public class RoundController {
                     }
                     else{
                         Game.EndOfRound();
+                        setFirstActivePlayer();
                         GamePhaseHandler(GamePhase.FILL_CLOUDS);
                     }
                 }
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
-                break;
+                finally {
+                    break;
+                }
 
             case CHARACTER_CARD:
                 try{
@@ -199,8 +208,8 @@ public class RoundController {
                 }
                 finally {
                     gamePhase = previousPhase;
+                    break;
                 }
-                break;
         }
     }
 
@@ -217,7 +226,7 @@ public class RoundController {
         Game.getMatch().getPlayers()[PresentActive+1].setActive();
     }    //next player becomes active
 
-    public boolean FinishedPlayers() throws NoActivePlayerException {   //return true if active player is last element of players List
+    public boolean FinishedPlayers() throws NoActivePlayerException {   //return true if active player is last element of players list
         if(Game.getActivePlayerPosition()==Game.getMatch().getNumberOfPlayers()-1) return true;
         else return false;
     }
@@ -230,4 +239,11 @@ public class RoundController {
         this.gamePhase = gamePhase;
     }
 
+    public void setExpectedCardMsg(int expectedCardMsg){
+        this.ExpectedCardMsg=expectedCardMsg;
+    }
+
+    public GamePhase getGamePhase(){
+        return this.gamePhase;
+    }
 }

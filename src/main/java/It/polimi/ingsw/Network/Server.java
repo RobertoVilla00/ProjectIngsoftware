@@ -24,37 +24,59 @@ public class Server {
     }
 
     public synchronized void DeregisterConnection(Connection c){
-        connections.remove(c);
+        //connections.remove(c);
         Connection opponent= playConnection.get(c);
-        if(opponent!=null){
+        if(opponent!=null) {
             opponent.closeConnection();
+        }
             playConnection.remove(c);
             playConnection.remove(opponent);
+            /*
+            Iterator<String> iterator=waitConnection.keySet().iterator();
+            while (iterator.hasNext()){
+                if (waitConnection.get(iterator.next()==(c))){
+                    iterator.remove();
+                }*/
         }
-    }
+
 
     public synchronized void Lobby(Connection c, String nickname){
+        List<String> keys= new ArrayList<>(waitConnection.keySet());
+        for (int i=0;i<keys.size();i++){
+            Connection connection=waitConnection.get(keys.get(i));
+            connection.AsyncSend("Connected User: "+ keys.get(i));
+        }
         waitConnection.put(nickname,c);
-        List<String> keys = new ArrayList<>(waitConnection.keySet());
-        Connection c1=waitConnection.get(keys.get(0));
-        Connection c2=waitConnection.get(keys.get(1));
-        playConnection.put(c1,c2);
-        playConnection.put(c2,c1);
-        waitConnection.clear();
+        if (waitConnection.size()==1){
+            c.AsyncSend("Waiting for another player");
+        }
+
+         keys = new ArrayList<>(waitConnection.keySet());
+
+        if(waitConnection.size() ==2){
+            Connection c1=waitConnection.get(keys.get(0));
+            Connection c2=waitConnection.get(keys.get(1));
+            playConnection.put(c1,c2);
+            playConnection.put(c2,c1);
+            waitConnection.clear();
+        }
+
     }
 
     public void run() {
         int connections = 0;
         System.out.println("Server Listening on port: " + Port);
-        try {
-            Socket socket = serverSocket.accept();
-            System.out.println("Connection number: " + connections);
-            connections++;
-            Connection connection = new Connection(socket, this);
-            AddConnection(connection);
-            executor.submit(connection);
-        }catch (IOException e){
-            System.err.println("Connection error");
+        while (true) {
+            try {
+                Socket socket = serverSocket.accept();
+                System.out.println("Connection number: " + connections);
+                connections++;
+                Connection connection = new Connection(socket, this);
+                AddConnection(connection);
+                executor.submit(connection);
+            } catch (IOException e) {
+                System.err.println("Connection error");
+            }
         }
     }
 }
