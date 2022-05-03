@@ -4,6 +4,8 @@ import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Exceptions.WrongMessageException;
 import It.polimi.ingsw.Message.*;
+import It.polimi.ingsw.Observer.Observer;
+
 public class RoundController {
 
     private GameController Game;
@@ -215,7 +217,7 @@ public class RoundController {
         Game.getMatch().getPlayers()[PresentActive+1].setActive();
     }    //next player becomes active
 
-    public boolean FinishedPlayers() throws NoActivePlayerException {   //return true if active player is last element of players list
+    public boolean FinishedPlayers() throws NoActivePlayerException {   //return true if active player is last element of players List
         if(Game.getActivePlayerPosition()==Game.getMatch().getNumberOfPlayers()-1) return true;
         else return false;
     }
@@ -227,4 +229,5 @@ public class RoundController {
     public void setGamePhase(GamePhase gamePhase) {
         this.gamePhase = gamePhase;
     }
+
 }
