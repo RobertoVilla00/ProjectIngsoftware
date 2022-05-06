@@ -13,13 +13,15 @@ import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.Scanner;
 
-public class Server {
+public class Server  {
     private static final int Port = 1234;
+    private int numberOfPlayer=0;
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
     private List<Connection> connections = new ArrayList<Connection>();
-    private Map<String, Connection> waitConnection = new HashMap<>();
+    private Map<Connection, String> waitConnection = new HashMap<>();
     private Map<Connection, Connection> playConnection = new HashMap<>();
     private RoundController roundController;
 
@@ -48,27 +50,48 @@ public class Server {
         }
 
 
-    public synchronized void Lobby(Connection c, String nickname){
-        List<String> keys= new ArrayList<>(waitConnection.keySet());
-        for (int i=0;i<keys.size();i++){
-            Connection connection=waitConnection.get(keys.get(i));
-            connection.AsyncSend("Connected User: "+ keys.get(i));
-        }
-        waitConnection.put(nickname,c);
-        if (waitConnection.size()==1){
-            c.AsyncSend("Waiting for another player");
-        }
+    public synchronized void Lobby(Connection c, String nickname) throws IOException {
+        AddConnection(c);
+        List<Connection> keys= new ArrayList<>(waitConnection.keySet());
+        boolean UsedName= false;
+        String name=nickname;
+        do {
+            if (UsedName) {
+                c.AsyncSend("Error! this name is already used ");
+                //Scanner in = new Scanner(System.in);
+                name = c.Read(); //in.nextLine();
+                UsedName = false;
+            }
+            boolean d = false;
+            for (Connection k : keys) {
+                if (waitConnection.get(k).equalsIgnoreCase(name)) {
+                    d = true;
+                }
+            }
+            if (d) {
+                UsedName = true;
+            }
+        }while (UsedName);
+        waitConnection.put(c,name);
+        if (connections.size()==1){
+            Connection c1=connections.get(0);
+            c1.AsyncSend("Choose the number of player: 2 or 3 ?");
+            while(!(numberOfPlayer==2 || numberOfPlayer==3)){
+                try{
+                    //Scanner in = new Scanner(System.in);
+                    String s=c1.Read();//in.nextLine();
+                    int Number=Integer.parseInt(s);
 
-         keys = new ArrayList<>(waitConnection.keySet());
-
-        if(waitConnection.size() ==2){
-            Connection c1=waitConnection.get(keys.get(0));
-            Connection c2=waitConnection.get(keys.get(1));
-            playConnection.put(c1,c2);
-            playConnection.put(c2,c1);
-            waitConnection.clear();
+                    if(Number==2 || Number==3){
+                        numberOfPlayer=Number;
+                    }else{
+                        c1.AsyncSend("Error! choose 2 or 3");
+                    }
+                }catch (NumberFormatException e){
+                    c1.AsyncSend((String)"Error! choose 2 or 3");
+                }
+            }
         }
-
     }
 
     public void run() {
@@ -80,7 +103,6 @@ public class Server {
                 System.out.println("Connection number: " + connections);
                 connections++;
                 Connection connection = new Connection(socket, this);
-                AddConnection(connection);
                 executor.submit(connection);
             } catch (IOException e) {
                 System.err.println("Connection error");

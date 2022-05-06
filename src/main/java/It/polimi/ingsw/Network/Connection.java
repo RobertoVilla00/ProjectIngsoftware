@@ -7,6 +7,7 @@ import It.polimi.ingsw.Observer.Observable;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Connection extends Observable implements Runnable {
@@ -50,6 +51,11 @@ public class Connection extends Observable implements Runnable {
                 SendMessage(message);
             }
         }).start();
+    }
+
+    public String Read() throws NoSuchElementException{
+        Scanner read=new Scanner(System.in);
+        return read.nextLine();
     }
 
     public synchronized void closeConnection(){
