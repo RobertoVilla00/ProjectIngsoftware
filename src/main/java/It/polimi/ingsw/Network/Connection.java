@@ -53,8 +53,8 @@ public class Connection extends Observable implements Runnable {
         }).start();
     }
 
-    public String Read() throws NoSuchElementException{
-        Scanner read=new Scanner(System.in);
+    public String Read() throws NoSuchElementException, IOException {
+        Scanner read=new Scanner(socket.getInputStream());
         return read.nextLine();
     }
 

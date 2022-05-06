@@ -51,46 +51,50 @@ public class Server  {
 
 
     public synchronized void Lobby(Connection c, String nickname) throws IOException {
-        AddConnection(c);
-        List<Connection> keys= new ArrayList<>(waitConnection.keySet());
-        boolean UsedName= false;
-        String name=nickname;
-        do {
-            if (UsedName) {
-                c.AsyncSend("Error! this name is already used ");
-                //Scanner in = new Scanner(System.in);
-                name = c.Read(); //in.nextLine();
+        if (connections.size() == 0 || connections.size() < numberOfPlayer) {
+            AddConnection(c);
+            List<Connection> keys = new ArrayList<>(waitConnection.keySet());
+            boolean UsedName = false;
+            String name = nickname;
+            do {
+                if (UsedName) {
+                    c.AsyncSend("Error! this name is already used ");
+                    name = c.Read();
+                }
                 UsedName = false;
-            }
-            boolean d = false;
-            for (Connection k : keys) {
-                if (waitConnection.get(k).equalsIgnoreCase(name)) {
-                    d = true;
-                }
-            }
-            if (d) {
-                UsedName = true;
-            }
-        }while (UsedName);
-        waitConnection.put(c,name);
-        if (connections.size()==1){
-            Connection c1=connections.get(0);
-            c1.AsyncSend("Choose the number of player: 2 or 3 ?");
-            while(!(numberOfPlayer==2 || numberOfPlayer==3)){
-                try{
-                    //Scanner in = new Scanner(System.in);
-                    String s=c1.Read();//in.nextLine();
-                    int Number=Integer.parseInt(s);
-
-                    if(Number==2 || Number==3){
-                        numberOfPlayer=Number;
-                    }else{
-                        c1.AsyncSend("Error! choose 2 or 3");
+                for (Connection k : keys) {
+                    if (waitConnection.get(k).equalsIgnoreCase(name)) {
+                        UsedName = true;
                     }
-                }catch (NumberFormatException e){
-                    c1.AsyncSend((String)"Error! choose 2 or 3");
+                }
+
+            } while (UsedName);
+            waitConnection.put(c, name);
+            if (waitConnection.size() == 1) {
+                keys = new ArrayList<>(waitConnection.keySet());
+                Connection c1 = keys.get(0);
+                c1.AsyncSend("Choose the number of player: 2 or 3 ?");
+                while (!(numberOfPlayer == 2 || numberOfPlayer == 3)) {
+                    try {
+                        String s = c1.Read();
+                        int Number = Integer.parseInt(s);
+
+                        if (Number == 2 || Number == 3) {
+                            numberOfPlayer = Number;
+                            c1.AsyncSend("Valid Number");
+                        } else {
+                            c1.AsyncSend("Error! choose 2 or 3");
+                        }
+                    } catch (NumberFormatException e) {
+                        c1.AsyncSend((String) "Error! choose 2 or 3");
+                    }
                 }
             }
+        }
+        else{
+            AddConnection(c);
+            c.AsyncSend("too many players!");
+            DeregisterConnection(c);
         }
     }
 
