@@ -1,6 +1,8 @@
 package It.polimi.ingsw.Message;
 
 public class CloudChoiceMessage extends Message{
+    private static final long serialVersionUID=1L;
+
     private int CloudIndex;
 
     public CloudChoiceMessage(int cloudIndex){

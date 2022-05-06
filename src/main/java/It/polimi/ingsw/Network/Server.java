@@ -1,5 +1,12 @@
 package It.polimi.ingsw.Network;
 
+import It.polimi.ingsw.Controller.GameController;
+import It.polimi.ingsw.Controller.RoundController;
+import It.polimi.ingsw.Exceptions.InvalidInputException;
+import It.polimi.ingsw.Exceptions.NoActivePlayerException;
+import It.polimi.ingsw.Exceptions.WrongMessageException;
+import It.polimi.ingsw.Message.Message;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,6 +21,7 @@ public class Server {
     private List<Connection> connections = new ArrayList<Connection>();
     private Map<String, Connection> waitConnection = new HashMap<>();
     private Map<Connection, Connection> playConnection = new HashMap<>();
+    private RoundController roundController;
 
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(Port);
@@ -77,6 +85,18 @@ public class Server {
             } catch (IOException e) {
                 System.err.println("Connection error");
             }
+        }
+    }
+
+    public void handleReceivedMessage(Message message) {
+        try {
+            roundController.MessageHandler(message);
+        } catch (NoActivePlayerException e) {
+            e.printStackTrace();
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+        } catch (WrongMessageException e) {
+            e.printStackTrace();
         }
     }
 }

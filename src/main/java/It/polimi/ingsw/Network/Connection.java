@@ -5,10 +5,7 @@ import It.polimi.ingsw.Message.Message;
 import It.polimi.ingsw.Message.MessageContent;
 import It.polimi.ingsw.Observer.Observable;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.io.Serializable;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -16,16 +13,19 @@ public class Connection extends Observable implements Runnable {
 
     private Socket socket;
     private ObjectOutputStream out;
+    private ObjectInputStream in;
     //private Scanner in;
     //private PrintWriter out;
     private Server server;
     //private String Nickname;
     private boolean active=true;
+    private Object lock;
 
 
     public Connection(Socket socket, Server server){
         this.socket=socket;
         this.server=server;
+        this.lock=new Object();
     }
 
     public synchronized void SendMessage(Object message){
@@ -80,7 +80,7 @@ public class Connection extends Observable implements Runnable {
             server.Lobby(this, Nickname);
             while (isActive()){
                 String readIn= in.nextLine();
-                System.out.println(readIn.toUpperCase());
+                handleConnection();
                 notifyObserver(readIn);
             }
         }catch (IOException e){
@@ -90,4 +90,15 @@ public class Connection extends Observable implements Runnable {
         }
     }
 
+    private void handleConnection(){
+        try{
+            synchronized (lock){
+                Message message=(Message)in.readObject();
+                server.handleReceivedMessage(message);
+            }
+        }
+        catch (ClassNotFoundException | IOException e){
+            //todo:handle exceptions
+        }
+    }
 }

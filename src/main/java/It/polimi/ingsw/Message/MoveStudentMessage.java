@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Message;
 
 public class MoveStudentMessage extends Message {
+    private static final long serialVersionUID=1L;
 
     private int EntrancePosition;
     private int Destination;   //0 -> move to dining groom, 1 to num of islands -> move to an island (destination -1)

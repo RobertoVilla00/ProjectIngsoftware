@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Message;
 
 public class Card1Message extends Message{
+    private static final long serialVersionUID=1L;
     private int StudentOnCardIndex;
     private int IslandIndex;
 

@@ -66,6 +66,7 @@ public class RoundController {
                             if (CardId != 0) {                                               //parameters neededExpectedCardMsg = CardId;
                                 previousPhase = gamePhase;
                                 gamePhase = GamePhase.CHARACTER_CARD;
+                                setExpectedCardMsg(CardId);
                             }
                         }
                     }
@@ -145,7 +146,7 @@ public class RoundController {
                     break;
                 }
 
-            case MOVE_STUDENT:
+            case MOVE_STUDENT:                          //TODO:repeat more times:3 or 4 depending on number of players
                 try {
                     Game.MoveStudent((MoveStudentMessage) msg);
                     gamePhase = GamePhase.MOVE_MN;

@@ -4,10 +4,7 @@ import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.WrongMessageException;
 import It.polimi.ingsw.Message.*;
-import It.polimi.ingsw.Model.Cards1and10;
-import It.polimi.ingsw.Model.CharacterCard;
-import It.polimi.ingsw.Model.Color;
-import It.polimi.ingsw.Model.TowerColor;
+import It.polimi.ingsw.Model.*;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -70,6 +67,15 @@ public class RoundControllerTest {
 		assertTrue(roundController.getGameController().getMatch().getPlayers()[0].IsActive());
 	}
 
+	@Test
+	public void StartMessageWrongInput() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController=new RoundController();
+		StartMessage startMessage=new StartMessage(2,2);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		assertEquals(GamePhase.GAME_INIT,roundController.getGamePhase());
+	}
+
 	@Test(expected = WrongMessageException.class)
 	public void StartMessageWrongPhase() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
 		RoundController roundController=new RoundController();
@@ -92,6 +98,19 @@ public class RoundControllerTest {
 	}
 
 	@Test
+	public void AssistantCardMessageWrongCard() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController=new RoundController();
+		StartMessage startMessage=new StartMessage(2,1);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		AssistantCardMessage assistantCardMessage= new AssistantCardMessage(-2);
+		roundController.setGamePhase(GamePhase.ASSISTANT_CARD);
+		roundController.MessageHandler(assistantCardMessage);
+		int orderValue =roundController.getGameController().getMatch().getPlayers()[0].GetPlayedOrderValue();
+		assertEquals(0,orderValue);
+	}
+
+		@Test
 	public void AssistantCardLastPlayer() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
 		RoundController roundController=new RoundController();
 		StartMessage startMessage=new StartMessage(2,1);
@@ -129,6 +148,20 @@ public class RoundControllerTest {
 		assertEquals(1,numberOfStudents);
 	}
 
+	@Test
+	public void MoveStudentMessageWrongDestination() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController=new RoundController();
+		StartMessage startMessage=new StartMessage(2,1);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		roundController.setGamePhase(GamePhase.MOVE_STUDENT);
+		MoveStudentMessage moveStudentMessage=new MoveStudentMessage(2,15);
+		Color studentColor=roundController.getGameController().getMatch().getPlayers()[0].getPlayersSchool().GetEntranceStudentColor(1);
+		roundController.MessageHandler(moveStudentMessage);
+		int NumberOfStudents=roundController.getGameController().getMatch().getPlayers()[0].getPlayersSchool().getEntranceStudentsNumber();
+		assertEquals(7,NumberOfStudents);
+	}
+
 	@Test(expected = WrongMessageException.class)
 	public void MoveStudentMessageWrongPhase() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
 		RoundController roundController=new RoundController();
@@ -154,6 +187,20 @@ public class RoundControllerTest {
 		assertEquals(3,position);
 	}
 
+	@Test
+	public void MotherNatureMessageWrongNumberOfSteps() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController = new RoundController();
+		StartMessage startMessage = new StartMessage(2, 1);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		roundController.setGamePhase(GamePhase.MOVE_MN);
+		roundController.getGameController().getMatch().getPlayers()[0].PlayAssistantCard(3);
+		MotherNatureMessage motherNatureMessage = new MotherNatureMessage(10);
+		roundController.MessageHandler(motherNatureMessage);
+		int position= roundController.getGameController().getMatch().getMotherNaturePosition();
+		assertEquals(0,position);
+	}
+
 	@Test(expected = WrongMessageException.class)
 	public void MotherNatureMessageWrongPhase() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
 		RoundController roundController = new RoundController();
@@ -174,8 +221,21 @@ public class RoundControllerTest {
 		roundController.setGamePhase(GamePhase.CHOOSE_CLOUD);
 		CloudChoiceMessage cloudChoiceMessage=new CloudChoiceMessage(1);
 		roundController.MessageHandler(cloudChoiceMessage);
-		int numberOfStudent=roundController.getGameController().getMatch().getClouds().get(0	).CloudSize();
+		int numberOfStudent=roundController.getGameController().getMatch().getClouds().get(0).CloudSize();
 		assertEquals(0,numberOfStudent);
+	}
+
+	@Test
+	public void ChooseCloudMessageWrongCloudIndex() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController = new RoundController();
+		StartMessage startMessage = new StartMessage(2, 1);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		roundController.setGamePhase(GamePhase.CHOOSE_CLOUD);
+		CloudChoiceMessage cloudChoiceMessage=new CloudChoiceMessage(0);
+		roundController.MessageHandler(cloudChoiceMessage);
+		int numberOfStudent=roundController.getGameController().getMatch().getPlayers()[0].getPlayersSchool().getEntranceStudentsNumber();
+		assertEquals(7,numberOfStudent);
 	}
 
 	@Test
@@ -218,6 +278,30 @@ public class RoundControllerTest {
 		roundController.MessageHandler(characterCardMessage);
 		GamePhase phase=roundController.getGamePhase();
 		assertEquals(GamePhase.CHARACTER_CARD,phase);
+	}
+
+	@Test
+	public void CharacterCardMessageNoEntryTiles() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController = new RoundController();
+		StartMessage startMessage = new StartMessage(2, 1);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		while(roundController.getGameController().getMatch().getCharacterCardsOnTable()[1].getIdCharacterCard()!=5){
+			roundController.getGameController().InitializeGame(startMessage);
+		}
+		roundController.getGameController().getMatch().getPlayers()[0].setActive();
+		roundController.getGameController().getMatch().getPlayers()[0].AddCoin(2);
+		Card5 card=(Card5)roundController.getGameController().getMatch().getCharacterCardById(5);
+		for(int i=0;i<4;i++){
+			card.RemoveNoEntryTile();
+		}
+		roundController.setGamePhase(GamePhase.MOVE_MN);
+		CharacterCardMessage characterCardMessage=new CharacterCardMessage(2);
+		roundController.MessageHandler(characterCardMessage);
+		Card3and5Message card3and5Message=new Card3and5Message(4);
+		roundController.MessageHandler(card3and5Message);
+		int numberOfTiles=card.getNoEntryTilesOnCard();
+		assertEquals(0,numberOfTiles);
 	}
 
 	@Test(expected = WrongMessageException.class)

@@ -1,7 +1,10 @@
 package It.polimi.ingsw.Message;
 
 
-public abstract class Message {
+import java.io.Serializable;
+
+public abstract class Message implements Serializable {
+    private static final long serialVersionUID=1L;
     private MessageContent Content;
 
     public Message(MessageContent Content){

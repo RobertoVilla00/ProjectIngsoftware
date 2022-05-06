@@ -3,6 +3,7 @@ import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Model.Color;
 
 public class Card12Message extends Message{
+    private static final long serialVersionUID=1L;
 
     private Color StudentColor;
 

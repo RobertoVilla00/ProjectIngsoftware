@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Message;
 
 public class MotherNatureMessage extends Message{
+    private static final long serialVersionUID=1L;
     private int Steps;
 
     public MotherNatureMessage(int steps){

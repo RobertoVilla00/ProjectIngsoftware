@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Message;
 
 public class AssistantCardMessage extends Message{
+    private static final long serialVersionUID=1L;
     private int CardIndex;
 
     public AssistantCardMessage(int cardIndex){
