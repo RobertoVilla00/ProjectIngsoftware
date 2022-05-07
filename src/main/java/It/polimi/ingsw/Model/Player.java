@@ -27,7 +27,7 @@ public class Player implements Comparable<Player> {
 
 	private boolean AdditionalPoints;
 
-	private boolean PlayedCaracterCard;
+	private boolean PlayedCharacterCard;
 
 	private ArrayList <TowerColor> Teacher;
 
@@ -43,7 +43,7 @@ public class Player implements Comparable<Player> {
 	}
 
 	public void setPlayedCharacterCard(boolean value){
-		this.PlayedCaracterCard = value;
+		this.PlayedCharacterCard = value;
 	}
 
 	public boolean getAdditionalPoints(){
@@ -81,7 +81,7 @@ public class Player implements Comparable<Player> {
 		return (x < y) ? -1 : ((x == y) ? 0 : 1);
 	}
 
-	public boolean HasPlayedCharacterCard(){return PlayedCaracterCard;}
+	public boolean HasPlayedCharacterCard(){return PlayedCharacterCard;}
 
 	public int GetPlayedOrderValue() {
 		return PlayedOrderValue;
@@ -97,8 +97,8 @@ public class Player implements Comparable<Player> {
 		Deck.RemoveCard(index); // not sure
 	}
 
-	public void IncreaseMovements(int NumberOfMOvements){
-		this.PlayedMovements=PlayedMovements+NumberOfMOvements;
+	public void IncreaseMovements(int NumberOfMovements){
+		this.PlayedMovements=PlayedMovements+NumberOfMovements;
 	}
 
 	public void IncreaseTowersPlaced(int numberOfTowers){

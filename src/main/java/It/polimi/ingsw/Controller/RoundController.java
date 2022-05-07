@@ -11,6 +11,7 @@ public class RoundController {
     private GamePhase previousPhase;
     private int ExpectedCardMsg;
     private Message msg;
+    private int MovedStudentCounter;
 
 
     public RoundController(){
@@ -35,7 +36,7 @@ public class RoundController {
                 break;
 
             case MOVESTUDENT:
-                if(gamePhase == GamePhase.MOVE_STUDENT){
+                if(gamePhase == GamePhase.MOVE_STUDENT ){
                     GamePhaseHandler(GamePhase.MOVE_STUDENT);
                 }
                 else throw new WrongMessageException();
@@ -146,10 +147,15 @@ public class RoundController {
                     break;
                 }
 
-            case MOVE_STUDENT:                          //TODO:repeat more times:3 or 4 depending on number of players
+            case MOVE_STUDENT:
                 try {
                     Game.MoveStudent((MoveStudentMessage) msg);
-                    gamePhase = GamePhase.MOVE_MN;
+                    MovedStudentCounter ++;
+                    if(MovedStudentCounter == Game.getMatch().getNumberOfPlayers()+1 || Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber()==0) {
+                        //change phase if player moved max num of students or if the entrance of the school is empty
+                        gamePhase = GamePhase.MOVE_MN;
+                        MovedStudentCounter=0;      //reset counter
+                    }
                 } catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
                 }
