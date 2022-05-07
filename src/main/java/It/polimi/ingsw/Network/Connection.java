@@ -23,10 +23,12 @@ public class Connection extends Observable implements Runnable {
     private Object lock;
 
 
-    public Connection(Socket socket, Server server){
+    public Connection(Socket socket, Server server) throws IOException {
         this.socket=socket;
         this.server=server;
         this.lock=new Object();
+
+        //in=new ObjectInputStream(socket.getInputStream());
     }
 
     public synchronized void SendMessage(Object message){
@@ -76,18 +78,18 @@ public class Connection extends Observable implements Runnable {
     }
 
     public void run(){
-        Scanner in;
+        Scanner scanner;
         String Nickname;
         try{
-            in=new Scanner(socket.getInputStream());
+            scanner=new Scanner(socket.getInputStream());
             out= new ObjectOutputStream(socket.getOutputStream());
             SendMessage("Welcome in Eryantis!! What's your nickname?");
-            Nickname=in.nextLine();
+            Nickname=scanner.nextLine();
             server.Lobby(this, Nickname);
             while (isActive()){
-                String readIn= in.nextLine();
+                String readIn= scanner.nextLine();
                 handleConnection();
-                notifyObserver(readIn);
+                //notifyObserver(readIn);
             }
         }catch (IOException e){
             System.err.println(e.getMessage());
@@ -99,7 +101,8 @@ public class Connection extends Observable implements Runnable {
     private void handleConnection(){
         try{
             synchronized (lock){
-                Message message=(Message)in.readObject();
+                Message message=(Message)in.readObject();           ///PROBLEMA QUI in non inizializzato
+
                 server.handleReceivedMessage(message);
             }
         }
