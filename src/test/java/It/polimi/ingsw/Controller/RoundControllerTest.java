@@ -174,6 +174,21 @@ public class RoundControllerTest {
 	}
 
 	@Test
+	public void MoveLastStudentOfPhase() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController=new RoundController();
+		StartMessage startMessage=new StartMessage(2,1);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		roundController.setGamePhase(GamePhase.MOVE_STUDENT);
+		MoveStudentMessage moveStudentMessage=new MoveStudentMessage(2,7);
+		roundController.MessageHandler(moveStudentMessage);
+		roundController.MessageHandler(moveStudentMessage);
+		roundController.MessageHandler(moveStudentMessage);
+		GamePhase gamePhase=roundController.getGamePhase();
+		assertEquals(GamePhase.MOVE_MN,gamePhase);
+	}
+
+	@Test
 	public void MotherNatureMessage() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
 		RoundController roundController = new RoundController();
 		StartMessage startMessage = new StartMessage(2, 1);
