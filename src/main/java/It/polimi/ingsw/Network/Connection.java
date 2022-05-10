@@ -57,7 +57,8 @@ public class Connection extends Observable implements Runnable {
 
     public String Read() throws NoSuchElementException, IOException {
         Scanner read=new Scanner(socket.getInputStream());
-        return read.nextLine();
+        String line=read.nextLine();
+        return line;
     }
 
     public synchronized void closeConnection(){
@@ -84,8 +85,8 @@ public class Connection extends Observable implements Runnable {
             scanner=new Scanner(socket.getInputStream());
             out= new ObjectOutputStream(socket.getOutputStream());
             SendMessage("Welcome in Eryantis!! What's your nickname?");
-            Nickname=scanner.nextLine();
-            server.Lobby(this, Nickname);
+            server.Lobby(this);
+            //TODO: inizia gestione regolare view
             while (isActive()){
                 String readIn= scanner.nextLine();
                 handleConnection();

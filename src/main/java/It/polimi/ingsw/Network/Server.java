@@ -50,16 +50,19 @@ public class Server  {
         }
 
 
-    public synchronized void Lobby(Connection c, String nickname) throws IOException {
+    public synchronized void Lobby(Connection c) throws IOException {
         if (connections.size() == 0 || connections.size() < numberOfPlayer) {
             AddConnection(c);
             List<Connection> keys = new ArrayList<>(waitConnection.keySet());
             boolean UsedName = false;
-            String name = nickname;
+            String name;
+            name = c.Read().substring(4);
+            System.out.println("ho letto "+name);
             do {
                 if (UsedName) {
                     c.AsyncSend("Error! this name is already used ");
                     name = c.Read();
+                    System.out.println("ho letto "+name);
                 }
                 UsedName = false;
                 for (Connection k : keys) {
@@ -67,8 +70,8 @@ public class Server  {
                         UsedName = true;
                     }
                 }
-
             } while (UsedName);
+            c.AsyncSend("valid name");
             waitConnection.put(c, name);
             if (waitConnection.size() == 1) {
                 keys = new ArrayList<>(waitConnection.keySet());
