@@ -32,4 +32,14 @@ public class Cli extends Observable implements View {
 
 	}
 
+	@Override
+	public void showGameInformation() {
+
+	}
+
+	@Override
+	public void askInformation() {
+
+	}
+
 }
