@@ -28,6 +28,7 @@ public class RoundController {
                 else throw new WrongMessageException();
                 break;
 
+
             case ASSISTANTCARD:
                 if(gamePhase == GamePhase.ASSISTANT_CARD){
                     GamePhaseHandler(GamePhase.ASSISTANT_CARD);
@@ -67,6 +68,7 @@ public class RoundController {
                             if (CardId != 0) {                                               //parameters neededExpectedCardMsg = CardId;
                                 previousPhase = gamePhase;
                                 gamePhase = GamePhase.CHARACTER_CARD;
+                                Game.getMatch().setGamePhase(gamePhase);
                                 setExpectedCardMsg(CardId);
                             }
                         }
@@ -126,6 +128,8 @@ public class RoundController {
             case FILL_CLOUDS:
                 Game.FillClouds();
                 this.gamePhase = GamePhase.ASSISTANT_CARD;
+                Game.getMatch().setGamePhase(gamePhase);
+
                 break;
 
             case ASSISTANT_CARD:
@@ -138,6 +142,7 @@ public class RoundController {
                         Game.getMatch().SortPlayersByOrderValue();
                         setFirstActivePlayer();
                         this.gamePhase = GamePhase.MOVE_STUDENT;
+                        Game.getMatch().setGamePhase(gamePhase);
                     }
                 }
                 catch (InvalidInputException e) {
@@ -154,6 +159,7 @@ public class RoundController {
                     if(MovedStudentCounter == Game.getMatch().getNumberOfPlayers()+1 || Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber()==0) {
                         //change phase if player moved max num of students or if the entrance of the school is empty
                         this.gamePhase = GamePhase.MOVE_MN;
+                        Game.getMatch().setGamePhase(gamePhase);
                         MovedStudentCounter=0;      //reset counter
                     }
                 } catch (InvalidInputException e) {
@@ -167,6 +173,7 @@ public class RoundController {
                 try {
                     Game.MoveMotherNature((MotherNatureMessage) msg);
                     this.gamePhase = GamePhase.CHOOSE_CLOUD;
+                    Game.getMatch().setGamePhase(gamePhase);
                 }
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
@@ -181,6 +188,7 @@ public class RoundController {
                     if (!FinishedPlayers()) {
                         setNextActivePlayer();
                         this.gamePhase = GamePhase.MOVE_STUDENT;
+                        Game.getMatch().setGamePhase(gamePhase);
                     }
                     else{
                         Game.EndOfRound();
@@ -215,6 +223,7 @@ public class RoundController {
                 }
                 finally {
                     this.gamePhase = previousPhase;
+                    Game.getMatch().setGamePhase(gamePhase);
                     break;
                 }
         }
@@ -222,6 +231,7 @@ public class RoundController {
 
     public void setFirstActivePlayer(){
         Game.getMatch().getPlayers()[0].setActive();
+        Game.getMatch().setActivePlayerId(Game.getMatch().getPlayers()[0].getPlayerId());
         for(int i=1;i<Game.getMatch().getNumberOfPlayers();i++){
             Game.getMatch().getPlayers()[i].setInactive();
         }
@@ -231,6 +241,7 @@ public class RoundController {
         int PresentActive = Game.getActivePlayerPosition();
         Game.getMatch().getPlayers()[PresentActive].setInactive();
         Game.getMatch().getPlayers()[PresentActive+1].setActive();
+        Game.getMatch().setActivePlayerId(Game.getMatch().getPlayers()[PresentActive+1].getPlayerId()); //write in model who's the active player
     }    //next player becomes active
 
     public boolean FinishedPlayers() throws NoActivePlayerException {   //return true if active player is last element of players list
@@ -248,6 +259,7 @@ public class RoundController {
 
     public void setExpectedCardMsg(int expectedCardMsg){
         this.ExpectedCardMsg=expectedCardMsg;
+        Game.getMatch().setExpectedCardMessage(expectedCardMsg);
     }
 
     public GamePhase getGamePhase(){

@@ -1,9 +1,13 @@
 package It.polimi.ingsw.Model;
 
+import It.polimi.ingsw.Controller.GamePhase;
+import It.polimi.ingsw.Message.ShowMatchInfoMessage;
+import It.polimi.ingsw.Observer.Observable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Match {
+public class Match extends Observable {
 
 	private int NumberOfPlayers;
 
@@ -24,6 +28,12 @@ public class Match {
 	private Bag bag;
 
 	private ArrayList<Teacher> Teachers;
+
+	private int ActivePlayerId;
+
+	private GamePhase gamePhase;
+
+	private int ExpectedCardMessage;
 
 	private boolean PlaysCard6;
 
@@ -151,6 +161,18 @@ public class Match {
 		}
 	}
 
+	public void setGamePhase(GamePhase gamePhase){
+		this.gamePhase = gamePhase;
+	}
+
+	public GamePhase getGamePhase(){
+		return this.gamePhase;
+	}
+
+	public void setExpectedCardMessage(int id){
+		this.ExpectedCardMessage=id;
+	}
+
 	public void PlayAssistantCard(int CardIndex,int PlayerIndex){
 		Players[PlayerIndex].PlayAssistantCard(CardIndex);
 	}
@@ -220,6 +242,9 @@ public class Match {
 		}
 	}
 
+	public void setActivePlayerId(int id){
+		this.ActivePlayerId = id;
+	}
 	public void MoveStudentsFromEntranceToDiningRoom(int StudentIndex, int PlayerIndex){
 		Color studentColor= Players[PlayerIndex].getPlayersSchool().GetEntranceStudentColor(StudentIndex);
 		Players[PlayerIndex].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
@@ -227,6 +252,18 @@ public class Match {
 			Players[PlayerIndex].AddCoin(1);
 		}
 	}
+	public int getExpectedCardMessage(){
+		return this.ExpectedCardMessage;
+	}
+	public int getActivePlayerId(){
+		return this.ActivePlayerId;
+	}
+
+	public void CreateMessage(){
+		ShowMatchInfoMessage showMatchInfoMessage= new ShowMatchInfoMessage(this);
+		notifyObserver(showMatchInfoMessage);
+	}
+
 
 	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerIndex, int IslandIndex){
 		Color StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(StudentIndex);
