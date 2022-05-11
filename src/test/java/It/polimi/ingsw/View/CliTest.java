@@ -35,18 +35,22 @@ public class CliTest {
         Cli cli = new Cli();
         ShowMatchInfoMessage msg;
         Match match = new Match(2, 1);
-        for(int i=0;i<4;i++){
+        for(int i=0;i<2;i++){
             match.MoveStudentsBagToIsland(0);
         }
-        for(int i=0;i<4;i++){
+        for(int i=0;i<12;i++){
             match.MoveStudentsBagToIsland(1);
         }
-        for(int i=0;i<4;i++){
+        for(int i=0;i<2;i++){
             match.MoveStudentsBagToIsland(2);
         }
-        for(int i=0;i<4;i++){
+        for(int i=0;i<2;i++){
             match.MoveStudentsBagToIsland(3);
         }
+
+        //match.MergeIslands(0,1);
+        match.MergeIslands(0,1);
+
         msg = new ShowMatchInfoMessage(match);
         cli.setMsg(msg);
         cli.startGame();

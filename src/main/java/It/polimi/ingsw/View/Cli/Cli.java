@@ -17,7 +17,7 @@ public class Cli extends Observable implements View {
 	}
 
 	public void startGame(){
-		System.out.println(StrColor.ANSI_YELLOW+"                                                                                                                      \n" +
+		System.out.println(StrColor.ANSI_GREY+"                                                                                                                      \n" +
 				"         .**ooooOOOOOOOOOOOOOO*                 .oOOo.                                                                    \n" +
 				"      .o##o**°*@@@#.°°°°°*o#@@@°                #@@@@o                                   °#.                              \n" +
 				"     *@@*     #@@@#          *#@o               .O#O*                                   *@@.                              \n" +
@@ -45,12 +45,19 @@ public class Cli extends Observable implements View {
 
 
 		// SHOWING THE TABLE
+
+		//first row
+
 		for(int i=0;i<145;i++) str.append("-");
 		str.append("\n");
 		for(int i= 0; i < 3; i++){
 			str.append("|");
 			str.append("    ISLAND "+(i+1));
-			for(int j=0;j<35;j++) {
+			if(msg.getMotherNaturePosition()==i){
+				str.append("    "+StrColor.ANSI_RED+"-MN-"+ StrColor.ANSI_RESET);
+				for(int j=0;j<27;j++) str.append(" ");
+			}
+			else for(int j=0;j<35;j++) {
 				str.append(" ");
 			}
 		}
@@ -59,7 +66,6 @@ public class Cli extends Observable implements View {
 		for(int i = 0;i<145;i++) str.append("-");
 		str.append("\n");
 
-		//first row
 		str.append("|");
 		for(int i = 0; i < 3; i++) {
 			for (int j = 0; j < msg.getTable().get(i).getGreenStudents(); j++) {
@@ -120,23 +126,30 @@ public class Cli extends Observable implements View {
 
 		//second row
 
-		for(int i=0;i<145;i++) str.append("-");
+		int toRemove = 6-msg.getTable().size();
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove<=0) str.append("-");
 		str.append("\n");
-		for(int i= 3; i < 6; i++){
+		for(int i= 3; i < 6&& i<msg.getTable().size(); i++){
 			str.append("|");
 			str.append("    ISLAND "+(i+1));
-			for(int j=0;j<35;j++) {
+			if(msg.getMotherNaturePosition()==i){
+				str.append("    "+StrColor.ANSI_RED+"-MN-"+ StrColor.ANSI_RESET);
+				for(int j=0;j<27;j++) str.append(" ");
+			}
+			else for(int j=0;j<35;j++) {
 				str.append(" ");
 			}
 		}
 		str.append("|");
 		str.append("\n");
-		for(int i = 0;i<145;i++) str.append("-");
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove==0) str.append("-");
 		str.append("\n");
 
 
 		str.append("|");
-		for(int i = 3; i < 6 || i < msg.getTable().size(); i++) {
+		for(int i = 3; i < 6 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getGreenStudents(); j++) {
 				str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -147,7 +160,7 @@ public class Cli extends Observable implements View {
 		}
 		str.append("\n");
 		str.append("|");
-		for(int i = 3; i < 6 || i < msg.getTable().size(); i++) {
+		for(int i = 3; i < 6 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getYellowStudents(); j++) {
 				str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -158,7 +171,7 @@ public class Cli extends Observable implements View {
 		}
 		str.append("\n");
 		str.append("|");
-		for(int i = 3; i < 6|| i < msg.getTable().size(); i++) {
+		for(int i = 3; i < 6 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getRedStudents(); j++) {
 				str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -169,7 +182,7 @@ public class Cli extends Observable implements View {
 		}
 		str.append("\n");
 		str.append("|");
-		for(int i = 3; i < 6|| i < msg.getTable().size(); i++) {
+		for(int i = 3; i < 6 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getBlueStudents(); j++) {
 				str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -180,7 +193,7 @@ public class Cli extends Observable implements View {
 		}
 		str.append("\n");
 		str.append("|");
-		for(int i = 3; i < 6|| i < msg.getTable().size(); i++) {
+		for(int i = 3; i < 6 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getPinkStudents(); j++) {
 				str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -190,14 +203,37 @@ public class Cli extends Observable implements View {
 			studentCnt = 0;
 		}
 		str.append("\n");
-		for(int i = 0;i<145;i++) str.append("-");
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove==0) str.append("-");
 		str.append("\n");
 
 
 		//third row
-/*
+
+		toRemove = 9-msg.getTable().size();
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove<=0) str.append("-");
+		str.append("\n");
+		for(int i= 6; i < 9 && i<msg.getTable().size(); i++){
+			str.append("|");
+			str.append("    ISLAND "+(i+1));
+			if(msg.getMotherNaturePosition()==i){
+				str.append("    "+StrColor.ANSI_RED+"-MN-"+ StrColor.ANSI_RESET);
+				for(int j=0;j<27;j++) str.append(" ");
+			}
+			else for(int j=0;j<35;j++) {
+				str.append(" ");
+			}
+		}
 		str.append("|");
-		for(int i = 6; i < 9 || i < msg.getTable().size(); i++) {
+		str.append("\n");
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove==0) str.append("-");
+		str.append("\n");
+
+
+		str.append("|");
+		for(int i = 6; i < 9 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getGreenStudents(); j++) {
 				str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -208,7 +244,7 @@ public class Cli extends Observable implements View {
 		}
 		str.append("\n");
 		str.append("|");
-		for(int i = 6; i < 9 || i < msg.getTable().size(); i++) {
+		for(int i = 6; i < 9 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getYellowStudents(); j++) {
 				str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -219,7 +255,7 @@ public class Cli extends Observable implements View {
 		}
 		str.append("\n");
 		str.append("|");
-		for(int i = 6; i < 9|| i < msg.getTable().size(); i++) {
+		for(int i = 6; i < 9 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getRedStudents(); j++) {
 				str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -230,7 +266,7 @@ public class Cli extends Observable implements View {
 		}
 		str.append("\n");
 		str.append("|");
-		for(int i = 6; i < 9|| i < msg.getTable().size(); i++) {
+		for(int i = 6; i < 9 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getBlueStudents(); j++) {
 				str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -241,7 +277,7 @@ public class Cli extends Observable implements View {
 		}
 		str.append("\n");
 		str.append("|");
-		for(int i = 6; i < 9|| i < msg.getTable().size(); i++) {
+		for(int i = 6; i < 9 && i < msg.getTable().size(); i++) {
 			for (int j = 0; j < msg.getTable().get(i).getPinkStudents(); j++) {
 				str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
@@ -251,10 +287,92 @@ public class Cli extends Observable implements View {
 			studentCnt = 0;
 		}
 		str.append("\n");
-		for(int i = 0;i<145;i++) str.append("-");
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove==0) str.append("-");
 		str.append("\n");
-	*/
+
 		//fourth row
+
+		toRemove = 12-msg.getTable().size();
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove==0) str.append("-");
+		str.append("\n");
+		for(int i= 9; i < 12 && i<msg.getTable().size(); i++){
+			str.append("|");
+			str.append("    ISLAND "+(i+1));
+			if(msg.getMotherNaturePosition()==i){
+				str.append("    "+StrColor.ANSI_RED+"-MN-"+ StrColor.ANSI_RESET);
+				for(int j=0;j<27;j++) str.append(" ");
+			}
+			else for(int j=0;j<34;j++) {
+				str.append(" ");
+			}
+		}
+		str.append("|");
+		str.append("\n");
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove==0) str.append("-");
+		str.append("\n");
+
+
+		str.append("|");
+		for(int i = 9; i < 12 && i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getGreenStudents(); j++) {
+				str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 9; i < 12 && i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getYellowStudents(); j++) {
+				str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 9; i < 12 && i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getRedStudents(); j++) {
+				str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 9; i < 12 && i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getBlueStudents(); j++) {
+				str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 9; i < 12 && i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getPinkStudents(); j++) {
+				str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		for(int i=0;i<144-toRemove*defaultSpace;i++) str.append("-");
+		if(toRemove==0) str.append("-");
+		str.append("\n");
 
 
 		System.out.println(str);

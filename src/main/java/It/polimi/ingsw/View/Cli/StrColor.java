@@ -5,6 +5,7 @@ public enum StrColor {
     //COLORS
 
     ANSI_RESET("\u001B[0m"),
+    ANSI_GREY("\033[0;90m"),
     ANSI_BLACK("\u001B[30m"),
     ANSI_RED("\u001B[31m"),
     ANSI_GREEN("\u001B[32m"),
