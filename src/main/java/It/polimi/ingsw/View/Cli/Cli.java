@@ -1,5 +1,7 @@
 package It.polimi.ingsw.View.Cli;
 
+import It.polimi.ingsw.Message.ShowMatchInfoMessage;
+import It.polimi.ingsw.Model.Color;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.View.View;
 
@@ -7,14 +9,15 @@ import java.io.PrintStream;
 
 public class Cli extends Observable implements View {
 	private final PrintStream out;
-
+	private ShowMatchInfoMessage msg;
+	private int PlayerId;
 
 	public Cli(){
 		out=System.out;
 	}
 
 	public void startGame(){
-		out.println("                                                                                                                      \n" +
+		System.out.println(StrColor.ANSI_YELLOW+"                                                                                                                      \n" +
 				"         .**ooooOOOOOOOOOOOOOO*                 .oOOo.                                                                    \n" +
 				"      .o##o**°*@@@#.°°°°°*o#@@@°                #@@@@o                                   °#.                              \n" +
 				"     *@@*     #@@@#          *#@o               .O#O*                                   *@@.                              \n" +
@@ -28,13 +31,233 @@ public class Cli extends Observable implements View {
 				"          °*oO####OoooooooOO##*   ..              .°.     .°.     .°.   ..      .°°.    °°°. .   ...*O#*.°.    .°°°°°...  \n" +
 				"                                                                                                ..°o#@o°°...  .           \n" +
 				"                                                                                              ...°o@@@*°°.                \n" +
-				"                       																		°°*OO°...                  \n");
+				"                       																		°°*OO°...                  \n"+StrColor.ANSI_RESET);
 
 	}
 
 	@Override
 	public void showGameInformation() {
 
+		int defaultSpace = 47;
+		int studentCnt = 0;
+		StringBuilder str = new StringBuilder();
+		str.append("ISLANDS:\n\n");
+
+
+		// SHOWING THE TABLE
+		for(int i=0;i<145;i++) str.append("-");
+		str.append("\n");
+		for(int i= 0; i < 3; i++){
+			str.append("|");
+			str.append("    ISLAND "+(i+1));
+			for(int j=0;j<35;j++) {
+				str.append(" ");
+			}
+		}
+		str.append("|");
+		str.append("\n");
+		for(int i = 0;i<145;i++) str.append("-");
+		str.append("\n");
+
+		//first row
+		str.append("|");
+		for(int i = 0; i < 3; i++) {
+			for (int j = 0; j < msg.getTable().get(i).getGreenStudents(); j++) {
+				str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 0; i < 3; i++) {
+			for (int j = 0; j < msg.getTable().get(i).getYellowStudents(); j++) {
+				str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 0; i < 3; i++) {
+			for (int j = 0; j < msg.getTable().get(i).getRedStudents(); j++) {
+				str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 0; i < 3; i++) {
+			for (int j = 0; j < msg.getTable().get(i).getBlueStudents(); j++) {
+				str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 0; i < 3; i++) {
+			for (int j = 0; j < msg.getTable().get(i).getPinkStudents(); j++) {
+				str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		for(int i = 0;i<145;i++) str.append("-");
+		str.append("\n");
+
+		//second row
+
+		for(int i=0;i<145;i++) str.append("-");
+		str.append("\n");
+		for(int i= 3; i < 6; i++){
+			str.append("|");
+			str.append("    ISLAND "+(i+1));
+			for(int j=0;j<35;j++) {
+				str.append(" ");
+			}
+		}
+		str.append("|");
+		str.append("\n");
+		for(int i = 0;i<145;i++) str.append("-");
+		str.append("\n");
+
+
+		str.append("|");
+		for(int i = 3; i < 6 || i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getGreenStudents(); j++) {
+				str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 3; i < 6 || i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getYellowStudents(); j++) {
+				str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 3; i < 6|| i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getRedStudents(); j++) {
+				str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 3; i < 6|| i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getBlueStudents(); j++) {
+				str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 3; i < 6|| i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getPinkStudents(); j++) {
+				str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		for(int i = 0;i<145;i++) str.append("-");
+		str.append("\n");
+
+
+		//third row
+/*
+		str.append("|");
+		for(int i = 6; i < 9 || i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getGreenStudents(); j++) {
+				str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 6; i < 9 || i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getYellowStudents(); j++) {
+				str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 6; i < 9|| i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getRedStudents(); j++) {
+				str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 6; i < 9|| i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getBlueStudents(); j++) {
+				str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		str.append("|");
+		for(int i = 6; i < 9|| i < msg.getTable().size(); i++) {
+			for (int j = 0; j < msg.getTable().get(i).getPinkStudents(); j++) {
+				str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
+				studentCnt++;
+			}
+			for (int k = 0; k < defaultSpace - studentCnt; k++) str.append(" ");
+			str.append("|");
+			studentCnt = 0;
+		}
+		str.append("\n");
+		for(int i = 0;i<145;i++) str.append("-");
+		str.append("\n");
+	*/
+		//fourth row
+
+
+		System.out.println(str);
 	}
 
 	@Override
@@ -42,4 +265,7 @@ public class Cli extends Observable implements View {
 
 	}
 
+	public void setMsg(ShowMatchInfoMessage msg){
+		this.msg = msg;
+	}
 }

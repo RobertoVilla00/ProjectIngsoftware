@@ -17,6 +17,7 @@ public class ShowMatchInfoMessage extends Message{
     private GamePhase gamePhase;
     private int ActivePlayerId;
     private int ExpectedCardMessage;
+    private int MotherNaturePosition;
 
 
     public ShowMatchInfoMessage(Match match) {
@@ -28,12 +29,21 @@ public class ShowMatchInfoMessage extends Message{
         this.Table = match.getTable();
         this.gamePhase = match.getGamePhase();
         this.Players = match.getPlayers();
+        this.MotherNaturePosition=match.getMotherNaturePosition();
     }
 
 
 
     public CharacterCard[] getCharacterCards() {
         return CharacterCards;
+    }
+
+    public int getMotherNaturePosition() {
+        return MotherNaturePosition;
+    }
+
+    public void setMotherNaturePosition(int motherNaturePosition) {
+        MotherNaturePosition = motherNaturePosition;
     }
 
     public void setCharacterCards(CharacterCard[] characterCards) {

@@ -3,6 +3,7 @@ package It.polimi.ingsw.Model;
 
 public class Island {
 
+
 	private int GreenStudents;
 
 	private int RedStudents;
@@ -42,6 +43,35 @@ public class Island {
 			case YELLOW:YellowStudents++;
 			break;
 		}
+	}
+
+
+	public int getGreenStudents() {
+		return GreenStudents;
+	}
+
+	public int getRedStudents() {
+		return RedStudents;
+	}
+
+	public int getYellowStudents() {
+		return YellowStudents;
+	}
+
+	public int getPinkStudents() {
+		return PinkStudents;
+	}
+
+	public int getBlueStudents() {
+		return BlueStudents;
+	}
+
+	public int getNumberOfTowers() {
+		return NumberOfTowers;
+	}
+
+	public boolean isNoEntryTile() {
+		return NoEntryTile;
 	}
 
 	public void BuildTower(TowerColor Color) {
