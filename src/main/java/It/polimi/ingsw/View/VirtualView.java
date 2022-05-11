@@ -16,4 +16,19 @@ public class VirtualView implements View, Observer {
 	public void update(Message message) {
 		connection.AsyncSend(message);
 	}
+
+	@Override
+	public void startGame() {
+
+	}
+
+	@Override
+	public void showGameInformation() {
+
+	}
+
+	@Override
+	public void askInformation() {
+
+	}
 }

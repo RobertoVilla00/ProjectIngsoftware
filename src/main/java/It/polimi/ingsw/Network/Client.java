@@ -48,16 +48,11 @@ public class Client {
                 try {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
-                        if (inputObject instanceof String) {
-                            System.out.println((String) inputObject);
-                        } else if (inputObject instanceof Match) {
-                            //((Match)inputObject).print();
-                        } else {
-                            throw new IllegalArgumentException();
-                        }
                     }
-                } catch (Exception e) {
-                    setActive(false);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         });
