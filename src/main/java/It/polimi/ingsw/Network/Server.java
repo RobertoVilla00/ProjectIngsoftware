@@ -6,6 +6,7 @@ import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.WrongMessageException;
 import It.polimi.ingsw.Message.Message;
+import It.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -16,7 +17,6 @@ import java.util.concurrent.Executors;
 import java.util.Scanner;
 
 public class Server  {
-    private static final int Port = 1234;
     private int numberOfPlayer=0;
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
@@ -25,8 +25,8 @@ public class Server  {
     private Map<Connection, Connection> playConnection = new HashMap<>();
     private RoundController roundController;
 
-    public Server() throws IOException {
-        this.serverSocket = new ServerSocket(Port);
+    public Server(int port) throws IOException {
+        this.serverSocket = new ServerSocket(port);
     }
 
     public synchronized void AddConnection(Connection c) {
@@ -53,6 +53,7 @@ public class Server  {
     public synchronized void Lobby(Connection c) throws IOException {
         if (connections.size() == 0 || connections.size() < numberOfPlayer) {
             AddConnection(c);
+            VirtualView virtualView=new VirtualView(c);
             List<Connection> keys = new ArrayList<>(waitConnection.keySet());
             boolean UsedName = false;
             String name;
@@ -103,7 +104,7 @@ public class Server  {
 
     public void run() {
         int connections = 0;
-        System.out.println("Server Listening on port: " + Port);
+        //System.out.println("Server Listening on port: " + Port);
         while (true) {
             try {
                 Socket socket = serverSocket.accept();

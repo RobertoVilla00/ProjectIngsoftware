@@ -63,6 +63,7 @@ public class Match extends Observable {
 		}
 		bag = new Bag(24);
 
+
 		if(GameMode == 1) {
 			this.InitializeCharacterCardOnTable();
 		}

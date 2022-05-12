@@ -1,13 +1,34 @@
 package It.polimi.ingsw.Network;
 
+import It.polimi.ingsw.View.Cli.Cli;
+
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Scanner;
+
 
 public class ClientApp {
 
     public static void main(String[] args) {
         try{
-            Client client=new Client("127.0.0.1", 1234);
+            Scanner s=new Scanner(System.in);
+            System.out.println("Please type the ip address: ");
+            String ip=s.nextLine();
+            System.out.println("Please type the number port :");
+            int p=Integer.parseInt(s.nextLine());
+
+            boolean cli=false;
+            System.out.println("Insert cli or gui");
+            String par=s.nextLine();
+            System.out.println(par);
+            if(par.equalsIgnoreCase("cli")){
+                cli=true;
+            }
+            int playerid=0;
+            if (cli){
+                Cli c=new Cli( playerid);
+            }
+
+            Client client=new Client(ip, p);
             client.run();
         }catch (IOException e){
             System.err.println(e.getMessage());

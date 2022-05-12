@@ -33,7 +33,7 @@ public class CliTest {
     @Test
 
     public void ShowMatchInfo(){
-        Cli cli = new Cli();
+        Cli cli = new Cli(0);
         ShowMatchInfoMessage msg;
         Match match = new Match(2, 1);
         for(int i=0;i<2;i++){
