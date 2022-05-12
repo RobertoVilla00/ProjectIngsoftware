@@ -12,7 +12,8 @@ public class Cli extends Observable implements View {
 	private ShowMatchInfoMessage msg;
 	private int PlayerId;
 
-	public Cli(){
+	public Cli(int playerId){
+		playerId=playerId;
 		out=System.out;
 	}
 
