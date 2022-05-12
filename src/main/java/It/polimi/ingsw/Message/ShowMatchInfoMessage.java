@@ -18,6 +18,7 @@ public class ShowMatchInfoMessage extends Message{
     private int ActivePlayerId;
     private int ExpectedCardMessage;
     private int MotherNaturePosition;
+    private boolean ExpertMode;
 
 
     public ShowMatchInfoMessage(Match match) {
@@ -30,9 +31,16 @@ public class ShowMatchInfoMessage extends Message{
         this.gamePhase = match.getGamePhase();
         this.Players = match.getPlayers();
         this.MotherNaturePosition=match.getMotherNaturePosition();
+        this.ExpertMode= match.isExpertMode();
     }
 
+    public boolean isExpertMode() {
+        return ExpertMode;
+    }
 
+    public void setExpertMode(boolean expertMode) {
+        ExpertMode = expertMode;
+    }
 
     public CharacterCard[] getCharacterCards() {
         return CharacterCards;
