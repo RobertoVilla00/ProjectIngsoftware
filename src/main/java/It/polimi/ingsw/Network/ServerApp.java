@@ -14,6 +14,7 @@ public class ServerApp {
             System.out.println("Please type the port number: ");
             int port=Integer.parseInt(s.nextLine());
             server= new Server(port);
+            System.out.println("Port Number Accepted");
             server.run();
         }catch (IOException e){
             System.err.println("Impossible to start the server!\n" + e.getMessage());

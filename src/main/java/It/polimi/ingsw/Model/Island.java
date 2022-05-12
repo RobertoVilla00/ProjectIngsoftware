@@ -70,10 +70,6 @@ public class Island {
 		return NumberOfTowers;
 	}
 
-	public boolean isNoEntryTile() {
-		return NoEntryTile;
-	}
-
 	public void BuildTower(TowerColor Color) {
 		if (NumberOfTowers == 0) {
 			NumberOfTowers++;

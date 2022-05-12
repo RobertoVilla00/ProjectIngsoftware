@@ -125,6 +125,7 @@ public class Match extends Observable {
 				Clouds.add(new Cloud(j));
 			}
 		}
+		CreateMessage();
 	}
 
 	public Bag getBag(){
@@ -135,6 +136,7 @@ public class Match extends Observable {
 	public void MoveStudentsBagToIsland(int index){
 		Color StudentColor = bag.FillIsland();
 		Table.get(index).AddStudent(StudentColor);
+		CreateMessage();										//not sure about this
 	}
 
 	public void MoveStudentsBagToCloud(int index){
@@ -176,6 +178,7 @@ public class Match extends Observable {
 
 	public void PlayAssistantCard(int CardIndex,int PlayerIndex){
 		Players[PlayerIndex].PlayAssistantCard(CardIndex);
+		CreateMessage();
 	}
 
 	public void MergeIslands(int IslandIndex, int IslandToMergeIndex) {
@@ -229,9 +232,10 @@ public class Match extends Observable {
 
 	public void MoveMotherNature(int movements){
 		this.MotherNaturePosition=MotherNaturePosition+movements;
-		if(MotherNaturePosition>=Table.size()){							//secure the circularity of the table
+		while(MotherNaturePosition>=Table.size()){							//secure the circularity of the table
 			MotherNaturePosition=MotherNaturePosition-Table.size();
 		}
+		CreateMessage();
 	}
 
 	public void MoveStudentsFromCloudToEntrance(int PlayerIndex, int CloudIndex ){
@@ -241,21 +245,25 @@ public class Match extends Observable {
 			StudentColor = getClouds().get(CloudIndex).MoveStudentFromCloud(0);
 			Players[PlayerIndex].getPlayersSchool().AddEntranceStudents(StudentColor);
 		}
+		CreateMessage();
 	}
 
 	public void setActivePlayerId(int id){
 		this.ActivePlayerId = id;
 	}
+
 	public void MoveStudentsFromEntranceToDiningRoom(int StudentIndex, int PlayerIndex){
 		Color studentColor= Players[PlayerIndex].getPlayersSchool().GetEntranceStudentColor(StudentIndex);
 		Players[PlayerIndex].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
 		if(Players[PlayerIndex].getPlayersSchool().getStudentNumber(studentColor)%3==0  && ExpertMode){
 			Players[PlayerIndex].AddCoin(1);
 		}
+		CreateMessage();
 	}
 	public int getExpectedCardMessage(){
 		return this.ExpectedCardMessage;
 	}
+
 	public int getActivePlayerId(){
 		return this.ActivePlayerId;
 	}
@@ -265,10 +273,10 @@ public class Match extends Observable {
 		notifyObserver(showMatchInfoMessage);
 	}
 
-
 	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerIndex, int IslandIndex){
 		Color StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(StudentIndex);
 		Table.get(IslandIndex).AddStudent(StudentColor);
+		CreateMessage();
 	}
 
 	public void SortPlayersByOrderValue(){
