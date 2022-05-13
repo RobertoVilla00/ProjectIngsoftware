@@ -1,7 +1,7 @@
 package It.polimi.ingsw.View.Cli;
 
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
-import It.polimi.ingsw.Model.TowerColor;
+import It.polimi.ingsw.Model.*;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.View.View;
 
@@ -20,19 +20,19 @@ public class Cli extends Observable implements View {
 	public void startGame(){
 		System.out.println(StrColor.ANSI_RED+"                                                                                                                      \n" +
 				"         .**ooooOOOOOOOOOOOOOO*                 .oOOo.                                                                    \n" +
-				"      .o##o**°*@@@#.°°°°°*o#@@@°                #@@@@o                                   °#.                              \n" +
-				"     *@@*     #@@@#          *#@o               .O#O*                                   *@@.                              \n" +
-				"    .@@O     o@@@@#  °oOOOO*   °* .***   °***.  °***.       .°*oo**o*   °**°  .****  °oO@@@oo* .*oo°   .oOO*.  °ooOOo**O. \n" +
-				"    °@@o     o@@@@O*#@@O**O@*   .o#@@@*°#@@@@#°oO@@@#     *O#@O*O@@@O *O@@@#.o@@@@@o *o@@@@o**o#@@@@O. o@@@@#°O@#***O@@o  \n" +
-				"    .#@#.    o@@@@#@@o.   °O.   *°#@@@##*o@@#°...@@@#   .O@@#.  o@@@O.**@@@###*o@@@O   #@@@  oo*°O@@@#° .O@@@o@@#Oo*°   . \n" +
-				"     °@@O°   o@@@@@#.             O@@@o. o#*    .@@@#.  O@@@°   o@@@O  .@@@@o  *@@@O. .@@@@.      o@@@#* *@@* *@@@@@@#o*..\n" +
-				"      .o##Oo.o@@@@@.           °* #@@@*  .      .@@@#  .@@@@*..*O@@@O  °@@@@.  *@@@O  .#@@@. ..  ..*@@@#o#@* *o°°o#@@@@@°.\n" +
-				"         ..°.*@@@@O          .*#* O@@@*         .@@@#°°.#@@@@@@#O@@@O.°°@@@@.  *@@@o.°.#@@@*oo°..  .*@@@@O°  *@O°.  *#@@°.\n" +
-				"            .o@@@@O°......°*o#@*  o@#o.          o@@#o* °#@@@#* .O@@Oo°.#@#o   °#@@O*° o@@@O*... .  .*@@o..  °o@#OOooOO*..\n" +
-				"          °*oO####OoooooooOO##*   ..              .°.     .°.     .°.   ..      .°°.    °°°. .   ...*O#*.°.    .°°°°°...  \n" +
-				"                                                                                                ..°o#@o°°...  .           \n" +
-				"                                                                                              ...°o@@@*°°.                \n" +
-				"                       																		°°*OO°...                  \n"+StrColor.ANSI_RESET);
+				"      .o##o**°*@@@#.°°°°°*o#@@@°                #@@@@o                                   °#                               \n" +
+				"     *@@*     #@@@#          *#@o                *O#O*                                  *@@                               \n" +
+				"    .@@O     o@@@@#  °oOOOO*   °*  ***   °***.              .°*oo**o*   °**°  .****  °oO@@@oo*  *oo°   .oOO*.  °ooOOo**O. \n" +
+				"    °@@o     o@@@@O*#@@O**O@*     #@@@*°#@@@@# oO@@@#     *O#@O*O@@@O   @@@#.o@@@@@o *o@@@@o**o @@@@O   @@@@# @#*  *O@@o  \n" +
+				"    .#@#.    o@@@@#@@o    °O      #@@@##*o@@#°   @@@#   .O@@#.  o@@@O   @@@###*o@@@O   #@@@     °O@@@#   O@@@ @@#Oo       \n" +
+				"     °@@O°   o@@@@@#              O@@@o  o#*     @@@#   O@@@°   o@@@O   @@@@o  *@@@O   @@@@       o@@@#* *@@* *@@@@@@#o*  \n" +
+				"      .o##Oo o@@@@@            °* #@@@*          @@@#  .@@@@*..*O@@@O   @@@@.  *@@@O   #@@@       *@@@#o#@*      #@@@@@°  \n" +
+				"             o@@@@O          .*#* O@@@*          @@@#° .#@@@@@@#O@@@O   @@@@.  *@@@o   #@@@*oo°     *@@@@O°  *@O°   *#@@° \n" +
+				"             o@@@@O°      °*o#@*  o@#o.          o@@#o* °#@@@#* .O@@Oo° #@#o   °#@@O*  o@@@O*        *@@o.   °o@#OOooOO*  \n" +
+				"          °*oO####OoooooooOO##*                                                         °°°         *O#*.       °°°°°     \n" +
+				"                                                                                                  °o#@o°                  \n" +
+				"                                                                                                °o@@@*°                   \n" +
+				"                       																		 °*OO°                     \n"+StrColor.ANSI_RESET);
 
 	}
 
@@ -497,7 +497,7 @@ public class Cli extends Observable implements View {
 			if (toRemove == 0) str.append("--");
 			str.append("\n");
 		}
-		if(msg.isExpertMode()) printCharacterCards();
+		if(msg.isExpertMode()) printCharacterCards(str);
 
 
 
@@ -511,7 +511,91 @@ public class Cli extends Observable implements View {
 	}
 
 
-	public void printCharacterCards(){}
+	public void printCharacterCards(StringBuilder str){
+		int i=1;
+		str.append("\n");
+		for(CharacterCard c: msg.getCharacterCards()){
+			str.append(StrColor.ANSI_BLUE+"CHARACTER "+i+": "+StrColor.ANSI_RESET);
+			if(c.getIdCharacterCard()==1){
+				str.append("Take 1 Student from this card and place it on an island of you choice\n");
+				str.append("             [");
+				c=(Cards1and10)c;
+				for(int j=0;j<((Cards1and10) c).getNumberOfStudents();j++) {
+					if(((Cards1and10) c).GetStudentColor(j)== Color.BLUE) {
+						str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
+					}
+					if(((Cards1and10) c).GetStudentColor(j)== Color.GREEN) {
+						str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
+					}
+					if(((Cards1and10) c).GetStudentColor(j)== Color.YELLOW) {
+						str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
+					}
+					if(((Cards1and10) c).GetStudentColor(j)== Color.RED) {
+						str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
+					}
+					if(((Cards1and10) c).GetStudentColor(j)== Color.PINK) {
+						str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
+					}
+				}
+				str.append("]\n\n");
+			}
+
+			if(c.getIdCharacterCard()==3){
+				str.append("Choose an Island and resolve it as if Mother Nature had ended her movement there\n\n");
+			}
+
+			if(c.getIdCharacterCard()==4){
+				str.append("You may move Mother Nature up to 2 additional Island than indicated on the Assistant card you've played\n\n");
+			}
+
+			if(c.getIdCharacterCard()==5) {
+				str.append("Place a No Entry tile on an island on your choice. Influence will not be calculated next time Mother Nature ends there\n");
+				str.append("            [");
+				c=(Card5)c;
+				for(int j=0; j<((Card5) c).getNoEntryTilesOnCard();j++){
+					str.append(StrColor.ANSI_RED+"Ø"+StrColor.ANSI_RESET);
+				}
+				str.append("]\n\n");
+			}
+
+			if(c.getIdCharacterCard()==6){
+				str.append("when resolving a Conquering on an island, Towers do not count towards influence\n\n");
+			}
+
+			if(c.getIdCharacterCard()==9){
+				str.append("During the influence calculation this turn, you count as having 2 more influence\n\n");
+			}
+			if(c.getIdCharacterCard()==10){
+				str.append("Move one Student from this card to the Dining Room, then draw one Student from the Bag and place it on this card\n");
+				str.append("             [");
+				c=(Cards1and10)c;
+				for(int j=0;j<((Cards1and10) c).getNumberOfStudents();j++) {
+					if(((Cards1and10) c).GetStudentColor(j)== Color.BLUE) {
+						str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
+					}
+					if(((Cards1and10) c).GetStudentColor(j)== Color.GREEN) {
+						str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
+					}
+					if(((Cards1and10) c).GetStudentColor(j)== Color.YELLOW) {
+						str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
+					}
+					if(((Cards1and10) c).GetStudentColor(j)== Color.RED) {
+						str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
+					}
+					if(((Cards1and10) c).GetStudentColor(j)== Color.PINK) {
+						str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
+					}
+				}
+				str.append("]\n\n");
+			}
+			if(c.getIdCharacterCard()==12){
+				str.append("Choose a Student Color. Every player must return 3 Students of that Color from their Dining Room to the Bag.\n\n");
+			}
+			i++;
+		}
+
+
+	}
 
 	public void setMsg(ShowMatchInfoMessage msg){
 		this.msg = msg;
