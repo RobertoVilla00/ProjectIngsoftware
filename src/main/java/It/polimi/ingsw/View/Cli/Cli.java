@@ -13,7 +13,7 @@ public class Cli extends Observable implements View {
 	private int PlayerId;
 
 	public Cli(int playerId){
-		playerId=playerId;
+		this.PlayerId=playerId;
 		out=System.out;
 	}
 
@@ -517,7 +517,7 @@ public class Cli extends Observable implements View {
 		for(CharacterCard c: msg.getCharacterCards()){
 			str.append(StrColor.ANSI_BLUE+"CHARACTER "+i+": "+StrColor.ANSI_RESET);
 			if(c.getIdCharacterCard()==1){
-				str.append("Take 1 Student from this card and place it on an island of you choice\n");
+				str.append("Take 1 Student from this card and place it on an island of you choice" +StrColor.ANSI_GREEN+ "  (COST = 1)\n"+StrColor.ANSI_RESET);
 				str.append("             [");
 				c=(Cards1and10)c;
 				for(int j=0;j<((Cards1and10) c).getNumberOfStudents();j++) {
@@ -541,16 +541,16 @@ public class Cli extends Observable implements View {
 			}
 
 			if(c.getIdCharacterCard()==3){
-				str.append("Choose an Island and resolve it as if Mother Nature had ended her movement there\n\n");
+				str.append("Choose an Island and resolve it as if Mother Nature had ended her movement there " +StrColor.ANSI_GREEN+ " (COST = 3)\n\n"+StrColor.ANSI_RESET);
 			}
 
 			if(c.getIdCharacterCard()==4){
-				str.append("You may move Mother Nature up to 2 additional Island than indicated on the Assistant card you've played\n\n");
+				str.append("You may move Mother Nature up to 2 additional Island than indicated on the Assistant card you've played " +StrColor.ANSI_GREEN+" (COST = 1)\n\n"+StrColor.ANSI_RESET);
 			}
 
 			if(c.getIdCharacterCard()==5) {
-				str.append("Place a No Entry tile on an island on your choice. Influence will not be calculated next time Mother Nature ends there\n");
-				str.append("            [");
+				str.append("Place a No Entry tile on an island on your choice. Influence will not be calculated next time Mother Nature ends there  " +StrColor.ANSI_GREEN+ "(COST = 2)\n"+StrColor.ANSI_RESET);
+				str.append("             [");
 				c=(Card5)c;
 				for(int j=0; j<((Card5) c).getNoEntryTilesOnCard();j++){
 					str.append(StrColor.ANSI_RED+"Ø"+StrColor.ANSI_RESET);
@@ -559,14 +559,14 @@ public class Cli extends Observable implements View {
 			}
 
 			if(c.getIdCharacterCard()==6){
-				str.append("when resolving a Conquering on an island, Towers do not count towards influence\n\n");
+				str.append("when resolving a Conquering on an island, Towers do not count towards influence " +StrColor.ANSI_GREEN+ " (COST = 3)\n\n"+StrColor.ANSI_RESET);
 			}
 
 			if(c.getIdCharacterCard()==9){
-				str.append("During the influence calculation this turn, you count as having 2 more influence\n\n");
+				str.append("During the influence calculation this turn, you count as having 2 more influence " +StrColor.ANSI_GREEN+ " (COST = 2)\n\n"+StrColor.ANSI_RESET);
 			}
 			if(c.getIdCharacterCard()==10){
-				str.append("Move one Student from this card to the Dining Room, then draw one Student from the Bag and place it on this card\n");
+				str.append("Move one Student from this card to the Dining Room, then draw one Student from the Bag and place it on this card  " +StrColor.ANSI_GREEN+ "(COST = 2)\n"+StrColor.ANSI_RESET);
 				str.append("             [");
 				c=(Cards1and10)c;
 				for(int j=0;j<((Cards1and10) c).getNumberOfStudents();j++) {
@@ -589,7 +589,7 @@ public class Cli extends Observable implements View {
 				str.append("]\n\n");
 			}
 			if(c.getIdCharacterCard()==12){
-				str.append("Choose a Student Color. Every player must return 3 Students of that Color from their Dining Room to the Bag.\n\n");
+				str.append("Choose a Student Color. Every player must return 3 Students of that Color from their Dining Room to the Bag " +StrColor.ANSI_GREEN+ " (COST = 3)\n\n"+StrColor.ANSI_RESET);
 			}
 			i++;
 		}

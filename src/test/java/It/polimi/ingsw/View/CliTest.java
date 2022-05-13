@@ -50,8 +50,8 @@ public class CliTest {
         }
 
         for(int i=0;i<0;i++)match.MergeIslands(0,1);
-        //match.MergeIslands(0,1);
-        match.getTable().get(2).BuildTower(TowerColor.WHITE);
+        match.MergeIslands(0,1);
+        match.getTable().get(2).BuildTower(TowerColor.GREY);
         match.getTable().get(5).BuildTower(TowerColor.BLACK);
         match.getTable().get(5).IncreaseTower();
         match.getTable().get(5).IncreaseTower();
@@ -61,9 +61,9 @@ public class CliTest {
         match.getTable().get(9).IncreaseTower();
         match.getTable().get(9).IncreaseTower();
         match.getTable().get(9).IncreaseTower();
-        match.getTable().get(11).BuildTower(TowerColor.WHITE);
-        match.getTable().get(11).IncreaseTower();
-        match.MergeIslands(9,11);
+        match.getTable().get(10).BuildTower(TowerColor.WHITE);
+        match.getTable().get(10).IncreaseTower();
+        match.MergeIslands(8,10);
         match.MoveMotherNature(6);
         msg = new ShowMatchInfoMessage(match);
         cli.setMsg(msg);
