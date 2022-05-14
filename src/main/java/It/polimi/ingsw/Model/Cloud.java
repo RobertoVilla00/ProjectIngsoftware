@@ -27,6 +27,9 @@ public class Cloud {
 		CloudStudents.remove(index);
 		return StudentColor;
 	}
+	public ArrayList<Color> getCloudStudents(){
+		return this.CloudStudents;
+	}
 
 	public int countStudents(Color color){
 		int students=0;

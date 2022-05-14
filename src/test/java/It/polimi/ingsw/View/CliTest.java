@@ -35,7 +35,7 @@ public class CliTest {
     public void ShowMatchInfo(){
         Cli cli = new Cli(0);
         ShowMatchInfoMessage msg;
-        Match match = new Match(2, 1);
+        Match match = new Match(3, 1);
         for(int i=0;i<2;i++){
             match.MoveStudentsBagToIsland(0);
         }
@@ -49,7 +49,9 @@ public class CliTest {
             match.MoveStudentsBagToIsland(3);
         }
 
-        for(int i=0;i<0;i++)match.MergeIslands(0,1);
+        for(int i=0;i<match.getClouds().size();i++){
+            for(int j=0;j<4;j++) match.getClouds().get(i).AddStudent(Color.GREEN);
+        }
         match.MergeIslands(0,1);
         match.getTable().get(2).BuildTower(TowerColor.GREY);
         match.getTable().get(5).BuildTower(TowerColor.BLACK);
@@ -63,8 +65,9 @@ public class CliTest {
         match.getTable().get(9).IncreaseTower();
         match.getTable().get(10).BuildTower(TowerColor.WHITE);
         match.getTable().get(10).IncreaseTower();
+        match.getTable().get(5).setNoEntryTile();
         match.MergeIslands(8,10);
-        match.MoveMotherNature(6);
+        match.MoveMotherNature(45);
         msg = new ShowMatchInfoMessage(match);
         cli.setMsg(msg);
         cli.startGame();

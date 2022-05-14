@@ -14,6 +14,9 @@ public class ShowMatchInfoMessage extends Message{
     private Player[] Players;
     private ArrayList<Island> Table;
 
+
+    private ArrayList<Teacher> Teachers;
+
     private GamePhase gamePhase;
     private int ActivePlayerId;
     private int ExpectedCardMessage;
@@ -32,7 +35,18 @@ public class ShowMatchInfoMessage extends Message{
         this.Players = match.getPlayers();
         this.MotherNaturePosition=match.getMotherNaturePosition();
         this.ExpertMode= match.isExpertMode();
+        this.Teachers= match.getTeachers();
     }
+
+    public ArrayList<Teacher> getTeachers() {
+        return Teachers;
+    }
+
+    public void setTeachers(ArrayList<Teacher> teachers) {
+        Teachers = teachers;
+    }
+
+
 
     public boolean isExpertMode() {
         return ExpertMode;
