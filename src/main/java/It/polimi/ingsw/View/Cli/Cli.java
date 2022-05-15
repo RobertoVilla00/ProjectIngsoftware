@@ -2,15 +2,17 @@ package It.polimi.ingsw.View.Cli;
 
 import It.polimi.ingsw.Controller.GamePhase;
 import It.polimi.ingsw.Message.AssistantCardMessage;
+import It.polimi.ingsw.Message.Message;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Model.*;
 import It.polimi.ingsw.Observer.Observable;
+import It.polimi.ingsw.Observer.Observer;
 import It.polimi.ingsw.View.View;
 
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class Cli extends Observable implements View {
+public class Cli extends Observable implements View, Observer {
 	private final PrintStream out;
 	private Scanner in = new Scanner(System.in) ;
 	private ShowMatchInfoMessage msg;
@@ -782,7 +784,7 @@ public class Cli extends Observable implements View {
 				int CardIndex = in.nextInt();
 				AssistantCardMessage msg = new AssistantCardMessage(CardIndex);
 			}
-			if(msg.getGamePhase()==GamePhase.MOVE_MN){
+			if(msg.getGamePhase()== GamePhase.MOVE_MN){
 				if(msg.isExpertMode()){
 
 				}
@@ -914,5 +916,10 @@ public class Cli extends Observable implements View {
 
 	public void setMsg(ShowMatchInfoMessage msg){
 		this.msg = msg;
+	}
+
+	@Override
+	public void update(Message message) {
+		this.setMsg((ShowMatchInfoMessage) message);
 	}
 }

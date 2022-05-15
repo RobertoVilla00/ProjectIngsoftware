@@ -122,6 +122,7 @@ public class RoundController {
                     System.out.println(e.getMessage());
                 }
                 finally {
+                    Game.getMatch().CreateMessage();
                     break;
                 }
 
@@ -129,7 +130,6 @@ public class RoundController {
                 Game.FillClouds();
                 this.gamePhase = GamePhase.ASSISTANT_CARD;
                 Game.getMatch().setGamePhase(gamePhase);
-
                 break;
 
             case ASSISTANT_CARD:
@@ -149,6 +149,7 @@ public class RoundController {
                     System.out.println(e.getMessage());
                 }
                 finally {
+                    Game.getMatch().CreateMessage();
                     break;
                 }
 
@@ -166,6 +167,7 @@ public class RoundController {
                     System.out.println(e.getMessage());
                 }
                 finally {
+                    Game.getMatch().CreateMessage();
                     break;
                 }
 
@@ -179,6 +181,7 @@ public class RoundController {
                     System.out.println(e.getMessage());
                 }
                 finally {
+                    Game.getMatch().CreateMessage();
                     break;
                 }
 
@@ -200,6 +203,7 @@ public class RoundController {
                     System.out.println(e.getMessage());
                 }
                 finally {
+                    Game.getMatch().CreateMessage();
                     break;
                 }
 

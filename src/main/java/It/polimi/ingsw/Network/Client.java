@@ -2,6 +2,7 @@ package It.polimi.ingsw.Network;
 
 import It.polimi.ingsw.Message.Message;
 import It.polimi.ingsw.Model.Match;
+import It.polimi.ingsw.Observer.Observable;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,7 +12,7 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Client {
+public class Client extends Observable {
 
     private String ip;
     private int port;
@@ -45,14 +46,14 @@ public class Client {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    while (isActive()) {
-                        Object inputObject = socketIn.readObject();
+                while (isActive()) {
+                    Object inputObject = null;
+                    try {
+                        inputObject = socketIn.readObject();
+                        notifyObserver(inputObject);
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
                 }
             }
         });
