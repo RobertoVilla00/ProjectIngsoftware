@@ -1,5 +1,6 @@
 package It.polimi.ingsw.View;
 
+import It.polimi.ingsw.Controller.GamePhase;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Model.Color;
 import It.polimi.ingsw.Model.Match;
@@ -71,10 +72,13 @@ public class CliTest {
         for(int i=0;i<9;i++) match.getPlayerById(0).getPlayersSchool().AddStudentToDiningRoom(Color.GREEN);
         for(int i=0;i<9;i++) match.getPlayerById(1).getPlayersSchool().AddStudentToDiningRoom(Color.RED);
         match.getTeacherByColor(Color.GREEN).ChangeController(match.getPlayerById(0));
+        match.setGamePhase(GamePhase.ASSISTANT_CARD);
         msg = new ShowMatchInfoMessage(match);
         cli.setMsg(msg);
         cli.startGame();
         cli.showGameInformation();
+
+        cli.askInformation();
 
     }
 }

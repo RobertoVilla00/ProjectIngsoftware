@@ -1,14 +1,18 @@
 package It.polimi.ingsw.View.Cli;
 
+import It.polimi.ingsw.Controller.GamePhase;
+import It.polimi.ingsw.Message.AssistantCardMessage;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Model.*;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.View.View;
 
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class Cli extends Observable implements View {
 	private final PrintStream out;
+	private Scanner in = new Scanner(System.in) ;
 	private ShowMatchInfoMessage msg;
 	private int PlayerId;
 
@@ -18,7 +22,7 @@ public class Cli extends Observable implements View {
 	}
 
 	public void startGame(){
-		System.out.println(StrColor.ANSI_RED+"                                                                                                                      \n" +
+		out.println(StrColor.ANSI_RED+"                                                                                                                      \n" +
 				"         .**ooooOOOOOOOOOOOOOO*                 .oOOo.                                                                    \n" +
 				"      .o##o**°*@@@#.°°°°°*o#@@@°                #@@@@o                                   °#                               \n" +
 				"     *@@*     #@@@#          *#@o                *O#O*                                  *@@                               \n" +
@@ -771,6 +775,21 @@ public class Cli extends Observable implements View {
 
 	@Override
 	public void askInformation() {
+
+		if(msg.getActivePlayerId()==PlayerId){
+			if(msg.getGamePhase()== GamePhase.ASSISTANT_CARD){
+				out.println("Choose which Assistant Card you want to play\n");
+				int CardIndex = in.nextInt();
+				AssistantCardMessage msg = new AssistantCardMessage(CardIndex);
+			}
+			if(msg.getGamePhase()==GamePhase.MOVE_MN){
+				if(msg.isExpertMode()){
+
+				}
+			}
+		}
+
+
 
 	}
 
