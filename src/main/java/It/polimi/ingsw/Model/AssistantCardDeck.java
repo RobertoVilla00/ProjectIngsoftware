@@ -27,6 +27,10 @@ public class AssistantCardDeck {
 		return Cards.get(index);
 	}
 
+	public ArrayList<AssistantCard> getCards(){
+		return Cards;
+	}
+
 	public int CardCount(){
 		return Cards.size();
 	}

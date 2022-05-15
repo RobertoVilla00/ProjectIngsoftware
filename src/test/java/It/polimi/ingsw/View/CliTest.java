@@ -68,6 +68,9 @@ public class CliTest {
         match.getTable().get(5).setNoEntryTile();
         match.MergeIslands(8,10);
         match.MoveMotherNature(45);
+        for(int i=0;i<9;i++) match.getPlayerById(0).getPlayersSchool().AddStudentToDiningRoom(Color.GREEN);
+        for(int i=0;i<9;i++) match.getPlayerById(1).getPlayersSchool().AddStudentToDiningRoom(Color.RED);
+        match.getTeacherByColor(Color.GREEN).ChangeController(match.getPlayerById(0));
         msg = new ShowMatchInfoMessage(match);
         cli.setMsg(msg);
         cli.startGame();
