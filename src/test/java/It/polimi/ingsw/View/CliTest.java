@@ -78,7 +78,7 @@ public class CliTest {
         cli.startGame();
         cli.showGameInformation();
 
-        cli.askInformation();
+        //cli.askInformation();
 
     }
 }
