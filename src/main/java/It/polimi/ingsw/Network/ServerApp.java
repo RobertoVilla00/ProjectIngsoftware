@@ -3,6 +3,10 @@ package It.polimi.ingsw.Network;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Main of the server app
+ */
+
 public class ServerApp {
 
     public static void main(String[] args) throws InterruptedException {

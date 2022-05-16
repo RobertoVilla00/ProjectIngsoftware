@@ -5,6 +5,9 @@ import It.polimi.ingsw.View.Cli.Cli;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Main of the client app
+ */
 
 public class ClientApp {
 
@@ -23,12 +26,7 @@ public class ClientApp {
             if(par.equalsIgnoreCase("cli")){
                 cli=true;
             }
-            int playerid=0;
-            if (cli){
-                Cli c=new Cli( playerid);
-            }
-
-            Client client=new Client(ip, p);
+            Client client=new Client(ip, p, cli);
             client.run();
         }catch (IOException e){
             System.err.println(e.getMessage());

@@ -18,12 +18,14 @@ public class Client extends Observable {
     private int port;
     private Socket socket;
     private boolean active = true;
+    private boolean cli;
     private final ObjectInputStream inputStream;
     private final ObjectOutputStream outputStream;
 
-    public Client(String ip, int port) throws IOException {
+    public Client(String ip, int port, boolean cli) throws IOException {
         this.ip = ip;
         this.port = port;
+        this.cli=cli;
         try {
             socket = new Socket(ip, port);
         } catch (IOException e) {
