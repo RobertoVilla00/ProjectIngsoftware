@@ -3,6 +3,9 @@ package It.polimi.ingsw.Model;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the Player class of the game
+ */
 public class Player implements Comparable<Player> {
 
 	private TowerColor PlayerColor;
@@ -31,6 +34,12 @@ public class Player implements Comparable<Player> {
 
 	private ArrayList <TowerColor> Teacher;
 
+	/**
+	 * Constructor of the class player
+	 * @param playerColor: the color of the tower of the player
+	 * @param name: the nickname of the player
+	 * @param playerId: the id of the player
+	 */
 	public Player(TowerColor playerColor, String name,int playerId) {
 		PlayerId=playerId;
 		PlayerColor = playerColor;
@@ -42,10 +51,18 @@ public class Player implements Comparable<Player> {
 		IsActive = false;
 	}
 
+	/**
+	 * If the player used a CharacterCard, set the attribute PlayedCharacterCard to true
+	 * @param value: boolean attribute that indicates if the player used a CharacterCard
+	 */
 	public void setPlayedCharacterCard(boolean value){
 		this.PlayedCharacterCard = value;
 	}
 
+	/**
+	 * Return true if the player used a character card that give additional points
+	 * @return the boolean attribute AdditionalPoints
+	 */
 	public boolean getAdditionalPoints(){
 		return this.AdditionalPoints;
 	}

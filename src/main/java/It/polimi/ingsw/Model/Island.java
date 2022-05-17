@@ -114,6 +114,11 @@ public class Island {
 		TowersColor= Color;
 	}
 
+	/**
+	 * Return true if the color of the tower in this island is the same of the attribute PlayerColor, else return false
+	 * @param PlayerColor: the color of a tower
+	 * @return true if the color of the tower in this island is the same of the attribute PlayerColor
+	 */
 	public boolean SameTowerColor(TowerColor PlayerColor){
 		if(!isEmpty() && TowersColor == PlayerColor){
 			return true;
@@ -121,27 +126,50 @@ public class Island {
 		else return false;
 	}
 
+	/**
+	 * Initialize the prohibition cards to false
+	 */
 	public void ResetNoEntryTile(){
 		this.NoEntryTile = false;
 	}
 
+	/**
+	 * Return true if an island contains zero towers else return false
+	 * @return a boolean that indicate if an island contains tower or not
+	 */
 	public boolean isEmpty(){
 		if(NumberOfTowers==0) return true;
 		else return false;
 	}
 
+	/**
+	 * Return the color of the towers of this island
+	 * @return the color of the towers of this island
+	 */
 	public TowerColor getTowersColor(){
 		return TowersColor;
 	}
 
+	/**
+	 * Increment the number of towers in this island by one
+	 */
 	public void IncreaseTower(){
 		 NumberOfTowers++;
 	}
 
+	/**
+	 * Return the number of towers in this island
+	 * @return the number of towers in this island
+	 */
 	public int CountTowers(){
 		return NumberOfTowers;
 	}
 
+	/**
+	 * Return the number of students of this color in this island
+	 * @param StudentColor: the color of a student
+	 * @return the number of students of this color in this island
+	 */
 	public int CountStudents(Color StudentColor) {
 		int StudentNumber = 0;
 		switch (StudentColor){
@@ -159,10 +187,17 @@ public class Island {
 		return StudentNumber;
 	}
 
+	/**
+	 * Initialize true the attribute NoEntryTile
+	 */
 	public void setNoEntryTile(){
 		this.NoEntryTile=true;
 	}
 
+	/**
+	 * Return the boolean value of the attribute NoEntryTile
+	 * @return the attribute NoEntryTile
+	 */
 	public boolean GetNoEntryTile(){return this.NoEntryTile;}
 
 
