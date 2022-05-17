@@ -3,6 +3,7 @@ package It.polimi.ingsw.Network;
 import It.polimi.ingsw.Message.Message;
 import It.polimi.ingsw.Model.Match;
 import It.polimi.ingsw.Observer.Observable;
+import It.polimi.ingsw.Observer.Observer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,20 +13,18 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Client extends Observable {
+public class Client extends Observable implements Observer {
 
     private String ip;
     private int port;
     private Socket socket;
     private boolean active = true;
-    private boolean cli;
     private final ObjectInputStream inputStream;
     private final ObjectOutputStream outputStream;
 
-    public Client(String ip, int port, boolean cli) throws IOException {
+    public Client(String ip, int port) throws IOException {
         this.ip = ip;
         this.port = port;
-        this.cli=cli;
         try {
             socket = new Socket(ip, port);
         } catch (IOException e) {
@@ -110,6 +109,11 @@ public class Client extends Observable {
             socketOut.close();
             socket.close();
         }
+    }
+
+    @Override
+    public void update(Message message) {
+        sendMessage(message);
     }
 }
 

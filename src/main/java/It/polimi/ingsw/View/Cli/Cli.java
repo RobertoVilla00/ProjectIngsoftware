@@ -1,15 +1,14 @@
 package It.polimi.ingsw.View.Cli;
 
 import It.polimi.ingsw.Controller.GamePhase;
-import It.polimi.ingsw.Message.AssistantCardMessage;
-import It.polimi.ingsw.Message.Message;
-import It.polimi.ingsw.Message.ShowMatchInfoMessage;
+import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
 import It.polimi.ingsw.View.View;
 
 import java.io.PrintStream;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Cli extends Observable implements View, Observer {
@@ -18,8 +17,7 @@ public class Cli extends Observable implements View, Observer {
 	private ShowMatchInfoMessage msg;
 	private int PlayerId;
 
-	public Cli(int playerId){
-		this.PlayerId=playerId;
+	public Cli(){
 		out=System.out;
 	}
 
@@ -775,26 +773,6 @@ public class Cli extends Observable implements View, Observer {
 		System.out.println(str);
 	}
 
-	@Override
-	public void askInformation() {
-
-		if(msg.getActivePlayerId()==PlayerId){
-			if(msg.getGamePhase()== GamePhase.ASSISTANT_CARD){
-				out.println("Choose which Assistant Card you want to play\n");
-				int CardIndex = in.nextInt();
-				AssistantCardMessage msg = new AssistantCardMessage(CardIndex);
-			}
-			if(msg.getGamePhase()== GamePhase.MOVE_MN){
-				if(msg.isExpertMode()){
-
-				}
-			}
-		}
-
-
-
-	}
-
 	public void printCoins(StringBuilder str) {
 		for (Player p : msg.getPlayers()) {
 			str.append("|");
@@ -906,7 +884,6 @@ public class Cli extends Observable implements View, Observer {
 		return null;
 	}
 
-
 	public int maxTowersNumber(){
 		int i=0;
 		for(Player p: msg.getPlayers()) i++;
@@ -919,7 +896,110 @@ public class Cli extends Observable implements View, Observer {
 	}
 
 	@Override
+	public void askInformation() {
+
+		if(msg.getActivePlayerId()==PlayerId) {
+			if (msg.getGamePhase() == GamePhase.ASSISTANT_CARD) {
+				out.println("Choose which Assistant Card you want to play\n");
+				int CardIndex = in.nextInt();
+				AssistantCardMessage assistantCardMessage = new AssistantCardMessage(CardIndex);
+				notifyObserver(assistantCardMessage);
+			}
+		}
+
+		if(msg.getGamePhase()==GamePhase.MOVE_STUDENT) {
+			if (msg.isExpertMode()) {
+				while (true) {
+					out.println("Type C if you want to play a Character Card, M if you want to move a Student\n");
+					if (in.nextLine().toUpperCase() == "C") {
+						out.println("Choose the Character Card you want to play\n");
+						int CharacterCardIndex = in.nextInt();
+						CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
+						notifyObserver(characterCardMessage);
+						break;
+					} else if (in.nextLine().toUpperCase() == "M") {
+						while (true) {
+							out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island\n");
+							if (in.nextLine().toUpperCase() == "D") {
+								out.println("Which Student do you want to move?\n");
+								int position = in.nextInt();
+								MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
+								break;
+							} else if (in.nextLine().toUpperCase() == "I") {
+								out.println("Which Student do you want to move?\n");
+								int position = in.nextInt();
+								out.println("Select the Island\n");
+								int destination = in.nextInt();
+								MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, destination);
+								break;
+							}
+							else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+						}
+					}
+				}
+			}
+		}
+
+		if(msg.getGamePhase()== GamePhase.MOVE_MN){
+			if(msg.isExpertMode()){
+				while (true) {
+					out.println("Type C if you want to play a Character Card, M if you want to move Mother nature\n");
+					if(in.nextLine().toUpperCase()=="C") {
+						out.println("Choose the Character Card you want to play\n");
+						int CharacterCardIndex = in.nextInt();
+						CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
+						notifyObserver(characterCardMessage);
+						break;
+					}
+					else if(in.nextLine().toUpperCase()=="M") {
+						out.println("How many steps do you want Mother Nature to make?\n");
+						int steps = in.nextInt();
+						MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
+						notifyObserver(motherNatureMessage);break;
+					} else out.println(StrColor.ANSI_RED+"Invalid command!\n"+StrColor.ANSI_RESET);
+				}
+			}
+		}
+
+
+		if(msg.getGamePhase()== GamePhase.CHOOSE_CLOUD){
+			if(msg.isExpertMode()){
+				while (true) {
+					out.println("Type C if you want to play a Character Card, P if you want to pick Students from a Cloud\n");
+					if(in.nextLine().toUpperCase()=="C") {
+						out.println("Choose the Character Card you want to play\n");
+						int CharacterCardIndex = in.nextInt();
+						CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
+						notifyObserver(characterCardMessage);
+						break;
+					}
+					else if(in.nextLine().toUpperCase()=="P") {
+						out.println("Choose the Cloud you want to pick the Students from\n");
+						int index = in.nextInt();
+						CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(index);
+						notifyObserver(cloudChoiceMessage);
+						break;
+					} else out.println(StrColor.ANSI_RED+"Invalid command!\n"+StrColor.ANSI_RESET);
+				}
+			}
+		}
+
+
+
+
+	}
+
+	@Override
 	public void update(Message message) {
-		this.setMsg((ShowMatchInfoMessage) message);
+		switch (message.getMessageContent()){
+			case SHOWMATCHINFO:
+				this.setMsg((ShowMatchInfoMessage) message);
+				showGameInformation();
+				askInformation();
+				break;
+			case PLAYERID:
+				PlayerIdMessage msg=(PlayerIdMessage)message;
+				this.PlayerId= msg.getPlayerId();
+		}
 	}
 }

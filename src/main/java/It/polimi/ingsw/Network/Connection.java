@@ -88,9 +88,7 @@ public class Connection extends Observable implements Runnable {
             server.Lobby(this);
             //TODO: inizia gestione regolare view
             while (isActive()){
-                String readIn= scanner.nextLine();
                 handleConnection();
-                //notifyObserver(readIn);
             }
         }catch (IOException e){
             System.err.println(e.getMessage());

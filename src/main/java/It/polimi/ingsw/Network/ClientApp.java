@@ -19,14 +19,17 @@ public class ClientApp {
             System.out.println("Please type the number port :");
             int p=Integer.parseInt(s.nextLine());
 
-            boolean cli=false;
+            boolean useCli=false;
             System.out.println("Insert cli or gui");
             String par=s.nextLine();
             System.out.println(par);
             if(par.equalsIgnoreCase("cli")){
-                cli=true;
+                useCli=true;
             }
-            Client client=new Client(ip, p, cli);
+            Client client=new Client(ip, p);
+            if(useCli){
+                Cli cli = new Cli();
+            }
             client.run();
         }catch (IOException e){
             System.err.println(e.getMessage());
