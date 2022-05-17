@@ -96,6 +96,7 @@ public class Server  {
             }
         //    if() come ottengo attributo cli del client
         }
+
         else{
             AddConnection(c);
             c.AsyncSend("too many players!");
