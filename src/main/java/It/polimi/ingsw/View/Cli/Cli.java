@@ -905,88 +905,116 @@ public class Cli extends Observable implements View, Observer {
 				AssistantCardMessage assistantCardMessage = new AssistantCardMessage(CardIndex);
 				notifyObserver(assistantCardMessage);
 			}
-		}
 
-		if(msg.getGamePhase()==GamePhase.MOVE_STUDENT) {
-			if (msg.isExpertMode()) {
-				while (true) {
-					out.println("Type C if you want to play a Character Card, M if you want to move a Student\n");
-					if (in.nextLine().toUpperCase() == "C") {
-						out.println("Choose the Character Card you want to play\n");
-						int CharacterCardIndex = in.nextInt();
-						CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
-						notifyObserver(characterCardMessage);
-						break;
-					} else if (in.nextLine().toUpperCase() == "M") {
-						while (true) {
-							out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island\n");
-							if (in.nextLine().toUpperCase() == "D") {
-								out.println("Which Student do you want to move?\n");
-								int position = in.nextInt();
-								MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
-								break;
-							} else if (in.nextLine().toUpperCase() == "I") {
-								out.println("Which Student do you want to move?\n");
-								int position = in.nextInt();
-								out.println("Select the Island\n");
-								int destination = in.nextInt();
-								MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, destination);
-								break;
-							}
-							else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+			if (msg.getGamePhase() == GamePhase.MOVE_STUDENT) {
+				if (msg.isExpertMode()) {
+					while (true) {
+						out.println("Type C if you want to play a Character Card, M if you want to move a Student\n");
+						if (in.nextLine().toUpperCase() == "C") {
+							out.println("Choose the Character Card you want to play\n");
+							int CharacterCardIndex = in.nextInt();
+							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
+							notifyObserver(characterCardMessage);
+							break;
 						}
+						else if (in.nextLine().toUpperCase() == "M") {
+							while (true) {
+								out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island\n");
+								if (in.nextLine().toUpperCase() == "D") {
+									out.println("Which Student do you want to move?\n");
+									int position = in.nextInt();
+									MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
+									break;
+								} else if (in.nextLine().toUpperCase() == "I") {
+									out.println("Which Student do you want to move?\n");
+									int position = in.nextInt();
+									out.println("Select the Island\n");
+									int destination = in.nextInt();
+									MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, destination);
+									break;
+								}
+								else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+							}
+							break;
+						}
+						else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+					}
+				}
+				else{
+					while (true) {
+						out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island\n");
+						if (in.nextLine().toUpperCase() == "D") {
+							out.println("Which Student do you want to move?\n");
+							int position = in.nextInt();
+							MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
+							break;
+						} else if (in.nextLine().toUpperCase() == "I") {
+							out.println("Which Student do you want to move?\n");
+							int position = in.nextInt();
+							out.println("Select the Island\n");
+							int destination = in.nextInt();
+							MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, destination);
+							break;
+						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
 					}
 				}
 			}
-		}
 
-		if(msg.getGamePhase()== GamePhase.MOVE_MN){
-			if(msg.isExpertMode()){
-				while (true) {
-					out.println("Type C if you want to play a Character Card, M if you want to move Mother nature\n");
-					if(in.nextLine().toUpperCase()=="C") {
-						out.println("Choose the Character Card you want to play\n");
-						int CharacterCardIndex = in.nextInt();
-						CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
-						notifyObserver(characterCardMessage);
-						break;
+			if (msg.getGamePhase() == GamePhase.MOVE_MN) {
+				if (msg.isExpertMode()) {
+					while (true) {
+						out.println("Type C if you want to play a Character Card, M if you want to move Mother nature\n");
+						if (in.nextLine().toUpperCase() == "C") {
+							out.println("Choose the Character Card you want to play\n");
+							int CharacterCardIndex = in.nextInt();
+							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
+							notifyObserver(characterCardMessage);
+							break;
+						} else if (in.nextLine().toUpperCase() == "M") {
+							out.println("How many steps do you want Mother Nature to make?\n");
+							int steps = in.nextInt();
+							MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
+							notifyObserver(motherNatureMessage);
+							break;
+						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
 					}
-					else if(in.nextLine().toUpperCase()=="M") {
-						out.println("How many steps do you want Mother Nature to make?\n");
-						int steps = in.nextInt();
-						MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
-						notifyObserver(motherNatureMessage);break;
-					} else out.println(StrColor.ANSI_RED+"Invalid command!\n"+StrColor.ANSI_RESET);
+				}
+				else{
+					out.println("How many steps do you want Mother Nature to make?\n");
+					int steps = in.nextInt();
+					MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
+					notifyObserver(motherNatureMessage);
+				}
+			}
+
+
+			if (msg.getGamePhase() == GamePhase.CHOOSE_CLOUD) {
+				if (msg.isExpertMode()) {
+					while (true) {
+						out.println("Type C if you want to play a Character Card, P if you want to pick Students from a Cloud\n");
+						if (in.nextLine().toUpperCase() == "C") {
+							out.println("Choose the Character Card you want to play\n");
+							int CharacterCardIndex = in.nextInt();
+							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
+							notifyObserver(characterCardMessage);
+							break;
+						} else if (in.nextLine().toUpperCase() == "P") {
+							out.println("Choose the Cloud you want to pick the Students from\n");
+							int index = in.nextInt();
+							CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(index);
+							notifyObserver(cloudChoiceMessage);
+							break;
+						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+					}
+				}
+				else{
+					out.println("Choose the Cloud you want to pick the Students from\n");
+					int index = in.nextInt();
+					CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(index);
+					notifyObserver(cloudChoiceMessage);
 				}
 			}
 		}
-
-
-		if(msg.getGamePhase()== GamePhase.CHOOSE_CLOUD){
-			if(msg.isExpertMode()){
-				while (true) {
-					out.println("Type C if you want to play a Character Card, P if you want to pick Students from a Cloud\n");
-					if(in.nextLine().toUpperCase()=="C") {
-						out.println("Choose the Character Card you want to play\n");
-						int CharacterCardIndex = in.nextInt();
-						CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
-						notifyObserver(characterCardMessage);
-						break;
-					}
-					else if(in.nextLine().toUpperCase()=="P") {
-						out.println("Choose the Cloud you want to pick the Students from\n");
-						int index = in.nextInt();
-						CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(index);
-						notifyObserver(cloudChoiceMessage);
-						break;
-					} else out.println(StrColor.ANSI_RED+"Invalid command!\n"+StrColor.ANSI_RESET);
-				}
-			}
-		}
-
-
-
-
 	}
 
 	@Override
