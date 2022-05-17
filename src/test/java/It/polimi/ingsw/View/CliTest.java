@@ -34,7 +34,7 @@ public class CliTest {
     @Test
 
     public void ShowMatchInfo(){
-        Cli cli = new Cli(0);
+        Cli cli = new Cli();
         ShowMatchInfoMessage msg;
         Match match = new Match(3, 1);
         for(int i=0;i<2;i++){

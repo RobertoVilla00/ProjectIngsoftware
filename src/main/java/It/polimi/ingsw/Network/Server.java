@@ -6,6 +6,7 @@ import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.WrongMessageException;
 import It.polimi.ingsw.Message.Message;
+import It.polimi.ingsw.Message.PlayerIdMessage;
 import It.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
@@ -53,6 +54,8 @@ public class Server  {
     public synchronized void Lobby(Connection c) throws IOException {
         if (connections.size() == 0 || connections.size() < numberOfPlayer) {
             AddConnection(c);
+            PlayerIdMessage playerIdMessage=new PlayerIdMessage(connections.size());
+            c.AsyncSend(playerIdMessage);
             VirtualView virtualView=new VirtualView(c);
             List<Connection> keys = new ArrayList<>(waitConnection.keySet());
             boolean UsedName = false;
@@ -94,7 +97,6 @@ public class Server  {
                     }
                 }
             }
-        //    if() come ottengo attributo cli del client
         }
         else{
             AddConnection(c);
