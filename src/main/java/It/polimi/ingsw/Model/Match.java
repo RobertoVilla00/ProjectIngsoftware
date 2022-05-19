@@ -7,6 +7,9 @@ import It.polimi.ingsw.Observer.Observable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class is the main class of the game, which contains the main methods.
+ */
 public class Match extends Observable {
 
 	private int NumberOfPlayers;
@@ -37,6 +40,14 @@ public class Match extends Observable {
 
 	private boolean PlaysCard6;
 
+	/**
+	 * Constructor of the class Match. This method manages the start of the game, takes care of filling the bag with the students,
+	 * filling the Entrance of the school for each player, preparing the table of islands, clouds, schools,
+	 * initializing the players, the professors, the Character Card.
+	 * Handles the case in which there are 2 or 3 players or you choose to play with the variant for experts.
+	 * @param numberOfPlayers: the number of players (2 or 3) in the game.
+	 * @param GameMode: 1 for the variant for experts, 0 for classic game.
+	 */
 	public Match(int numberOfPlayers, int GameMode) {
 		this.NumberOfPlayers = numberOfPlayers;
 
@@ -127,16 +138,29 @@ public class Match extends Observable {
 		}
 	}
 
+	/**
+	 * Return the bag containing the students.
+	 * @return the bag containing the students.
+	 */
 	public Bag getBag(){
 		return this.bag;
 	}
 
 
+	/**
+	 * Add the student extracted from the bag to the island at the given index.
+	 * @param index: the index of an island in the table.
+	 */
 	public void MoveStudentsBagToIsland(int index){
 		Color StudentColor = bag.FillIsland();
 		Table.get(index).AddStudent(StudentColor);
 	}
 
+	/**
+	 * If the number of players is 2 it fills the cloud at the given index with 3 students,
+	 * if the number of players is 3 it fills it with 4 students.
+	 * @param index: the index of a cloud.
+	 */
 	public void MoveStudentsBagToCloud(int index){
 		if(NumberOfPlayers == 2) {
 			for (int i = 0; i < 3; i++) {
@@ -152,32 +176,64 @@ public class Match extends Observable {
 		}
 	}
 
+	/**
+	 * Return the player at the given index in the array Players.
+	 * @param PlayerId: the Id of a player.
+	 * @return the player at the given Id.
+	 */
 	public Player getPlayerById(int PlayerId){
 		return this.Players[PlayerId];
 	}
 
+	/**
+	 * It fills 2 clouds if there are two players, 3 clouds if there are three players invoking the method MoveStudentsBagToCloud.
+	 */
 	public void PlanningPhase() {
 		for(int i=0; i<NumberOfPlayers; i++) {
 			MoveStudentsBagToCloud(i);
 		}
 	}
 
+	/**
+	 * Its sets the attribute gamePhase.
+	 * @param gamePhase: it is a phase of the game.
+	 */
 	public void setGamePhase(GamePhase gamePhase){
 		this.gamePhase = gamePhase;
 	}
 
+	/**
+	 * Return the phase of the current match.
+	 * @return the phase of the current match.
+	 */
 	public GamePhase getGamePhase(){
 		return this.gamePhase;
 	}
 
+	/**
+	 * It sets the attribute ExpectedCardMessage.
+	 * @param id: the Id of a card.
+	 */
 	public void setExpectedCardMessage(int id){
 		this.ExpectedCardMessage=id;
 	}
 
+	/**
+	 * It used when a player want to play an Assistant Card invoking the method PlayAssistantCard in the class Player.
+	 * @param CardIndex: the index of an Assistant Card.
+	 * @param PlayerIndex: the index of the player in the array Players who play the Assistant Card.
+	 */
 	public void PlayAssistantCard(int CardIndex,int PlayerIndex){
 		Players[PlayerIndex].PlayAssistantCard(CardIndex);
 	}
 
+	/**
+	 * It used when you need to unify two islands after a player builds two towers of the same color on two adjacent islands.
+	 * It unify the two islands, moves all students, towers, mother nature to a single island
+	 * and removes from the ArrayList Table the island that has been unified.
+	 * @param IslandIndex: the index of an island in the ArrayList table.
+	 * @param IslandToMergeIndex: the index of an island in the ArrayList table.
+	 */
 	public void MergeIslands(int IslandIndex, int IslandToMergeIndex) {
 		int StudentNumber;
 		int TowersNumber;
@@ -227,6 +283,13 @@ public class Match extends Observable {
 		}
 	}
 
+	/**
+	 * It used when the player have to move Mother Nature.
+	 * It increase the position of Mother Nature by the number received as parameter.
+	 * To secure the circularity of the table, when the number indicating the position of Mother Nature is Greater or equal
+	 * to the size of table, it decreases the position of Mother Nature by the size of the table.
+	 * @param movements: a number indicating the steps that mother nature must take.
+	 */
 	public void MoveMotherNature(int movements){
 		this.MotherNaturePosition=MotherNaturePosition+movements;
 		while(MotherNaturePosition>=Table.size()){							//secure the circularity of the table
@@ -234,6 +297,11 @@ public class Match extends Observable {
 		}
 	}
 
+	/**
+	 * It used to move students from the cloud given by parameter to the Entrance of the player given by parameter.
+	 * @param PlayerIndex: the index of the player.
+	 * @param CloudIndex: the index of the cloud.
+	 */
 	public void MoveStudentsFromCloudToEntrance(int PlayerIndex, int CloudIndex ){
 		Color StudentColor;
 		int NumberOfStudents=getClouds().get(CloudIndex).CloudSize();
@@ -243,10 +311,20 @@ public class Match extends Observable {
 		}
 	}
 
+	/**
+	 * It initializes the attribute ActivePlayerId at the given id.
+	 * @param id: the id of a player.
+	 */
 	public void setActivePlayerId(int id){
 		this.ActivePlayerId = id;
 	}
 
+	/**
+	 * It used to move students at the given StudentIndex to the Dining Room of the player identified by the PlayerIndex.
+	 * If the number of students in the dining room is a multiple of 3 and the game is in the expert mode the player earns a coin.
+	 * @param StudentIndex: the index of a student in the Entrance of School.
+	 * @param PlayerIndex: the index of a player.
+	 */
 	public void MoveStudentsFromEntranceToDiningRoom(int StudentIndex, int PlayerIndex){
 		Color studentColor= Players[PlayerIndex].getPlayersSchool().GetEntranceStudentColor(StudentIndex);
 		Players[PlayerIndex].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
@@ -254,46 +332,93 @@ public class Match extends Observable {
 			Players[PlayerIndex].AddCoin(1);
 		}
 	}
+
+	/**
+	 * Return the attribute ExpectedCardMessage.
+	 * @return the id of a card.
+	 */
 	public int getExpectedCardMessage(){
 		return this.ExpectedCardMessage;
 	}
 
+	/**
+	 * Return the ActivePlayerId.
+	 * @return the ActivePlayerId.
+	 */
 	public int getActivePlayerId(){
 		return this.ActivePlayerId;
 	}
 
+	/**
+	 * Create a showMatchInfoMessage and invoke notifyObserver
+	 */
 	public void CreateMessage(){
 		ShowMatchInfoMessage showMatchInfoMessage= new ShowMatchInfoMessage(this);
 		notifyObserver(showMatchInfoMessage);
 	}
 
+	/**
+	 * It is used to move the student at StudentIndex from the Entrance of the School of the player identified by the PlayerIndex
+	 * to the island at IslandIndex.
+	 * @param StudentIndex: the index of a student in the Entrance of the School.
+	 * @param PlayerIndex: the index of a player in the array Players.
+	 * @param IslandIndex: the index of an island in the ArrayList table.
+	 */
 	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerIndex, int IslandIndex){
 		Color StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(StudentIndex);
 		Table.get(IslandIndex).AddStudent(StudentColor);
 	}
 
+	/**
+	 * It sorts the order of players in the array Players depending on the value of the Assistant Card played the previous round.
+	 */
 	public void SortPlayersByOrderValue(){
 		Arrays.sort(Players);
 	}
 
+	/**
+	 * Return the position of Mother Nature.
+	 * @return the position of Mother Nature.
+	 */
 	public int getMotherNaturePosition() {
 		return MotherNaturePosition;
 	}
 
+	/**
+	 * Return the ArrayList of islands.
+	 * @return the ArrayList of islands.
+	 */
 	public ArrayList<Island> getTable(){
 		return this.Table;
 	}
 
+	/**
+	 * Return the array of players.
+	 * @return the array of players.
+	 */
 	public Player[] getPlayers(){
 		return this.Players;
 	}
 
+	/**
+	 * Return the ArrayList of clouds.
+	 * @return the ArrayList of clouds.
+	 */
 	public ArrayList<Cloud> getClouds(){
 		return this.Clouds;
 	}
 
+	/**
+	 * Return the ArrayList of teachers.
+	 * @return the Arraylist of teachers.
+	 */
 	public ArrayList<Teacher> getTeachers(){return this.Teachers;}
 
+	/**
+	 * Return the teacher who has the color given by parameter.
+	 * @param color: the color of a teacher.
+	 * @return the teacher who has the color given by parameter.
+	 */
 	public Teacher getTeacherByColor(Color color){
 		int index=0;
 		for(int i=0;i<5;i++){
@@ -306,6 +431,11 @@ public class Match extends Observable {
 		return Teachers.get(index);
 	}
 
+	/**
+	 * Return true if the Character Card identified by the id receives as parameter is on table, false if not.
+	 * @param CharacterCardId: the id of a Character Card.
+	 * @return a boolean that indicates if the Character Card is on table or not.
+	 */
 	public boolean isCharacterCardOnTable(int CharacterCardId){
 		for(int i=0;i<3;i++){
 			if(CharacterCardId == CharacterCardOnTable[i].getIdCharacterCard()){    //if id matches
@@ -315,6 +445,11 @@ public class Match extends Observable {
 		return false;
 	}
 
+	/**
+	 * Return the Character Card which has the id equals to the given id.
+	 * @param CharacterCardId: the id of a Character Card.
+	 * @return the Character Card which has the id equals to the given id.
+	 */
 	public CharacterCard getCharacterCardById(int CharacterCardId){
 		int index=0;
 		for(int i=0;i<3;i++){
@@ -326,6 +461,11 @@ public class Match extends Observable {
 		return CharacterCardOnTable[index];
 	}
 
+	/**
+	 * Return the player whose tower's color is equals to the given color.
+	 * @param towerColor: the color of a tower.
+	 * @return the player whose tower's color is equals to the given color.
+	 */
 	public Player getPlayerByTowerColor(TowerColor towerColor){
 		int index=0;
 		for(int i=0; i<NumberOfPlayers;i++){
@@ -338,26 +478,49 @@ public class Match extends Observable {
 		return Players[index];
 	}
 
+	/**
+	 * Return true in case of variants for experts, false if not.
+	 * @return the mode of the game.
+	 */
 	public boolean isExpertMode(){
 		return ExpertMode;
 	}
 
+	/**
+	 * Return true if the Card 6 is played, false if not.
+	 * @return a boolean that indicates if the Card 6 is played or not.
+	 */
 	public boolean getPlaysCard6(){
 		return PlaysCard6;
 	}
 
+	/**
+	 * It sets the attribute PlaysCard6 to the value given by parameter.
+	 * @param value: it is a boolean.
+	 */
 	public void setPlaysCard6(boolean value){
 		PlaysCard6 = value;
 	}
 
+	/**
+	 * Return the number of players in the current Match.
+	 * @return the number of players in the Match.
+	 */
 	public int getNumberOfPlayers(){
 		return this.NumberOfPlayers;
 	}
 
+	/**
+	 * Return tha array of Character Card on table.
+	 * @return the array of Character Card on table.
+	 */
 	public CharacterCard[] getCharacterCardsOnTable(){
 		return this.CharacterCardOnTable;
 	}
 
+	/**
+	 * It initializes the Array of Character Card with 3 random cards.
+	 */
 	public void InitializeCharacterCardOnTable() {
 		CharacterDeck = new CharacterCardDeck(this);
 		CharacterDeck.ShuffleCharacterCardDeck();
