@@ -534,5 +534,19 @@ public class Match extends Observable {
 			}
 		}
 	}
+
+	/**
+	 * Return the number of teachers controlled by a certain player
+	 * @param player the player we want to know how many teachers control
+	 * @return the number of teachers controlled by player
+	 */
+	public int getTeachersOfPlayer(Player player){
+		int numberOfTeachers=0;
+		for(Teacher t:this.Teachers){
+			if(t.getControllingPlayer()==player)
+				numberOfTeachers++;
+		}
+		return numberOfTeachers;
+	}
 }
 

@@ -188,6 +188,8 @@ public class RoundController {
             case CHOOSE_CLOUD:
                 try {
                     Game.ChooseCloud((CloudChoiceMessage) msg);
+                    Game.getMatch().setPlaysCard6(false);
+                    Game.getMatch().getPlayerById(Game.getActivePlayer()).setAdditionalPoints(false);
                     if (!FinishedPlayers()) {
                         setNextActivePlayer();
                         this.gamePhase = GamePhase.MOVE_STUDENT;

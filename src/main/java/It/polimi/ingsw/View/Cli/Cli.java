@@ -884,6 +884,10 @@ public class Cli extends Observable implements View, Observer {
 		return null;
 	}
 
+	public void printError(String error){
+		out.println(error);
+	}
+
 	public int maxTowersNumber(){
 		int i=0;
 		for(Player p: msg.getPlayers()) i++;
@@ -1028,6 +1032,12 @@ public class Cli extends Observable implements View, Observer {
 			case PLAYERID:
 				PlayerIdMessage msg=(PlayerIdMessage)message;
 				this.PlayerId= msg.getPlayerId();
+				break;
+			case ERROR:
+				ErrorMessage errorMessage=(ErrorMessage) message;
+				String error=errorMessage.getError();
+				printError(error);
+				break;
 		}
 	}
 }

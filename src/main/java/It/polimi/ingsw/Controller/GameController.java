@@ -122,8 +122,7 @@ public class GameController implements Observer {
                 ControllingPlayerId = TowerController.getPlayerId();
                 InfluencePoints[ControllingPlayerId] += numberOfTowers;
             }
-            match.setPlaysCard6(false);                                         //TODO: TO BE DONE AT THE END OF THE TURN TOO!! OR ROUND?
-
+            match.setPlaysCard6(false);
             int maximum = 0;
             int idMax = 0;
             boolean isTied = true;
@@ -255,12 +254,13 @@ public class GameController implements Observer {
     }
 
     public int EndGame(){                                   //return the id of the winner
-        ranking=new int[match.getNumberOfPlayers()][2];
+        ranking=new int[match.getNumberOfPlayers()][3];
         for(Player p:match.getPlayers()){
             ranking[p.getPlayerId()][0]=p.getPlayerId();
             ranking[p.getPlayerId()][1]=p.getTowersPlaced();
+            ranking[p.getPlayerId()][2]=match.getTeachersOfPlayer(p);
         }
-        int temp[]=new int[2];                                       //sorting of the ranking
+        int temp[];                                       //sorting of the ranking
         for(int i=0;i<match.getNumberOfPlayers()-1;i++){
             for(int j=0;j< match.getNumberOfPlayers()-i-1;j++){
                 if(ranking[j][1]>ranking[j+1][1]){
@@ -270,7 +270,27 @@ public class GameController implements Observer {
                 }
             }
         }
-        //TODO: add teacher control in case of draw on towers number
+        if(ranking[match.getNumberOfPlayers()-1][1]== ranking[match.getNumberOfPlayers()-2][1]){    //check teachers in case of a tie
+            if(match.getNumberOfPlayers()==3 && ranking[1][1]==ranking[0][1]){                    //case of a 3 way tie
+                for(int i=0;i<match.getNumberOfPlayers()-1;i++){
+                    for(int j=0;j< match.getNumberOfPlayers()-i-1;j++){
+                        if(ranking[j][2]>ranking[j+1][2]){
+                            temp=ranking[j];
+                            ranking[j]=ranking[j+1];
+                            ranking[j+1]=temp;
+                        }
+                    }
+                }
+            }
+            else{                                                                                   //case of a 2 way tie
+                if(ranking[match.getNumberOfPlayers()-1][2]<ranking[match.getNumberOfPlayers()-2][2]){
+                    temp=ranking[match.getNumberOfPlayers()-1];
+                    ranking[match.getNumberOfPlayers()-1]=ranking[match.getNumberOfPlayers()-2];
+                    ranking[match.getNumberOfPlayers()-2]=temp;
+                }
+            }
+        }
+        //TODO: test this part
         int winnerId=ranking[match.getNumberOfPlayers()-1][0];
         return winnerId;
     }
