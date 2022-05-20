@@ -7,7 +7,7 @@ public class Card12Message extends Message{
 
     private Color StudentColor;
 
-    public Card12Message(String studentColor) throws InvalidInputException {
+    public Card12Message(String studentColor)  {
         super(MessageContent.CARD12);
 
         studentColor=studentColor.toUpperCase();
@@ -27,8 +27,7 @@ public class Card12Message extends Message{
             case("PINK"):
                 this.StudentColor=Color.PINK;
                 break;
-            default:
-                throw new InvalidInputException("invalid input, please insert a valid Color");
+
         }
     }
 

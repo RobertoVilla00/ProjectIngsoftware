@@ -777,6 +777,54 @@ public class Cli extends Observable implements View, Observer {
 					notifyObserver(cloudChoiceMessage);
 				}
 			}
+
+			if(msg.getGamePhase()==GamePhase.CHARACTER_CARD){
+				if(msg.getExpectedCardMessage()==1){
+					out.println("Choose the Student you want to move\n");
+					int studentIndex = in.nextInt();
+					out.println("Choose the Island where you want to move the Student\n");
+					int islandIndex = in.nextInt();
+
+					Card1Message card1Message = new Card1Message(studentIndex, islandIndex);
+					notifyObserver(card1Message);
+				}
+				if(msg.getExpectedCardMessage()==3){
+					out.println("Choose the Island to resolve\n");
+					int islandIndex = in.nextInt();
+
+					Card3and5Message card3and5Message = new Card3and5Message(islandIndex);
+					notifyObserver(card3and5Message);
+				}
+				if(msg.getExpectedCardMessage()==5){
+					out.println("Choose the Island where you want to put the no entry tile\n");
+					int islandindex = in.nextInt();
+
+					Card3and5Message card3and5Message = new Card3and5Message(islandindex);
+					notifyObserver(card3and5Message);
+
+				}
+				if(msg.getExpectedCardMessage()==10){
+					out.println("Choose the Student you want to move to the Dining Room\n");
+					int index = in.nextInt();
+
+					Card10Message card10Message = new Card10Message(index);
+					notifyObserver(card10Message);
+
+				}
+				if(msg.getExpectedCardMessage()==12){
+					String color;
+					while (true) {
+						out.println("Type the Color of the Student to move back to the Bag\n");
+						color = in.nextLine().toUpperCase();
+						if(color=="GREEN" || color=="YELLOW" || color=="RED" || color=="BLUE" || color=="PINK"){
+							break;
+						}
+						else out.println(StrColor.ANSI_RED+"Choose a valid Color!\n"+StrColor.ANSI_RESET);
+					}
+					Card12Message card12Message= new Card12Message(color);
+					notifyObserver(card12Message);
+				}
+			}
 		}
 	}
 
