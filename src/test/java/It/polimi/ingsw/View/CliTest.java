@@ -53,7 +53,7 @@ public class CliTest {
         for(int i=0;i<match.getClouds().size();i++){
             for(int j=0;j<4;j++) match.getClouds().get(i).AddStudent(Color.GREEN);
         }
-        match.MergeIslands(0,1);
+
         match.getTable().get(2).BuildTower(TowerColor.GREY);
         match.getTable().get(5).BuildTower(TowerColor.BLACK);
         match.getTable().get(5).IncreaseTower();
@@ -66,9 +66,12 @@ public class CliTest {
         match.getTable().get(9).IncreaseTower();
         match.getTable().get(10).BuildTower(TowerColor.WHITE);
         match.getTable().get(10).IncreaseTower();
-        match.getTable().get(5).setNoEntryTile();
-        match.MergeIslands(8,10);
-        match.MoveMotherNature(45);
+        match.getTable().get(10).setNoEntryTile();
+
+
+        for (int i=0;i<0;i++) match.MergeIslands(0,1);
+        match.MoveMotherNature(42);
+
         for(int i=0;i<9;i++) match.getPlayerById(0).getPlayersSchool().AddStudentToDiningRoom(Color.GREEN);
         for(int i=0;i<9;i++) match.getPlayerById(1).getPlayersSchool().AddStudentToDiningRoom(Color.RED);
         match.getTeacherByColor(Color.GREEN).ChangeController(match.getPlayerById(0));
