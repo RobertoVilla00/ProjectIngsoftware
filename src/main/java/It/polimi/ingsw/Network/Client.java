@@ -19,8 +19,8 @@ public class Client extends Observable implements Observer {
     private int port;
     private Socket socket;
     private boolean active = true;
-    private final ObjectInputStream inputStream;
-    private final ObjectOutputStream outputStream;
+    private ObjectInputStream inputStream;
+    private ObjectOutputStream outputStream;
 
     public Client(String ip, int port) throws IOException {
         this.ip = ip;
@@ -30,8 +30,9 @@ public class Client extends Observable implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        inputStream = new ObjectInputStream(socket.getInputStream());
         outputStream=new ObjectOutputStream(socket.getOutputStream());
+        outputStream.flush();
+        inputStream = new ObjectInputStream(socket.getInputStream());
 
     }
 
@@ -51,7 +52,7 @@ public class Client extends Observable implements Observer {
                     Object inputObject = null;
                     try {
                         inputObject = socketIn.readObject();
-                        notifyObserver(inputObject);
+                        notifyObserver((Message) inputObject);
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -62,7 +63,7 @@ public class Client extends Observable implements Observer {
         return t;
     }
 
-    public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut) {
+    /*public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut) {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -79,7 +80,7 @@ public class Client extends Observable implements Observer {
         });
         t.start();
         return t;
-    }
+    }*/
 
     public void sendMessage(Message message){
         try {
@@ -98,8 +99,8 @@ public class Client extends Observable implements Observer {
         Scanner stdin = new Scanner(System.in);
         try {
             Thread t0 = asyncReadFromSocket(inputStream);
-            Thread t1 = asyncWriteToSocket(stdin, socketOut);
-            t1.join();
+            /*Thread t1 = asyncWriteToSocket(stdin, socketOut);
+            t1.join();*/
             t0.join();
         } catch (InterruptedException | NoSuchElementException e) {
             System.out.println("Connection closed from the client side");

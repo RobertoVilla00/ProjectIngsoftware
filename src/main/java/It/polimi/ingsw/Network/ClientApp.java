@@ -29,6 +29,8 @@ public class ClientApp {
             Client client=new Client(ip, p);
             if(useCli){
                 Cli cli = new Cli();
+                client.addObserver(cli);
+                cli.addObserver(client);
             }
             client.run();
         }catch (IOException e){

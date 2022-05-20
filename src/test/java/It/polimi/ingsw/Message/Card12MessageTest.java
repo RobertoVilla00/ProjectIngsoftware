@@ -39,9 +39,4 @@ public class Card12MessageTest {
         Color color=card12Message.getStudentColor();
         assertEquals(Color.GREEN,color);
     }
-
-    @Test(expected = InvalidInputException.class)
-    public void WrongColor() throws InvalidInputException {
-        Card12Message card12Message=new Card12Message("purple");
-    }
 }

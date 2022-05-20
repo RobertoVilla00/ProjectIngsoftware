@@ -11,7 +11,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Cli extends Observable implements View, Observer {
-	private final PrintStream out;
+	private PrintStream out;
 	private Scanner in = new Scanner(System.in) ;
 	private ShowMatchInfoMessage msg;
 	private int PlayerId;
@@ -849,7 +849,7 @@ public class Cli extends Observable implements View, Observer {
 		}
 		out.println("Do you want to play with expert rules? (y/n)");
 		String response=in.nextLine();
-		while(response.toUpperCase()!= "Y" || response.toUpperCase()!= "N"){
+		while(!response.toUpperCase().equals("Y") && !response.toUpperCase().equals("N")){
 			out.println(StrColor.ANSI_RED+"Invalid response! type y or n\n"+StrColor.ANSI_RESET);
 			response = in.nextLine();
 		}
@@ -872,6 +872,7 @@ public class Cli extends Observable implements View, Observer {
 			case PLAYERID:
 				PlayerIdMessage msg=(PlayerIdMessage)message;
 				this.PlayerId= msg.getPlayerId();
+				askName();
 				break;
 			case ERROR:
 				ErrorMessage errorMessage=(ErrorMessage) message;

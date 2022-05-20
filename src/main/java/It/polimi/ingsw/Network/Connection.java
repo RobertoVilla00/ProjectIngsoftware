@@ -89,7 +89,6 @@ public class Connection extends Observable implements Runnable {
         try{
             scanner=new Scanner(socket.getInputStream());
             out= new ObjectOutputStream(socket.getOutputStream());
-            SendMessage("Welcome in Eryantis!! What's your nickname?");
             server.Lobby(this);
             //TODO: inizia gestione regolare view
             while (isActive()){

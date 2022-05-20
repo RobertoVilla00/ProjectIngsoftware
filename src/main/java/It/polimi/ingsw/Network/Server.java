@@ -61,11 +61,9 @@ public class Server  {
             String name;
             NicknameMessage msg = (NicknameMessage)c.ReadMessage();
             name = msg.getNickname();
-
             System.out.println("ho letto "+name);
             do {
                 if (UsedName) {
-                    c.AsyncSend("Error! this name is already used ");
                     NicknameMessage nicknameMessage = (NicknameMessage)c.ReadMessage();
                     name = nicknameMessage.getNickname();
                     System.out.println("ho letto "+name);
@@ -77,7 +75,6 @@ public class Server  {
                     }
                 }
             } while (UsedName);
-            c.AsyncSend("valid name");
             waitConnection.put(c, name);
             if (waitConnection.size() == 1) {
                 keys = new ArrayList<>(waitConnection.keySet());
@@ -85,6 +82,7 @@ public class Server  {
                 PlayersMessage playersMessage = new PlayersMessage();
                 c1.AsyncSend(playersMessage);
                 RoundController controller = new RoundController();
+                controller.getGameController().getMatch().addObserver(virtualView);
                 StartMessage startMessage = (StartMessage)c.ReadMessage();
                 try{
                     controller.MessageHandler(startMessage);
@@ -97,7 +95,6 @@ public class Server  {
 
         else{
             AddConnection(c);
-            c.AsyncSend("too many players!");
             DeregisterConnection(c);
         }
     }
