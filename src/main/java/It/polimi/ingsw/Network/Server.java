@@ -5,8 +5,7 @@ import It.polimi.ingsw.Controller.RoundController;
 import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.WrongMessageException;
-import It.polimi.ingsw.Message.Message;
-import It.polimi.ingsw.Message.PlayerIdMessage;
+import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
@@ -60,12 +59,15 @@ public class Server  {
             List<Connection> keys = new ArrayList<>(waitConnection.keySet());
             boolean UsedName = false;
             String name;
-            name = c.Read().substring(4);
+            NicknameMessage msg = (NicknameMessage)c.ReadMessage();
+            name = msg.getNickname();
+
             System.out.println("ho letto "+name);
             do {
                 if (UsedName) {
                     c.AsyncSend("Error! this name is already used ");
-                    name = c.Read();
+                    NicknameMessage nicknameMessage = (NicknameMessage)c.ReadMessage();
+                    name = nicknameMessage.getNickname();
                     System.out.println("ho letto "+name);
                 }
                 UsedName = false;
@@ -80,21 +82,15 @@ public class Server  {
             if (waitConnection.size() == 1) {
                 keys = new ArrayList<>(waitConnection.keySet());
                 Connection c1 = keys.get(0);
-                c1.AsyncSend("Choose the number of player: 2 or 3 ?");
-                while (!(numberOfPlayer == 2 || numberOfPlayer == 3)) {
-                    try {
-                        String s = c1.Read();
-                        int Number = Integer.parseInt(s);
-
-                        if (Number == 2 || Number == 3) {
-                            numberOfPlayer = Number;
-                            c1.AsyncSend("Valid Number");
-                        } else {
-                            c1.AsyncSend("Error! choose 2 or 3");
-                        }
-                    } catch (NumberFormatException e) {
-                        c1.AsyncSend((String) "Error! choose 2 or 3");
-                    }
+                PlayersMessage playersMessage = new PlayersMessage();
+                c1.AsyncSend(playersMessage);
+                RoundController controller = new RoundController();
+                StartMessage startMessage = (StartMessage)c.ReadMessage();
+                try{
+                    controller.MessageHandler(startMessage);
+                }
+                catch(Exception e){
+                    e.printStackTrace();
                 }
             }
         }

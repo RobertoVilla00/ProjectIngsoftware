@@ -28,7 +28,7 @@ public class Connection extends Observable implements Runnable {
         this.server=server;
         this.lock=new Object();
 
-        //in=new ObjectInputStream(socket.getInputStream());
+        in=new ObjectInputStream(socket.getInputStream());
     }
 
     public synchronized void SendMessage(Object message){
@@ -55,10 +55,15 @@ public class Connection extends Observable implements Runnable {
         }).start();
     }
 
-    public String Read() throws NoSuchElementException, IOException {
-        Scanner read=new Scanner(socket.getInputStream());
-        String line=read.nextLine();
-        return line;
+    public Message ReadMessage() throws NoSuchElementException, IOException {
+        Object inputObject = null;
+        try{
+            inputObject = in.readObject();
+
+        }catch (IOException | ClassNotFoundException e ){
+            e.printStackTrace();
+        }
+        return (Message)inputObject;
     }
 
     public synchronized void closeConnection(){

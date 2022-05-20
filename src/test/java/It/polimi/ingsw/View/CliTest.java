@@ -36,7 +36,7 @@ public class CliTest {
     public void ShowMatchInfo(){
         Cli cli = new Cli();
         ShowMatchInfoMessage msg;
-        Match match = new Match(3, 1);
+        Match match = new Match(2, 0);
         for(int i=0;i<2;i++){
             match.MoveStudentsBagToIsland(0);
         }

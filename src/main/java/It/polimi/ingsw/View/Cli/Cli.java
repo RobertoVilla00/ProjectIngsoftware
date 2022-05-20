@@ -8,7 +8,6 @@ import It.polimi.ingsw.Observer.Observer;
 import It.polimi.ingsw.View.View;
 
 import java.io.PrintStream;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Cli extends Observable implements View, Observer {
@@ -828,6 +827,40 @@ public class Cli extends Observable implements View, Observer {
 		}
 	}
 
+	public void askName(){
+		out.println("Insert your name\n");
+		String name = in.nextLine();
+
+		NicknameMessage nicknameMessage = new NicknameMessage(name);
+		notifyObserver(nicknameMessage);
+	}
+
+	public void printError(String error){
+		out.println(error);
+	}
+
+	public void askPlayers(){
+		out.println("Insert the number of Players (must be 2 or 3)\n");
+		int numberOfPlayers = in.nextInt();
+		while(numberOfPlayers != 2 && numberOfPlayers != 3)
+		{
+			out.println(StrColor.ANSI_RED+"Invalid number! Please choose 2 or 3\n"+StrColor.ANSI_RESET);
+			numberOfPlayers = in.nextInt();
+		}
+		out.println("Do you want to play with expert rules? (y/n)");
+		String response=in.nextLine();
+		while(response.toUpperCase()!= "Y" || response.toUpperCase()!= "N"){
+			out.println(StrColor.ANSI_RED+"Invalid response! type y or n\n"+StrColor.ANSI_RESET);
+			response = in.nextLine();
+		}
+		int gamemode;
+		if(response=="Y") gamemode = 1;
+		else gamemode = 0;
+
+		StartMessage startMessage = new StartMessage(numberOfPlayers, gamemode);
+		notifyObserver(startMessage);
+	}
+
 	@Override
 	public void update(Message message) {
 		switch (message.getMessageContent()){
@@ -843,8 +876,10 @@ public class Cli extends Observable implements View, Observer {
 			case ERROR:
 				ErrorMessage errorMessage=(ErrorMessage) message;
 				String error=errorMessage.getError();
-				//printError(error);
+				printError(error);
 				break;
+			case PLAYERS:
+				askPlayers();
 		}
 	}
 }

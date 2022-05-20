@@ -16,6 +16,7 @@ public class RoundController {
 
     public RoundController(){
         this.Game = new GameController();
+        this.gamePhase = GamePhase.GAME_INIT;
     }
 
     public void MessageHandler(Message msg) throws NoActivePlayerException, InvalidInputException, WrongMessageException {
