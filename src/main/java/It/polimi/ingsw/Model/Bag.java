@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,8 +9,8 @@ import java.util.Collections;
 /**
  * This class represents the bag of the game.
  */
-public class Bag {
-
+public class Bag implements Serializable {
+	private static final long serialVersionUid=1L;
 	private ArrayList<Color> Students;
 
 

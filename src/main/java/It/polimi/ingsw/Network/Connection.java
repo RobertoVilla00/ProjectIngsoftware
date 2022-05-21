@@ -67,7 +67,7 @@ public class Connection extends Observable implements Runnable {
     }
 
     public synchronized void closeConnection(){
-        SendMessage("Connection closed from the server side");
+        System.out.println("Connection closed from the server side");
         try{
             socket.close();
         }catch (IOException e){
@@ -84,13 +84,9 @@ public class Connection extends Observable implements Runnable {
     }
 
     public void run(){
-        Scanner scanner;
-        String Nickname;
         try{
-            scanner=new Scanner(socket.getInputStream());
             out= new ObjectOutputStream(socket.getOutputStream());
             server.Lobby(this);
-            //TODO: inizia gestione regolare view
             while (isActive()){
                 handleConnection();
             }
@@ -104,12 +100,11 @@ public class Connection extends Observable implements Runnable {
     private void handleConnection(){
         try{
             synchronized (lock){
-                Message message=(Message)in.readObject();           ///PROBLEMA QUI in non inizializzato
-
+                Message message=ReadMessage();
                 server.handleReceivedMessage(message);
             }
         }
-        catch (ClassNotFoundException | IOException e){
+        catch (IOException e){
             //todo:handle exceptions
         }
     }

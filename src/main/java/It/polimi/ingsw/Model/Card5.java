@@ -1,11 +1,15 @@
 package It.polimi.ingsw.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * This is the class of the Character Card with Id 5, which extends the Character Card class.
  */
-public class Card5 extends CharacterCard{
+public class Card5 extends CharacterCard implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
     private int NoEntryTilesOnCard;
 
     /**

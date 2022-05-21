@@ -1,10 +1,14 @@
 package It.polimi.ingsw.Model;
 
 
+import java.io.Serializable;
+
 /**
  * This class represents the Assistant Card.
  */
-public class AssistantCard {
+public class AssistantCard implements Serializable {
+
+	private static final long serialVersionUID=1L;
 
 	private int OrderValue;
 

@@ -1,12 +1,15 @@
 package It.polimi.ingsw.Model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * This class represents the Player class of the game.
  */
-public class Player implements Comparable<Player> {
+public class Player implements Comparable<Player>, Serializable {
+
+	private static final long serialVersionUID=1L;
 
 	private TowerColor PlayerColor;
 

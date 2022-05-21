@@ -1,10 +1,14 @@
 package It.polimi.ingsw.Model;
 
 
+import java.io.Serializable;
+
 /**
  * This class represents the teacher.
  */
-public class Teacher {
+public class Teacher implements Serializable {
+
+	private static final long serialVersionUID=1L;
 
 	private Color TeacherColor;
 

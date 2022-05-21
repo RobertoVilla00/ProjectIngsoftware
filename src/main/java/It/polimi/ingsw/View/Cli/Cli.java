@@ -672,22 +672,22 @@ public class Cli extends Observable implements View, Observer {
 				if (msg.isExpertMode()) {
 					while (true) {
 						out.println("Type C if you want to play a Character Card, M if you want to move a Student\n");
-						if (in.nextLine().toUpperCase() == "C") {
+						if (in.nextLine().equalsIgnoreCase("C")) {
 							out.println("Choose the Character Card you want to play\n");
 							int CharacterCardIndex = in.nextInt();
 							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
 							notifyObserver(characterCardMessage);
 							break;
 						}
-						else if (in.nextLine().toUpperCase() == "M") {
+						else if (in.nextLine().equalsIgnoreCase("M")) {
 							while (true) {
 								out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island\n");
-								if (in.nextLine().toUpperCase() == "D") {
+								if (in.nextLine().equalsIgnoreCase("D")) {
 									out.println("Which Student do you want to move?\n");
 									int position = in.nextInt();
 									MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
 									break;
-								} else if (in.nextLine().toUpperCase() == "I") {
+								} else if (in.nextLine().equalsIgnoreCase("I")) {
 									out.println("Which Student do you want to move?\n");
 									int position = in.nextInt();
 									out.println("Select the Island\n");
@@ -705,12 +705,12 @@ public class Cli extends Observable implements View, Observer {
 				else{
 					while (true) {
 						out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island\n");
-						if (in.nextLine().toUpperCase() == "D") {
+						if (in.nextLine().equalsIgnoreCase("D")) {
 							out.println("Which Student do you want to move?\n");
 							int position = in.nextInt();
 							MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
 							break;
-						} else if (in.nextLine().toUpperCase() == "I") {
+						} else if (in.nextLine().equalsIgnoreCase("I")) {
 							out.println("Which Student do you want to move?\n");
 							int position = in.nextInt();
 							out.println("Select the Island\n");
@@ -726,13 +726,13 @@ public class Cli extends Observable implements View, Observer {
 				if (msg.isExpertMode()) {
 					while (true) {
 						out.println("Type C if you want to play a Character Card, M if you want to move Mother nature\n");
-						if (in.nextLine().toUpperCase() == "C") {
+						if (in.nextLine().equalsIgnoreCase("C")) {
 							out.println("Choose the Character Card you want to play\n");
 							int CharacterCardIndex = in.nextInt();
 							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
 							notifyObserver(characterCardMessage);
 							break;
-						} else if (in.nextLine().toUpperCase() == "M") {
+						} else if (in.nextLine().equalsIgnoreCase("M")) {
 							out.println("How many steps do you want Mother Nature to make?\n");
 							int steps = in.nextInt();
 							MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
@@ -754,13 +754,13 @@ public class Cli extends Observable implements View, Observer {
 				if (msg.isExpertMode()) {
 					while (true) {
 						out.println("Type C if you want to play a Character Card, P if you want to pick Students from a Cloud\n");
-						if (in.nextLine().toUpperCase() == "C") {
+						if (in.nextLine().equalsIgnoreCase("C")) {
 							out.println("Choose the Character Card you want to play\n");
 							int CharacterCardIndex = in.nextInt();
 							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
 							notifyObserver(characterCardMessage);
 							break;
-						} else if (in.nextLine().toUpperCase() == "P") {
+						} else if (in.nextLine().equalsIgnoreCase("P")) {
 							out.println("Choose the Cloud you want to pick the Students from\n");
 							int index = in.nextInt();
 							CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(index);
@@ -849,12 +849,12 @@ public class Cli extends Observable implements View, Observer {
 		}
 		out.println("Do you want to play with expert rules? (y/n)");
 		String response=in.nextLine();
-		while(!response.toUpperCase().equals("Y") && !response.toUpperCase().equals("N")){
+		while(!"Y".equalsIgnoreCase(response) && !"N".equalsIgnoreCase(response)){
 			out.println(StrColor.ANSI_RED+"Invalid response! type y or n\n"+StrColor.ANSI_RESET);
 			response = in.nextLine();
 		}
 		int gamemode;
-		if(response=="Y") gamemode = 1;
+		if(response.equalsIgnoreCase("Y")) gamemode = 1;
 		else gamemode = 0;
 
 		StartMessage startMessage = new StartMessage(numberOfPlayers, gamemode);
@@ -872,6 +872,9 @@ public class Cli extends Observable implements View, Observer {
 			case PLAYERID:
 				PlayerIdMessage msg=(PlayerIdMessage)message;
 				this.PlayerId= msg.getPlayerId();
+				askName();
+				break;
+			case NICKNAME:
 				askName();
 				break;
 			case ERROR:

@@ -1,11 +1,14 @@
 package It.polimi.ingsw.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * This class represents the deck of Assistant Card.
  */
-public class AssistantCardDeck {
+public class AssistantCardDeck implements Serializable {
+	private static final long serialVersionUID=1L;
+
 	private ArrayList<AssistantCard> Cards;
 
 	/**

@@ -129,8 +129,8 @@ public class RoundController {
             case FILL_CLOUDS:
                 Game.FillClouds();
                 this.gamePhase = GamePhase.ASSISTANT_CARD;
-                Game.getMatch().setGamePhase(gamePhase);
-                Game.getMatch().CreateMessage();
+                Game.getMatch().setGamePhase(this.gamePhase);
+                //Game.getMatch().CreateMessage();
                 break;
 
             case ASSISTANT_CARD:
@@ -143,7 +143,7 @@ public class RoundController {
                         Game.getMatch().SortPlayersByOrderValue();
                         setFirstActivePlayer();
                         this.gamePhase = GamePhase.MOVE_STUDENT;
-                        Game.getMatch().setGamePhase(gamePhase);
+                        Game.getMatch().setGamePhase(this.gamePhase);
                     }
                 }
                 catch (InvalidInputException e) {
@@ -161,7 +161,7 @@ public class RoundController {
                     if(MovedStudentCounter == Game.getMatch().getNumberOfPlayers()+1 || Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().getEntranceStudentsNumber()==0) {
                         //change phase if player moved max num of students or if the entrance of the school is empty
                         this.gamePhase = GamePhase.MOVE_MN;
-                        Game.getMatch().setGamePhase(gamePhase);
+                        Game.getMatch().setGamePhase(this.gamePhase);
                         MovedStudentCounter=0;      //reset counter
                     }
                 } catch (InvalidInputException e) {
@@ -176,7 +176,7 @@ public class RoundController {
                 try {
                     Game.MoveMotherNature((MotherNatureMessage) msg);
                     this.gamePhase = GamePhase.CHOOSE_CLOUD;
-                    Game.getMatch().setGamePhase(gamePhase);
+                    Game.getMatch().setGamePhase(this.gamePhase);
                 }
                 catch (InvalidInputException e) {
                     System.out.println(e.getMessage());
@@ -194,7 +194,7 @@ public class RoundController {
                     if (!FinishedPlayers()) {
                         setNextActivePlayer();
                         this.gamePhase = GamePhase.MOVE_STUDENT;
-                        Game.getMatch().setGamePhase(gamePhase);
+                        Game.getMatch().setGamePhase(this.gamePhase);
                     }
                     else{
                         Game.EndOfRound();
@@ -230,7 +230,7 @@ public class RoundController {
                 }
                 finally {
                     this.gamePhase = previousPhase;
-                    Game.getMatch().setGamePhase(gamePhase);
+                    Game.getMatch().setGamePhase(this.gamePhase);
                     break;
                 }
         }

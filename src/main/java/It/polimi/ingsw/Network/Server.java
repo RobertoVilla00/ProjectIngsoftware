@@ -23,7 +23,7 @@ public class Server  {
     private List<Connection> connections = new ArrayList<Connection>();
     private Map<Connection, String> waitConnection = new HashMap<>();
     private Map<Connection, Connection> playConnection = new HashMap<>();
-    private RoundController roundController;
+    private RoundController controller;
 
     public Server(int port) throws IOException {
         this.serverSocket = new ServerSocket(port);
@@ -51,9 +51,10 @@ public class Server  {
 
 
     public synchronized void Lobby(Connection c) throws IOException {
+        System.out.println("nella lobby");
         if (connections.size() == 0 || connections.size() < numberOfPlayer) {
             AddConnection(c);
-            PlayerIdMessage playerIdMessage=new PlayerIdMessage(connections.size());
+            PlayerIdMessage playerIdMessage=new PlayerIdMessage(connections.size()-1);
             c.AsyncSend(playerIdMessage);
             VirtualView virtualView=new VirtualView(c);
             List<Connection> keys = new ArrayList<>(waitConnection.keySet());
@@ -64,6 +65,9 @@ public class Server  {
             System.out.println("ho letto "+name);
             do {
                 if (UsedName) {
+                    ErrorMessage errorMessage=new ErrorMessage("The name is already taken!");
+                    c.AsyncSend(errorMessage);
+                    c.AsyncSend(msg);
                     NicknameMessage nicknameMessage = (NicknameMessage)c.ReadMessage();
                     name = nicknameMessage.getNickname();
                     System.out.println("ho letto "+name);
@@ -81,9 +85,9 @@ public class Server  {
                 Connection c1 = keys.get(0);
                 PlayersMessage playersMessage = new PlayersMessage();
                 c1.AsyncSend(playersMessage);
-                RoundController controller = new RoundController();
-                controller.getGameController().getMatch().addObserver(virtualView);
+                controller = new RoundController();
                 StartMessage startMessage = (StartMessage)c.ReadMessage();
+                numberOfPlayer=startMessage.getNumberOfPlayers();
                 try{
                     controller.MessageHandler(startMessage);
                 }
@@ -91,12 +95,18 @@ public class Server  {
                     e.printStackTrace();
                 }
             }
+            controller.getGameController().getMatch().addObserver(virtualView);
+            if (waitConnection.size() == numberOfPlayer){
+                controller.getGameController().getMatch().CreateMessage();
+            }
         }
+
 
         else{
             AddConnection(c);
             DeregisterConnection(c);
         }
+
     }
 
     public void run() {
@@ -117,7 +127,7 @@ public class Server  {
 
     public void handleReceivedMessage(Message message) {
         try {
-            roundController.MessageHandler(message);
+            controller.MessageHandler(message);
         } catch (NoActivePlayerException e) {
             e.printStackTrace();
         } catch (InvalidInputException e) {

@@ -1,10 +1,14 @@
 package It.polimi.ingsw.Model;
 
 
+import java.io.Serializable;
+
 /**
  * This class represents the Character Card.
  */
-public class CharacterCard {
+public class CharacterCard implements Serializable {
+
+	private static final long serialVersionUID=1L;
 
 	private int IdCharacterCard;
 

@@ -4,13 +4,15 @@ import It.polimi.ingsw.Controller.GamePhase;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Observer.Observable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
  * This class is the main class of the game, which contains the main methods.
  */
-public class Match extends Observable {
+public class Match extends Observable implements Serializable {
+	private static final long serialVersionUID=1L;
 
 	private int NumberOfPlayers;
 

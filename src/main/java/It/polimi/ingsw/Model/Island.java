@@ -1,11 +1,13 @@
 package It.polimi.ingsw.Model;
 
 
+import java.io.Serializable;
+
 /**
  * This class represents an island.
  */
-public class Island {
-
+public class Island implements Serializable {
+	private static final long serialVersionUID=1L;
 
 	private int GreenStudents;
 

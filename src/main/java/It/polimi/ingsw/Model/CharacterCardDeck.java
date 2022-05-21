@@ -1,14 +1,15 @@
 package It.polimi.ingsw.Model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * This class represents the deck of Character Cards.
  */
-public class CharacterCardDeck {
-
+public class CharacterCardDeck implements Serializable {
+	private static final long serialVersionUID=1L;
 	private ArrayList<CharacterCard> Cards;
 	private Match match;
 

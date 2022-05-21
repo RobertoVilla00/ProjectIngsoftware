@@ -533,4 +533,14 @@ public class RoundControllerTest {
 		Card12Message card12Message = new Card12Message("BLUE");
 		roundController.MessageHandler(card12Message);
 	}
+
+	@Test
+	public void GamePhase() throws NoActivePlayerException, InvalidInputException, WrongMessageException {
+		RoundController roundController = new RoundController();
+		StartMessage startMessage = new StartMessage(2, 1);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		GamePhase phase=roundController.getGameController().getMatch().getGamePhase();
+		assertEquals(phase,GamePhase.ASSISTANT_CARD);
+	}
 }
