@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Observable;
 
+/**
+ * The controller of the main methods of the game.
+ */
 public class GameController implements Observer {
 
     private Match match;
@@ -19,9 +22,18 @@ public class GameController implements Observer {
     private int ranking[][];
     /*private View view;*/
 
+    /**
+     * Default constructor.
+     */
     public GameController(){
     }
 
+    /**
+     * It creates a new match receiving the number of players and the game mode.
+     * In case of expert mode, it creates the Character card controller.
+     * @param startMessage: the message which contains the number of players and the game mode.
+     * @throws InvalidInputException: the number of players can only be 2 or 3 and game mode can only be 0 or 1.
+     */
     public void InitializeGame(StartMessage startMessage) throws InvalidInputException {
         match = new Match(startMessage.getNumberOfPlayers(), startMessage.getGameMode());
         if(startMessage.getNumberOfPlayers() < 2 || startMessage.getNumberOfPlayers() > 3){
@@ -29,7 +41,7 @@ public class GameController implements Observer {
         }
         else {
             if (startMessage.getGameMode() < 0 || startMessage.getGameMode() > 1) {
-                throw new InvalidInputException("Gamemode can only be 0 or 1");
+                throw new InvalidInputException("Game mode can only be 0 or 1");
             } else {
                 if (match.isExpertMode()) {
                     characterCardController = new CharacterCardController(this);
@@ -38,6 +50,10 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * It carries out the necessary checks to understand if an island should be unified or not.
+     * @param IslandIndex: the index of the island that must be checked for a possible unification.
+     */
     public void CheckIslandMerge(int IslandIndex){
 
         if(match.getTable().get(IslandIndex).isEmpty()) return;     //if island has no towers end check
@@ -81,6 +97,11 @@ public class GameController implements Observer {
         if (match.getTable().size() <= 3) EndGame();
     }
 
+    /**
+     * It checks if the student who moved the student takes possession of the professor.
+     * @param color: a color of a teacher.
+     * @param playerPlacingStudent: the player who places a student.
+     */
     public void CheckTeacherControl(Color color,Player playerPlacingStudent){
         Teacher ColorTeacher =match.getTeacherByColor(color);
         int highestNumberOfStudents=ColorTeacher.getHighestNumberOfStudents();
@@ -90,6 +111,10 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * It calculates the influence of the island and in case there is no towers it builds the tower.
+     * @param IslandIndex: the index of an island.
+     */
     public void CheckIslandInfluence(int IslandIndex){
         if(match.getTable().get(IslandIndex).GetNoEntryTile()){
             match.getTable().get(IslandIndex).ResetNoEntryTile();
@@ -144,6 +169,9 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * It checks if there are conditions for the end of the game.
+     */
     public void checkEndGame(){
         for(Player p:match.getPlayers()){
             if(match.getNumberOfPlayers()==2){
@@ -168,6 +196,12 @@ public class GameController implements Observer {
 
     }
 
+    /**
+     * It moves the student depending on the destination on the island or to the dining room.
+     * @param moveStudentMessage: contains the id of the active player, the index of student in the Entrance and the destination of the student.
+     * @throws InvalidInputException: in case of invalid destination, if the dining room is full or if the index of student is invalid.
+     * @throws NoActivePlayerException: in case there is no active player.
+     */
     public void MoveStudent(MoveStudentMessage moveStudentMessage) throws InvalidInputException, NoActivePlayerException {
         int activePlayerId = getActivePlayer();
         int StudentIndex = moveStudentMessage.getEntrancePosition();
@@ -192,6 +226,12 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * It moves mother nature depending on the number of steps received as a parameter.
+     * @param motherNatureMessage: it contains the number of steps mother nature must perform.
+     * @throws InvalidInputException: in case of a negative number of steps, if the number of steps is zero or if the number of steps is too high.
+     * @throws NoActivePlayerException: in case there is no active player.
+     */
     public void MoveMotherNature(MotherNatureMessage motherNatureMessage) throws InvalidInputException, NoActivePlayerException {
 
         if(motherNatureMessage.getSteps() == 0) throw new InvalidInputException("MotherNature has to do at least one step");
@@ -203,6 +243,12 @@ public class GameController implements Observer {
         else throw new InvalidInputException("Too many steps, max is "+match.getPlayerById(getActivePlayer()).GetPlayedMovements());
     }
 
+    /**
+     * It invokes the method that moves students from cloud given by parameter to Entrance.
+     * @param cloudChoiceMessage: contains the index of a cloud.
+     * @throws InvalidInputException: in case of an invalid cloud index.
+     * @throws NoActivePlayerException: in case there is no active player.
+     */
     public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage) throws InvalidInputException, NoActivePlayerException {
         if( cloudChoiceMessage.getCloudIndex() > match.getNumberOfPlayers()-1 || cloudChoiceMessage.getCloudIndex() < 0){
             throw new InvalidInputException("invalid Cloud index");
@@ -211,6 +257,12 @@ public class GameController implements Observer {
     }
 
 
+    /**
+     * This method allows you to play an assistant card.
+     * @param assistantCardMessage: contains the index of the assistant card to be played.
+     * @throws InvalidInputException: in case of the card's index is invalid or if the assistant card selected is not playable.
+     * @throws NoActivePlayerException: in case there is no active player.
+     */
     public void PlayAssistantCard(AssistantCardMessage assistantCardMessage) throws InvalidInputException, NoActivePlayerException {
         int card = assistantCardMessage.getCardIndex();
         boolean notPlayable = false;
@@ -253,6 +305,10 @@ public class GameController implements Observer {
 
     }
 
+    /**
+     * This method allows you to calculate who is the winner of the game by returning the id of the winner.
+     * @return the id of the winner.
+     */
     public int EndGame(){                                   //return the id of the winner
         ranking=new int[match.getNumberOfPlayers()][3];
         for(Player p:match.getPlayers()){
@@ -295,6 +351,11 @@ public class GameController implements Observer {
         return winnerId;
     }
 
+    /**
+     * Return the id of the active player.
+     * @return the id of the active player.
+     * @throws NoActivePlayerException: in case there is no active player.
+     */
     public int getActivePlayer() throws NoActivePlayerException{
         int id = 0;
         for(Player p: match.getPlayers()){
@@ -304,8 +365,17 @@ public class GameController implements Observer {
     }
 
 
+    /**
+     * Return the current match.
+     * @return the current match.
+     */
     public Match getMatch(){return this.match;}
 
+    /**
+     * Return the position of the active player.
+     * @return the position of the active player in the array of players.
+     * @throws NoActivePlayerException: in case there is no active player.
+     */
     public int getActivePlayerPosition() throws NoActivePlayerException {
         for(int i=0; i< match.getNumberOfPlayers(); i++){
             if(match.getPlayers()[i].IsActive()) return i;
@@ -313,6 +383,9 @@ public class GameController implements Observer {
         throw new NoActivePlayerException();
     }
 
+    /**
+     * It is used to fill the clouds.
+     */
     public void FillClouds(){
         for(int i=0;i< getMatch().getNumberOfPlayers();i++){
             if(match.getBag().BagSize()!=0){
@@ -321,6 +394,13 @@ public class GameController implements Observer {
         }
     }
 
+    /**
+     * It is used to play a character Card. It returns a number depending on the id of the card.
+     * @param cardMessage: contains the index of the Character Card to be played.
+     * @return a number. 0 if the Id of the card is 4,6 or 9, otherwise it returns the id of the card.
+     * @throws InvalidInputException: in case the index of the Character Card is invalid.
+     * @throws NoActivePlayerException: in case there is no active player.
+     */
     public int PlayCharacterCard(CharacterCardMessage cardMessage) throws InvalidInputException, NoActivePlayerException {
         if(cardMessage.getCardIndex()<0 || cardMessage.getCardIndex()>2){
             throw new InvalidInputException("Invalid Card Index");
@@ -343,7 +423,9 @@ public class GameController implements Observer {
     }
 
 
-
+    /**
+     * It executes all the actions needed at the end of every round.
+     */
     public void EndOfRound(){       //executes all the actions needed at the end of every round
         //match.setPlaysCard6(false); ??
 
@@ -353,6 +435,14 @@ public class GameController implements Observer {
 
     }
 
+    /**
+     * It allows you to play a Character Card depending on the id of the card.
+     * @param id: the id of a Character Card.
+     * @param msg: the message to forward.
+     * @throws NoActivePlayerException: in case there is no active player.
+     * @throws InvalidInputException: in case the index of the card is invalid.
+     * @throws NoEntryTilesException: in case there are no prohibition cards.
+     */
     public void PlayCharacterCardById(int id, Message msg) throws NoActivePlayerException, InvalidInputException, NoEntryTilesException {
         if(id==1){
             characterCardController.PlayCard1((Card1Message) msg);
