@@ -1,5 +1,8 @@
 package It.polimi.ingsw.Message;
 
+/**
+ * The enum of the content of the Messages.
+ */
 public enum MessageContent {
     START,
     NICKNAME,

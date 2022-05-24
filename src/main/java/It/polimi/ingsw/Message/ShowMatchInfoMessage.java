@@ -6,6 +6,9 @@ import It.polimi.ingsw.Model.*;
 
 import java.util.ArrayList;
 
+/**
+ * The message for the info of the match.
+ */
 public class ShowMatchInfoMessage extends Message{
 
     private static final long serialVersionUID=1L;
@@ -24,6 +27,10 @@ public class ShowMatchInfoMessage extends Message{
     private boolean ExpertMode;
 
 
+    /**
+     * The constructor of the message with the match's infos.
+     * @param match: the current match.
+     */
     public ShowMatchInfoMessage(Match match) {
         super(MessageContent.SHOWMATCHINFO);
         this.ActivePlayerId=match.getActivePlayerId();
@@ -38,6 +45,10 @@ public class ShowMatchInfoMessage extends Message{
         this.Teachers= match.getTeachers();
     }
 
+    /**
+     * Return the Arraylist of teachers.
+     * @return the ArrayList of teachers.
+     */
     public ArrayList<Teacher> getTeachers() {
         return Teachers;
     }
@@ -47,7 +58,10 @@ public class ShowMatchInfoMessage extends Message{
     }
 
 
-
+    /**
+     * Return true if the mode is expert, false if not.
+     * @return the mode of the game.
+     */
     public boolean isExpertMode() {
         return ExpertMode;
     }
@@ -56,10 +70,18 @@ public class ShowMatchInfoMessage extends Message{
         ExpertMode = expertMode;
     }
 
+    /**
+     * Return the array of Character Cards.
+     * @return the Array of Character Cards.
+     */
     public CharacterCard[] getCharacterCards() {
         return CharacterCards;
     }
 
+    /**
+     * Return the position of mother nature.
+     * @return the position of mother nature.
+     */
     public int getMotherNaturePosition() {
         return MotherNaturePosition;
     }
@@ -72,6 +94,10 @@ public class ShowMatchInfoMessage extends Message{
         CharacterCards = characterCards;
     }
 
+    /**
+     * Return the ArrayList of clouds.
+     * @return the ArrayList of clouds.
+     */
     public ArrayList<Cloud> getClouds() {
         return Clouds;
     }
@@ -80,14 +106,26 @@ public class ShowMatchInfoMessage extends Message{
         Clouds = clouds;
     }
 
+    /**
+     * Return the Array of players.
+     * @return the Array of players.
+     */
     public Player[] getPlayers() {
         return Players;
     }
 
+    /**
+     * It sets the array of players.
+     * @param players: the array of the players.
+     */
     public void setPlayers(Player[] players) {
         Players = players;
     }
 
+    /**
+     * Return the ArrayList of islands.
+     * @return the ArrayList of Islands.
+     */
     public ArrayList<Island> getTable() {
         return Table;
     }
@@ -96,6 +134,10 @@ public class ShowMatchInfoMessage extends Message{
         Table = table;
     }
 
+    /**
+     * Return the phase of the game.
+     * @return the phase of the game.
+     */
     public GamePhase getGamePhase() {
         return gamePhase;
     }
@@ -104,6 +146,10 @@ public class ShowMatchInfoMessage extends Message{
         this.gamePhase = gamePhase;
     }
 
+    /**
+     * Return the id of the active player.
+     * @return the id of the active player.
+     */
     public int getActivePlayerId() {
         return ActivePlayerId;
     }
@@ -112,6 +158,10 @@ public class ShowMatchInfoMessage extends Message{
         ActivePlayerId = activePlayerId;
     }
 
+    /**
+     * Return the number of the expected card.
+     * @return the number of the expected card.
+     */
     public int getExpectedCardMessage() {
         return ExpectedCardMessage;
     }
