@@ -14,7 +14,7 @@ import java.util.Observable;
 /**
  * The controller of the main methods of the game.
  */
-public class GameController implements Observer {
+public class GameController {
 
     private Match match;
     private CharacterCardController characterCardController;
@@ -165,6 +165,7 @@ public class GameController implements Observer {
             if (!isTied) {                //if the count is tied no one build the tower
                 TowerColor BuiltTowerColor = match.getPlayers()[idMax].getPlayerColor();         //find color of the tower to build
                 match.getTable().get(IslandIndex).BuildTower(BuiltTowerColor);
+                match.CountNumberOfTowers();
                 checkEndGame();
                 CheckIslandMerge(IslandIndex);
             }
@@ -466,11 +467,6 @@ public class GameController implements Observer {
             characterCardController.PlayCard12((Card12Message) msg);
         }
     }
-
-    @Override
-    public void update(Message message){
-    }
-
 }
 
 

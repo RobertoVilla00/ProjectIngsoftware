@@ -239,4 +239,13 @@ public class Player implements Comparable<Player>, Serializable {
 	 * @return the ID of the player.
 	 */
 	public int getPlayerId(){ return this.PlayerId; }
+
+	/**
+	 * Set a number of towers placed.
+	 * @param number: the number to set.
+
+	 */
+	public void setNumberOfTowers(int number){
+		TowersPlaced=number;
+	}
 }

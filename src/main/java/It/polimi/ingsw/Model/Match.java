@@ -4,6 +4,7 @@ import It.polimi.ingsw.Controller.GamePhase;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Observer.Observable;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -549,6 +550,22 @@ public class Match extends Observable implements Serializable {
 				numberOfTeachers++;
 		}
 		return numberOfTeachers;
+	}
+
+	/**
+	 * Count and set how many towers each player built.
+	 */
+	public void CountNumberOfTowers(){
+		for(Player p: Players) {
+			TowerColor towerColor= p.getPlayerColor();
+			int numberOfTowers=0;
+			for (Island i : Table) {
+				if(i.getTowersColor()==towerColor){
+					numberOfTowers=numberOfTowers+i.getNumberOfTowers();
+				}
+			}
+			p.setNumberOfTowers(numberOfTowers);
+		}
 	}
 }
 
