@@ -182,13 +182,16 @@ public class CharacterCardController{
                 if (message.getStudentIndex() >= card.getNumberOfStudents()) {
                     throw new InvalidInputException("Given Student Index is not Available, please give another one");
                 } else {
-                    Color StudentColor = card.RemoveStudent(message.getStudentIndex());
+                    Color StudentColor = card.GetStudentColor(message.getStudentIndex());
                     if (Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().getStudentNumber(StudentColor) == 10) {
                         throw new InvalidInputException("Dining Room is full, you cannot play this Card");
-                    } else {
+                    }
+                    else {
+                        card.RemoveStudent(message.getStudentIndex());
                         Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(StudentColor);
                         Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card.getCardCost());
                         Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
+                        Game.CheckTeacherControl(StudentColor,Game.getMatch().getPlayerById(Game.getActivePlayer()));
                         Game.getMatch().CreateMessage();
                     }
                 }
@@ -213,6 +216,7 @@ public class CharacterCardController{
                     for (int i = 0; i < 3; i++) {
                         if (p.getPlayersSchool().getStudentNumber(message.getStudentColor()) > 0) {
                             p.getPlayersSchool().RemoveStudentFromDiningRoom(message.getStudentColor());
+                            Game.getMatch().getBag().AddStudent(message.getStudentColor());
                         }
                     }
                 }

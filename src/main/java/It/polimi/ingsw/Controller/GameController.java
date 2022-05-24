@@ -118,6 +118,8 @@ public class GameController implements Observer {
     public void CheckIslandInfluence(int IslandIndex){
         if(match.getTable().get(IslandIndex).GetNoEntryTile()){
             match.getTable().get(IslandIndex).ResetNoEntryTile();
+            Card5 card5=(Card5) match.getCharacterCardById(5);
+            card5.AddNoEntryTile();
         }
         else {
             int InfluencePoints[] = new int[match.getNumberOfPlayers()];
@@ -217,7 +219,11 @@ public class GameController implements Observer {
                     if(match.getPlayerById(activePlayerId).getPlayersSchool().getStudentNumber(StudentColor)==10) {
                         throw new InvalidInputException("Dining Room is full, you cannot play this Card");
                     }
-                    else match.MoveStudentsFromEntranceToDiningRoom(StudentIndex, activePlayerId);
+                    else {
+                        match.MoveStudentsFromEntranceToDiningRoom(StudentIndex, activePlayerId);
+                        Player player=match.getPlayerById(activePlayerId);
+                        CheckTeacherControl(StudentColor,player);
+                    }
                 }
                 else {                                        //if destination is an island
                     match.MoveStudentsFromEntranceToIsland(StudentIndex, activePlayerId, Destination);

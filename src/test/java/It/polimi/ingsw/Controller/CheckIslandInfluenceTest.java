@@ -175,6 +175,9 @@ public class CheckIslandInfluenceTest {
         GameController controller=new GameController();
         StartMessage startMessage=new StartMessage(3,1);
         controller.InitializeGame(startMessage);
+        while(controller.getMatch().getCharacterCardsOnTable()[0].getIdCharacterCard()!=5){
+            controller.InitializeGame(startMessage);
+        }
         controller.getMatch().getPlayers()[0].getPlayersSchool().AddStudentToDiningRoom(Color.BLUE);
         controller.CheckTeacherControl(Color.BLUE,controller.getMatch().getPlayers()[0]);
         controller.getMatch().getTable().get(0).AddStudent(Color.BLUE);

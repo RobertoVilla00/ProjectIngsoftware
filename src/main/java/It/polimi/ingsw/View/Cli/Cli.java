@@ -714,6 +714,7 @@ public class Cli extends Observable implements View, Observer {
 							out.println("Which Student do you want to move?\n");
 							int position = Integer.parseInt(in.nextLine());
 							MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
+							notifyObserver(moveStudentMessage);
 							break;
 						} else if (in.nextLine().equalsIgnoreCase("I")) {
 							out.println("Which Student do you want to move?\n");
@@ -721,6 +722,7 @@ public class Cli extends Observable implements View, Observer {
 							out.println("Select the Island\n");
 							int destination = Integer.parseInt(in.nextLine());
 							MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, destination);
+							notifyObserver(moveStudentMessage);
 							break;
 						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
 					}
