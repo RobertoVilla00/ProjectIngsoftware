@@ -12,16 +12,16 @@ import java.util.Scanner;
 
 public class Cli extends Observable implements View, Observer {
 	private PrintStream out;
-	private Scanner in = new Scanner(System.in) ;
+	private Scanner in = new Scanner(System.in);
 	private ShowMatchInfoMessage msg;
 	private int PlayerId;
 
-	public Cli(){
-		out=System.out;
+	public Cli() {
+		out = System.out;
 	}
 
-	public void startGame(){
-		out.println(StrColor.ANSI_RED+"                                                                                                                      \n" +
+	public void startGame() {
+		out.println(StrColor.ANSI_RED + "                                                                                                                      \n" +
 				"         .**ooooOOOOOOOOOOOOOO*                 .oOOo.                                                                    \n" +
 				"      .o##o**°*@@@#.°°°°°*o#@@@°                #@@@@o                                   °#                               \n" +
 				"     *@@*     #@@@#          *#@o                *O#O*                                  *@@                               \n" +
@@ -35,7 +35,7 @@ public class Cli extends Observable implements View, Observer {
 				"          °*oO####OoooooooOO##*                                                         °°°         *O#*.       °°°°°     \n" +
 				"                                                                                                  °o#@o°                  \n" +
 				"                                                                                                °o@@@*°                   \n" +
-				"                       																		 °*OO°                     \n"+StrColor.ANSI_RESET);
+				"                       																		 °*OO°                     \n" + StrColor.ANSI_RESET);
 
 	}
 
@@ -49,7 +49,6 @@ public class Cli extends Observable implements View, Observer {
 		int cardCnt = 0;
 
 
-
 		StringBuilder str = new StringBuilder();
 		str.append("ISLANDS:\n\n");
 
@@ -58,7 +57,7 @@ public class Cli extends Observable implements View, Observer {
 
 		//first row
 
-		if(msg.getTable().size()>0) {
+		if (msg.getTable().size() > 0) {
 			toRemove = 6 - msg.getTable().size();
 			if (toRemove < 0) toRemove = 0;
 			for (int i = 0; i < 156 - toRemove * 26; i++) str.append("-");
@@ -71,8 +70,7 @@ public class Cli extends Observable implements View, Observer {
 				if (msg.getTable().get(i).GetNoEntryTile()) {
 					str.append("  " + StrColor.ANSI_RED + "Ø" + StrColor.ANSI_RESET);
 					for (int j = 0; j < 12; j++) str.append(" ");
-				}
-				else if (msg.getMotherNaturePosition() == i) {
+				} else if (msg.getMotherNaturePosition() == i) {
 					str.append("  " + StrColor.ANSI_RED + "-MN-" + StrColor.ANSI_RESET);
 					for (int j = 0; j < 9; j++) str.append(" ");
 				} else for (int j = 0; j < 15; j++) {
@@ -141,23 +139,23 @@ public class Cli extends Observable implements View, Observer {
 			}
 			str.append("\n");
 
-					//show towers
+			//show towers
 
 			str.append("|");
 			for (int i = 0; i < 6 && i < msg.getTable().size(); i++) {
 				for (int j = 0; j < msg.getTable().get(i).getNumberOfTowers(); j++) {
 
-					if (msg.getTable().get(i).getTowersColor()== TowerColor.BLACK) {
+					if (msg.getTable().get(i).getTowersColor() == TowerColor.BLACK) {
 						str.append(StrColor.ANSI_BLACK + "█ " + StrColor.ANSI_RESET);
-						towerCnt+=2;
+						towerCnt += 2;
 					}
-					if (msg.getTable().get(i).getTowersColor()== TowerColor.GREY) {
+					if (msg.getTable().get(i).getTowersColor() == TowerColor.GREY) {
 						str.append(StrColor.ANSI_GREY + "█ " + StrColor.ANSI_RESET);
-						towerCnt+=2;
+						towerCnt += 2;
 					}
-					if (msg.getTable().get(i).getTowersColor()== TowerColor.WHITE) {
+					if (msg.getTable().get(i).getTowersColor() == TowerColor.WHITE) {
 						str.append("█ ");
-						towerCnt+=2;
+						towerCnt += 2;
 					}
 				}
 				for (int k = 0; k < defaultSpace - towerCnt; k++) str.append(" ");
@@ -172,7 +170,7 @@ public class Cli extends Observable implements View, Observer {
 
 		//second row
 
-		if(msg.getTable().size()>6) {
+		if (msg.getTable().size() > 6) {
 			toRemove = 12 - msg.getTable().size();
 			if (toRemove < 0) toRemove = 0;
 
@@ -182,16 +180,15 @@ public class Cli extends Observable implements View, Observer {
 
 				if (msg.getTable().get(i).GetNoEntryTile()) {
 					str.append("  " + StrColor.ANSI_RED + "Ø" + StrColor.ANSI_RESET);
-					if(i>8) for(int j=0;j<11;j++) str.append(" ");
+					if (i > 8) for (int j = 0; j < 11; j++) str.append(" ");
 					else for (int j = 0; j < 12; j++) str.append(" ");
-				}
-				else if (msg.getMotherNaturePosition() == i) {
+				} else if (msg.getMotherNaturePosition() == i) {
 					str.append("  " + StrColor.ANSI_RED + "-MN-" + StrColor.ANSI_RESET);
-					if(i>8) for (int j = 0; j < 8; j++) str.append(" ");
-					else for(int j=0; j<9;j++) str.append(" ");
+					if (i > 8) for (int j = 0; j < 8; j++) str.append(" ");
+					else for (int j = 0; j < 9; j++) str.append(" ");
 				} else for (int j = 0; j < 15; j++) {
-					if (i > 8 && j< 14) str.append(" ");
-					else if (i<9) str.append(" ");
+					if (i > 8 && j < 14) str.append(" ");
+					else if (i < 9) str.append(" ");
 				}
 			}
 			str.append("|");
@@ -260,17 +257,17 @@ public class Cli extends Observable implements View, Observer {
 			for (int i = 6; i < 12 && i < msg.getTable().size(); i++) {
 				for (int j = 0; j < msg.getTable().get(i).getNumberOfTowers(); j++) {
 
-					if (msg.getTable().get(i).getTowersColor()== TowerColor.BLACK) {
+					if (msg.getTable().get(i).getTowersColor() == TowerColor.BLACK) {
 						str.append(StrColor.ANSI_BLACK + "█ " + StrColor.ANSI_RESET);
-						towerCnt+=2;
+						towerCnt += 2;
 					}
-					if (msg.getTable().get(i).getTowersColor()== TowerColor.GREY) {
+					if (msg.getTable().get(i).getTowersColor() == TowerColor.GREY) {
 						str.append(StrColor.ANSI_GREY + "█ " + StrColor.ANSI_RESET);
-						towerCnt+=2;
+						towerCnt += 2;
 					}
-					if (msg.getTable().get(i).getTowersColor()== TowerColor.WHITE) {
+					if (msg.getTable().get(i).getTowersColor() == TowerColor.WHITE) {
 						str.append("█ ");
-						towerCnt+=2;
+						towerCnt += 2;
 					}
 				}
 				for (int k = 0; k < defaultSpace - towerCnt; k++) str.append(" ");
@@ -284,29 +281,28 @@ public class Cli extends Observable implements View, Observer {
 			str.append("\n");
 		}
 
-		if(msg.isExpertMode()) printCharacterCards(str);
-
+		if (msg.isExpertMode()) printCharacterCards(str);
 
 
 		//PRINTING THE CLOUDS
 
-		for(int i=0;i<msg.getClouds().size();i++){
-			str.append("CLOUD "+(i+1)+(": "));
+		for (int i = 0; i < msg.getClouds().size(); i++) {
+			str.append("CLOUD " + (i + 1) + (": "));
 			str.append("[");
-			for(Color student: msg.getClouds().get(i).getCloudStudents()){
-				if(student == Color.BLUE) {
+			for (Color student : msg.getClouds().get(i).getCloudStudents()) {
+				if (student == Color.BLUE) {
 					str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
 				}
-				if(student == Color.GREEN) {
+				if (student == Color.GREEN) {
 					str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
 				}
-				if(student == Color.YELLOW) {
+				if (student == Color.YELLOW) {
 					str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
 				}
-				if(student == Color.RED) {
+				if (student == Color.RED) {
 					str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
 				}
-				if(student == Color.PINK) {
+				if (student == Color.PINK) {
 					str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
 				}
 			}
@@ -317,67 +313,66 @@ public class Cli extends Observable implements View, Observer {
 
 		//PRINTING SCHOOLS
 
-		for(Player p: msg.getPlayers()) {
+		for (Player p : msg.getPlayers()) {
 
 			for (int i = 0; i < 13; i++) str.append("-");
-			for(int i=0;i<20;i++) str.append(" ");
+			for (int i = 0; i < 20; i++) str.append(" ");
 		}
 		str.append("\n");
-		for(Player p: msg.getPlayers()){
+		for (Player p : msg.getPlayers()) {
 			str.append("| ");
-			for(int i=0;i<p.getPlayersSchool().getEntranceStudentsNumber();i++){
-				if(p.getPlayersSchool().GetEntranceStudentColor(i)==Color.GREEN){
+			for (int i = 0; i < p.getPlayersSchool().getEntranceStudentsNumber(); i++) {
+				if (p.getPlayersSchool().GetEntranceStudentColor(i) == Color.GREEN) {
 					str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
 					studentCnt++;
 				}
-				if(p.getPlayersSchool().GetEntranceStudentColor(i)==Color.BLUE){
+				if (p.getPlayersSchool().GetEntranceStudentColor(i) == Color.BLUE) {
 					str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
 					studentCnt++;
 				}
-				if(p.getPlayersSchool().GetEntranceStudentColor(i)==Color.RED){
+				if (p.getPlayersSchool().GetEntranceStudentColor(i) == Color.RED) {
 					str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
 					studentCnt++;
 				}
-				if(p.getPlayersSchool().GetEntranceStudentColor(i)==Color.YELLOW){
+				if (p.getPlayersSchool().GetEntranceStudentColor(i) == Color.YELLOW) {
 					str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
 					studentCnt++;
 				}
-				if(p.getPlayersSchool().GetEntranceStudentColor(i)==Color.PINK){
+				if (p.getPlayersSchool().GetEntranceStudentColor(i) == Color.PINK) {
 					str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
 					studentCnt++;
 				}
 			}
-			for(int i=0;i<10-studentCnt;i++){
+			for (int i = 0; i < 10 - studentCnt; i++) {
 				str.append(" ");
 			}
-			studentCnt=0;
+			studentCnt = 0;
 			str.append("|");
-			for(int i=0;i<20;i++) str.append(" ");
+			for (int i = 0; i < 20; i++) str.append(" ");
 		}
 
 		str.append("\n");
 
 
-
-		for(Player p: msg.getPlayers()) {
+		for (Player p : msg.getPlayers()) {
 
 			for (int i = 0; i < 13; i++) str.append("-");
-			for(int i=0;i<20;i++) str.append(" ");
+			for (int i = 0; i < 20; i++) str.append(" ");
 		}
 
 		//printing green students
 		str.append("\n");
-		for(Player p: msg.getPlayers()){
+		for (Player p : msg.getPlayers()) {
 			str.append("|");
-			for(int i=0;i<p.getPlayersSchool().getStudentNumber(Color.GREEN);i++){
+			for (int i = 0; i < p.getPlayersSchool().getStudentNumber(Color.GREEN); i++) {
 				str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
 			}
-			for(int i=0;i<10-studentCnt;i++) str.append(" ");
-			studentCnt=0;
-			for(Teacher t: msg.getTeachers()){
-				if(t.getTeacherColor()==Color.GREEN){
-					if(t.getControllingPlayer()==p) str.append(StrColor.ANSI_GREEN + "@"+ StrColor.ANSI_RESET);
+			for (int i = 0; i < 10 - studentCnt; i++) str.append(" ");
+			studentCnt = 0;
+			for (Teacher t : msg.getTeachers()) {
+				if (t.getTeacherColor() == Color.GREEN) {
+					if (t.getControllingPlayer() == p) str.append(StrColor.ANSI_GREEN + "@" + StrColor.ANSI_RESET);
 					else str.append(" ");
 				}
 			}
@@ -386,17 +381,17 @@ public class Cli extends Observable implements View, Observer {
 		str.append("\n");
 
 		//printing red students
-		for(Player p: msg.getPlayers()){
+		for (Player p : msg.getPlayers()) {
 			str.append("|");
-			for(int i=0;i<p.getPlayersSchool().getStudentNumber(Color.RED);i++){
+			for (int i = 0; i < p.getPlayersSchool().getStudentNumber(Color.RED); i++) {
 				str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
 			}
-			for(int i=0;i<10-studentCnt;i++) str.append(" ");
-			studentCnt=0;
-			for(Teacher t: msg.getTeachers()){
-				if(t.getTeacherColor()==Color.RED){
-					if(t.getControllingPlayer()==p) str.append(StrColor.ANSI_RED + "@"+ StrColor.ANSI_RESET);
+			for (int i = 0; i < 10 - studentCnt; i++) str.append(" ");
+			studentCnt = 0;
+			for (Teacher t : msg.getTeachers()) {
+				if (t.getTeacherColor() == Color.RED) {
+					if (t.getControllingPlayer() == p) str.append(StrColor.ANSI_RED + "@" + StrColor.ANSI_RESET);
 					else str.append(" ");
 				}
 			}
@@ -405,17 +400,17 @@ public class Cli extends Observable implements View, Observer {
 		str.append("\n");
 
 		//printing blue students
-		for(Player p: msg.getPlayers()){
+		for (Player p : msg.getPlayers()) {
 			str.append("|");
-			for(int i=0;i<p.getPlayersSchool().getStudentNumber(Color.BLUE);i++){
+			for (int i = 0; i < p.getPlayersSchool().getStudentNumber(Color.BLUE); i++) {
 				str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
 			}
-			for(int i=0;i<10-studentCnt;i++) str.append(" ");
-			studentCnt=0;
-			for(Teacher t: msg.getTeachers()){
-				if(t.getTeacherColor()==Color.BLUE){
-					if(t.getControllingPlayer()==p) str.append(StrColor.ANSI_BLUE + "@"+ StrColor.ANSI_RESET);
+			for (int i = 0; i < 10 - studentCnt; i++) str.append(" ");
+			studentCnt = 0;
+			for (Teacher t : msg.getTeachers()) {
+				if (t.getTeacherColor() == Color.BLUE) {
+					if (t.getControllingPlayer() == p) str.append(StrColor.ANSI_BLUE + "@" + StrColor.ANSI_RESET);
 					else str.append(" ");
 				}
 			}
@@ -424,17 +419,17 @@ public class Cli extends Observable implements View, Observer {
 		str.append("\n");
 
 		//printing yellow students
-		for(Player p: msg.getPlayers()){
+		for (Player p : msg.getPlayers()) {
 			str.append("|");
-			for(int i=0;i<p.getPlayersSchool().getStudentNumber(Color.YELLOW);i++){
+			for (int i = 0; i < p.getPlayersSchool().getStudentNumber(Color.YELLOW); i++) {
 				str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
 			}
-			for(int i=0;i<10-studentCnt;i++) str.append(" ");
-			studentCnt=0;
-			for(Teacher t: msg.getTeachers()){
-				if(t.getTeacherColor()==Color.YELLOW){
-					if(t.getControllingPlayer()==p) str.append(StrColor.ANSI_YELLOW + "@"+ StrColor.ANSI_RESET);
+			for (int i = 0; i < 10 - studentCnt; i++) str.append(" ");
+			studentCnt = 0;
+			for (Teacher t : msg.getTeachers()) {
+				if (t.getTeacherColor() == Color.YELLOW) {
+					if (t.getControllingPlayer() == p) str.append(StrColor.ANSI_YELLOW + "@" + StrColor.ANSI_RESET);
 					else str.append(" ");
 				}
 			}
@@ -443,17 +438,17 @@ public class Cli extends Observable implements View, Observer {
 		str.append("\n");
 
 		//printing pink students
-		for(Player p: msg.getPlayers()){
+		for (Player p : msg.getPlayers()) {
 			str.append("|");
-			for(int i=0;i<p.getPlayersSchool().getStudentNumber(Color.PINK);i++){
+			for (int i = 0; i < p.getPlayersSchool().getStudentNumber(Color.PINK); i++) {
 				str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
 				studentCnt++;
 			}
-			for(int i=0;i<10-studentCnt;i++) str.append(" ");
-			studentCnt=0;
-			for(Teacher t: msg.getTeachers()){
-				if(t.getTeacherColor()==Color.PINK){
-					if(t.getControllingPlayer()==p) str.append(StrColor.ANSI_PURPLE + "@"+ StrColor.ANSI_RESET);
+			for (int i = 0; i < 10 - studentCnt; i++) str.append(" ");
+			studentCnt = 0;
+			for (Teacher t : msg.getTeachers()) {
+				if (t.getTeacherColor() == Color.PINK) {
+					if (t.getControllingPlayer() == p) str.append(StrColor.ANSI_PURPLE + "@" + StrColor.ANSI_RESET);
 					else str.append(" ");
 				}
 			}
@@ -462,71 +457,70 @@ public class Cli extends Observable implements View, Observer {
 		str.append("\n");
 
 		//printing towers
-		for(Player p: msg.getPlayers()){
+		for (Player p : msg.getPlayers()) {
 			str.append("|");
 			str.append(" ");
-			for(int i=0;i<4&&i<maxTowersNumber()-p.getTowersPlaced();i++){
-				if(p.getPlayerColor()==TowerColor.BLACK) {
+			for (int i = 0; i < 4 && i < maxTowersNumber() - p.getTowersPlaced(); i++) {
+				if (p.getPlayerColor() == TowerColor.BLACK) {
 					str.append(StrColor.ANSI_BLACK + " █" + StrColor.ANSI_RESET);
 					towerCnt += 2;
 				}
-				if(p.getPlayerColor()==TowerColor.WHITE) {
+				if (p.getPlayerColor() == TowerColor.WHITE) {
 					str.append(" █");
 					towerCnt += 2;
 				}
 
-				if(p.getPlayerColor()==TowerColor.GREY) {
+				if (p.getPlayerColor() == TowerColor.GREY) {
 					str.append(StrColor.ANSI_GREY + " █" + StrColor.ANSI_RESET);
 					towerCnt += 2;
 				}
 			}
-			for(int i=0;i< 10-towerCnt; i++) str.append(" ");
-			towerCnt=0;
+			for (int i = 0; i < 10 - towerCnt; i++) str.append(" ");
+			towerCnt = 0;
 			str.append("|");
-			for(int i=0;i<20;i++) str.append(" ");
+			for (int i = 0; i < 20; i++) str.append(" ");
 
 		}
 
 		str.append("\n");
 
-		for(Player p: msg.getPlayers()){
+		for (Player p : msg.getPlayers()) {
 			str.append("|");
 			str.append(" ");
-			for(int i=4;i<maxTowersNumber()&&i<maxTowersNumber()-p.getTowersPlaced();i++){
-				if(p.getPlayerColor()==TowerColor.BLACK) {
+			for (int i = 4; i < maxTowersNumber() && i < maxTowersNumber() - p.getTowersPlaced(); i++) {
+				if (p.getPlayerColor() == TowerColor.BLACK) {
 					str.append(StrColor.ANSI_BLACK + " █" + StrColor.ANSI_RESET);
 					towerCnt += 2;
 				}
-				if(p.getPlayerColor()==TowerColor.WHITE) {
+				if (p.getPlayerColor() == TowerColor.WHITE) {
 					str.append(" █");
 					towerCnt += 2;
 				}
 
-				if(p.getPlayerColor()==TowerColor.GREY) {
+				if (p.getPlayerColor() == TowerColor.GREY) {
 					str.append(StrColor.ANSI_GREY + " █" + StrColor.ANSI_RESET);
 					towerCnt += 2;
 				}
 			}
-			for(int i=0;i< 10-towerCnt; i++) str.append(" ");
-			towerCnt=0;
+			for (int i = 0; i < 10 - towerCnt; i++) str.append(" ");
+			towerCnt = 0;
 			str.append("|");
-			for(int i=0;i<20;i++) str.append(" ");
+			for (int i = 0; i < 20; i++) str.append(" ");
 
 		}
 		str.append("\n");
-		for(Player p: msg.getPlayers()) {
+		for (Player p : msg.getPlayers()) {
 
 			for (int i = 0; i < 13; i++) str.append("-");
-			for(int i=0;i<20;i++) str.append(" ");
+			for (int i = 0; i < 20; i++) str.append(" ");
 		}
 		str.append("\n");
-		if(msg.isExpertMode()) printCoins(str);
+		if (msg.isExpertMode()) printCoins(str);
 
-		for(Player p: msg.getPlayers()){
-			if(p.getPlayerId()==PlayerId)
-			{
-				for(AssistantCard c: p.getDeck().getCards()){
-					str.append("["+StrColor.ANSI_BLUE+"OV:"+StrColor.ANSI_RESET+c.getOrderValue()+StrColor.ANSI_BLUE+"  M:"+StrColor.ANSI_RESET+c.getMovement()+"]   ");
+		for (Player p : msg.getPlayers()) {
+			if (p.getPlayerId() == PlayerId) {
+				for (AssistantCard c : p.getDeck().getCards()) {
+					str.append("[" + StrColor.ANSI_BLUE + "OV:" + StrColor.ANSI_RESET + c.getOrderValue() + StrColor.ANSI_BLUE + "  M:" + StrColor.ANSI_RESET + c.getMovement() + "]   ");
 				}
 			}
 		}
@@ -554,106 +548,106 @@ public class Cli extends Observable implements View, Observer {
 		str.append("\n\n");
 	}
 
-	public void printCharacterCards(StringBuilder str){
-		int i=1;
+	public void printCharacterCards(StringBuilder str) {
+		int i = 1;
 		str.append("\n");
-		for(CharacterCard c: msg.getCharacterCards()){
-			str.append("CHARACTER "+i+": ");
-			if(c.getIdCharacterCard()==1){
-				str.append("Take 1 Student from this card and place it on an island of you choice" +StrColor.ANSI_GREEN+ "\n(COST = 1)"+StrColor.ANSI_RESET);
+		for (CharacterCard c : msg.getCharacterCards()) {
+			str.append("CHARACTER " + i + ": ");
+			if (c.getIdCharacterCard() == 1) {
+				str.append("Take 1 Student from this card and place it on an island of you choice" + StrColor.ANSI_GREEN + "\n(COST = 1)" + StrColor.ANSI_RESET);
 				str.append("             [");
-				c=(Cards1and10)c;
-				for(int j=0;j<((Cards1and10) c).getNumberOfStudents();j++) {
-					if(((Cards1and10) c).GetStudentColor(j)== Color.BLUE) {
+				c = (Cards1and10) c;
+				for (int j = 0; j < ((Cards1and10) c).getNumberOfStudents(); j++) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.BLUE) {
 						str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
 					}
-					if(((Cards1and10) c).GetStudentColor(j)== Color.GREEN) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.GREEN) {
 						str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
 					}
-					if(((Cards1and10) c).GetStudentColor(j)== Color.YELLOW) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.YELLOW) {
 						str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
 					}
-					if(((Cards1and10) c).GetStudentColor(j)== Color.RED) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.RED) {
 						str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
 					}
-					if(((Cards1and10) c).GetStudentColor(j)== Color.PINK) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.PINK) {
 						str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
 					}
 				}
 				str.append("]\n\n");
 			}
 
-			if(c.getIdCharacterCard()==3){
-				str.append("Choose an Island and resolve it as if Mother Nature had ended her movement there " +StrColor.ANSI_GREEN+ "\n(COST = 3)\n\n"+StrColor.ANSI_RESET);
+			if (c.getIdCharacterCard() == 3) {
+				str.append("Choose an Island and resolve it as if Mother Nature had ended her movement there " + StrColor.ANSI_GREEN + "\n(COST = 3)\n\n" + StrColor.ANSI_RESET);
 			}
 
-			if(c.getIdCharacterCard()==4){
-				str.append("You may move Mother Nature up to 2 additional Island than indicated on the Assistant card you've played " +StrColor.ANSI_GREEN+"\n(COST = 1)\n\n"+StrColor.ANSI_RESET);
+			if (c.getIdCharacterCard() == 4) {
+				str.append("You may move Mother Nature up to 2 additional Island than indicated on the Assistant card you've played " + StrColor.ANSI_GREEN + "\n(COST = 1)\n\n" + StrColor.ANSI_RESET);
 			}
 
-			if(c.getIdCharacterCard()==5) {
-				str.append("Place a No Entry tile on an island on your choice. Influence will not be calculated next time Mother Nature ends there  " +StrColor.ANSI_GREEN+ "\n(COST = 2)"+StrColor.ANSI_RESET);
+			if (c.getIdCharacterCard() == 5) {
+				str.append("Place a No Entry tile on an island on your choice. Influence will not be calculated next time Mother Nature ends there  " + StrColor.ANSI_GREEN + "\n(COST = 2)" + StrColor.ANSI_RESET);
 				str.append("             [");
-				c=(Card5)c;
-				for(int j=0; j<((Card5) c).getNoEntryTilesOnCard();j++){
-					str.append(StrColor.ANSI_RED+"Ø"+StrColor.ANSI_RESET);
+				c = (Card5) c;
+				for (int j = 0; j < ((Card5) c).getNoEntryTilesOnCard(); j++) {
+					str.append(StrColor.ANSI_RED + "Ø" + StrColor.ANSI_RESET);
 				}
 				str.append("]\n\n");
 			}
 
-			if(c.getIdCharacterCard()==6){
-				str.append("when resolving a Conquering on an island, Towers do not count towards influence " +StrColor.ANSI_GREEN+ "\n(COST = 3)\n\n"+StrColor.ANSI_RESET);
+			if (c.getIdCharacterCard() == 6) {
+				str.append("when resolving a Conquering on an island, Towers do not count towards influence " + StrColor.ANSI_GREEN + "\n(COST = 3)\n\n" + StrColor.ANSI_RESET);
 			}
 
-			if(c.getIdCharacterCard()==9){
-				str.append("During the influence calculation this turn, you count as having 2 more influence " +StrColor.ANSI_GREEN+ "\n(COST = 2)\n\n"+StrColor.ANSI_RESET);
+			if (c.getIdCharacterCard() == 9) {
+				str.append("During the influence calculation this turn, you count as having 2 more influence " + StrColor.ANSI_GREEN + "\n(COST = 2)\n\n" + StrColor.ANSI_RESET);
 			}
-			if(c.getIdCharacterCard()==10){
-				str.append("Move one Student from this card to the Dining Room, then draw one Student from the Bag and place it on this card  " +StrColor.ANSI_GREEN+ "\n(COST = 2)"+StrColor.ANSI_RESET);
+			if (c.getIdCharacterCard() == 10) {
+				str.append("Move one Student from this card to the Dining Room, then draw one Student from the Bag and place it on this card  " + StrColor.ANSI_GREEN + "\n(COST = 2)" + StrColor.ANSI_RESET);
 				str.append("             [");
-				c=(Cards1and10)c;
-				for(int j=0;j<((Cards1and10) c).getNumberOfStudents();j++) {
-					if(((Cards1and10) c).GetStudentColor(j)== Color.BLUE) {
+				c = (Cards1and10) c;
+				for (int j = 0; j < ((Cards1and10) c).getNumberOfStudents(); j++) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.BLUE) {
 						str.append(StrColor.ANSI_BLUE + "O" + StrColor.ANSI_RESET);
 					}
-					if(((Cards1and10) c).GetStudentColor(j)== Color.GREEN) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.GREEN) {
 						str.append(StrColor.ANSI_GREEN + "O" + StrColor.ANSI_RESET);
 					}
-					if(((Cards1and10) c).GetStudentColor(j)== Color.YELLOW) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.YELLOW) {
 						str.append(StrColor.ANSI_YELLOW + "O" + StrColor.ANSI_RESET);
 					}
-					if(((Cards1and10) c).GetStudentColor(j)== Color.RED) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.RED) {
 						str.append(StrColor.ANSI_RED + "O" + StrColor.ANSI_RESET);
 					}
-					if(((Cards1and10) c).GetStudentColor(j)== Color.PINK) {
+					if (((Cards1and10) c).GetStudentColor(j) == Color.PINK) {
 						str.append(StrColor.ANSI_PURPLE + "O" + StrColor.ANSI_RESET);
 					}
 				}
 				str.append("]\n\n");
 			}
-			if(c.getIdCharacterCard()==12){
+			if (c.getIdCharacterCard() == 12) {
 				str.append("Choose a Student Color. Every player must return 3 Students of that Color from their Dining Room to the Bag " + StrColor.ANSI_GREEN + "\n(COST = 3)\n\n" + StrColor.ANSI_RESET);
 			}
 			i++;
 		}
 	}
 
-	public Player getActivePlayerById(){
-		for(Player p: msg.getPlayers()){
-			if(p.getPlayerId()==msg.getActivePlayerId()) return p;
+	public Player getActivePlayerById() {
+		for (Player p : msg.getPlayers()) {
+			if (p.getPlayerId() == msg.getActivePlayerId()) return p;
 		}
 		return null;
 	}
 
 
-	public int maxTowersNumber(){
-		int i=0;
-		for(Player p: msg.getPlayers()) i++;
-		if(i==2) return 8;
+	public int maxTowersNumber() {
+		int i = 0;
+		for (Player p : msg.getPlayers()) i++;
+		if (i == 2) return 8;
 		else return 6;
 	}
 
-	public void setMsg(ShowMatchInfoMessage msg){
+	public void setMsg(ShowMatchInfoMessage msg) {
 		this.msg = msg;
 	}
 
@@ -662,7 +656,7 @@ public class Cli extends Observable implements View, Observer {
 
 		String nextLine;
 
-		if(msg.getActivePlayerId()==PlayerId) {
+		if (msg.getActivePlayerId() == PlayerId) {
 			if (msg.getGamePhase() == GamePhase.ASSISTANT_CARD) {
 				out.println("Choose which Assistant Card you want to play\n");
 				int CardIndex = Integer.parseInt(in.nextLine());
@@ -674,18 +668,17 @@ public class Cli extends Observable implements View, Observer {
 				if (msg.isExpertMode()) {
 					while (true) {
 						out.println("Type C if you want to play a Character Card, M if you want to move a Student");
-						nextLine=in.nextLine();
+						nextLine = in.nextLine();
 						if (nextLine.equalsIgnoreCase("C")) {
 							out.println("Choose the Character Card you want to play\n");
 							int CharacterCardIndex = Integer.parseInt(in.nextLine());
 							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
 							notifyObserver(characterCardMessage);
 							break;
-						}
-						else if (nextLine.equalsIgnoreCase("M")) {
+						} else if (nextLine.equalsIgnoreCase("M")) {
 							while (true) {
 								out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island");
-								nextLine=in.nextLine();
+								nextLine = in.nextLine();
 								if (nextLine.equalsIgnoreCase("D")) {
 									out.println("Which Student do you want to move?");
 									int position = Integer.parseInt(in.nextLine());
@@ -703,19 +696,16 @@ public class Cli extends Observable implements View, Observer {
 									MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, destination);
 									notifyObserver(moveStudentMessage);
 									break;
-								}
-								else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+								} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
 							}
 							break;
-						}
-						else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
 					}
-				}
-				else{
+				} else {
 					while (true) {
 						out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island\n");
 
-						nextLine=in.nextLine();
+						nextLine = in.nextLine();
 						if (nextLine.equalsIgnoreCase("D")) {
 							out.println("Which Student do you want to move?\n");
 							int position = Integer.parseInt(in.nextLine());
@@ -739,7 +729,7 @@ public class Cli extends Observable implements View, Observer {
 				if (msg.isExpertMode()) {
 					while (true) {
 						out.println("Type C if you want to play a Character Card, M if you want to move Mother nature\n");
-						nextLine=in.nextLine();
+						nextLine = in.nextLine();
 						if (nextLine.equalsIgnoreCase("C")) {
 							out.println("Choose the Character Card you want to play\n");
 							int CharacterCardIndex = Integer.parseInt(in.nextLine());
@@ -754,8 +744,7 @@ public class Cli extends Observable implements View, Observer {
 							break;
 						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
 					}
-				}
-				else{
+				} else {
 					out.println("How many steps do you want Mother Nature to make?\n");
 					int steps = Integer.parseInt(in.nextLine());
 					MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
@@ -768,7 +757,7 @@ public class Cli extends Observable implements View, Observer {
 				if (msg.isExpertMode()) {
 					while (true) {
 						out.println("Type C if you want to play a Character Card, P if you want to pick Students from a Cloud\n");
-						nextLine=in.nextLine();
+						nextLine = in.nextLine();
 						if (nextLine.equalsIgnoreCase("C")) {
 							out.println("Choose the Character Card you want to play\n");
 							int CharacterCardIndex = Integer.parseInt(in.nextLine());
@@ -783,8 +772,7 @@ public class Cli extends Observable implements View, Observer {
 							break;
 						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
 					}
-				}
-				else{
+				} else {
 					out.println("Choose the Cloud you want to pick the Students from\n");
 					int index = Integer.parseInt(in.nextLine());
 					CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(index);
@@ -792,8 +780,8 @@ public class Cli extends Observable implements View, Observer {
 				}
 			}
 
-			if(msg.getGamePhase()==GamePhase.CHARACTER_CARD){
-				if(msg.getExpectedCardMessage()==1){
+			if (msg.getGamePhase() == GamePhase.CHARACTER_CARD) {
+				if (msg.getExpectedCardMessage() == 1) {
 					out.println("Choose the Student you want to move\n");
 					int studentIndex = Integer.parseInt(in.nextLine());
 					out.println("Choose the Island where you want to move the Student\n");
@@ -802,14 +790,14 @@ public class Cli extends Observable implements View, Observer {
 					Card1Message card1Message = new Card1Message(studentIndex, islandIndex);
 					notifyObserver(card1Message);
 				}
-				if(msg.getExpectedCardMessage()==3){
+				if (msg.getExpectedCardMessage() == 3) {
 					out.println("Choose the Island to resolve\n");
 					int islandIndex = Integer.parseInt(in.nextLine());
 
 					Card3and5Message card3and5Message = new Card3and5Message(islandIndex);
 					notifyObserver(card3and5Message);
 				}
-				if(msg.getExpectedCardMessage()==5){
+				if (msg.getExpectedCardMessage() == 5) {
 					out.println("Choose the Island where you want to put the no entry tile\n");
 					int islandindex = Integer.parseInt(in.nextLine());
 
@@ -817,7 +805,7 @@ public class Cli extends Observable implements View, Observer {
 					notifyObserver(card3and5Message);
 
 				}
-				if(msg.getExpectedCardMessage()==10){
+				if (msg.getExpectedCardMessage() == 10) {
 					out.println("Choose the Student you want to move to the Dining Room\n");
 					int index = Integer.parseInt(in.nextLine());
 
@@ -825,24 +813,23 @@ public class Cli extends Observable implements View, Observer {
 					notifyObserver(card10Message);
 
 				}
-				if(msg.getExpectedCardMessage()==12){
+				if (msg.getExpectedCardMessage() == 12) {
 					String color;
 					while (true) {
 						out.println("Type the Color of the Student to move back to the Bag\n");
 						color = in.nextLine().toUpperCase();
-						if(color.equalsIgnoreCase("GREEN") || color.equalsIgnoreCase("YELLOW") || color.equalsIgnoreCase("RED") || color.equalsIgnoreCase("BLUE") || color.equalsIgnoreCase("PINK")){
+						if (color.equalsIgnoreCase("GREEN") || color.equalsIgnoreCase("YELLOW") || color.equalsIgnoreCase("RED") || color.equalsIgnoreCase("BLUE") || color.equalsIgnoreCase("PINK")) {
 							break;
-						}
-						else out.println(StrColor.ANSI_RED+"Choose a valid Color!\n"+StrColor.ANSI_RESET);
+						} else out.println(StrColor.ANSI_RED + "Choose a valid Color!\n" + StrColor.ANSI_RESET);
 					}
-					Card12Message card12Message= new Card12Message(color);
+					Card12Message card12Message = new Card12Message(color);
 					notifyObserver(card12Message);
 				}
 			}
 		}
 	}
 
-	public void askName(){
+	public void askName() {
 		out.println("Insert your name\n");
 		String name = in.nextLine();
 
@@ -850,35 +837,38 @@ public class Cli extends Observable implements View, Observer {
 		notifyObserver(nicknameMessage);
 	}
 
-	public void printError(String error){
+	public void printError(String error) {
 		out.println(error);
 	}
 
-	public void askPlayers(){
+	public void askPlayers() {
 		out.println("Insert the number of Players (must be 2 or 3)\n");
 		int numberOfPlayers = Integer.parseInt(in.nextLine());
-		while(numberOfPlayers != 2 && numberOfPlayers != 3)
-		{
-			out.println(StrColor.ANSI_RED+"Invalid number! Please choose 2 or 3\n"+StrColor.ANSI_RESET);
+		while (numberOfPlayers != 2 && numberOfPlayers != 3) {
+			out.println(StrColor.ANSI_RED + "Invalid number! Please choose 2 or 3\n" + StrColor.ANSI_RESET);
 			numberOfPlayers = Integer.parseInt(in.nextLine());
 		}
 		out.println("Do you want to play with expert rules? (y/n)");
-		String response=in.nextLine();
-		while(!"Y".equalsIgnoreCase(response) && !"N".equalsIgnoreCase(response)){
-			out.println(StrColor.ANSI_RED+"Invalid response! type y or n\n"+StrColor.ANSI_RESET);
+		String response = in.nextLine();
+		while (!"Y".equalsIgnoreCase(response) && !"N".equalsIgnoreCase(response)) {
+			out.println(StrColor.ANSI_RED + "Invalid response! type y or n\n" + StrColor.ANSI_RESET);
 			response = in.nextLine();
 		}
 		int gamemode;
-		if(response.equalsIgnoreCase("Y")) gamemode = 1;
+		if (response.equalsIgnoreCase("Y")) gamemode = 1;
 		else gamemode = 0;
 
 		StartMessage startMessage = new StartMessage(numberOfPlayers, gamemode);
 		notifyObserver(startMessage);
 	}
 
+	public void endGame(Message message){
+		//todo:stampa di tutti i vincitori
+	}
+
 	@Override
 	public void update(Message message) {
-		switch (message.getMessageContent()){
+		switch (message.getMessageContent()) {
 			case SHOWMATCHINFO:
 				this.setMsg((ShowMatchInfoMessage) message);
 				showGameInformation();
@@ -886,20 +876,24 @@ public class Cli extends Observable implements View, Observer {
 				break;
 			case PLAYERID:
 				startGame();
-				PlayerIdMessage msg=(PlayerIdMessage)message;
-				this.PlayerId= msg.getPlayerId();
+				PlayerIdMessage msg = (PlayerIdMessage) message;
+				this.PlayerId = msg.getPlayerId();
 				askName();
 				break;
 			case NICKNAME:
 				askName();
 				break;
 			case ERROR:
-				ErrorMessage errorMessage=(ErrorMessage) message;
-				String error=errorMessage.getError();
+				ErrorMessage errorMessage = (ErrorMessage) message;
+				String error = errorMessage.getError();
 				printError(error);
 				break;
 			case PLAYERS:
 				askPlayers();
+			case ENDGAME:
+				EndgameMessage endgameMessage=(EndgameMessage) message;
+				endGame(endgameMessage);
+				break;
 		}
 	}
 }

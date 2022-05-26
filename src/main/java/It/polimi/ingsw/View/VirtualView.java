@@ -7,8 +7,8 @@ import It.polimi.ingsw.Observer.Observer;
 public class VirtualView implements View, Observer {
 	private Connection connection;
 
-	public VirtualView(Connection connection){
-		this.connection=connection;
+	public VirtualView(Connection connection) {
+		this.connection = connection;
 	}
 
 

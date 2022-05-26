@@ -8,5 +8,5 @@ import java.io.Serializable;
  */
 public enum Color {
 
-	GREEN,RED,YELLOW,PINK,BLUE;
+	GREEN, RED, YELLOW, PINK, BLUE;
 }

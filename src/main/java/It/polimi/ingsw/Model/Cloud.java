@@ -9,30 +9,33 @@ import java.util.ArrayList;
  */
 public class Cloud implements Serializable {
 
-	private static final long serialVersionUID=1L;
+	private static final long serialVersionUID = 1L;
 	private int IdCloud;
 
 	private ArrayList<Color> CloudStudents;
 
 	/**
 	 * Constructor of the cloud. It creates the cloud with that id.
+	 *
 	 * @param Id: the id of the island.
 	 */
-	public Cloud(int Id){
-			IdCloud = Id;
-			CloudStudents = new ArrayList<Color>();
+	public Cloud(int Id) {
+		IdCloud = Id;
+		CloudStudents = new ArrayList<Color>();
 	}
 
 	/**
 	 * Return the id of the cloud.
+	 *
 	 * @return the id of the cloud.
 	 */
-	public int getIdCloud(){
+	public int getIdCloud() {
 		return this.IdCloud;
 	}
 
 	/**
 	 * Add a students of that color to the cloud.
+	 *
 	 * @param StudentColor: the color of a student.
 	 */
 	public void AddStudent(Color StudentColor) {
@@ -41,6 +44,7 @@ public class Cloud implements Serializable {
 
 	/**
 	 * Remove the student of that index from the cloud and return its color.
+	 *
 	 * @param index: the index of the student.
 	 * @return the color of the student which is removed.
 	 */
@@ -52,21 +56,23 @@ public class Cloud implements Serializable {
 
 	/**
 	 * Return the Arraylist of students.
+	 *
 	 * @return the ArrayList of students.
 	 */
-	public ArrayList<Color> getCloudStudents(){
+	public ArrayList<Color> getCloudStudents() {
 		return this.CloudStudents;
 	}
 
 	/**
 	 * Return the number of students of that color in this cloud.
+	 *
 	 * @param color: the color of a student.
 	 * @return the number of students of that color.
 	 */
-	public int countStudents(Color color){
-		int students=0;
-		for(Color c:CloudStudents){
-			if(c==color){
+	public int countStudents(Color color) {
+		int students = 0;
+		for (Color c : CloudStudents) {
+			if (c == color) {
 				students++;
 			}
 		}
@@ -75,9 +81,10 @@ public class Cloud implements Serializable {
 
 	/**
 	 * Return the number of students in this cloud.
+	 *
 	 * @return the number of students in this cloud.
 	 */
-	public int CloudSize(){
+	public int CloudSize() {
 		return this.CloudStudents.size();
 	}
 }

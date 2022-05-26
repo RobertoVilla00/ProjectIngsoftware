@@ -3,8 +3,8 @@ package It.polimi.ingsw.Message;
 /**
  * The message for the id of the player.
  */
-public class PlayerIdMessage extends Message{
-	private static final long serialVersionUID=1L;
+public class PlayerIdMessage extends Message {
+	private static final long serialVersionUID = 1L;
 	private int playerId;
 
 	/**
@@ -20,7 +20,7 @@ public class PlayerIdMessage extends Message{
 	 * Return the id of the player.
 	 * @return the id of the player.
 	 */
-	public int getPlayerId(){
+	public int getPlayerId() {
 		return this.playerId;
 	}
 }

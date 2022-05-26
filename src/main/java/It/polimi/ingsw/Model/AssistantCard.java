@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class AssistantCard implements Serializable {
 
-	private static final long serialVersionUID=1L;
+	private static final long serialVersionUID = 1L;
 
 	private int OrderValue;
 
@@ -16,8 +16,9 @@ public class AssistantCard implements Serializable {
 
 	/**
 	 * Constructor of the class Assistant Card.
+	 *
 	 * @param orderValue: the value of the card.
-	 * @param movements: the number of steps that mother nature can at most perform.
+	 * @param movements:  the number of steps that mother nature can at most perform.
 	 */
 	public AssistantCard(int orderValue, int movements) {
 		OrderValue = orderValue;
@@ -26,6 +27,7 @@ public class AssistantCard implements Serializable {
 
 	/**
 	 * Return the value of the card.
+	 *
 	 * @return the value of the card.
 	 */
 	public int getOrderValue() {
@@ -34,6 +36,7 @@ public class AssistantCard implements Serializable {
 
 	/**
 	 * Return the attribute Movements.
+	 *
 	 * @return the attribute Movements of the card.
 	 */
 	public int getMovement() {

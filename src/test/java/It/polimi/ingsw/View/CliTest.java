@@ -12,76 +12,76 @@ import org.junit.Test;
 public class CliTest {
 
 
-    @Test
-    public void StartGame(){
-        System.out.println(StrColor.ANSI_PURPLE+"                                                                                                                      \n" +
-                "         .**ooooOOOOOOOOOOOOOO*                 .oOOo.                                                                    \n" +
-                "      .o##o**°*@@@#.°°°°°*o#@@@°                #@@@@o                                   °#                               \n" +
-                "     *@@*     #@@@#          *#@o                *OO*                                  *@@                               \n" +
-                "    .@@O     o@@@@#  °oOOOO*   °*  ***   °***.              .°*oo**o*   °**°  .****  °oO@@@oo*  *oo°   .oOO*.  °ooOOo**O. \n" +
-                "    °@@o     o@@@@O*#@@O**O@*     #@@@*°#@@@@# oO@@@#     *O#@O*O@@@O   @@@#.o@@@@@o *o@@@@o**o @@@@O   @@@@# @#*   O@@o  \n" +
-                "    .#@#.    o@@@@#@@o    °O      #@@@##*o@@#°   @@@#   .O@@#.  o@@@O   @@@###*o@@@O   #@@@     °O@@@#   O@@@ @@#Oo       \n" +
-                "     °@@O°   o@@@@@#              O@@@o  o#*     @@@#   O@@@°   o@@@O   @@@@o  *@@@O   @@@@       o@@@#* *@@* *@@@@@@#o*  \n" +
-                "      .o##Oo o@@@@@            °* #@@@*          @@@#  .@@@@*..*O@@@O   @@@@.  *@@@O   #@@@       *@@@#o#@*      #@@@@@°  \n" +
-                "             o@@@@O          .*#* O@@@*          @@@#° .#@@@@@@#O@@@O   @@@@.  *@@@o   #@@@*oo°     *@@@@O°  *@O°   *#@@° \n" +
-                "             o@@@@O°      °*o#@*  o@#o.          o@@#o* °#@@@#* .O@@Oo° #@#o   °#@@O*  o@@@O*        *@@o.   °o@#OOooOO*  \n" +
-                "          °*oO####OoooooooOO##*                                                         °°°         *O#*.                 \n" +
-                "                                                                                                  °o#@o°                  \n" +
-                "                                                                                                °o@@@*°                   \n" +
-                "                       																		 °*OO°                     \n"+StrColor.ANSI_RESET);
-    }
+	@Test
+	public void StartGame() {
+		System.out.println(StrColor.ANSI_PURPLE + "                                                                                                                      \n" +
+				"         .**ooooOOOOOOOOOOOOOO*                 .oOOo.                                                                    \n" +
+				"      .o##o**°*@@@#.°°°°°*o#@@@°                #@@@@o                                   °#                               \n" +
+				"     *@@*     #@@@#          *#@o                *OO*                                  *@@                               \n" +
+				"    .@@O     o@@@@#  °oOOOO*   °*  ***   °***.              .°*oo**o*   °**°  .****  °oO@@@oo*  *oo°   .oOO*.  °ooOOo**O. \n" +
+				"    °@@o     o@@@@O*#@@O**O@*     #@@@*°#@@@@# oO@@@#     *O#@O*O@@@O   @@@#.o@@@@@o *o@@@@o**o @@@@O   @@@@# @#*   O@@o  \n" +
+				"    .#@#.    o@@@@#@@o    °O      #@@@##*o@@#°   @@@#   .O@@#.  o@@@O   @@@###*o@@@O   #@@@     °O@@@#   O@@@ @@#Oo       \n" +
+				"     °@@O°   o@@@@@#              O@@@o  o#*     @@@#   O@@@°   o@@@O   @@@@o  *@@@O   @@@@       o@@@#* *@@* *@@@@@@#o*  \n" +
+				"      .o##Oo o@@@@@            °* #@@@*          @@@#  .@@@@*..*O@@@O   @@@@.  *@@@O   #@@@       *@@@#o#@*      #@@@@@°  \n" +
+				"             o@@@@O          .*#* O@@@*          @@@#° .#@@@@@@#O@@@O   @@@@.  *@@@o   #@@@*oo°     *@@@@O°  *@O°   *#@@° \n" +
+				"             o@@@@O°      °*o#@*  o@#o.          o@@#o* °#@@@#* .O@@Oo° #@#o   °#@@O*  o@@@O*        *@@o.   °o@#OOooOO*  \n" +
+				"          °*oO####OoooooooOO##*                                                         °°°         *O#*.                 \n" +
+				"                                                                                                  °o#@o°                  \n" +
+				"                                                                                                °o@@@*°                   \n" +
+				"                       																		 °*OO°                     \n" + StrColor.ANSI_RESET);
+	}
 
-    @Test
+	@Test
 
-    public void ShowMatchInfo(){
-        Cli cli = new Cli();
-        ShowMatchInfoMessage msg;
-        Match match = new Match(2, 0);
-        for(int i=0;i<2;i++){
-            match.MoveStudentsBagToIsland(0);
-        }
-        for(int i=0;i<12;i++){
-            match.MoveStudentsBagToIsland(1);
-        }
-        for(int i=0;i<20;i++){
-            match.MoveStudentsBagToIsland(2);
-        }
-        for(int i=0;i<2;i++){
-            match.MoveStudentsBagToIsland(3);
-        }
+	public void ShowMatchInfo() {
+		Cli cli = new Cli();
+		ShowMatchInfoMessage msg;
+		Match match = new Match(2, 0);
+		for (int i = 0; i < 2; i++) {
+			match.MoveStudentsBagToIsland(0);
+		}
+		for (int i = 0; i < 12; i++) {
+			match.MoveStudentsBagToIsland(1);
+		}
+		for (int i = 0; i < 20; i++) {
+			match.MoveStudentsBagToIsland(2);
+		}
+		for (int i = 0; i < 2; i++) {
+			match.MoveStudentsBagToIsland(3);
+		}
 
-        for(int i=0;i<match.getClouds().size();i++){
-            for(int j=0;j<4;j++) match.getClouds().get(i).AddStudent(Color.GREEN);
-        }
+		for (int i = 0; i < match.getClouds().size(); i++) {
+			for (int j = 0; j < 4; j++) match.getClouds().get(i).AddStudent(Color.GREEN);
+		}
 
-        match.getTable().get(2).BuildTower(TowerColor.GREY);
-        match.getTable().get(5).BuildTower(TowerColor.BLACK);
-        match.getTable().get(5).IncreaseTower();
-        match.getTable().get(5).IncreaseTower();
-        match.getTable().get(9).BuildTower(TowerColor.WHITE);
-        match.getTable().get(9).IncreaseTower();
-        match.getTable().get(9).IncreaseTower();
-        match.getTable().get(9).IncreaseTower();
-        match.getTable().get(9).IncreaseTower();
-        match.getTable().get(9).IncreaseTower();
-        match.getTable().get(10).BuildTower(TowerColor.WHITE);
-        match.getTable().get(10).IncreaseTower();
-        match.getTable().get(10).setNoEntryTile();
+		match.getTable().get(2).BuildTower(TowerColor.GREY);
+		match.getTable().get(5).BuildTower(TowerColor.BLACK);
+		match.getTable().get(5).IncreaseTower();
+		match.getTable().get(5).IncreaseTower();
+		match.getTable().get(9).BuildTower(TowerColor.WHITE);
+		match.getTable().get(9).IncreaseTower();
+		match.getTable().get(9).IncreaseTower();
+		match.getTable().get(9).IncreaseTower();
+		match.getTable().get(9).IncreaseTower();
+		match.getTable().get(9).IncreaseTower();
+		match.getTable().get(10).BuildTower(TowerColor.WHITE);
+		match.getTable().get(10).IncreaseTower();
+		match.getTable().get(10).setNoEntryTile();
 
 
-        for (int i=0;i<0;i++) match.MergeIslands(0,1);
-        match.MoveMotherNature(42);
+		for (int i = 0; i < 0; i++) match.MergeIslands(0, 1);
+		match.MoveMotherNature(42);
 
-        for(int i=0;i<9;i++) match.getPlayerById(0).getPlayersSchool().AddStudentToDiningRoom(Color.GREEN);
-        for(int i=0;i<9;i++) match.getPlayerById(1).getPlayersSchool().AddStudentToDiningRoom(Color.RED);
-        match.getTeacherByColor(Color.GREEN).ChangeController(match.getPlayerById(0));
-        match.setGamePhase(GamePhase.ASSISTANT_CARD);
-        msg = new ShowMatchInfoMessage(match);
-        cli.setMsg(msg);
-        cli.startGame();
-        cli.showGameInformation();
+		for (int i = 0; i < 9; i++) match.getPlayerById(0).getPlayersSchool().AddStudentToDiningRoom(Color.GREEN);
+		for (int i = 0; i < 9; i++) match.getPlayerById(1).getPlayersSchool().AddStudentToDiningRoom(Color.RED);
+		match.getTeacherByColor(Color.GREEN).ChangeController(match.getPlayerById(0));
+		match.setGamePhase(GamePhase.ASSISTANT_CARD);
+		msg = new ShowMatchInfoMessage(match);
+		cli.setMsg(msg);
+		cli.startGame();
+		cli.showGameInformation();
 
-        //cli.askInformation();
+		//cli.askInformation();
 
-    }
+	}
 }

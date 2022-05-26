@@ -5,8 +5,10 @@ package It.polimi.ingsw.Exceptions;
  */
 public class WrongMessageException extends Exception {
 
-    /**
-     * Constructor of the class.
-     */
-    public WrongMessageException(){ super("Wrong Message Content");}
+	/**
+	 * Constructor of the class.
+	 */
+	public WrongMessageException() {
+		super("Wrong Message Content");
+	}
 }

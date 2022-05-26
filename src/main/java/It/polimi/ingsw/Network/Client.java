@@ -15,53 +15,53 @@ import java.util.Scanner;
 
 public class Client extends Observable implements Observer {
 
-    private String ip;
-    private int port;
-    private Socket socket;
-    private boolean active = true;
-    private ObjectInputStream inputStream;
-    private ObjectOutputStream outputStream;
+	private String ip;
+	private int port;
+	private Socket socket;
+	private boolean active = true;
+	private ObjectInputStream inputStream;
+	private ObjectOutputStream outputStream;
 
-    public Client(String ip, int port) throws IOException {
-        this.ip = ip;
-        this.port = port;
-        try {
-            socket = new Socket(ip, port);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        outputStream=new ObjectOutputStream(socket.getOutputStream());
-        outputStream.flush();
-        inputStream = new ObjectInputStream(socket.getInputStream());
+	public Client(String ip, int port) throws IOException {
+		this.ip = ip;
+		this.port = port;
+		try {
+			socket = new Socket(ip, port);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		outputStream = new ObjectOutputStream(socket.getOutputStream());
+		outputStream.flush();
+		inputStream = new ObjectInputStream(socket.getInputStream());
 
-    }
+	}
 
-    public synchronized boolean isActive() {
-        return active;
-    }
+	public synchronized boolean isActive() {
+		return active;
+	}
 
-    public synchronized void setActive(boolean active) {
-        this.active = active;
-    }
+	public synchronized void setActive(boolean active) {
+		this.active = active;
+	}
 
-    public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (isActive()) {
-                    Object inputObject = null;
-                    try {
-                        inputObject = socketIn.readObject();
-                        notifyObserver((Message) inputObject);
-                    } catch (IOException | ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        t.start();
-        return t;
-    }
+	public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (isActive()) {
+					Object inputObject = null;
+					try {
+						inputObject = socketIn.readObject();
+						notifyObserver((Message) inputObject);
+					} catch (IOException | ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		t.start();
+		return t;
+	}
 
     /*public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut) {
         Thread t = new Thread(new Runnable() {
@@ -82,39 +82,39 @@ public class Client extends Observable implements Observer {
         return t;
     }*/
 
-    public void sendMessage(Message message){
-        try {
-            outputStream.writeObject(message);
-            outputStream.flush();
-            outputStream.reset();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	public void sendMessage(Message message) {
+		try {
+			outputStream.writeObject(message);
+			outputStream.flush();
+			outputStream.reset();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void run() throws IOException {
-        System.out.println("Connection Established");
-        //ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
-        PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
-        Scanner stdin = new Scanner(System.in);
-        try {
-            Thread t0 = asyncReadFromSocket(inputStream);
+	public void run() throws IOException {
+		System.out.println("Connection Established");
+		//ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
+		PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
+		Scanner stdin = new Scanner(System.in);
+		try {
+			Thread t0 = asyncReadFromSocket(inputStream);
             /*Thread t1 = asyncWriteToSocket(stdin, socketOut);
             t1.join();*/
-            t0.join();
-        } catch (InterruptedException | NoSuchElementException e) {
-            System.out.println("Connection closed from the client side");
-        } finally {
-            stdin.close();
-            inputStream.close();
-            socketOut.close();
-            socket.close();
-        }
-    }
+			t0.join();
+		} catch (InterruptedException | NoSuchElementException e) {
+			System.out.println("Connection closed from the client side");
+		} finally {
+			stdin.close();
+			inputStream.close();
+			socketOut.close();
+			socket.close();
+		}
+	}
 
-    @Override
-    public void update(Message message) {
-        sendMessage(message);
-    }
+	@Override
+	public void update(Message message) {
+		sendMessage(message);
+	}
 }
 

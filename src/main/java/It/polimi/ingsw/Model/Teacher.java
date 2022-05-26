@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class Teacher implements Serializable {
 
-	private static final long serialVersionUID=1L;
+	private static final long serialVersionUID = 1L;
 
 	private Color TeacherColor;
 
@@ -18,6 +18,7 @@ public class Teacher implements Serializable {
 
 	/**
 	 * Constructor of the class Teacher.
+	 *
 	 * @param teacherColor: the color of the teacher.
 	 */
 	public Teacher(Color teacherColor) {
@@ -27,14 +28,16 @@ public class Teacher implements Serializable {
 
 	/**
 	 * Return the color of the player's towers controlled by the teacher.
+	 *
 	 * @return the color of the player's towers controlled by the teacher.
 	 */
-	public TowerColor getControllingPlayerColor(){
+	public TowerColor getControllingPlayerColor() {
 		return this.ControllingPlayer.getPlayerColor();
 	}
 
 	/**
 	 * Return the number of students controlled by the teacher.
+	 *
 	 * @return the number of students controlled by the teacher.
 	 */
 	public int getHighestNumberOfStudents() {   //gives the attribute to Match
@@ -44,12 +47,13 @@ public class Teacher implements Serializable {
 	/**
 	 * Increase the number of students controlled by the teacher by one.
 	 */
-	public void IncreaseHighestNumberOfStudents(){
+	public void IncreaseHighestNumberOfStudents() {
 		HighestNumberOfStudents++;
 	}
 
 	/**
 	 * Change the player who controls the teacher.
+	 *
 	 * @param NewControllingPlayer: the player who controls the teacher.
 	 */
 	public void ChangeController(Player NewControllingPlayer) { //changes the attribute if requested by Match
@@ -58,13 +62,19 @@ public class Teacher implements Serializable {
 
 	/**
 	 * Return the color of the teacher.
+	 *
 	 * @return the color of the teacher.
 	 */
-	public Color getTeacherColor(){return this.TeacherColor;}
+	public Color getTeacherColor() {
+		return this.TeacherColor;
+	}
 
 	/**
 	 * Return the player who controls the teacher.
+	 *
 	 * @return the player who controls the teacher.
 	 */
-	public Player getControllingPlayer(){return ControllingPlayer;}
+	public Player getControllingPlayer() {
+		return ControllingPlayer;
+	}
 }
