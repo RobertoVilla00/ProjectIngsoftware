@@ -890,6 +890,7 @@ public class Cli extends Observable implements View, Observer {
 				break;
 			case PLAYERS:
 				askPlayers();
+				break;
 			case ENDGAME:
 				EndgameMessage endgameMessage=(EndgameMessage) message;
 				endGame(endgameMessage);
