@@ -95,6 +95,8 @@ public class Server {
 				}
 			}
 			controller.getGameController().getMatch().addObserver(virtualView);
+			NicknameMessage nicknameMessage=new NicknameMessage(name,waitConnection.size()-1);
+			controller.addNickName(nicknameMessage);
 			if (waitConnection.size() == numberOfPlayer) {
 				controller.getGameController().getMatch().CreateMessage();
 			}

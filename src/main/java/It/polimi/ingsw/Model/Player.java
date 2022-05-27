@@ -41,13 +41,11 @@ public class Player implements Comparable<Player>, Serializable {
 	 * Constructor of the class player.
 	 *
 	 * @param playerColor: the color of the tower of the player.
-	 * @param name:        the nickname of the player.
 	 * @param playerId:    the id of the player.
 	 */
-	public Player(TowerColor playerColor, String name, int playerId) {
+	public Player(TowerColor playerColor, int playerId) {
 		PlayerId = playerId;
 		PlayerColor = playerColor;
-		Name = name;
 		PlayersSchool = new School();
 		TowersPlaced = 0;
 		Coins = 1;
@@ -273,5 +271,9 @@ public class Player implements Comparable<Player>, Serializable {
 	 */
 	public void setNumberOfTowers(int number) {
 		TowersPlaced = number;
+	}
+
+	public void setName(String nickname) {
+		this.Name=nickname;
 	}
 }

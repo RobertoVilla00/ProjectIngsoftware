@@ -94,15 +94,13 @@ public class Match extends Observable implements Serializable {
 		if (numberOfPlayers == 2) {
 			//getname 															??????
 			//temporary name String
-			String name1 = "examplePlayer1";                    //initialize players
-			Players[0] = new Player(TowerColor.WHITE, name1, 0);
+			Players[0] = new Player(TowerColor.WHITE, 0);
 			for (int i = 0; i < 7; i++) {
 				studentColor = bag.getFirstElement();
 				bag.RemoveFirstElement();
 				Players[0].getPlayersSchool().AddEntranceStudents(studentColor);
 			}
-			String name2 = "examplePlayer2";
-			Players[1] = new Player(TowerColor.BLACK, name2, 1);
+			Players[1] = new Player(TowerColor.BLACK, 1);
 			for (int i = 0; i < 7; i++) {
 				studentColor = bag.getFirstElement();
 				bag.RemoveFirstElement();
@@ -113,22 +111,19 @@ public class Match extends Observable implements Serializable {
 				Clouds.add(new Cloud(j));
 			}
 		} else if (numberOfPlayers == 3) {
-			String name1 = "examplePlayer1";                    //initialize players
-			Players[0] = new Player(TowerColor.WHITE, name1, 0);
+			Players[0] = new Player(TowerColor.WHITE, 0);
 			for (int i = 0; i < 9; i++) {
 				studentColor = bag.getFirstElement();
 				bag.RemoveFirstElement();
 				Players[0].getPlayersSchool().AddEntranceStudents(studentColor);
 			}
-			String name2 = "examplePlayer2";
-			Players[1] = new Player(TowerColor.BLACK, name2, 1);
+			Players[1] = new Player(TowerColor.BLACK, 1);
 			for (int i = 0; i < 9; i++) {
 				studentColor = bag.getFirstElement();
 				bag.RemoveFirstElement();
 				Players[1].getPlayersSchool().AddEntranceStudents(studentColor);
 			}
-			String name3 = "examplePlayer3";
-			Players[2] = new Player(TowerColor.GREY, name3, 2);
+			Players[2] = new Player(TowerColor.GREY, 2);
 			for (int i = 0; i < 9; i++) {
 				studentColor = bag.getFirstElement();
 				bag.RemoveFirstElement();

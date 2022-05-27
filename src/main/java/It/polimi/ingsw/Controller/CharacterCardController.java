@@ -45,6 +45,7 @@ public class CharacterCardController {
 						card1.AddStudent();
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card1.getCardCost());
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
+						card1.IncreaseCardCost();
 						Game.getMatch().CreateMessage();
 					}
 				}
@@ -71,6 +72,7 @@ public class CharacterCardController {
 					Game.CheckIslandInfluence(message.getIslandIndex());
 					Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card3.getCardCost());
 					Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
+					card3.IncreaseCardCost();
 					Game.getMatch().CreateMessage();
 				}
 			} else throw new InvalidInputException("You do not have enough coins to play this card");
@@ -90,6 +92,7 @@ public class CharacterCardController {
 				Game.getMatch().getPlayerById(Game.getActivePlayer()).IncreaseMovements(2);
 				Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card4.getCardCost());
 				Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
+				card4.IncreaseCardCost();
 				Game.getMatch().CreateMessage();
 			} else throw new InvalidInputException("You do not have enough coins to play this card");
 		} else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
@@ -117,6 +120,7 @@ public class CharacterCardController {
 						Game.getMatch().getTable().get(message.getIslandIndex()).setNoEntryTile();
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card.getCardCost());
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
+						card.IncreaseCardCost();
 						Game.getMatch().CreateMessage();
 					}
 				}
@@ -140,6 +144,7 @@ public class CharacterCardController {
 					Game.getMatch().setPlaysCard6(true);
 					Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card6.getCardCost());
 					Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
+					card6.IncreaseCardCost();
 					Game.getMatch().CreateMessage();
 				}
 			} else throw new InvalidInputException("You do not have enough coins to play this card");
@@ -160,6 +165,7 @@ public class CharacterCardController {
 				Game.getMatch().getPlayerById(Game.getActivePlayer()).setAdditionalPoints(true);
 				Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card9.getCardCost());
 				Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
+				card9.IncreaseCardCost();
 				Game.getMatch().CreateMessage();
 			} else throw new InvalidInputException("You do not have enough coins to play this card");
 		} else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");
@@ -189,6 +195,7 @@ public class CharacterCardController {
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card.getCardCost());
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
 						Game.CheckTeacherControl(StudentColor, Game.getMatch().getPlayerById(Game.getActivePlayer()));
+						card.IncreaseCardCost();
 						Game.getMatch().CreateMessage();
 					}
 				}
@@ -218,6 +225,7 @@ public class CharacterCardController {
 				}
 				Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card12.getCardCost());
 				Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
+				card12.IncreaseCardCost();
 				Game.getMatch().CreateMessage();
 			} else throw new InvalidInputException("You do not have enough coins to play this card");
 		} else throw new InvalidInputException("Selected Card is not on Table, please choose another Card");

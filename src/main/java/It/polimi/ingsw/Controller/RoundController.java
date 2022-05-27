@@ -248,4 +248,8 @@ public class RoundController {
 	public GamePhase getGamePhase() {
 		return this.gamePhase;
 	}
+
+	public void addNickName(NicknameMessage nicknameMessage){
+		Game.getMatch().getPlayerById(nicknameMessage.getPlayerIndex()).setName(nicknameMessage.getNickname());
+	}
 }
