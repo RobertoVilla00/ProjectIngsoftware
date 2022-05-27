@@ -71,7 +71,8 @@ public class RoundController {
 							}
 						}
 					} catch (InvalidInputException e) {
-						System.out.println(e.getMessage());
+						ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
+						Game.getMatch().sendError(errorMessage);
 					}
 				} else throw new WrongMessageException();
 				break;
@@ -110,7 +111,8 @@ public class RoundController {
 					setFirstActivePlayer();
 					GamePhaseHandler(GamePhase.FILL_CLOUDS);
 				} catch (InvalidInputException e) {
-					System.out.println(e.getMessage());
+					ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
+					Game.getMatch().sendError(errorMessage);
 				} finally {
 					break;
 				}
@@ -134,7 +136,8 @@ public class RoundController {
 						Game.getMatch().setGamePhase(this.gamePhase);
 					}
 				} catch (InvalidInputException e) {
-					System.out.println(e.getMessage());
+					ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
+					Game.getMatch().sendError(errorMessage);
 				} finally {
 					Game.getMatch().CreateMessage();
 					break;
@@ -151,7 +154,8 @@ public class RoundController {
 						MovedStudentCounter = 0;      //reset counter
 					}
 				} catch (InvalidInputException e) {
-					System.out.println(e.getMessage());
+					ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
+					Game.getMatch().sendError(errorMessage);
 				} finally {
 					Game.getMatch().CreateMessage();
 					break;
@@ -163,7 +167,8 @@ public class RoundController {
 					this.gamePhase = GamePhase.CHOOSE_CLOUD;
 					Game.getMatch().setGamePhase(this.gamePhase);
 				} catch (InvalidInputException e) {
-					System.out.println(e.getMessage());
+					ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
+					Game.getMatch().sendError(errorMessage);
 				} finally {
 					Game.getMatch().CreateMessage();
 					break;
@@ -184,7 +189,8 @@ public class RoundController {
 						GamePhaseHandler(GamePhase.FILL_CLOUDS);
 					}
 				} catch (InvalidInputException e) {
-					System.out.println(e.getMessage());
+					ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
+					Game.getMatch().sendError(errorMessage);
 				} finally {
 					Game.getMatch().CreateMessage();
 					break;
@@ -207,7 +213,8 @@ public class RoundController {
 						Game.PlayCharacterCardById(12, msg);
 					}
 				} catch (InvalidInputException | NoEntryTilesException e) {
-					System.out.println(e.getMessage());
+					ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
+					Game.getMatch().sendError(errorMessage);
 				}
 		}
 	}

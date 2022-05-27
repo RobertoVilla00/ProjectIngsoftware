@@ -188,6 +188,9 @@ public class GameController {
 				}
 			}
 		}
+	}
+
+	public void CheckEndGameEOT(){
 		if (match.getBag().BagSize() == 0) {
 			EndGame();
 		}
@@ -196,7 +199,6 @@ public class GameController {
 				EndGame();
 			}
 		}
-
 	}
 
 	/**
@@ -318,7 +320,7 @@ public class GameController {
 	 *
 	 * @return an array list with the ids of the winner(usually one but more in case of a tie).
 	 */
-	public ArrayList<Integer> EndGame() {		//return the id of the winner
+	public ArrayList<String> EndGame() {		//return the id of the winner
 		ranking = new int[match.getNumberOfPlayers()][3];
 		int numberOfTiedPlayers=0;
 		for (Player p : match.getPlayers()) {
@@ -375,9 +377,10 @@ public class GameController {
 		else{
 			numberOfTiedPlayers=1;
 		}
-		ArrayList<Integer> tiedPlayers=new ArrayList<Integer>();
+		ArrayList<String> tiedPlayers=new ArrayList<String>();
 		for (int j=0; j<numberOfTiedPlayers; j++){
-			tiedPlayers.add(ranking[match.getNumberOfPlayers()-(1+j)][0]);
+			String string=match.getPlayerById(ranking[match.getNumberOfPlayers()-(1+j)][0]).getName();
+			tiedPlayers.add(string);
 		}
 		EndgameMessage endgameMessage=new EndgameMessage(tiedPlayers);
 		match.SendEndMessage(endgameMessage);
@@ -470,6 +473,14 @@ public class GameController {
 
 		for (Player p : match.getPlayers()) {
 			p.setPlayedCharacterCard(false);
+		}
+		if (match.getBag().BagSize() == 0) {
+			EndGame();
+		}
+		for (Player p : match.getPlayers()) {
+			if (p.getDeck().CardCount() == 0) {
+				EndGame();
+			}
 		}
 
 	}

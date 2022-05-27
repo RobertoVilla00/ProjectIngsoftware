@@ -2,6 +2,7 @@ package It.polimi.ingsw.Model;
 
 import It.polimi.ingsw.Controller.GamePhase;
 import It.polimi.ingsw.Message.EndgameMessage;
+import It.polimi.ingsw.Message.ErrorMessage;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Observer.Observable;
 
@@ -594,6 +595,10 @@ public class Match extends Observable implements Serializable {
 			}
 			p.setNumberOfTowers(numberOfTowers);
 		}
+	}
+
+	public void sendError(ErrorMessage msg){
+		notifyObserver(msg);
 	}
 }
 

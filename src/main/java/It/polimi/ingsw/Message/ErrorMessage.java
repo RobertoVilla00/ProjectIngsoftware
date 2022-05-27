@@ -6,6 +6,7 @@ package It.polimi.ingsw.Message;
 public class ErrorMessage extends Message {
 	private static final long serialVersionUID = 1L;
 	private String error;
+	private int PlayerId;
 
 	/**
 	 * The constructor for the error message.
@@ -16,6 +17,11 @@ public class ErrorMessage extends Message {
 		this.error = error;
 	}
 
+	public ErrorMessage(String error, int PlayerId) {
+		super(MessageContent.ERROR);
+		this.error = error;
+		this.PlayerId = PlayerId;
+	}
 	/**
 	 * Return the string of the error.
 	 * @return the string of the error.

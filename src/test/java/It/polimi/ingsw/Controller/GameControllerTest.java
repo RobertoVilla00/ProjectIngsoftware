@@ -606,9 +606,9 @@ public class GameControllerTest {
 		controller.getMatch().getPlayers()[0].IncreaseTowersPlaced(3);
 		controller.getMatch().getPlayers()[1].IncreaseTowersPlaced(5);
 		controller.getMatch().getPlayers()[2].IncreaseTowersPlaced(4);
-		Integer winnerId = controller.EndGame().get(0);
-		int winner=winnerId;
-		assertEquals(1, winner);
+		controller.getMatch().getPlayerById(1).setName("mario");
+		String name = controller.EndGame().get(0);
+		assertEquals("mario", name);
 	}
 
 	@Test
@@ -624,8 +624,9 @@ public class GameControllerTest {
 		}
 		//assertEquals(0,controller.getMatch().getBag().BagSize());
 		controller.checkEndGame();
-		int winner=controller.EndGame().get(0);
-		assertEquals(0, winner);
+		controller.getMatch().getPlayerById(0).setName("Carlo");
+		String winner=controller.EndGame().get(0);
+		assertEquals("Carlo", winner);
 	}
 
 	@Test
@@ -656,8 +657,9 @@ public class GameControllerTest {
 		controller.PlayAssistantCard(assistantCardMessage9);
 		controller.getMatch().getPlayers()[0].IncreaseTowersPlaced(2);
 		controller.checkEndGame();
-		int winner=controller.EndGame().get(0);
-		assertEquals(0, winner);
+		controller.getMatch().getPlayerById(0).setName("Carlo");
+		String winner=controller.EndGame().get(0);
+		assertEquals("Carlo", winner);
 	}
 
 	@Test
@@ -667,8 +669,9 @@ public class GameControllerTest {
 		controller.InitializeGame(startMessage);
 		controller.getMatch().getPlayers()[0].IncreaseTowersPlaced(8);
 		controller.checkEndGame();
-		int winner=controller.EndGame().get(0);
-		assertEquals(0, winner);
+		controller.getMatch().getPlayerById(0).setName("Carlo");
+		String winner=controller.EndGame().get(0);
+		assertEquals("Carlo", winner);
 	}
 
 	@Test
@@ -678,8 +681,9 @@ public class GameControllerTest {
 		controller.InitializeGame(startMessage);
 		controller.getMatch().getPlayers()[0].IncreaseTowersPlaced(6);
 		controller.checkEndGame();
-		int winner=controller.EndGame().get(0);
-		assertEquals(0, winner);
+		controller.getMatch().getPlayerById(0).setName("Carlo");
+		String winner=controller.EndGame().get(0);
+		assertEquals("Carlo", winner);
 	}
 
 	@Test
@@ -835,9 +839,9 @@ public class GameControllerTest {
 		controller.getMatch().getPlayerById(2).IncreaseTowersPlaced(2);
 		controller.getMatch().getTeachers().get(0).ChangeController(controller.getMatch().getPlayerById(0));
 		controller.getMatch().getTeachers().get(1).ChangeController(controller.getMatch().getPlayerById(1));
-		Integer winner2 = controller.EndGame().get(1);
-		int winner = winner2;
-		assertEquals(0, winner);
+		controller.getMatch().getPlayerById(1).setName("Carlo");
+		String winner=controller.EndGame().get(0);
+		assertEquals("Carlo", winner);
 	}
 
 		@Test
@@ -848,8 +852,8 @@ public class GameControllerTest {
 			controller.getMatch().getPlayerById(0).IncreaseTowersPlaced(2);
 			controller.getMatch().getPlayerById(1).IncreaseTowersPlaced(2);
 			controller.getMatch().getTeachers().get(0).ChangeController(controller.getMatch().getPlayerById(0));
-			Integer winner2=controller.EndGame().get(0);
-			int winner= winner2;
-			assertEquals(0,winner);
+			controller.getMatch().getPlayerById(0).setName("Carlo");
+			String winner=controller.EndGame().get(0);
+			assertEquals("Carlo", winner);
 	}
 }

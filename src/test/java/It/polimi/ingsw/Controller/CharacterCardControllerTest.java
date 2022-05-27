@@ -305,13 +305,13 @@ public class CharacterCardControllerTest {
 		controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
 		characterCardController.PlayCard5(card3and5Message);
 		Card3and5Message card3and5Message2 = new Card3and5Message(5);
-		controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
+		controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(5);
 		characterCardController.PlayCard5(card3and5Message);
 		Card3and5Message card3and5Message3 = new Card3and5Message(10);
-		controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
+		controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(10);
 		characterCardController.PlayCard5(card3and5Message);
 		Card3and5Message card3and5Message4 = new Card3and5Message(11);
-		controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(2);
+		controller.getMatch().getPlayerById(controller.getActivePlayer()).AddCoin(10);
 		characterCardController.PlayCard5(card3and5Message);
 	}
 

@@ -47,7 +47,7 @@ public class Cli extends Observable implements View, Observer {
 		int towerCnt = 0;
 		int toRemove = 0;
 		int cardCnt = 0;
-
+		int nicknameSpace = 33;
 
 		StringBuilder str = new StringBuilder();
 		str.append("ISLANDS:\n\n");
@@ -315,7 +315,15 @@ public class Cli extends Observable implements View, Observer {
 
 		//PRINTING SCHOOLS
 
+		for(Player p: msg.getPlayers()){
+			str.append(p.getName());
+			for(int i=0;i < nicknameSpace-p.getName().length(); i++) str.append(" ");
+		}
+		str.append("\n");
+
 		for(Player p: msg.getPlayers()) {
+
+
 
 			for (int i = 0; i < 13; i++) str.append("-");
 			for(int i=0;i<20;i++) str.append(" ");
@@ -877,8 +885,12 @@ public class Cli extends Observable implements View, Observer {
 		notifyObserver(startMessage);
 	}
 
-	public void endGame(Message message){
+	public void endGame(EndgameMessage message){
 		//todo:stampa di tutti i vincitori
+		for(String winner : message.getWinners()){
+			System.out.println(StrColor.ANSI_GREEN+winner+", "+StrColor.ANSI_RESET);
+		}
+		System.out.println(StrColor.ANSI_GREEN+"YOU WON!"+StrColor.ANSI_RESET);
 	}
 
 	@Override

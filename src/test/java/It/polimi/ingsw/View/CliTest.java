@@ -31,7 +31,7 @@ public class CliTest {
 				"                       																		 °*OO°                     \n" + StrColor.ANSI_RESET);
 	}
 
-	@Test
+	/*@Test
 
 	public void ShowMatchInfo() {
 		Cli cli = new Cli();
@@ -83,5 +83,5 @@ public class CliTest {
 
 		//cli.askInformation();
 
-	}
+	}*/
 }

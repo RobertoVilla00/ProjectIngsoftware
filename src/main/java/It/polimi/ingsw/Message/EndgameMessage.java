@@ -6,14 +6,14 @@ import java.util.List;
 public class EndgameMessage extends  Message{
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<Integer> winners;
+	private ArrayList<String> winners;
 
-	public EndgameMessage(ArrayList<Integer> winners){
+	public EndgameMessage(ArrayList<String> winners){
 		super(MessageContent.ENDGAME);
 		this.winners=winners;
 	}
 
-	public ArrayList<Integer> getWinners(){
+	public ArrayList<String> getWinners(){
 		return  this.winners;
 	}
 }
