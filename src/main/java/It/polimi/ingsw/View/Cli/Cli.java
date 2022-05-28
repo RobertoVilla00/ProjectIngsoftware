@@ -10,16 +10,25 @@ import It.polimi.ingsw.View.View;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * The class that represents the Cli.
+ */
 public class Cli extends Observable implements View, Observer {
 	private PrintStream out;
 	private Scanner in = new Scanner(System.in);
 	private ShowMatchInfoMessage msg;
 	private int PlayerId;
 
+	/**
+	 * The constructor of the Cli.
+	 */
 	public Cli() {
 		out = System.out;
 	}
 
+	/**
+	 * The method which print on the screen the name of the game.
+	 */
 	public void startGame() {
 		out.println(StrColor.ANSI_RED + "                                                                                                                      \n" +
 				"         .**ooooOOOOOOOOOOOOOO*                 .oOOo.                                                                    \n" +
@@ -39,6 +48,10 @@ public class Cli extends Observable implements View, Observer {
 
 	}
 
+	/**
+	 * THe method that shows the information of the game.
+	 * It shows clouds, islands, school, students, teachers, mother nature, character cards, assistant card, coins.
+	 */
 	@Override
 	public void showGameInformation() {
 		int schoolSpace = 20;
@@ -553,6 +566,10 @@ public class Cli extends Observable implements View, Observer {
 		System.out.println(str);
 	}
 
+	/**
+	 * It used to print coins of each student on the screen.
+	 * @param str: the string which show the information on the screen.
+	 */
 	public void printCoins(StringBuilder str) {
 		for (Player p : msg.getPlayers()) {
 			str.append("|");
@@ -571,6 +588,10 @@ public class Cli extends Observable implements View, Observer {
 		str.append("\n\n");
 	}
 
+	/**
+	 * The method which print the information of character cards on the screen.
+	 * @param str: the string which show the information on the screen.
+	 */
 	public void printCharacterCards(StringBuilder str) {
 		int i = 1;
 		str.append("\n");
@@ -655,6 +676,10 @@ public class Cli extends Observable implements View, Observer {
 		}
 	}
 
+	/**
+	 * Return the active player.
+	 * @return the active player.
+	 */
 	public Player getActivePlayerById() {
 		for (Player p : msg.getPlayers()) {
 			if (p.getPlayerId() == msg.getActivePlayerId()) return p;
@@ -663,6 +688,10 @@ public class Cli extends Observable implements View, Observer {
 	}
 
 
+	/**
+	 * Return the max number of towers in the game depending on the number of players.
+	 * @return the max number of towers.
+	 */
 	public int maxTowersNumber() {
 		int i = 0;
 		for (Player p : msg.getPlayers()) i++;
@@ -670,10 +699,17 @@ public class Cli extends Observable implements View, Observer {
 		else return 6;
 	}
 
+	/**
+	 * It sets the ShowMatchInfoMessage.
+	 * @param msg: the ShowMatchInfoMessage.
+	 */
 	public void setMsg(ShowMatchInfoMessage msg) {
 		this.msg = msg;
 	}
 
+	/**
+	 * The method who asks the player for information during the game.
+	 */
 	@Override
 	public void askInformation() {
 
@@ -852,6 +888,9 @@ public class Cli extends Observable implements View, Observer {
 		}
 	}
 
+	/**
+	 * It used to ask the player's name.
+	 */
 	public void askName() {
 		out.println("Insert your name\n");
 		String name = in.nextLine();
@@ -860,10 +899,17 @@ public class Cli extends Observable implements View, Observer {
 		notifyObserver(nicknameMessage);
 	}
 
+	/**
+	 * It used to print error on the screen.
+	 * @param error: the error.
+	 */
 	public void printError(String error) {
 		out.println(error);
 	}
 
+	/**
+	 * It used to ask the number of players and the game mode.
+	 */
 	public void askPlayers() {
 		out.println("Insert the number of Players (must be 2 or 3)\n");
 		int numberOfPlayers = Integer.parseInt(in.nextLine());
@@ -885,6 +931,10 @@ public class Cli extends Observable implements View, Observer {
 		notifyObserver(startMessage);
 	}
 
+	/**
+	 * It used to print on the screen the winner of the game.
+	 * @param message: the message which is received.
+	 */
 	public void endGame(EndgameMessage message){
 		//todo:stampa di tutti i vincitori
 		for(String winner : message.getWinners()){
@@ -893,6 +943,10 @@ public class Cli extends Observable implements View, Observer {
 		System.out.println(StrColor.ANSI_GREEN+"YOU WON!"+StrColor.ANSI_RESET);
 	}
 
+	/**
+	 * The method update of the interface Observer. It invokes the correct method depending on the message received.
+	 * @param message: the message which is received.
+	 */
 	@Override
 	public void update(Message message) {
 		switch (message.getMessageContent()) {

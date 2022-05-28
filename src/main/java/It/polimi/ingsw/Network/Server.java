@@ -14,8 +14,10 @@ import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.Scanner;
 
+/**
+ * The server class that starts a Socket Server.
+ */
 public class Server {
 	private int numberOfPlayer = 0;
 	private ServerSocket serverSocket;
@@ -25,10 +27,19 @@ public class Server {
 	private Map<Connection, Connection> playConnection = new HashMap<>();
 	private RoundController controller;
 
+	/**
+	 * The constructor of the Server.
+	 * @param port: the number of port.
+	 * @throws IOException: signals that an I/O exception has occurred.
+	 */
 	public Server(int port) throws IOException {
 		this.serverSocket = new ServerSocket(port);
 	}
 
+	/**
+	 * It adds a connection to the List of connections.
+	 * @param c: the connection.
+	 */
 	public synchronized void AddConnection(Connection c) {
 		connections.add(c);
 	}
@@ -50,6 +61,11 @@ public class Server {
 	}
 
 
+	/**
+	 * This is the method that create the Lobby in which the connections are added.
+	 * @param c: the connection.
+	 * @throws IOException: signals that an I/O exception has occurred.
+	 */
 	public synchronized void Lobby(Connection c) throws IOException {
 		System.out.println("nella lobby");
 		if (connections.size() == 0 || connections.size() < numberOfPlayer) {
@@ -107,6 +123,9 @@ public class Server {
 
 	}
 
+	/**
+	 * This is the main method of the thread.
+	 */
 	public void run() {
 		int connections = 0;
 		//System.out.println("Server Listening on port: " + Port);
@@ -123,6 +142,10 @@ public class Server {
 		}
 	}
 
+	/**
+	 * It used to invoke the Message Handler in the Round Controller.
+	 * @param message: the message that is received.
+	 */
 	public void handleReceivedMessage(Message message) {
 		try {
 			controller.MessageHandler(message);

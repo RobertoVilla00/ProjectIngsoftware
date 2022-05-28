@@ -273,6 +273,10 @@ public class Player implements Comparable<Player>, Serializable {
 		TowersPlaced = number;
 	}
 
+	/**
+	 * It sets the nickname of the player.
+	 * @param nickname: the nickname of the player.
+	 */
 	public void setName(String nickname) {
 		this.Name=nickname;
 	}

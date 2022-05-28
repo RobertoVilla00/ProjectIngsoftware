@@ -6,6 +6,9 @@ import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Exceptions.WrongMessageException;
 import It.polimi.ingsw.Message.*;
 
+/**
+ * This is the class that represents the controller of the Round.
+ */
 public class RoundController {
 
 	private GameController Game;
@@ -16,11 +19,21 @@ public class RoundController {
 	private int MovedStudentCounter;
 
 
+	/**
+	 * The constructor of the Round Controller. It creates the Game Controller and set the initial Game Phase.
+	 */
 	public RoundController() {
 		this.Game = new GameController();
 		this.gamePhase = GamePhase.GAME_INIT;
 	}
 
+	/**
+	 * This method takes care of managing the messages received.
+	 * @param msg: the message
+	 * @throws NoActivePlayerException: in case there is no active player.
+	 * @throws InvalidInputException: in case a value that the player insert is invalid.
+	 * @throws WrongMessageException: in case there is an error in the game.
+	 */
 	public void MessageHandler(Message msg) throws NoActivePlayerException, InvalidInputException, WrongMessageException {
 		this.msg = msg;
 		switch (msg.getMessageContent()) {
@@ -103,6 +116,13 @@ public class RoundController {
 		}
 	}
 
+	/**
+	 * This method takes care of receiving the current game phase and invoking the methods corresponding to that game phase.
+	 * @param gamePhase: this is the current phase of the game.
+	 * @throws InvalidInputException: in case a value that the player insert is invalid.
+	 * @throws WrongMessageException: in case there is an error in the game.
+	 * @throws NoActivePlayerException: in case there is no active player.
+	 */
 	public void GamePhaseHandler(GamePhase gamePhase) throws InvalidInputException, WrongMessageException, NoActivePlayerException {
 		switch (gamePhase) {
 			case GAME_INIT:
@@ -219,6 +239,9 @@ public class RoundController {
 		}
 	}
 
+	/**
+	 * It used to set the fist player to active, and the other players to inactive.
+	 */
 	public void setFirstActivePlayer() {
 		Game.getMatch().getPlayers()[0].setActive();
 		Game.getMatch().setActivePlayerId(Game.getMatch().getPlayers()[0].getPlayerId());
@@ -227,6 +250,10 @@ public class RoundController {
 		}
 	}   //first player of the new list becomes active
 
+	/**
+	 * It used to set the next player in the array to active.
+	 * @throws NoActivePlayerException: in case there is no active player.
+	 */
 	public void setNextActivePlayer() throws NoActivePlayerException {
 		int PresentActive = Game.getActivePlayerPosition();
 		Game.getMatch().getPlayers()[PresentActive].setInactive();
@@ -234,28 +261,53 @@ public class RoundController {
 		Game.getMatch().setActivePlayerId(Game.getMatch().getPlayers()[PresentActive + 1].getPlayerId()); //write in model who's the active player
 	}    //next player becomes active
 
+	/**
+	 * Return true if active player is last element of the array of players, otherwise false.
+	 * @return true if active player is last element of the array of players.
+	 * @throws NoActivePlayerException: in case there is no active player.
+	 */
 	public boolean FinishedPlayers() throws NoActivePlayerException {   //return true if active player is last element of players list
 		if (Game.getActivePlayerPosition() == Game.getMatch().getNumberOfPlayers() - 1) return true;
 		else return false;
 	}
 
+	/**
+	 * Return the instance of the game controller.
+	 * @return the instance of the game controller.
+	 */
 	public GameController getGameController() {
 		return this.Game;
 	}
 
+	/**
+	 * It sets the phase of the game.
+	 * @param gamePhase: the game phase of the game.
+	 */
 	public void setGamePhase(GamePhase gamePhase) {
 		this.gamePhase = gamePhase;
 	}
 
+	/**
+	 * It sets the expected number of the Character Card.
+	 * @param expectedCardMsg: the number of the expected Character Card.
+	 */
 	public void setExpectedCardMsg(int expectedCardMsg) {
 		this.ExpectedCardMsg = expectedCardMsg;
 		Game.getMatch().setExpectedCardMessage(expectedCardMsg);
 	}
 
+	/**
+	 * Return the game phase of the game.
+	 * @return the game phase of the game.
+	 */
 	public GamePhase getGamePhase() {
 		return this.gamePhase;
 	}
 
+	/**
+	 * It used to add the nickname of the player to the match.
+	 * @param nicknameMessage: the message containing the nickname of the player and his index.
+	 */
 	public void addNickName(NicknameMessage nicknameMessage){
 		Game.getMatch().getPlayerById(nicknameMessage.getPlayerIndex()).setName(nicknameMessage.getNickname());
 	}

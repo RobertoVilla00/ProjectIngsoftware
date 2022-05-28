@@ -1,5 +1,8 @@
 package It.polimi.ingsw.View.Cli;
 
+/**
+ * The enum of the Colors.
+ */
 public enum StrColor {
 
 	//COLORS
@@ -29,10 +32,18 @@ public enum StrColor {
 
 	private final String ColorCode;
 
+	/**
+	 * The constructor of the class.
+	 * @param ColorCode: the color code.
+	 */
 	StrColor(String ColorCode) {
 		this.ColorCode = ColorCode;
 	}
 
+	/**
+	 * Return the name of this enum constant.
+	 * @return the name of this enum constant.
+	 */
 	@Override
 	public String toString() {
 		return ColorCode;

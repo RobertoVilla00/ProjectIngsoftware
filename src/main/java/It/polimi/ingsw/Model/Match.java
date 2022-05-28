@@ -597,6 +597,10 @@ public class Match extends Observable implements Serializable {
 		}
 	}
 
+	/**
+	 * It used to notify the player that made a mistake.
+	 * @param msg: the message representing the error.
+	 */
 	public void sendError(ErrorMessage msg){
 		notifyObserver(msg);
 	}

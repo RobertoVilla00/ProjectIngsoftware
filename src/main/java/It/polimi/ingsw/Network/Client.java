@@ -13,6 +13,9 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * The class that represents the client.
+ */
 public class Client extends Observable implements Observer {
 
 	private String ip;
@@ -22,6 +25,12 @@ public class Client extends Observable implements Observer {
 	private ObjectInputStream inputStream;
 	private ObjectOutputStream outputStream;
 
+	/**
+	 * The constructor of the client.
+	 * @param ip: the address ip.
+	 * @param port: the number of port.
+	 * @throws IOException: signals that an I/O exception has occurred.
+	 */
 	public Client(String ip, int port) throws IOException {
 		this.ip = ip;
 		this.port = port;
@@ -36,6 +45,10 @@ public class Client extends Observable implements Observer {
 
 	}
 
+	/**
+	 * Return true if the client is active.
+	 * @return true if the client is active.
+	 */
 	public synchronized boolean isActive() {
 		return active;
 	}
@@ -44,6 +57,11 @@ public class Client extends Observable implements Observer {
 		this.active = active;
 	}
 
+	/**
+	 * It creates a thread that read objects from socket.
+	 * @param socketIn: Object Input Stream which objects are read.
+	 * @return the thread which is cretaed.
+	 */
 	public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
 		Thread t = new Thread(new Runnable() {
 			@Override
@@ -82,6 +100,10 @@ public class Client extends Observable implements Observer {
         return t;
     }*/
 
+	/**
+	 * It used to send message on the Object output stream.
+	 * @param message: the message to be sent.
+	 */
 	public void sendMessage(Message message) {
 		try {
 			outputStream.writeObject(message);
@@ -92,6 +114,10 @@ public class Client extends Observable implements Observer {
 		}
 	}
 
+	/**
+	 * The main method of the thread.
+	 * @throws IOException: signals that an I/O exception has occurred.
+	 */
 	public void run() throws IOException {
 		System.out.println("Connection Established");
 		//ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
@@ -112,6 +138,10 @@ public class Client extends Observable implements Observer {
 		}
 	}
 
+	/**
+	 * It is an override of the update method in interface Observer.
+	 * @param message: the message to be sent.
+	 */
 	@Override
 	public void update(Message message) {
 		sendMessage(message);
