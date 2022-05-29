@@ -49,7 +49,7 @@ public class Cli extends Observable implements View, Observer {
 	}
 
 	/**
-	 * THe method that shows the information of the game.
+	 * The method that shows the information of the game.
 	 * It shows clouds, islands, school, students, teachers, mother nature, character cards, assistant card, coins.
 	 */
 	@Override

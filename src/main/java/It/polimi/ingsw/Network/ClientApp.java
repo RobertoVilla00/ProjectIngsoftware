@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Network;
 
 import It.polimi.ingsw.View.Cli.Cli;
+import It.polimi.ingsw.View.Gui.Gui;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -20,17 +21,26 @@ public class ClientApp {
 			int p = Integer.parseInt(s.nextLine());
 
 			boolean useCli = false;
+			boolean useGui = false;
 			System.out.println("Insert cli or gui");
 			String par = s.nextLine();
 			System.out.println(par);
 			if (par.equalsIgnoreCase("cli")) {
 				useCli = true;
 			}
+			else if (par.equalsIgnoreCase("gui")) {
+				useGui = true;
+			}
 			Client client = new Client(ip, p);
 			if (useCli) {
 				Cli cli = new Cli();
 				client.addObserver(cli);
 				cli.addObserver(client);
+			}
+			if(useGui){
+				Gui gui = new Gui();
+				client.addObserver(gui);
+				gui.addObserver(client);
 			}
 			client.run();
 		} catch (IOException e) {
