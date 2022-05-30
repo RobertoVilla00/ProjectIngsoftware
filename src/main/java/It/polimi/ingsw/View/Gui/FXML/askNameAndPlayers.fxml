@@ -20,7 +20,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <RadioButton fx:id="PlayersButton2" layoutX="226.0" layoutY="182.0" mnemonicParsing="false" selected="true" text="2">
+      <RadioButton fx:id="PlayersButton2" layoutX="226.0" layoutY="182.0" mnemonicParsing="false" onAction="#getNumberOfPlayers" selected="true" text="2">
          <font>
             <Font size="20.0" />
          </font>
@@ -28,7 +28,7 @@
             <ToggleGroup fx:id="NumberOfPlayersButtons" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="PlayersButton3" layoutX="333.0" layoutY="182.0" mnemonicParsing="false" text="3" toggleGroup="$NumberOfPlayersButtons">
+      <RadioButton fx:id="PlayersButton3" layoutX="333.0" layoutY="182.0" mnemonicParsing="false" onAction="#getNumberOfPlayers" text="3" toggleGroup="$NumberOfPlayersButtons">
          <font>
             <Font size="20.0" />
          </font>
@@ -43,7 +43,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <RadioButton fx:id="GameModeNormal" layoutX="175.0" layoutY="286.0" mnemonicParsing="false" selected="true" text="Normal">
+      <RadioButton fx:id="GameModeNormal" layoutX="175.0" layoutY="286.0" mnemonicParsing="false" onAction="#getGameMode" selected="true" text="Normal">
          <font>
             <Font size="20.0" />
          </font>
@@ -51,7 +51,7 @@
             <ToggleGroup fx:id="GameModeButton" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="GameModeExpert" layoutX="354.0" layoutY="286.0" mnemonicParsing="false" text="Expert" toggleGroup="$GameModeButton">
+      <RadioButton fx:id="GameModeExpert" layoutX="354.0" layoutY="286.0" mnemonicParsing="false" onAction="#getGameMode" text="Expert" toggleGroup="$GameModeButton">
          <font>
             <Font size="20.0" />
          </font>

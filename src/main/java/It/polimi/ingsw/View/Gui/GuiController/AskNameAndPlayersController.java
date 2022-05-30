@@ -3,6 +3,7 @@ package It.polimi.ingsw.View.Gui.GuiController;
 import It.polimi.ingsw.Message.NicknameMessage;
 import It.polimi.ingsw.Message.StartMessage;
 import It.polimi.ingsw.View.Gui.Gui;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,14 +23,16 @@ public class AskNameAndPlayersController {
 
 	public int NumberOfPlayers;
 	public int GameMode;
-	String nickname;
-	Gui gui;
+	public String nickname;
+	public Gui gui;
 
 	public AskNameAndPlayersController(Gui gui){
 		this.gui=gui;
+		this.NumberOfPlayers=2;
+		this.GameMode=0;
 	}
 
-	public void getAnswers(){
+	public void getAnswers(ActionEvent event){
 		nickname=nicknameTextField.getText();
 		if(nickname.isEmpty()){
 			nameLabel.setText("Insert a valid name");
@@ -42,7 +45,7 @@ public class AskNameAndPlayersController {
 		gui.sendMessage(startMessage);
 	}
 
-	public void getNumberOfPlayers(){
+	public void getNumberOfPlayers(ActionEvent event){
 		if(PlayersButton2.isSelected()){
 			   NumberOfPlayers=2;
 		}
@@ -51,7 +54,7 @@ public class AskNameAndPlayersController {
 		}
 	}
 
-	public void getGameMode(){
+	public void getGameMode(ActionEvent event){
 		if(GameModeNormal.isSelected()){
 			GameMode=0;
 		}
@@ -59,4 +62,5 @@ public class AskNameAndPlayersController {
 			GameMode=1;
 		}
 	}
+
 }
