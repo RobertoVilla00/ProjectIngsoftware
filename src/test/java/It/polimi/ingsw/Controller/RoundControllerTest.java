@@ -544,4 +544,21 @@ public class RoundControllerTest {
 		GamePhase phase = roundController.getGameController().getMatch().getGamePhase();
 		assertEquals(phase, GamePhase.ASSISTANT_CARD);
 	}
+
+
+
+	@Test
+	public void Game() throws InvalidInputException, NoActivePlayerException, WrongMessageException {
+		RoundController roundController=new RoundController();
+		StartMessage startMessage = new StartMessage(2, 1);
+		roundController.setGamePhase(GamePhase.GAME_INIT);
+		roundController.MessageHandler(startMessage);
+		AssistantCardMessage assistantCardMessage=new AssistantCardMessage(2);
+		AssistantCardMessage assistantCardMessage2=new AssistantCardMessage(1);
+		roundController.MessageHandler(assistantCardMessage);
+		roundController.MessageHandler(assistantCardMessage2);
+		MoveStudentMessage moveStudentMessage=new MoveStudentMessage(1,0);
+		roundController.MessageHandler(moveStudentMessage);
+
+	}
 }

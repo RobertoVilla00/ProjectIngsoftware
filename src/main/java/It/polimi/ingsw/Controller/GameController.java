@@ -163,7 +163,7 @@ public class GameController {
 				}
 			}
 			if (!isTied) {                //if the count is tied no one build the tower
-				TowerColor BuiltTowerColor = match.getPlayers()[idMax].getPlayerColor();         //find color of the tower to build
+				TowerColor BuiltTowerColor = match.getPlayerById(idMax).getPlayerColor();         //find color of the tower to build
 				match.getTable().get(IslandIndex).BuildTower(BuiltTowerColor);
 				match.CountNumberOfTowers();
 				checkEndGame();
@@ -186,17 +186,6 @@ public class GameController {
 				if (p.getTowersPlaced() == 6) {
 					EndGame();
 				}
-			}
-		}
-	}
-
-	public void CheckEndGameEOT(){
-		if (match.getBag().BagSize() == 0) {
-			EndGame();
-		}
-		for (Player p : match.getPlayers()) {
-			if (p.getDeck().CardCount() == 0) {
-				EndGame();
 			}
 		}
 	}
@@ -262,7 +251,11 @@ public class GameController {
 	public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage) throws InvalidInputException, NoActivePlayerException {
 		if (cloudChoiceMessage.getCloudIndex() > match.getNumberOfPlayers() - 1 || cloudChoiceMessage.getCloudIndex() < 0) {
 			throw new InvalidInputException("invalid Cloud index");
-		} else match.MoveStudentsFromCloudToEntrance(getActivePlayer(), cloudChoiceMessage.getCloudIndex());
+		}
+		else if (match.getClouds().get(cloudChoiceMessage.getCloudIndex()).CloudSize()==0){
+			throw new InvalidInputException("The cloud is empty");
+		}
+		else match.MoveStudentsFromCloudToEntrance(getActivePlayer(), cloudChoiceMessage.getCloudIndex());
 	}
 
 

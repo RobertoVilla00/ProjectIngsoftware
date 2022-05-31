@@ -184,7 +184,13 @@ public class Match extends Observable implements Serializable {
 	 * @return the player at the given Id.
 	 */
 	public Player getPlayerById(int PlayerId) {
-		return this.Players[PlayerId];
+		Player player;
+		for (Player p:Players){
+			if(p.getPlayerId()==PlayerId){
+				return p;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -305,15 +311,15 @@ public class Match extends Observable implements Serializable {
 	/**
 	 * It used to move students from the cloud given by parameter to the Entrance of the player given by parameter.
 	 *
-	 * @param PlayerIndex: the index of the player.
+	 * @param PlayerId: the index of the player.
 	 * @param CloudIndex:  the index of the cloud.
 	 */
-	public void MoveStudentsFromCloudToEntrance(int PlayerIndex, int CloudIndex) {
+	public void MoveStudentsFromCloudToEntrance(int PlayerId, int CloudIndex) {
 		Color StudentColor;
 		int NumberOfStudents = getClouds().get(CloudIndex).CloudSize();
 		for (int i = 0; i < NumberOfStudents; i++) {
 			StudentColor = getClouds().get(CloudIndex).MoveStudentFromCloud(0);
-			Players[PlayerIndex].getPlayersSchool().AddEntranceStudents(StudentColor);
+			getPlayerById(PlayerId).getPlayersSchool().AddEntranceStudents(StudentColor);
 		}
 	}
 
@@ -331,13 +337,13 @@ public class Match extends Observable implements Serializable {
 	 * If the number of students in the dining room is a multiple of 3 and the game is in the expert mode the player earns a coin.
 	 *
 	 * @param StudentIndex: the index of a student in the Entrance of School.
-	 * @param PlayerIndex:  the index of a player.
+	 * @param PlayerId:  the Id of a player.
 	 */
-	public void MoveStudentsFromEntranceToDiningRoom(int StudentIndex, int PlayerIndex) {
-		Color studentColor = Players[PlayerIndex].getPlayersSchool().GetEntranceStudentColor(StudentIndex);
-		Players[PlayerIndex].getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
-		if (Players[PlayerIndex].getPlayersSchool().getStudentNumber(studentColor) % 3 == 0 && ExpertMode) {
-			Players[PlayerIndex].AddCoin(1);
+	public void MoveStudentsFromEntranceToDiningRoom(int StudentIndex, int PlayerId) {
+		Color studentColor =getPlayerById(PlayerId).getPlayersSchool().GetEntranceStudentColor(StudentIndex);
+		getPlayerById(PlayerId).getPlayersSchool().MoveStudentToDiningRoom(StudentIndex);
+		if (getPlayerById(PlayerId).getPlayersSchool().getStudentNumber(studentColor) % 3 == 0 && ExpertMode) {
+			getPlayerById(PlayerId).AddCoin(1);
 		}
 	}
 
@@ -376,11 +382,11 @@ public class Match extends Observable implements Serializable {
 	 * to the island at IslandIndex.
 	 *
 	 * @param StudentIndex: the index of a student in the Entrance of the School.
-	 * @param PlayerIndex:  the index of a player in the array Players.
+	 * @param PlayerId:  the id of a player in the array Players.
 	 * @param IslandIndex:  the index of an island in the ArrayList table.
 	 */
-	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerIndex, int IslandIndex) {
-		Color StudentColor = Players[PlayerIndex].getPlayersSchool().MoveStudentToIsland(StudentIndex);
+	public void MoveStudentsFromEntranceToIsland(int StudentIndex, int PlayerId, int IslandIndex) {
+		Color StudentColor = getPlayerById(PlayerId).getPlayersSchool().MoveStudentToIsland(StudentIndex);
 		Table.get(IslandIndex).AddStudent(StudentColor);
 	}
 
