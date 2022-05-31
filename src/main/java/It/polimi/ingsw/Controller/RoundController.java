@@ -72,7 +72,9 @@ public class RoundController {
 				if (gamePhase == GamePhase.MOVE_STUDENT || gamePhase == GamePhase.MOVE_MN || gamePhase == GamePhase.CHOOSE_CLOUD) {
 					try {
 						if (Game.getMatch().getPlayerById(Game.getActivePlayer()).HasPlayedCharacterCard()) {
-							System.out.println("you have already played a character card in this round, wait for the next round");
+							ErrorMessage errorMessage=new ErrorMessage("you have already played a character card in this round, wait for the next round", Game.getActivePlayer());
+							Game.getMatch().sendError(errorMessage);
+							Game.getMatch().CreateMessage();
 						} else {
 							int CardId = Game.PlayCharacterCard((CharacterCardMessage) msg); //plays character card if parameters are not needed
 							if (CardId != 0) {                                               //parameters neededExpectedCardMsg = CardId;
