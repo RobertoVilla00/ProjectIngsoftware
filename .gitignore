@@ -1,0 +1,10 @@
+target/
+*.iml
+#Default ignored files
+/shelf/
+/workspace.xml
+/lib.xml
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/.idea/
