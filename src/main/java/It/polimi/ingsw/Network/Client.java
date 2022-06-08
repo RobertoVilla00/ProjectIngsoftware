@@ -71,7 +71,10 @@ public class Client extends Observable implements Observer {
 					try {
 						inputObject = socketIn.readObject();
 						notifyObserver((Message) inputObject);
-					} catch (IOException | ClassNotFoundException e) {
+					} catch (IOException e) {
+						setActive(false);
+					}
+					catch (ClassNotFoundException e) {
 						e.printStackTrace();
 					}
 				}
@@ -131,6 +134,8 @@ public class Client extends Observable implements Observer {
 		} catch (InterruptedException | NoSuchElementException e) {
 			System.out.println("Connection closed from the client side");
 		} finally {
+			System.out.println("A player disconnected, closing the Game");
+
 			stdin.close();
 			inputStream.close();
 			socketOut.close();

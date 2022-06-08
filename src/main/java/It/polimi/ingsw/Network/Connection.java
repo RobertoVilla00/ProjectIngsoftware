@@ -7,6 +7,7 @@ import It.polimi.ingsw.Observer.Observable;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.NoSuchElementException;
 
 /**
@@ -86,7 +87,7 @@ public class Connection extends Observable implements Runnable {
 		try {
 			inputObject = in.readObject();
 
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return (Message) inputObject;
@@ -125,7 +126,11 @@ public class Connection extends Observable implements Runnable {
 			while (isActive()) {
 				handleConnection();
 			}
-		} catch (IOException e) {
+		}
+		catch (SocketException e){
+			e.printStackTrace();
+		}
+		catch (IOException e) {
 			System.err.println(e.getMessage());
 		} finally {
 			Close();
@@ -141,8 +146,17 @@ public class Connection extends Observable implements Runnable {
 				Message message = ReadMessage();
 				server.handleReceivedMessage(message);
 			}
-		} catch (IOException e) {
-			//todo:handle exceptions
+		}
+		catch (IOException e) {
+			System.out.println("A Client disconnected. Closing the Connections");
+			server.CloseAll();
 		}
 	}
+
+
+
+	public void setActive(boolean value){
+		this.active=value;
+	}
 }
+

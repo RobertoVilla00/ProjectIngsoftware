@@ -157,4 +157,12 @@ public class Server {
 			e.printStackTrace();
 		}
 	}
+
+
+	public void CloseAll(){
+		connections.forEach(x-> {
+			x.setActive(false);
+			x.Close();
+		});
+	}
 }
