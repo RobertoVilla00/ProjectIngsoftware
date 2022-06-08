@@ -15,6 +15,8 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static java.lang.Thread.sleep;
+
 /**
  * The server class that starts a Socket Server.
  */
@@ -45,19 +47,7 @@ public class Server {
 	}
 
 	public synchronized void DeregisterConnection(Connection c) {
-		//connections.remove(c);
-		Connection opponent = playConnection.get(c);
-		if (opponent != null) {
-			opponent.closeConnection();
-		}
-		playConnection.remove(c);
-		playConnection.remove(opponent);
-            /*
-            Iterator<String> iterator=waitConnection.keySet().iterator();
-            while (iterator.hasNext()){
-                if (waitConnection.get(iterator.next()==(c))){
-                    iterator.remove();
-                }*/
+		connections.remove(c);
 	}
 
 
@@ -162,6 +152,12 @@ public class Server {
 	public void CloseAll(){
 		connections.forEach(x-> {
 			x.setActive(false);
+			x.AsyncSend(new ClosedConnectionMessage());
+			try {
+				sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			x.Close();
 		});
 	}

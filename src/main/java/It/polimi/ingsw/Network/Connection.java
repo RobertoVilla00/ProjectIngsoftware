@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Network;
 
 
+import It.polimi.ingsw.Message.ClosedConnectionMessage;
 import It.polimi.ingsw.Message.Message;
 import It.polimi.ingsw.Message.MessageContent;
 import It.polimi.ingsw.Observer.Observable;
@@ -9,6 +10,8 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.NoSuchElementException;
+
+import static java.lang.Thread.sleep;
 
 /**
  * The class that representing the connection.

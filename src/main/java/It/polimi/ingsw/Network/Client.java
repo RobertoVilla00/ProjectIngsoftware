@@ -1,6 +1,7 @@
 package It.polimi.ingsw.Network;
 
 import It.polimi.ingsw.Message.Message;
+import It.polimi.ingsw.Message.MessageContent;
 import It.polimi.ingsw.Model.Match;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
@@ -70,7 +71,11 @@ public class Client extends Observable implements Observer {
 					Object inputObject = null;
 					try {
 						inputObject = socketIn.readObject();
-						notifyObserver((Message) inputObject);
+						Message message=(Message) inputObject;
+						if(message.getMessageContent()== MessageContent.CLOSEDCONNECTION){
+							setActive(false);
+						}
+						else{notifyObserver((Message) inputObject);}
 					} catch (IOException e) {
 						setActive(false);
 					}

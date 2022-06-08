@@ -18,5 +18,6 @@ public enum MessageContent {
 	PLAYERID,
 	ERROR,
 	PLAYERS,
-	ENDGAME;
+	ENDGAME,
+	CLOSEDCONNECTION;
 }
