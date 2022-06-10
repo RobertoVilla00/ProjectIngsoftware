@@ -152,6 +152,7 @@ public class Connection extends Observable implements Runnable {
 		}
 		catch (IOException e) {
 			System.out.println("A Client disconnected. Closing the Connections");
+			this.Close();
 			server.CloseAll();
 		}
 	}
