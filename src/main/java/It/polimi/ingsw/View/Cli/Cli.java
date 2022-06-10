@@ -717,8 +717,8 @@ public class Cli extends Observable implements View, Observer {
 
 		if (msg.getActivePlayerId() == PlayerId) {
 			if (msg.getGamePhase() == GamePhase.ASSISTANT_CARD) {
-				out.println("Choose which Assistant Card you want to play\n");
-				int CardIndex = Integer.parseInt(in.nextLine());
+				out.println("Choose which Assistant Card you want to play");
+				int CardIndex = getInt();
 				AssistantCardMessage assistantCardMessage = new AssistantCardMessage(CardIndex);
 				notifyObserver(assistantCardMessage);
 			}
@@ -729,8 +729,8 @@ public class Cli extends Observable implements View, Observer {
 						out.println("Type C if you want to play a Character Card, M if you want to move a Student");
 						nextLine = in.nextLine();
 						if (nextLine.equalsIgnoreCase("C")) {
-							out.println("Choose the Character Card you want to play\n");
-							int CharacterCardIndex = Integer.parseInt(in.nextLine());
+							out.println("Choose the Character Card you want to play");
+							int CharacterCardIndex = getInt();
 							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
 							notifyObserver(characterCardMessage);
 							break;
@@ -740,7 +740,7 @@ public class Cli extends Observable implements View, Observer {
 								nextLine = in.nextLine();
 								if (nextLine.equalsIgnoreCase("D")) {
 									out.println("Which Student do you want to move?");
-									int position = Integer.parseInt(in.nextLine());
+									int position = getInt();
 
 									MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
 
@@ -749,37 +749,37 @@ public class Cli extends Observable implements View, Observer {
 									break;
 								} else if (nextLine.equalsIgnoreCase("I")) {
 									out.println("Which Student do you want to move?");
-									int position = Integer.parseInt(in.nextLine());
-									out.println("Select the Island\n");
-									int destination = Integer.parseInt(in.nextLine());
+									int position = getInt();
+									out.println("Select the Island");
+									int destination = getInt();
 									MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, destination);
 									notifyObserver(moveStudentMessage);
 									break;
-								} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+								} else out.println(StrColor.ANSI_RED + "Invalid command!" + StrColor.ANSI_RESET);
 							}
 							break;
-						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+						} else out.println(StrColor.ANSI_RED + "Invalid command!" + StrColor.ANSI_RESET);
 					}
 				} else {
 					while (true) {
-						out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island\n");
+						out.println("Type D if you want to move a Student to the Dining room, I if you want to move it to an Island");
 
 						nextLine = in.nextLine();
 						if (nextLine.equalsIgnoreCase("D")) {
-							out.println("Which Student do you want to move?\n");
-							int position = Integer.parseInt(in.nextLine());
+							out.println("Which Student do you want to move?");
+							int position = getInt();
 							MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, 0);
 							notifyObserver(moveStudentMessage);
 							break;
 						} else if (nextLine.equalsIgnoreCase("I")) {
-							out.println("Which Student do you want to move?\n");
-							int position = Integer.parseInt(in.nextLine());
-							out.println("Select the Island\n");
-							int destination = Integer.parseInt(in.nextLine());
+							out.println("Which Student do you want to move?");
+							int position = getInt();
+							out.println("Select the Island");
+							int destination = getInt();
 							MoveStudentMessage moveStudentMessage = new MoveStudentMessage(position, destination);
 							notifyObserver(moveStudentMessage);
 							break;
-						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+						} else out.println(StrColor.ANSI_RED + "Invalid command!" + StrColor.ANSI_RESET);
 					}
 				}
 			}
@@ -790,21 +790,21 @@ public class Cli extends Observable implements View, Observer {
 						out.println("Type C if you want to play a Character Card, M if you want to move Mother nature\n");
 						nextLine = in.nextLine();
 						if (nextLine.equalsIgnoreCase("C")) {
-							out.println("Choose the Character Card you want to play\n");
-							int CharacterCardIndex = Integer.parseInt(in.nextLine());
+							out.println("Choose the Character Card you want to play");
+							int CharacterCardIndex = getInt();
 							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
 							notifyObserver(characterCardMessage);
 							break;
 						} else if (nextLine.equalsIgnoreCase("M")) {
-							out.println("How many steps do you want Mother Nature to make?\n");
-							int steps = Integer.parseInt(in.nextLine());
+							out.println("How many steps do you want Mother Nature to make?");
+							int steps = getInt();
 							MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
 							notifyObserver(motherNatureMessage);
 							break;
-						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+						} else out.println(StrColor.ANSI_RED + "Invalid command!" + StrColor.ANSI_RESET);
 					}
 				} else {
-					out.println("How many steps do you want Mother Nature to make?\n");
+					out.println("How many steps do you want Mother Nature to make?");
 					int steps = Integer.parseInt(in.nextLine());
 					MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
 					notifyObserver(motherNatureMessage);
@@ -818,22 +818,22 @@ public class Cli extends Observable implements View, Observer {
 						out.println("Type C if you want to play a Character Card, P if you want to pick Students from a Cloud\n");
 						nextLine = in.nextLine();
 						if (nextLine.equalsIgnoreCase("C")) {
-							out.println("Choose the Character Card you want to play\n");
-							int CharacterCardIndex = Integer.parseInt(in.nextLine());
+							out.println("Choose the Character Card you want to play");
+							int CharacterCardIndex= getInt();
 							CharacterCardMessage characterCardMessage = new CharacterCardMessage(CharacterCardIndex);
 							notifyObserver(characterCardMessage);
 							break;
 						} else if (nextLine.equalsIgnoreCase("P")) {
-							out.println("Choose the Cloud you want to pick the Students from\n");
-							int index = Integer.parseInt(in.nextLine());
+							out.println("Choose the Cloud you want to pick the Students from");
+							int index = getInt();
 							CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(index);
 							notifyObserver(cloudChoiceMessage);
 							break;
-						} else out.println(StrColor.ANSI_RED + "Invalid command!\n" + StrColor.ANSI_RESET);
+						} else out.println(StrColor.ANSI_RED + "Invalid command!" + StrColor.ANSI_RESET);
 					}
 				} else {
-					out.println("Choose the Cloud you want to pick the Students from\n");
-					int index = Integer.parseInt(in.nextLine());
+					out.println("Choose the Cloud you want to pick the Students from");
+					int index = getInt();
 					CloudChoiceMessage cloudChoiceMessage = new CloudChoiceMessage(index);
 					notifyObserver(cloudChoiceMessage);
 				}
@@ -841,32 +841,32 @@ public class Cli extends Observable implements View, Observer {
 
 			if (msg.getGamePhase() == GamePhase.CHARACTER_CARD) {
 				if (msg.getExpectedCardMessage() == 1) {
-					out.println("Choose the Student you want to move\n");
-					int studentIndex = Integer.parseInt(in.nextLine());
-					out.println("Choose the Island where you want to move the Student\n");
-					int islandIndex = Integer.parseInt(in.nextLine());
+					out.println("Choose the Student you want to move");
+					int studentIndex = getInt();
+					out.println("Choose the Island where you want to move the Student");
+					int islandIndex = getInt();
 
 					Card1Message card1Message = new Card1Message(studentIndex, islandIndex);
 					notifyObserver(card1Message);
 				}
 				if (msg.getExpectedCardMessage() == 3) {
-					out.println("Choose the Island to resolve\n");
-					int islandIndex = Integer.parseInt(in.nextLine());
+					out.println("Choose the Island to resolve");
+					int islandIndex = getInt();
 
 					Card3and5Message card3and5Message = new Card3and5Message(islandIndex);
 					notifyObserver(card3and5Message);
 				}
 				if (msg.getExpectedCardMessage() == 5) {
-					out.println("Choose the Island where you want to put the no entry tile\n");
-					int islandindex = Integer.parseInt(in.nextLine());
+					out.println("Choose the Island where you want to put the no entry tile");
+					int islandindex = getInt();
 
 					Card3and5Message card3and5Message = new Card3and5Message(islandindex);
 					notifyObserver(card3and5Message);
 
 				}
 				if (msg.getExpectedCardMessage() == 10) {
-					out.println("Choose the Student you want to move to the Dining Room\n");
-					int index = Integer.parseInt(in.nextLine());
+					out.println("Choose the Student you want to move to the Dining Room");
+					int index = getInt();
 
 					Card10Message card10Message = new Card10Message(index);
 					notifyObserver(card10Message);
@@ -875,11 +875,11 @@ public class Cli extends Observable implements View, Observer {
 				if (msg.getExpectedCardMessage() == 12) {
 					String color;
 					while (true) {
-						out.println("Type the Color of the Student to move back to the Bag\n");
+						out.println("Type the Color of the Student to move back to the Bag");
 						color = in.nextLine().toUpperCase();
 						if (color.equalsIgnoreCase("GREEN") || color.equalsIgnoreCase("YELLOW") || color.equalsIgnoreCase("RED") || color.equalsIgnoreCase("BLUE") || color.equalsIgnoreCase("PINK")) {
 							break;
-						} else out.println(StrColor.ANSI_RED + "Choose a valid Color!\n" + StrColor.ANSI_RESET);
+						} else out.println(StrColor.ANSI_RED + "Choose a valid Color!" + StrColor.ANSI_RESET);
 					}
 					Card12Message card12Message = new Card12Message(color);
 					notifyObserver(card12Message);
@@ -892,7 +892,7 @@ public class Cli extends Observable implements View, Observer {
 	 * It used to ask the player's name.
 	 */
 	public void askName() {
-		out.println("Insert your name\n");
+		out.println("Insert your name");
 		String name = in.nextLine();
 
 		NicknameMessage nicknameMessage = new NicknameMessage(name);
@@ -911,16 +911,16 @@ public class Cli extends Observable implements View, Observer {
 	 * It used to ask the number of players and the game mode.
 	 */
 	public void askPlayers() {
-		out.println("Insert the number of Players (must be 2 or 3)\n");
-		int numberOfPlayers = Integer.parseInt(in.nextLine());
+		out.println("Insert the number of Players (must be 2 or 3)");
+		int numberOfPlayers = getInt();
 		while (numberOfPlayers != 2 && numberOfPlayers != 3) {
-			out.println(StrColor.ANSI_RED + "Invalid number! Please choose 2 or 3\n" + StrColor.ANSI_RESET);
-			numberOfPlayers = Integer.parseInt(in.nextLine());
+			out.println(StrColor.ANSI_RED + "Invalid number! Please choose 2 or 3" + StrColor.ANSI_RESET);
+			numberOfPlayers = getInt();
 		}
 		out.println("Do you want to play with expert rules? (y/n)");
 		String response = in.nextLine();
 		while (!"Y".equalsIgnoreCase(response) && !"N".equalsIgnoreCase(response)) {
-			out.println(StrColor.ANSI_RED + "Invalid response! type y or n\n" + StrColor.ANSI_RESET);
+			out.println(StrColor.ANSI_RED + "Invalid response! type y or n" + StrColor.ANSI_RESET);
 			response = in.nextLine();
 		}
 		int gamemode;
@@ -930,6 +930,19 @@ public class Cli extends Observable implements View, Observer {
 		StartMessage startMessage = new StartMessage(numberOfPlayers, gamemode);
 		notifyObserver(startMessage);
 	}
+
+	public int getInt(){
+		while(true){
+			try{
+				return Integer.parseInt(in.nextLine());
+			}
+			catch (NumberFormatException e){
+				System.out.println(StrColor.ANSI_RED + "insert a number!" + StrColor.ANSI_RESET);
+			}
+		}
+	}
+
+
 
 	/**
 	 * It used to print on the screen the winner of the game.
