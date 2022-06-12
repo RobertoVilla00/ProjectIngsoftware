@@ -5,6 +5,7 @@ import It.polimi.ingsw.Message.PlayerIdMessage;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
+import It.polimi.ingsw.View.Gui.GuiController.StartSceneController;
 import It.polimi.ingsw.View.View;
 
 public class Gui extends Observable implements View, Observer {
@@ -28,14 +29,13 @@ public class Gui extends Observable implements View, Observer {
 	}
 
 	public void askName(){
-
+		StartSceneController.ChangeToAskName();
 	}
 
 	@Override
 	public void update(Message message) {
 		switch (message.getMessageContent()) {
 			case PLAYERID:
-				startGame();
 				PlayerIdMessage msg = (PlayerIdMessage) message;
 				this.PlayerId = msg.getPlayerId();
 				askName();

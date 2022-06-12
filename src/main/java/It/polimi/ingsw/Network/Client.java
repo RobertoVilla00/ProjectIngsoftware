@@ -5,6 +5,8 @@ import It.polimi.ingsw.Message.MessageContent;
 import It.polimi.ingsw.Model.Match;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
+import It.polimi.ingsw.View.Gui.fxGui;
+import javafx.application.Application;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -32,7 +34,7 @@ public class Client extends Observable implements Observer {
 	 * @param port: the number of port.
 	 * @throws IOException: signals that an I/O exception has occurred.
 	 */
-	public Client(String ip, int port) throws IOException {
+	public Client(String ip, int port, boolean useGui) throws IOException {
 		this.ip = ip;
 		this.port = port;
 		try {

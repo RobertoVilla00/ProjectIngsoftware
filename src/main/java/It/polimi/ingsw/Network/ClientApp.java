@@ -2,6 +2,8 @@ package It.polimi.ingsw.Network;
 
 import It.polimi.ingsw.View.Cli.Cli;
 import It.polimi.ingsw.View.Gui.Gui;
+import It.polimi.ingsw.View.Gui.fxGui;
+import javafx.application.Application;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -31,7 +33,7 @@ public class ClientApp {
 			else if (par.equalsIgnoreCase("gui")) {
 				useGui = true;
 			}
-			Client client = new Client(ip, p);
+			Client client = new Client(ip, p,useGui);
 			if (useCli) {
 				Cli cli = new Cli();
 				client.addObserver(cli);
@@ -41,6 +43,8 @@ public class ClientApp {
 				Gui gui = new Gui();
 				client.addObserver(gui);
 				gui.addObserver(client);
+				client.run();
+				Application.launch(fxGui.class);//todo: mettere questo in un posto giusto
 			}
 			client.run();
 		} catch (IOException e) {
