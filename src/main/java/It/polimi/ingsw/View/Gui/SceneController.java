@@ -14,10 +14,11 @@ public class SceneController {
 	private static Stage stage;
 
 
-	/*public static void ChangeToAskName(){
+	public static void SwitchToAskName(Event e){
 		try {
-			Parent root = FXMLLoader.load(SceneController.class.getClassLoader().getResource("FXML/askName.fxml"));
-			stage = (Stage)getScene().getWindow();
+			FXMLLoader loader =  new FXMLLoader(SceneController.class.getClassLoader().getResource("fxml/askName.fxml"));
+			Parent root = loader.load();
+			Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			//String css= this.getClass().getResource("/CSS/Style.css").toExternalForm();
 			//scene.getStylesheets().add(css);
@@ -25,9 +26,9 @@ public class SceneController {
 			stage.setTitle("ERIANTYS");
 			stage.show();
 		}
-		catch (IOException e) {
-			e.printStackTrace();
+		catch (IOException exception) {
+			exception.printStackTrace();
 		}
-	}*/
+	}
 
 }

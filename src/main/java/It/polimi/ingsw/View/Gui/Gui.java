@@ -29,7 +29,6 @@ public class Gui extends Observable implements View, Observer {
 	}
 
 	public void askName(){
-		StartSceneController.ChangeToAskName();
 	}
 
 	@Override
@@ -38,7 +37,6 @@ public class Gui extends Observable implements View, Observer {
 			case PLAYERID:
 				PlayerIdMessage msg = (PlayerIdMessage) message;
 				this.PlayerId = msg.getPlayerId();
-				askName();
 				break;
 			case NICKNAME:
 				askName();

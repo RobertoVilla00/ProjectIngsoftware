@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class ClientApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		try {
 			Scanner s = new Scanner(System.in);
 			System.out.println("Please type the ip address: ");
@@ -38,15 +38,29 @@ public class ClientApp {
 				Cli cli = new Cli();
 				client.addObserver(cli);
 				cli.addObserver(client);
+				client.run();
 			}
 			if(useGui){
 				Gui gui = new Gui();
 				client.addObserver(gui);
 				gui.addObserver(client);
-				client.run();
-				Application.launch(fxGui.class);//todo: mettere questo in un posto giusto
-			}
-			client.run();
+
+
+				Thread t = new Thread() {
+					@Override
+					public void run() {
+						try {
+							client.run();
+						}
+						catch (IOException ex) {
+							ex.printStackTrace();
+						}
+					}
+				};
+				t.start();
+				Application.launch(fxGui.class);
+				}
+				//Thread t =Application.launch(fxGui.class);//todo: mettere questo in un posto giusto
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
