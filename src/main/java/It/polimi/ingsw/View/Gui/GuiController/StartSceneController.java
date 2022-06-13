@@ -16,11 +16,10 @@ import java.io.IOException;
 
 public class StartSceneController {
 	@FXML
-	Button StartButton;
+	Button startButton;
 
 
 	public void SwitchToAskName(Event e){
 		Platform.runLater(() -> SceneController.SwitchToAskName(e));
 	}
-
 }

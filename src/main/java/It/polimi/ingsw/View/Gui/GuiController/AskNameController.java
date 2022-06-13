@@ -3,6 +3,7 @@ package It.polimi.ingsw.View.Gui.GuiController;
 import It.polimi.ingsw.Message.NicknameMessage;
 import It.polimi.ingsw.Message.StartMessage;
 import It.polimi.ingsw.View.Gui.Gui;
+import It.polimi.ingsw.View.Gui.fxController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,12 +19,7 @@ public class AskNameController {
 	@FXML
 	Button nameButton;
 
-	public Gui gui;
 	public String nickname;
-
-	public AskNameController(Gui gui){
-		this.gui=gui;
-	}
 
 	public void getAnswer(ActionEvent event){
 		nickname=nameTextField.getText();
@@ -32,7 +28,7 @@ public class AskNameController {
 		}
 		else{
 			NicknameMessage nicknameMessage = new NicknameMessage(nickname);
-			gui.sendMessage(nicknameMessage);
+			fxController.setName(nicknameMessage);
 		}
 	}
 }

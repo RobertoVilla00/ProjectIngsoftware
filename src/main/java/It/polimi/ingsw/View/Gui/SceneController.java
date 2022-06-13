@@ -18,7 +18,7 @@ public class SceneController {
 		try {
 			FXMLLoader loader =  new FXMLLoader(SceneController.class.getClassLoader().getResource("fxml/askName.fxml"));
 			Parent root = loader.load();
-			Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+			stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 			Scene scene = new Scene(root);
 			//String css= this.getClass().getResource("/CSS/Style.css").toExternalForm();
 			//scene.getStylesheets().add(css);
@@ -31,4 +31,28 @@ public class SceneController {
 		}
 	}
 
+	public static void SwitchToAskPlayers(Event e){
+		try {
+			FXMLLoader loader =  new FXMLLoader(SceneController.class.getClassLoader().getResource("fxml/askNameAndPlayers.fxml"));
+			Parent root = loader.load();
+			Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+			Scene scene = new Scene(root);
+			//String css= this.getClass().getResource("/CSS/Style.css").toExternalForm();
+			//scene.getStylesheets().add(css);
+			stage.setScene(scene);
+			stage.setTitle("ERIANTYS");
+			stage.show();
+		}
+		catch (IOException exception) {
+			exception.printStackTrace();
+		}
+	}
+ 	public static void changeScene(String fxml){
+		try {
+			Parent pane= FXMLLoader.load(SceneController.class.getClassLoader().getResource(fxml));
+			stage.getScene().setRoot(pane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
