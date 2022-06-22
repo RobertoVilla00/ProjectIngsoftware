@@ -88,6 +88,7 @@ public class RoundController {
 					} catch (InvalidInputException e) {
 						ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
 						Game.getMatch().sendError(errorMessage);
+						Game.getMatch().CreateMessage();
 					}
 				} else throw new WrongMessageException();
 				break;
@@ -237,6 +238,7 @@ public class RoundController {
 				} catch (InvalidInputException | NoEntryTilesException e) {
 					ErrorMessage errorMessage = new ErrorMessage(e.getMessage(), Game.getActivePlayer());
 					Game.getMatch().sendError(errorMessage);
+					Game.getMatch().CreateMessage();
 				}
 		}
 	}

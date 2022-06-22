@@ -60,7 +60,6 @@ public class ClientApp {
 				t.start();
 				Application.launch(fxGui.class);
 				}
-				//Thread t =Application.launch(fxGui.class);//todo: mettere questo in un posto giusto
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}

@@ -990,6 +990,10 @@ public class Cli extends Observable implements View, Observer {
 				ErrorMessage errorMessage = (ErrorMessage) message;
 				String error = errorMessage.getError();
 				printError(error);
+				/*if (this.msg!=null){
+					showGameInformation();
+					askInformation();
+				}*/
 				break;
 			case PLAYERS:
 				askPlayers();
@@ -997,7 +1001,7 @@ public class Cli extends Observable implements View, Observer {
 			case ENDGAME:
 				EndgameMessage endgameMessage=(EndgameMessage) message;
 				endGame(endgameMessage);
-				break;
+				break;				//todo:far finire il programma
 		}
 	}
 }
