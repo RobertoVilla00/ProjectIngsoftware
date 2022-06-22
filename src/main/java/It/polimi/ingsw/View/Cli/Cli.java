@@ -7,6 +7,7 @@ import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
 import It.polimi.ingsw.View.View;
 
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -54,6 +55,16 @@ public class Cli extends Observable implements View, Observer {
 	 */
 	@Override
 	public void showGameInformation() {
+
+		//clear the console
+		try{
+			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		int schoolSpace = 20;
 		int defaultSpace = 25;
 		int studentCnt = 0;
@@ -63,8 +74,6 @@ public class Cli extends Observable implements View, Observer {
 		int nicknameSpace = 33;
 
 		StringBuilder str = new StringBuilder();
-		str.append("ISLANDS:\n\n");
-
 
 		// SHOWING THE TABLE
 
