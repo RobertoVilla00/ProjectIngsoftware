@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="Island0" fitHeight="59.0" fitWidth="64.0" layoutX="139.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island1" fitHeight="59.0" fitWidth="64.0" layoutX="216.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island2" fitHeight="59.0" fitWidth="64.0" layoutX="290.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island3" fitHeight="59.0" fitWidth="64.0" layoutX="363.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island5" fitHeight="59.0" fitWidth="64.0" layoutX="402.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island11" fitHeight="59.0" fitWidth="64.0" layoutX="96.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island10" fitHeight="59.0" fitWidth="64.0" layoutX="96.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island9" fitHeight="59.0" fitWidth="64.0" layoutX="146.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island8" fitHeight="59.0" fitWidth="64.0" layoutX="216.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island7" fitHeight="59.0" fitWidth="64.0" layoutX="293.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island6" fitHeight="59.0" fitWidth="64.0" layoutX="363.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Island4" fitHeight="59.0" fitWidth="64.0" layoutX="387.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/ISOLA.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="school0" fitHeight="77.0" fitWidth="182.0" layoutX="17.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Plancia/Plancia_DEF2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="school1" fitHeight="77.0" fitWidth="182.0" layoutX="212.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Plancia/Plancia_DEF2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="school2" fitHeight="77.0" fitWidth="182.0" layoutX="408.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Plancia/Plancia_DEF2.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="nickname0" layoutX="17.0" layoutY="239.0" prefHeight="18.0" prefWidth="151.0" text="Label" />
+      <Label fx:id="nickname1" layoutX="212.0" layoutY="239.0" prefHeight="18.0" prefWidth="151.0" text="Label" />
+      <Label fx:id="nickname2" layoutX="408.0" layoutY="239.0" prefHeight="18.0" prefWidth="151.0" text="Label" />
+      <ChoiceBox fx:id="assistantChoice" layoutX="17.0" layoutY="225.0" minHeight="10.0" minWidth="50.0" prefHeight="10.0" prefWidth="50.0" />
+      <ImageView fx:id="assistant0" fitHeight="90.0" fitWidth="35.0" layoutX="17.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Assistenti/retro/CarteTOT_back_1@3x.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="assistant1" fitHeight="90.0" fitWidth="35.0" layoutX="212.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Assistenti/retro/CarteTOT_back_11@3x.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="assistant2" fitHeight="90.0" fitWidth="35.0" layoutX="408.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Assistenti/retro/CarteTOT_back_21@3x.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="coin0" fitHeight="36.0" fitWidth="35.0" layoutX="80.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="coin1" fitHeight="36.0" fitWidth="35.0" layoutX="275.5" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="coin2" fitHeight="36.0" fitWidth="35.0" layoutX="471.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/coin.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="coinCount0" layoutX="120.0" layoutY="345.0" text="Label" />
+      <Label fx:id="coinCount1" layoutX="315.5" layoutY="345.0" text="Label" />
+      <Label fx:id="coinCount2" layoutX="511.0" layoutY="345.0" text="Label" />
+      <ImageView fx:id="cloud0" fitHeight="80.0" fitWidth="76.0" layoutX="492.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/nuvola.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cloud1" fitHeight="80.0" fitWidth="76.0" layoutX="492.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/nuvola.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cloud2" fitHeight="80.0" fitWidth="76.0" layoutX="492.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/ritagli/nuvola.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="character0" fitHeight="150.0" fitWidth="40.0" layoutX="175.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Personaggi/Personaggi_retro.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="character1" fitHeight="150.0" fitWidth="40.0" layoutX="250.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Personaggi/Personaggi_retro.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="character2" fitHeight="150.0" fitWidth="40.0" layoutX="325.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Personaggi/Personaggi_retro.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

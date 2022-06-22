@@ -28,7 +28,6 @@ public class VirtualView implements View, Observer {
 		connection.AsyncSend(message);
 	}
 
-	@Override
 	public void startGame() {
 
 	}

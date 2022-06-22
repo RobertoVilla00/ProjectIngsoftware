@@ -18,13 +18,8 @@ public class Gui extends Observable implements View, Observer {
 	}
 
 	@Override
-	public void startGame() {
-
-	}
-
-	@Override
 	public void showGameInformation() {
-
+		SceneController.changeScene("fxml/boardScene.fxml");
 	}
 
 	@Override
@@ -43,6 +38,9 @@ public class Gui extends Observable implements View, Observer {
 	@Override
 	public void update(Message message) {
 		switch (message.getMessageContent()) {
+			case SHOWMATCHINFO:
+				showGameInformation();
+				break;
 			case PLAYERID:
 				PlayerIdMessage msg = (PlayerIdMessage) message;
 				this.PlayerId = msg.getPlayerId();
