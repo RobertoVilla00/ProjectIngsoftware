@@ -23,6 +23,9 @@ public class SceneController {
 			//String css= this.getClass().getResource("/CSS/Style.css").toExternalForm();
 			//scene.getStylesheets().add(css);
 			stage.setScene(scene);
+			stage.setWidth(1280);
+			stage.setHeight(800);
+			stage.setResizable(false);
 			stage.setTitle("ERIANTYS");
 			stage.show();
 		}
