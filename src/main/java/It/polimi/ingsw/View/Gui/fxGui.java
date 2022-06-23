@@ -20,10 +20,11 @@ public class fxGui extends Application {
 			//String css= this.getClass().getResource("/CSS/Style.css").toExternalForm();
 			//scene.getStylesheets().add(css);
 			stage.setScene(scene);
-			stage.setWidth(1280d);
-			stage.setHeight(720d);
+			stage.setWidth(1920d);
+			stage.setHeight(1080d);
 			stage.setResizable(true);
 			stage.setMaximized(true);
+			stage.setFullScreen(true);
 			stage.setTitle("ERIANTYS");
 			stage.show();
 		} catch (Exception e) {
