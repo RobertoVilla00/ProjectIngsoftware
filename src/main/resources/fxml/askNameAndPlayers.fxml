@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="It.polimi.ingsw.View.Gui.GuiController.AskNameAndPlayersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="It.polimi.ingsw.View.Gui.GuiController.AskNameAndPlayersController">
    <children>
-      <RadioButton fx:id="PlayersButton2" layoutX="794.0" layoutY="372.0" mnemonicParsing="false" onAction="#getNumberOfPlayers" selected="true" text="2">
+      <RadioButton fx:id="PlayersButton2" layoutX="464.0" layoutY="237.0" mnemonicParsing="false" onAction="#getNumberOfPlayers" selected="true" text="2">
          <font>
             <Font size="30.0" />
          </font>
@@ -17,22 +17,22 @@
             <ToggleGroup fx:id="NumberOfPlayersButtons" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="PlayersButton3" layoutX="1061.0" layoutY="372.0" mnemonicParsing="false" onAction="#getNumberOfPlayers" text="3" toggleGroup="$NumberOfPlayersButtons">
+      <RadioButton fx:id="PlayersButton3" layoutX="731.0" layoutY="237.0" mnemonicParsing="false" onAction="#getNumberOfPlayers" text="3" toggleGroup="$NumberOfPlayersButtons">
          <font>
             <Font size="30.0" />
          </font>
       </RadioButton>
-      <Label fx:id="NumberOfPlayersLabel" alignment="CENTER" layoutX="600.0" layoutY="279.0" prefHeight="72.0" prefWidth="740.0" text="Choose the number of players">
+      <Label fx:id="NumberOfPlayersLabel" alignment="CENTER" layoutX="270.0" layoutY="144.0" prefHeight="72.0" prefWidth="740.0" text="Choose the number of players">
          <font>
             <Font size="41.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="663.0" layoutY="478.0" prefHeight="27.0" prefWidth="602.0" text="Choose the game mode">
+      <Label alignment="CENTER" layoutX="333.0" layoutY="343.0" prefHeight="27.0" prefWidth="602.0" text="Choose the game mode">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <RadioButton fx:id="GameModeNormal" layoutX="784.0" layoutY="613.0" mnemonicParsing="false" onAction="#getGameMode" selected="true" text="Normal">
+      <RadioButton fx:id="GameModeNormal" layoutX="454.0" layoutY="478.0" mnemonicParsing="false" onAction="#getGameMode" selected="true" text="Normal">
          <font>
             <Font size="30.0" />
          </font>
@@ -40,12 +40,12 @@
             <ToggleGroup fx:id="GameModeButton" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="GameModeExpert" layoutX="1054.0" layoutY="617.0" mnemonicParsing="false" onAction="#getGameMode" text="Expert" toggleGroup="$GameModeButton">
+      <RadioButton fx:id="GameModeExpert" layoutX="724.0" layoutY="482.0" mnemonicParsing="false" onAction="#getGameMode" text="Expert" toggleGroup="$GameModeButton">
          <font>
             <Font size="30.0" />
          </font>
       </RadioButton>
-      <Button fx:id="okButton" layoutX="953.0" layoutY="730.0" mnemonicParsing="false" onAction="#getAnswers" text="OK">
+      <Button fx:id="okButton" layoutX="623.0" layoutY="595.0" mnemonicParsing="false" onAction="#getAnswers" text="OK">
          <font>
             <Font size="30.0" />
          </font>
