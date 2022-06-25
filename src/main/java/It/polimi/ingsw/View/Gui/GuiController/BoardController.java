@@ -2,9 +2,9 @@ package It.polimi.ingsw.View.Gui.GuiController;
 
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-import java.awt.*;
 
 public class BoardController {
 
@@ -19,9 +19,9 @@ public class BoardController {
 
 	public void showGameInformation(ShowMatchInfoMessage msg){
 		if(!msg.isExpertMode()){
-			/*character0.setVisible(false);
+			character0.setVisible(false);
 			character1.setVisible(false);
-			character2.setVisible(false);*/
+			character2.setVisible(false);
 		}
 	}
 }

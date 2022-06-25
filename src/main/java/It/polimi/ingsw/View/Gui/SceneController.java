@@ -53,11 +53,11 @@ public class SceneController {
 	}
  	public static void changeScene(String fxml){
 		try {
-			FXMLLoader fxmlLoader=new FXMLLoader();
+			FXMLLoader fxmlLoader=new FXMLLoader(SceneController.class.getClassLoader().getResource(fxml));
+			Parent pane= (Parent)fxmlLoader.load();
 			if(Objects.equals(fxml, "fxml/boardScene.fxml")){
 				fxController.setBoardController(fxmlLoader.getController());
 			}
-			Parent pane= fxmlLoader.load(SceneController.class.getClassLoader().getResource(fxml));
 			stage.getScene().setRoot(pane);
 		} catch (IOException e) {
 			e.printStackTrace();

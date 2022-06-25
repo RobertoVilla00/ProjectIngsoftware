@@ -18,7 +18,7 @@ public class fxGui extends Application {
 	public void start(Stage stage){
 		try{
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartScene.fxml"));
-			Scene scene = new Scene(root, Color.LIGHTSKYBLUE);
+			Scene scene = new Scene(root);
 			//String css= this.getClass().getResource("/CSS/Style.css").toExternalForm();
 			//scene.getStylesheets().add(css);
 			stage.setScene(scene);
