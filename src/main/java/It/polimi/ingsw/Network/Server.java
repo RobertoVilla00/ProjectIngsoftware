@@ -1,6 +1,5 @@
 package It.polimi.ingsw.Network;
 
-import It.polimi.ingsw.Controller.GameController;
 import It.polimi.ingsw.Controller.RoundController;
 import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Exceptions.NoActivePlayerException;

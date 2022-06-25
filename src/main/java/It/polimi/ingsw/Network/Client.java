@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -91,24 +92,6 @@ public class Client extends Observable implements Observer {
 		return t;
 	}
 
-    /*public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut) {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (isActive()) {
-                        String inputline = stdin.nextLine();
-                        socketOut.println(inputline);
-                        socketOut.flush();
-                    }
-                } catch (Exception e) {
-                    setActive(false);
-                }
-            }
-        });
-        t.start();
-        return t;
-    }*/
 
 	/**
 	 * It used to send message on the Object output stream.
