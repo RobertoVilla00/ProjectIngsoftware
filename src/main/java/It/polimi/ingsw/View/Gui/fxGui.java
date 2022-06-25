@@ -1,5 +1,6 @@
 package It.polimi.ingsw.View.Gui;
 
+import It.polimi.ingsw.View.Gui.GuiController.BoardController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class fxGui extends Application {
+
 
 	@Override
 	public void start(Stage stage){

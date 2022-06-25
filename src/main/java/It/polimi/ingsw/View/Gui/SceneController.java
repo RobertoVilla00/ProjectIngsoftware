@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class SceneController {
 
@@ -52,8 +53,12 @@ public class SceneController {
 	}
  	public static void changeScene(String fxml){
 		try {
-			Parent pane= FXMLLoader.load(SceneController.class.getClassLoader().getResource(fxml));
+			FXMLLoader fxmlLoader=new FXMLLoader();
+			Parent pane= fxmlLoader.load(SceneController.class.getClassLoader().getResource(fxml));
 			stage.getScene().setRoot(pane);
+			if(Objects.equals(fxml, "fxml/boardScene.fxml")){
+				fxController.setBoardController(fxmlLoader.getController());
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
