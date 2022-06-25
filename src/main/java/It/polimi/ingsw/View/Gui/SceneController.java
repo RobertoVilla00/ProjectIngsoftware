@@ -25,7 +25,7 @@ public class SceneController {
 			//scene.getStylesheets().add(css);
 			stage.setScene(scene);
 			stage.setWidth(1280);
-			stage.setHeight(800);
+			stage.setHeight(950);
 			stage.setResizable(false);
 			stage.setTitle("ERIANTYS");
 			stage.show();
@@ -54,11 +54,11 @@ public class SceneController {
  	public static void changeScene(String fxml){
 		try {
 			FXMLLoader fxmlLoader=new FXMLLoader();
-			Parent pane= fxmlLoader.load(SceneController.class.getClassLoader().getResource(fxml));
-			stage.getScene().setRoot(pane);
 			if(Objects.equals(fxml, "fxml/boardScene.fxml")){
 				fxController.setBoardController(fxmlLoader.getController());
 			}
+			Parent pane= fxmlLoader.load(SceneController.class.getClassLoader().getResource(fxml));
+			stage.getScene().setRoot(pane);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
