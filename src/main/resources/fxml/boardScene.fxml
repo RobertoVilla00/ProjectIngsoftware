@@ -150,5 +150,330 @@
             <Image url="@../Graphical_Assets/Personaggi/Personaggi_retro.jpg" />
          </image>
       </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="75.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="57.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="57.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="57.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="66.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="812.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="811.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="783.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="794.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="786.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="254.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="253.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="226.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="236.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="228.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="393.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="392.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="365.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="375.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="367.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="548.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="547.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="520.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="530.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="522.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="690.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="689.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="662.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="672.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="664.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="811.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="808.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="784.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="794.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="786.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="694.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="693.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="665.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="676.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="668.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="563.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="562.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="534.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="545.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="537.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="407.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="406.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="378.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="389.0" layoutY="438.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="381.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="282.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="281.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="253.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="264.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="256.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="177.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="176.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="148.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="159.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="151.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="174.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4" scaleZ="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/blueStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="173.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4" scaleZ="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/greenStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="145.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4" scaleZ="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/pinkStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="156.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4" scaleZ="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/redStudent.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="148.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" scaleX="0.4" scaleY="0.4" scaleZ="0.4">
+         <image>
+            <Image url="@../Graphical_Assets/Pedine/yellowStudent.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
