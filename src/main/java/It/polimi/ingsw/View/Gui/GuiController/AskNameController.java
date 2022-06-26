@@ -3,6 +3,7 @@ package It.polimi.ingsw.View.Gui.GuiController;
 import It.polimi.ingsw.Message.NicknameMessage;
 import It.polimi.ingsw.Message.StartMessage;
 import It.polimi.ingsw.View.Gui.Gui;
+import It.polimi.ingsw.View.Gui.SceneController;
 import It.polimi.ingsw.View.Gui.fxController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

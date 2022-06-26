@@ -23,6 +23,10 @@ public class Gui extends Observable implements View, Observer {
 		this.boardController=boardController;
 	}
 
+	public int getPlayerId(){
+		return this.PlayerId;
+	}
+
 	@Override
 	public void showGameInformation() {
 		if(!gameStarted) {
@@ -34,10 +38,6 @@ public class Gui extends Observable implements View, Observer {
 
 	@Override
 	public void askInformation() {
-
-	}
-
-	public void askName(){
 
 	}
 
@@ -57,7 +57,6 @@ public class Gui extends Observable implements View, Observer {
 				this.PlayerId = msg.getPlayerId();
 				break;
 			case NICKNAME:
-				askName();
 				break;
 			case PLAYERS:
 				askPlayers();
