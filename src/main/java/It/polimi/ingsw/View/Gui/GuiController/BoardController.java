@@ -1,10 +1,7 @@
 package It.polimi.ingsw.View.Gui.GuiController;
 
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
-import It.polimi.ingsw.Model.Color;
-import It.polimi.ingsw.Model.Player;
-import It.polimi.ingsw.Model.Teacher;
-import It.polimi.ingsw.Model.TowerColor;
+import It.polimi.ingsw.Model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 
 public class BoardController {
@@ -528,6 +526,39 @@ public class BoardController {
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
 			}
+			int maxTowers;
+			if(msg.getPlayers().length==2) {
+				maxTowers = 8;
+			}
+			else{
+				maxTowers = 6;
+			}
+			String towerString=new String();
+			switch (i){
+				case 0:
+					towerString="Graphical_Assets/Pedine/torreNera.png";
+					break;
+				case 1:
+					towerString="Graphical_Assets/Pedine/torreBianca.png";
+					break;
+				case 2:
+					towerString="Graphical_Assets/Pedine/torreGrigia.png";
+					break;
+			}
+			for(int j=0;j<maxTowers-msg.getPlayers()[i].getTowersPlaced();j++){
+				int xValue;
+				int yValue;
+				xValue=305+((j%2)*27)+(436*i);
+				yValue=556+(25*(j/2));
+				ImageView studentImage=new ImageView(towerString);
+				studentImage.setVisible(true);
+				studentImage.setX(xValue);
+				studentImage.setY(yValue);
+				studentImage.setFitHeight(22);
+				studentImage.setFitWidth(22);
+				studentImage.setPreserveRatio(true);
+				boardPane.getChildren().add(studentImage);
+			}
 		}
 
 		//show last played assistantCard
@@ -565,6 +596,42 @@ public class BoardController {
 				cardCoins.get(i).setVisible(true);
 				cardCosts.get(i).setVisible(true);
 				cardCosts.get(i).setText(String.valueOf(msg.getCharacterCards()[i].getCardCost()));
+
+				if(idCharacterCard==1 || idCharacterCard==10){
+					Cards1and10 card=(Cards1and10) msg.getCharacterCards()[i];
+					for(int j=0;j<card.getNumberOfStudents();j++){
+						int xValue;
+						int yValue;
+						xValue = 354+(20*j)+(149*i);
+						yValue = 321;
+						String color=card.GetStudentColor(j).toString().toLowerCase();
+						ImageView studentImage = new ImageView("Graphical_Assets/Pedine/"+color+"Student.png");
+						studentImage.setVisible(true);
+						studentImage.setX(xValue);
+						studentImage.setY(yValue);
+						studentImage.setFitHeight(20);
+						studentImage.setFitWidth(20);
+						studentImage.setPreserveRatio(true);
+						boardPane.getChildren().add(studentImage);
+					}
+				}
+				if(idCharacterCard==5){
+					Card5 card=(Card5) msg.getCharacterCards()[i];
+					for(int j=0;j<card.getNoEntryTilesOnCard();j++) {
+						int xValue;
+						int yValue;
+						xValue = 354+(20*j)+(149*i);
+						yValue = 321;
+						ImageView NoentryImage = new ImageView("Graphical_Assets/Pedine/No.png");
+						NoentryImage.setVisible(true);
+						NoentryImage.setX(xValue);
+						NoentryImage.setY(yValue);
+						NoentryImage.setFitHeight(20);
+						NoentryImage.setFitWidth(20);
+						NoentryImage.setPreserveRatio(true);
+						boardPane.getChildren().add(NoentryImage);
+					}
+				}
 			}
 		}
 	}
