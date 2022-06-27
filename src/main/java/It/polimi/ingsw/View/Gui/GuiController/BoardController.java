@@ -63,6 +63,10 @@ public class BoardController {
 			towersNumber8,towersNumber9,towersNumber10,towersNumber11;
 	@FXML
 	AnchorPane boardPane;
+	@FXML
+	ImageView cardCoin0, cardCoin1, cardCoin2;
+	@FXML
+	Label cardCost0, cardCost1, cardCost2;
 
 
 	private List<Label> playerNicknames=new ArrayList<Label>();
@@ -87,6 +91,9 @@ public class BoardController {
 
 	private List<Label> towersNumber=new ArrayList<>();
 	private List<ImageView> assistantCards=new ArrayList<>();
+	private List<ImageView> characterCards=new ArrayList<>();
+	private List<ImageView> cardCoins=new ArrayList<>();
+	private List<Label> cardCosts=new ArrayList<>();
 
 	public void showGameInformation(ShowMatchInfoMessage msg){
 		playerNicknames.add(nickname0);
@@ -212,6 +219,12 @@ public class BoardController {
 			coinCount0.setVisible(false);
 			coinCount1.setVisible(false);
 			coinCount2.setVisible(false);
+			cardCoin0.setVisible(false);
+			cardCoin1.setVisible(false);
+			cardCoin2.setVisible(false);
+			cardCost0.setVisible(false);
+			cardCost1.setVisible(false);
+			cardCost2.setVisible(false);
 		}
 		//print the information only shown in expert mode
 		if(msg.isExpertMode()){
@@ -522,20 +535,38 @@ public class BoardController {
 		assistantCards.add(assistant1);
 		assistantCards.add(assistant2);
 		for(int i=0;i<msg.getPlayers().length;i++){
-			try {
-				int orderValue=msg.getPlayers()[i].GetPlayedOrderValue();
-				String assistantCard="Graphical_Assets/Assistenti/2x/Assistente ("+orderValue+").png";
-				Image cardImg=new Image(assistantCard);
+			int orderValue=msg.getPlayers()[i].GetPlayedOrderValue();
+			if(orderValue!=0) {
+				String assistantCard = "Graphical_Assets/Assistenti/2x/Assistente (" + orderValue + ").png";
+				Image cardImg = new Image(assistantCard);
 				assistantCards.get(i).setVisible(true);
 				assistantCards.get(i).setImage(cardImg);
 			}
-			catch(NullPointerException exception){
-
-			}
-
 		}
 
 
+		//show the character cards and their information
+		if(msg.isExpertMode()) {
+			characterCards.add(character0);
+			characterCards.add(character1);
+			characterCards.add(character2);
+			cardCosts.add(cardCost0);
+			cardCosts.add(cardCost1);
+			cardCosts.add(cardCost2);
+			cardCoins.add(cardCoin0);
+			cardCoins.add(cardCoin1);
+			cardCoins.add(cardCoin2);
+			for(int i=0; i<3;i++){
+				int idCharacterCard=msg.getCharacterCards()[i].getIdCharacterCard();
+				String characterCard="Graphical_Assets/implementedCharacters/characterCard"+idCharacterCard+".jpg";
+				Image cardImg=new Image(characterCard);
+				characterCards.get(i).setVisible(true);
+				characterCards.get(i).setImage(cardImg);
+				cardCoins.get(i).setVisible(true);
+				cardCosts.get(i).setVisible(true);
+				cardCosts.get(i).setText(String.valueOf(msg.getCharacterCards()[i].getCardCost()));
+			}
+		}
 	}
 
 

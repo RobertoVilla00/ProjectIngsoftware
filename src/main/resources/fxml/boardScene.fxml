@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="boardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="It.polimi.ingsw.View.Gui.GuiController.BoardController">
    <children>
@@ -135,17 +136,17 @@
             <Image url="@../Graphical_Assets/ritagli/nuvola.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="character0" fitHeight="150.0" fitWidth="40.0" layoutX="375.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" y="70.0">
+      <ImageView fx:id="character0" fitHeight="150.0" fitWidth="40.0" layoutX="375.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" scaleX="2.5" scaleY="2.5" y="70.0">
          <image>
             <Image url="@../Graphical_Assets/Personaggi/Personaggi_retro.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="character1" fitHeight="150.0" fitWidth="40.0" layoutX="524.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" y="70.0">
+      <ImageView fx:id="character1" fitHeight="150.0" fitWidth="40.0" layoutX="524.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" scaleX="2.5" scaleY="2.5" y="70.0">
          <image>
             <Image url="@../Graphical_Assets/Personaggi/Personaggi_retro.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="character2" fitHeight="150.0" fitWidth="40.0" layoutX="673.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" y="70.0">
+      <ImageView fx:id="character2" fitHeight="150.0" fitWidth="40.0" layoutX="673.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" scaleX="2.5" scaleY="2.5" y="70.0">
          <image>
             <Image url="@../Graphical_Assets/Personaggi/Personaggi_retro.jpg" />
          </image>
@@ -477,5 +478,35 @@
       <Label fx:id="towersNumber9" layoutX="354.0" layoutY="392.0" text="0" />
       <Label fx:id="towersNumber10" layoutX="249.0" layoutY="336.0" text="0" />
       <Label fx:id="towersNumber11" layoutX="249.0" layoutY="221.0" text="0" />
+      <ImageView fx:id="cardCoin0" fitHeight="70.0" fitWidth="70.0" layoutX="335.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Moneta_base.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cardCoin1" fitHeight="70.0" fitWidth="70.0" layoutX="483.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Moneta_base.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cardCoin2" fitHeight="70.0" fitWidth="70.0" layoutX="633.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphical_Assets/Moneta_base.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="cardCost0" layoutX="361.0" layoutY="210.0" text="0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardCost1" layoutX="509.0" layoutY="210.0" text="0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardCost2" layoutX="658.0" layoutY="210.0" text="0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

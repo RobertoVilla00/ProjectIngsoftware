@@ -32,4 +32,7 @@ public class AskNameController {
 			fxController.setName(nicknameMessage);
 		}
 	}
+	public void askCorrectName(){
+		nameLabel.setText("The name is already used, insert a valid one");
+	}
 }

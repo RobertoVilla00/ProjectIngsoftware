@@ -2,6 +2,7 @@ package It.polimi.ingsw.View.Gui;
 
 import It.polimi.ingsw.Message.NicknameMessage;
 import It.polimi.ingsw.Message.StartMessage;
+import It.polimi.ingsw.View.Gui.GuiController.AskNameController;
 import It.polimi.ingsw.View.Gui.GuiController.BoardController;
 
 public class fxController {
@@ -24,6 +25,9 @@ public class fxController {
 
 	public static void setBoardController(BoardController boardController){
 		gui.setBoardController(boardController);
+	}
 
+	public static void setNicknameController(AskNameController askNameController){
+		gui.setNicknameController(askNameController);
 	}
 }

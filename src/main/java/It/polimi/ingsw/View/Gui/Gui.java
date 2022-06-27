@@ -5,6 +5,7 @@ import It.polimi.ingsw.Message.PlayerIdMessage;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
+import It.polimi.ingsw.View.Gui.GuiController.AskNameController;
 import It.polimi.ingsw.View.Gui.GuiController.BoardController;
 import It.polimi.ingsw.View.View;
 import javafx.application.Platform;
@@ -15,6 +16,8 @@ public class Gui extends Observable implements View, Observer {
 	private int PlayerId;
 	private boolean gameStarted=false;
 	private BoardController boardController;
+	private AskNameController askNameController;
+	private boolean wrongName=false;
 
 	public Gui(){
 		fxController fxController=new fxController(this);
@@ -22,6 +25,10 @@ public class Gui extends Observable implements View, Observer {
 
 	public void setBoardController(BoardController boardController){
 		this.boardController=boardController;
+	}
+
+	public void setNicknameController(AskNameController askNameController){
+		this.askNameController=askNameController;
 	}
 
 	public int getPlayerId(){
@@ -53,6 +60,14 @@ public class Gui extends Observable implements View, Observer {
 
 	}
 
+	public void askNickname(){
+		Platform.runLater(()->{
+			SceneController.changeScene("fxml/askName.fxml");
+			askNameController.askCorrectName();
+		});
+
+	}
+
 	@Override
 	public void update(Message message) {
 		switch (message.getMessageContent()) {
@@ -65,9 +80,13 @@ public class Gui extends Observable implements View, Observer {
 				this.PlayerId = msg.getPlayerId();
 				break;
 			case NICKNAME:
+				askNickname();
 				break;
 			case PLAYERS:
 				askPlayers();
+				break;
+			case ERROR:
+				break;
 		}
 	}
 
