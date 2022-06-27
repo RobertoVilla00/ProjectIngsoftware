@@ -1,12 +1,15 @@
 package It.polimi.ingsw.View.Gui.GuiController;
 
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
+import It.polimi.ingsw.Model.Color;
 import It.polimi.ingsw.Model.Player;
 import It.polimi.ingsw.Model.Teacher;
 import It.polimi.ingsw.Model.TowerColor;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +61,8 @@ public class BoardController {
 	@FXML
 	Label towersNumber0,towersNumber1,towersNumber2,towersNumber3,towersNumber4,towersNumber5,towersNumber6,towersNumber7,
 			towersNumber8,towersNumber9,towersNumber10,towersNumber11;
-
+	@FXML
+	AnchorPane boardPane;
 
 
 	private List<Label> playerNicknames=new ArrayList<Label>();
@@ -82,6 +86,7 @@ public class BoardController {
 	private List<List<Label>> allStudents=new ArrayList<>();
 
 	private List<Label> towersNumber=new ArrayList<>();
+	private List<ImageView> assistantCards=new ArrayList<>();
 
 	public void showGameInformation(ShowMatchInfoMessage msg){
 		playerNicknames.add(nickname0);
@@ -321,6 +326,47 @@ public class BoardController {
 			towersNumber.get(i).setText(String.valueOf(msg.getTable().get(i).getNumberOfTowers()));
 		}
 
+		//showClouds
+		for(int i=0; i<msg.getClouds().size();i++){
+			for(int j=0;j<msg.getClouds().get(i).CloudSize();j++){
+				String student = new String();
+				switch (msg.getClouds().get(i).getCloudStudents().get(j)){
+					case RED:
+						student="Graphical_Assets/Pedine/redStudent.png";
+						break;
+					case YELLOW:
+						student="Graphical_Assets/Pedine/yellowStudent.png";
+						break;
+					case BLUE:
+						student="Graphical_Assets/Pedine/blueStudent.png";
+						break;
+					case PINK:
+						student="Graphical_Assets/Pedine/pinkStudent.png";
+						break;
+					case GREEN:
+						student="Graphical_Assets/Pedine/greenStudent.png";
+						break;
+				}
+
+				int xValue;
+				int yValue;
+				xValue=1013+(j*20);
+				yValue=116+(143*i);
+				ImageView studentImage=new ImageView(student);
+				studentImage.setVisible(true);
+				studentImage.setX(xValue);
+				studentImage.setY(yValue);
+				studentImage.setFitHeight(20);
+				studentImage.setFitWidth(20);
+				studentImage.setPreserveRatio(true);
+				boardPane.getChildren().add(studentImage);
+			}
+		}
+
+
+
+
+
 
 
 
@@ -347,27 +393,149 @@ public class BoardController {
 				playerColor=TowerColor.GREY;
 			}
 			for(Teacher t : msg.getTeachers()){
-				if(t.getControllingPlayerColor().equals(playerColor)){
-					switch (t.getTeacherColor()){
-						case GREEN:
-							allTeachers.get(i).get(0).setVisible(true);
-							break;
-						case RED:
-							allTeachers.get(i).get(1).setVisible(true);
-							break;
-						case YELLOW:
-							allTeachers.get(i).get(2).setVisible(true);
-							break;
-						case PINK:
-							allTeachers.get(i).get(3).setVisible(true);
-							break;
-						case BLUE:
-							allTeachers.get(i).get(4).setVisible(true);
-							break;
+				try {
+					if (t.getControllingPlayerColor().equals(playerColor)) {
+						switch (t.getTeacherColor()) {
+							case GREEN:
+								allTeachers.get(i).get(0).setVisible(true);
+								break;
+							case RED:
+								allTeachers.get(i).get(1).setVisible(true);
+								break;
+							case YELLOW:
+								allTeachers.get(i).get(2).setVisible(true);
+								break;
+							case PINK:
+								allTeachers.get(i).get(3).setVisible(true);
+								break;
+							case BLUE:
+								allTeachers.get(i).get(4).setVisible(true);
+								break;
+						}
 					}
 				}
+				catch (NullPointerException e){
+
+				}
+			}
+			for(int j=0; j<msg.getPlayers()[i].getPlayersSchool().getEntranceStudentsNumber();j++){
+				String student = new String();
+				switch (msg.getPlayers()[i].getPlayersSchool().GetEntranceStudentColor(j)){
+					case RED:
+						student="Graphical_Assets/Pedine/redStudent.png";
+						break;
+					case YELLOW:
+						student="Graphical_Assets/Pedine/yellowStudent.png";
+						break;
+					case BLUE:
+						student="Graphical_Assets/Pedine/blueStudent.png";
+						break;
+					case PINK:
+						student="Graphical_Assets/Pedine/pinkStudent.png";
+						break;
+					case GREEN:
+						student="Graphical_Assets/Pedine/greenStudent.png";
+						break;
+				}
+				int xValue;
+				int yValue;
+				xValue=28+i*437+((j+1)%2)*20;
+				yValue=546+((j+1)/2)*25;
+				ImageView studentImage=new ImageView(student);
+				studentImage.setVisible(true);
+				studentImage.setX(xValue);
+				studentImage.setY(yValue);
+				studentImage.setFitHeight(20);
+				studentImage.setFitWidth(20);
+				studentImage.setPreserveRatio(true);
+				boardPane.getChildren().add(studentImage);
+			}
+			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.GREEN); j++){
+				int xValue;
+				int yValue;
+				xValue=84+(j*17)+(i*436);
+				yValue=547;
+				ImageView studentImage=new ImageView("Graphical_Assets/Pedine/greenStudent.png");
+				studentImage.setVisible(true);
+				studentImage.setX(xValue);
+				studentImage.setY(yValue);
+				studentImage.setFitHeight(15);
+				studentImage.setFitWidth(15);
+				studentImage.setPreserveRatio(true);
+			}
+			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.RED); j++){
+				int xValue;
+				int yValue;
+				xValue=84+(j*17)+(i*436);
+				yValue=572;
+				ImageView studentImage=new ImageView("Graphical_Assets/Pedine/redStudent.png");
+				studentImage.setVisible(true);
+				studentImage.setX(xValue);
+				studentImage.setY(yValue);
+				studentImage.setFitHeight(15);
+				studentImage.setFitWidth(15);
+				studentImage.setPreserveRatio(true);
+			}
+			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.YELLOW); j++){
+				int xValue;
+				int yValue;
+				xValue=84+(j*17)+(i*436);
+				yValue=597;
+				ImageView studentImage=new ImageView("Graphical_Assets/Pedine/yellowStudent.png");
+				studentImage.setVisible(true);
+				studentImage.setX(xValue);
+				studentImage.setY(yValue);
+				studentImage.setFitHeight(15);
+				studentImage.setFitWidth(15);
+				studentImage.setPreserveRatio(true);
+			}
+			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.PINK); j++){
+				int xValue;
+				int yValue;
+				xValue=84+(j*17)+(i*436);
+				yValue=622;
+				ImageView studentImage=new ImageView("Graphical_Assets/Pedine/pinkStudent.png");
+				studentImage.setVisible(true);
+				studentImage.setX(xValue);
+				studentImage.setY(yValue);
+				studentImage.setFitHeight(15);
+				studentImage.setFitWidth(15);
+				studentImage.setPreserveRatio(true);
+			}
+			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.BLUE); j++){
+				int xValue;
+				int yValue;
+				xValue=84+(j*17)+(i*436);
+				yValue=647;
+				ImageView studentImage=new ImageView("Graphical_Assets/Pedine/blueStudent.png");
+				studentImage.setVisible(true);
+				studentImage.setX(xValue);
+				studentImage.setY(yValue);
+				studentImage.setFitHeight(15);
+				studentImage.setFitWidth(15);
+				studentImage.setPreserveRatio(true);
 			}
 		}
+
+		//show last played assistantCard
+		assistantCards.add(assistant0);
+		assistantCards.add(assistant1);
+		assistantCards.add(assistant2);
+		for(int i=0;i<msg.getPlayers().length;i++){
+			try {
+				int orderValue=msg.getPlayers()[i].GetPlayedOrderValue();
+				String assistantCard="Graphical_Assets/Assistenti/2x/Assistente ("+orderValue+").png";
+				Image cardImg=new Image(assistantCard);
+				assistantCards.get(i).setVisible(true);
+				assistantCards.get(i).setImage(cardImg);
+			}
+			catch(NullPointerException exception){
+
+			}
+
+		}
+
+
 	}
 
 

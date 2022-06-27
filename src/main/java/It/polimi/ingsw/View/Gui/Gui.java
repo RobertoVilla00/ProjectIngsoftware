@@ -7,6 +7,7 @@ import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
 import It.polimi.ingsw.View.Gui.GuiController.BoardController;
 import It.polimi.ingsw.View.View;
+import javafx.application.Platform;
 
 public class Gui extends Observable implements View, Observer {
 
@@ -30,10 +31,14 @@ public class Gui extends Observable implements View, Observer {
 	@Override
 	public void showGameInformation() {
 		if(!gameStarted) {
-			SceneController.changeScene("fxml/boardScene.fxml");
+			Platform.runLater(()->{
+				SceneController.changeScene("fxml/boardScene.fxml");
+			});
 			gameStarted=true;
 		}
-		boardController.showGameInformation(msg);
+		Platform.runLater(()->{
+			boardController.showGameInformation(msg);
+		});
 	}
 
 	@Override
@@ -42,7 +47,10 @@ public class Gui extends Observable implements View, Observer {
 	}
 
 	public void askPlayers(){
-		SceneController.changeScene("fxml/askNameAndPlayers.fxml");
+		Platform.runLater(()->{
+			SceneController.changeScene("fxml/askNameAndPlayers.fxml");
+		});
+
 	}
 
 	@Override
