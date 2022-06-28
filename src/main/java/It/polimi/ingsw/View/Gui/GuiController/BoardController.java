@@ -111,7 +111,8 @@ public class BoardController implements Initializable {
 
 
 	private List<List<ImageView>> allEntranceStudent=new ArrayList<>();
-
+	private List<List<ImageView>> allIslandTowers=new ArrayList<>();
+	private List<List<ImageView>> allCloudsStudent=new ArrayList<>();
 
 
 	public void showGameInformation(ShowMatchInfoMessage msg, int playerId){
@@ -303,7 +304,14 @@ public class BoardController implements Initializable {
 		}
 
 		//showClouds
+		for(int i=0;i<allCloudsStudent.size();i++){
+			for(ImageView imageView:allCloudsStudent.get(i)){
+				boardPane.getChildren().remove(imageView);
+			}
+		}
 		for(int i=0; i<msg.getClouds().size();i++){
+			ArrayList<ImageView> imageList=new ArrayList<>();
+			allCloudsStudent.add(imageList);
 			for(int j=0;j<msg.getClouds().get(i).CloudSize();j++){
 				String student = new String();
 				switch (msg.getClouds().get(i).getCloudStudents().get(j)){
@@ -337,6 +345,7 @@ public class BoardController implements Initializable {
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
 				studentImage.setId("cloudStudent"+j);
+				allCloudsStudent.get(i).add(studentImage);
 			}
 		}
 
@@ -359,14 +368,19 @@ public class BoardController implements Initializable {
 				boardPane.getChildren().remove(imageView);
 			}
 		}
+		for(int i=0;i<allIslandTowers.size();i++){
+			for(ImageView imageView:allIslandTowers.get(i)){
+				boardPane.getChildren().remove(imageView);
+			}
+		}
 		for(int i=0; i<msg.getPlayers().length; i++){
 			schools.get(i).setVisible(true);
 			TowerColor playerColor;
-			if(i==0){
+			if(msg.getPlayers()[i].getPlayerId()==0){
 				playerColor=TowerColor.WHITE;
 			}
-			else if(i==1){
-				playerColor=TowerColor.WHITE;
+			else if(msg.getPlayers()[i].getPlayerId()==1){
+				playerColor=TowerColor.BLACK;
 			}
 			else {
 				playerColor=TowerColor.GREY;
@@ -528,19 +542,22 @@ public class BoardController implements Initializable {
 					towerString="Graphical_Assets/Pedine/torreGrigia.png";
 					break;
 			}
+			ArrayList<ImageView> towerList=new ArrayList<>();
+			allIslandTowers.add(towerList);
 			for(int j=0;j<maxTowers-msg.getPlayers()[i].getTowersPlaced();j++){
 				int xValue;
 				int yValue;
 				xValue=305+((j%2)*27)+(436*i);
 				yValue=556+(25*(j/2));
-				ImageView studentImage=new ImageView(towerString);
-				studentImage.setVisible(true);
-				studentImage.setX(xValue);
-				studentImage.setY(yValue);
-				studentImage.setFitHeight(22);
-				studentImage.setFitWidth(22);
-				studentImage.setPreserveRatio(true);
-				boardPane.getChildren().add(studentImage);
+				ImageView towerImage=new ImageView(towerString);
+				towerImage.setVisible(true);
+				towerImage.setX(xValue);
+				towerImage.setY(yValue);
+				towerImage.setFitHeight(22);
+				towerImage.setFitWidth(22);
+				towerImage.setPreserveRatio(true);
+				boardPane.getChildren().add(towerImage);
+				allIslandTowers.get(i).add(towerImage);
 			}
 		}
 
@@ -669,7 +686,7 @@ public class BoardController implements Initializable {
 
 				}
 				else{
-
+					infoLabel.setText("Choose where you want to move Mother Nature");
 				}
 			}
 			if(msg.getGamePhase()== GamePhase.CHOOSE_CLOUD){
@@ -677,7 +694,7 @@ public class BoardController implements Initializable {
 
 				}
 				else{
-
+					infoLabel.setText("Choose the cloud you want to take the students from");
 				}
 			}
 			if(msg.getGamePhase()== GamePhase.CHARACTER_CARD){

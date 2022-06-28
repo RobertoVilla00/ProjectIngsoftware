@@ -1,1 +1,5 @@
--fx-background-image: url("../Graphical_Assets/bg.jpg")
+.root {
+    -fx-background-image: url("../Graphical_Assets/bg.jpg");
+    -fx-background-size: 1280 800;
+    -fx-background-position: top left;
+}

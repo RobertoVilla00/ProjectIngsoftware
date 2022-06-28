@@ -67,3 +67,4 @@ public class SceneController {
 		}
 	}
 }
+//todo:aggiungere gli eventi sulle nuvole, togliere gli studenti dalle sale, fixare tutte le torri nere nelle isole, gestire characterCard;
