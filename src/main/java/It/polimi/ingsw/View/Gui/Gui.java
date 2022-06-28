@@ -44,7 +44,7 @@ public class Gui extends Observable implements View, Observer {
 			gameStarted=true;
 		}
 		Platform.runLater(()->{
-			boardController.showGameInformation(msg);
+			boardController.showGameInformation(msg, PlayerId);
 		});
 	}
 

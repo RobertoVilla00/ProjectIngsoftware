@@ -1,20 +1,24 @@
 package It.polimi.ingsw.View.Gui.GuiController;
 
+import It.polimi.ingsw.Message.AssistantCardMessage;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Model.*;
+import It.polimi.ingsw.View.Cli.StrColor;
+import It.polimi.ingsw.View.Gui.fxController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.net.URL;
+import java.util.*;
 
 
-public class BoardController {
+public class BoardController implements Initializable {
 
 	@FXML
 	ImageView Island0, Island1, Island2, Island3, Island4, Island5, Island6, Island7, Island8, Island9, Island10, Island11;
@@ -65,6 +69,8 @@ public class BoardController {
 	ImageView cardCoin0, cardCoin1, cardCoin2;
 	@FXML
 	Label cardCost0, cardCost1, cardCost2;
+	@FXML
+	ChoiceBox<String> assistantChoice;
 
 
 	private List<Label> playerNicknames=new ArrayList<Label>();
@@ -93,7 +99,10 @@ public class BoardController {
 	private List<ImageView> cardCoins=new ArrayList<>();
 	private List<Label> cardCosts=new ArrayList<>();
 
-	public void showGameInformation(ShowMatchInfoMessage msg){
+
+
+
+	public void showGameInformation(ShowMatchInfoMessage msg, int playerId){
 		playerNicknames.add(nickname0);
 		playerNicknames.add(nickname1);
 		playerNicknames.add(nickname2);
@@ -603,7 +612,7 @@ public class BoardController {
 						int xValue;
 						int yValue;
 						xValue = 354+(20*j)+(149*i);
-						yValue = 321;
+						yValue = 260;
 						String color=card.GetStudentColor(j).toString().toLowerCase();
 						ImageView studentImage = new ImageView("Graphical_Assets/Pedine/"+color+"Student.png");
 						studentImage.setVisible(true);
@@ -621,7 +630,7 @@ public class BoardController {
 						int xValue;
 						int yValue;
 						xValue = 354+(20*j)+(149*i);
-						yValue = 321;
+						yValue = 260;
 						ImageView NoentryImage = new ImageView("Graphical_Assets/Pedine/No.png");
 						NoentryImage.setVisible(true);
 						NoentryImage.setX(xValue);
@@ -634,7 +643,31 @@ public class BoardController {
 				}
 			}
 		}
+
+		//write the assistant cards that are yet to be played
+		List<String> assistantCards=new ArrayList<>();
+		for (Player p : msg.getPlayers()) {
+			if (p.getPlayerId() == playerId) {
+				for (AssistantCard c : p.getDeck().getCards()) {
+					assistantCards.add("Movement="+c.getMovement()+" Order="+c.getOrderValue());
+				}
+			}
+		}
+		assistantChoice.getItems().clear();
+		assistantChoice.getItems().addAll(assistantCards);
+
+	}
+
+	public void playAssistantCard(ActionEvent event){
+		String assistantCard=assistantChoice.getValue();
+		int orderValue=Integer.valueOf(assistantCard.substring(17));
+		AssistantCardMessage assistantCardMessage=new AssistantCardMessage(orderValue);
+		fxController.playAssistantCard(assistantCardMessage);
 	}
 
 
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+		assistantChoice.setOnAction(this::playAssistantCard);
+	}
 }
