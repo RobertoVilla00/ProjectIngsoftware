@@ -1,6 +1,7 @@
 package It.polimi.ingsw.View.Gui;
 
 import It.polimi.ingsw.Message.AssistantCardMessage;
+import It.polimi.ingsw.Message.MoveStudentMessage;
 import It.polimi.ingsw.Message.NicknameMessage;
 import It.polimi.ingsw.Message.StartMessage;
 import It.polimi.ingsw.View.Gui.GuiController.AskNameController;
@@ -34,5 +35,8 @@ public class fxController {
 
 	public static void playAssistantCard(AssistantCardMessage assistantCardMessage){
 		gui.sendMessage(assistantCardMessage);
+	}
+	public static void moveStudent(MoveStudentMessage moveStudentMessage){
+		gui.sendMessage(moveStudentMessage);
 	}
 }

@@ -50,7 +50,9 @@ public class Gui extends Observable implements View, Observer {
 
 	@Override
 	public void askInformation() {
-
+		Platform.runLater(()->{
+			boardController.askInformation(msg,PlayerId);
+		});
 	}
 
 	public void askPlayers(){
@@ -74,6 +76,7 @@ public class Gui extends Observable implements View, Observer {
 			case SHOWMATCHINFO:
 				msg=(ShowMatchInfoMessage) message;
 				showGameInformation();
+				askInformation();
 				break;
 			case PLAYERID:
 				PlayerIdMessage msg = (PlayerIdMessage) message;

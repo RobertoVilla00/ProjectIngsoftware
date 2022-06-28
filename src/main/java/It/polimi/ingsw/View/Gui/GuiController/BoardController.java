@@ -1,17 +1,21 @@
 package It.polimi.ingsw.View.Gui.GuiController;
 
+import It.polimi.ingsw.Controller.GamePhase;
 import It.polimi.ingsw.Message.AssistantCardMessage;
+import It.polimi.ingsw.Message.MoveStudentMessage;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Model.*;
 import It.polimi.ingsw.View.Cli.StrColor;
 import It.polimi.ingsw.View.Gui.fxController;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -71,8 +75,13 @@ public class BoardController implements Initializable {
 	Label cardCost0, cardCost1, cardCost2;
 	@FXML
 	ChoiceBox<String> assistantChoice;
+	@FXML
+	Label infoLabel;
 
-
+	private int playerId;
+	private ShowMatchInfoMessage msg;
+	private boolean hasStudentSelected;
+	private int selectedStudentIndex;
 	private List<Label> playerNicknames=new ArrayList<Label>();
 	private List<Label> playerCoins=new ArrayList<Label>();
 
@@ -103,6 +112,13 @@ public class BoardController implements Initializable {
 
 
 	public void showGameInformation(ShowMatchInfoMessage msg, int playerId){
+		this.msg=msg;
+		this.playerId=playerId;
+		hasStudentSelected=false;
+
+		assistantChoice.setVisible(false);
+
+
 		playerNicknames.add(nickname0);
 		playerNicknames.add(nickname1);
 		playerNicknames.add(nickname2);
@@ -245,70 +261,7 @@ public class BoardController implements Initializable {
 
 
 		//showing Islands informations
-		islands.add(Island0);
-		islands.add(Island1);
-		islands.add(Island2);
-		islands.add(Island3);
-		islands.add(Island4);
-		islands.add(Island5);
-		islands.add(Island6);
-		islands.add(Island7);
-		islands.add(Island8);
-		islands.add(Island9);
-		islands.add(Island10);
-		islands.add(Island11);
 
-		noEntryTiles.add(noEntryTile0);
-		noEntryTiles.add(noEntryTile1);
-		noEntryTiles.add(noEntryTile2);
-		noEntryTiles.add(noEntryTile3);
-		noEntryTiles.add(noEntryTile4);
-		noEntryTiles.add(noEntryTile5);
-		noEntryTiles.add(noEntryTile6);
-		noEntryTiles.add(noEntryTile7);
-		noEntryTiles.add(noEntryTile8);
-		noEntryTiles.add(noEntryTile9);
-		noEntryTiles.add(noEntryTile10);
-		noEntryTiles.add(noEntryTile11);
-
-		towers.add(tower0);
-		towers.add(tower1);
-		towers.add(tower2);
-		towers.add(tower3);
-		towers.add(tower4);
-		towers.add(tower5);
-		towers.add(tower6);
-		towers.add(tower7);
-		towers.add(tower8);
-		towers.add(tower9);
-		towers.add(tower10);
-		towers.add(tower11);
-
-		towersNumber.add(towersNumber0);
-		towersNumber.add(towersNumber1);
-		towersNumber.add(towersNumber2);
-		towersNumber.add(towersNumber3);
-		towersNumber.add(towersNumber4);
-		towersNumber.add(towersNumber5);
-		towersNumber.add(towersNumber6);
-		towersNumber.add(towersNumber7);
-		towersNumber.add(towersNumber8);
-		towersNumber.add(towersNumber9);
-		towersNumber.add(towersNumber10);
-		towersNumber.add(towersNumber11);
-
-		motherNatures.add(mothernature0);
-		motherNatures.add(mothernature1);
-		motherNatures.add(mothernature2);
-		motherNatures.add(mothernature3);
-		motherNatures.add(mothernature4);
-		motherNatures.add(mothernature5);
-		motherNatures.add(mothernature6);
-		motherNatures.add(mothernature7);
-		motherNatures.add(mothernature8);
-		motherNatures.add(mothernature9);
-		motherNatures.add(mothernature10);
-		motherNatures.add(mothernature11);
 		for(int i=msg.getTable().size(); i<12; i++){
 			islands.get(i).setVisible(false);
 			motherNatures.get(i).setVisible(false);
@@ -380,6 +333,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitWidth(20);
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
+				studentImage.setId("cloudStudent"+j);
 			}
 		}
 
@@ -469,6 +423,13 @@ public class BoardController implements Initializable {
 				studentImage.setFitWidth(20);
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
+				studentImage.setId("entranceStudent"+j);
+				studentImage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+					public void handle(MouseEvent e){
+						selectStudent((ImageView)e.getSource());
+						e.consume();
+					}
+				});
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.GREEN); j++){
 				int xValue;
@@ -622,6 +583,7 @@ public class BoardController implements Initializable {
 						studentImage.setFitWidth(20);
 						studentImage.setPreserveRatio(true);
 						boardPane.getChildren().add(studentImage);
+						studentImage.setId("character"+i+"student"+j);
 					}
 				}
 				if(idCharacterCard==5){
@@ -639,6 +601,7 @@ public class BoardController implements Initializable {
 						NoentryImage.setFitWidth(20);
 						NoentryImage.setPreserveRatio(true);
 						boardPane.getChildren().add(NoentryImage);
+						NoentryImage.setId("tile"+i+"student"+j);
 					}
 				}
 			}
@@ -659,15 +622,156 @@ public class BoardController implements Initializable {
 	}
 
 	public void playAssistantCard(ActionEvent event){
-		String assistantCard=assistantChoice.getValue();
-		int orderValue=Integer.valueOf(assistantCard.substring(17));
-		AssistantCardMessage assistantCardMessage=new AssistantCardMessage(orderValue);
-		fxController.playAssistantCard(assistantCardMessage);
+		try {
+			String assistantCard = assistantChoice.getValue();
+			int orderValue = Integer.parseInt(assistantCard.substring(17));
+			AssistantCardMessage assistantCardMessage = new AssistantCardMessage(orderValue);
+			fxController.playAssistantCard(assistantCardMessage);
+		}
+		catch (NullPointerException nullPointerException){
+			//catch the value change to null
+		}
 	}
 
+
+
+
+	//ask information to the active player, tell the others to wait
+	public void askInformation(ShowMatchInfoMessage msg, int PlayerId){
+		if(msg.getActivePlayerId()==PlayerId){
+			if(msg.getGamePhase()== GamePhase.ASSISTANT_CARD){
+				assistantChoice.setVisible(true);
+				infoLabel.setText("Choose which assistant you want to play");
+			}
+			if(msg.getGamePhase()== GamePhase.MOVE_STUDENT){
+				if(msg.isExpertMode()){
+
+				}
+				else{
+					infoLabel.setText("Choose which student you want to move");
+				}
+			}
+			if(msg.getGamePhase()== GamePhase.MOVE_MN){
+				if(msg.isExpertMode()){
+
+				}
+				else{
+
+				}
+			}
+			if(msg.getGamePhase()== GamePhase.CHOOSE_CLOUD){
+				if(msg.isExpertMode()){
+
+				}
+				else{
+
+				}
+			}
+			if(msg.getGamePhase()== GamePhase.CHARACTER_CARD){
+
+			}
+
+
+		}
+		else{
+			infoLabel.setText("wait for your turn");
+		}
+	}
+
+
+	public void selectStudent(ImageView student){
+		if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_STUDENT){
+			infoLabel.setText("where do you want to put the student?");
+			hasStudentSelected=true;
+			selectedStudentIndex=Integer.parseInt(student.getId().substring(15));
+		}
+	}
+
+	public void moveStudentToIsland(ImageView destinationIsland){
+		if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_STUDENT && hasStudentSelected){
+			hasStudentSelected=false;
+			int destination=Integer.parseInt(destinationIsland.getId().substring(6));
+			MoveStudentMessage moveStudentMessage=new MoveStudentMessage(selectedStudentIndex,destination);
+			fxController.moveStudent(moveStudentMessage);
+		}
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		assistantChoice.setOnAction(this::playAssistantCard);
+
+		islands.add(Island0);
+		islands.add(Island1);
+		islands.add(Island2);
+		islands.add(Island3);
+		islands.add(Island4);
+		islands.add(Island5);
+		islands.add(Island6);
+		islands.add(Island7);
+		islands.add(Island8);
+		islands.add(Island9);
+		islands.add(Island10);
+		islands.add(Island11);
+
+		noEntryTiles.add(noEntryTile0);
+		noEntryTiles.add(noEntryTile1);
+		noEntryTiles.add(noEntryTile2);
+		noEntryTiles.add(noEntryTile3);
+		noEntryTiles.add(noEntryTile4);
+		noEntryTiles.add(noEntryTile5);
+		noEntryTiles.add(noEntryTile6);
+		noEntryTiles.add(noEntryTile7);
+		noEntryTiles.add(noEntryTile8);
+		noEntryTiles.add(noEntryTile9);
+		noEntryTiles.add(noEntryTile10);
+		noEntryTiles.add(noEntryTile11);
+
+		towers.add(tower0);
+		towers.add(tower1);
+		towers.add(tower2);
+		towers.add(tower3);
+		towers.add(tower4);
+		towers.add(tower5);
+		towers.add(tower6);
+		towers.add(tower7);
+		towers.add(tower8);
+		towers.add(tower9);
+		towers.add(tower10);
+		towers.add(tower11);
+
+		towersNumber.add(towersNumber0);
+		towersNumber.add(towersNumber1);
+		towersNumber.add(towersNumber2);
+		towersNumber.add(towersNumber3);
+		towersNumber.add(towersNumber4);
+		towersNumber.add(towersNumber5);
+		towersNumber.add(towersNumber6);
+		towersNumber.add(towersNumber7);
+		towersNumber.add(towersNumber8);
+		towersNumber.add(towersNumber9);
+		towersNumber.add(towersNumber10);
+		towersNumber.add(towersNumber11);
+
+		motherNatures.add(mothernature0);
+		motherNatures.add(mothernature1);
+		motherNatures.add(mothernature2);
+		motherNatures.add(mothernature3);
+		motherNatures.add(mothernature4);
+		motherNatures.add(mothernature5);
+		motherNatures.add(mothernature6);
+		motherNatures.add(mothernature7);
+		motherNatures.add(mothernature8);
+		motherNatures.add(mothernature9);
+		motherNatures.add(mothernature10);
+		motherNatures.add(mothernature11);
+
+		for(ImageView i: islands){
+			i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent e){
+					moveStudentToIsland((ImageView)e.getSource());
+					e.consume();
+				}
+			});
+		}
 	}
 }
