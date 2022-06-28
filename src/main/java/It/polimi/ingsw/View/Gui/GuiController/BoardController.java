@@ -2,6 +2,7 @@ package It.polimi.ingsw.View.Gui.GuiController;
 
 import It.polimi.ingsw.Controller.GamePhase;
 import It.polimi.ingsw.Message.AssistantCardMessage;
+import It.polimi.ingsw.Message.MotherNatureMessage;
 import It.polimi.ingsw.Message.MoveStudentMessage;
 import It.polimi.ingsw.Message.ShowMatchInfoMessage;
 import It.polimi.ingsw.Model.*;
@@ -717,6 +718,12 @@ public class BoardController implements Initializable {
 		}
 	}
 
+	public void moveMotherNature(ImageView destinationIsland){
+		int destination=Integer.parseInt(destinationIsland.getId().substring(6));
+		MotherNatureMessage motherNatureMessage = new MotherNatureMessage(((destination)-msg.getMotherNaturePosition())%(msg.getTable().size()));
+		fxController.moveMotherNature(motherNatureMessage);
+	}
+
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		assistantChoice.setOnAction(this::playAssistantCard);
@@ -797,7 +804,7 @@ public class BoardController implements Initializable {
 						e.consume();
 					}
 					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_MN){
-						//todo:moveMotherNature((ImageView)e.getSource());
+						moveMotherNature((ImageView)e.getSource());
 						e.consume();
 					}
 				}
