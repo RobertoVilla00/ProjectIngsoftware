@@ -109,6 +109,8 @@ public class BoardController implements Initializable {
 	private List<Label> cardCosts=new ArrayList<>();
 
 
+	private List<List<ImageView>> allEntranceStudent=new ArrayList<>();
+
 
 
 	public void showGameInformation(ShowMatchInfoMessage msg, int playerId){
@@ -345,13 +347,15 @@ public class BoardController implements Initializable {
 
 
 		//show School information
-		schools.add(school0);
-		schools.add(school1);
-		schools.add(school2);
 
 		for(int i=0; i<msg.getPlayers().length;i++){
 			for(int j=0; j<5;j++){
 				allTeachers.get(i).get(j).setVisible(false);
+			}
+		}
+		for(int i=0;i<allEntranceStudent.size();i++){
+			for(ImageView imageView:allEntranceStudent.get(i)){
+				boardPane.getChildren().remove(imageView);
 			}
 		}
 		for(int i=0; i<msg.getPlayers().length; i++){
@@ -392,6 +396,8 @@ public class BoardController implements Initializable {
 
 				}
 			}
+			ArrayList<ImageView> imageList=new ArrayList<>();
+			allEntranceStudent.add(imageList);
 			for(int j=0; j<msg.getPlayers()[i].getPlayersSchool().getEntranceStudentsNumber();j++){
 				String student = new String();
 				switch (msg.getPlayers()[i].getPlayersSchool().GetEntranceStudentColor(j)){
@@ -424,6 +430,7 @@ public class BoardController implements Initializable {
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
 				studentImage.setId("entranceStudent"+j);
+				allEntranceStudent.get(i).add(studentImage);
 				studentImage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 					public void handle(MouseEvent e){
 						selectStudent((ImageView)e.getSource());
@@ -443,6 +450,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitHeight(15);
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
+				boardPane.getChildren().add(studentImage);
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.RED); j++){
 				int xValue;
@@ -456,6 +464,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitHeight(15);
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
+				boardPane.getChildren().add(studentImage);
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.YELLOW); j++){
 				int xValue;
@@ -469,6 +478,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitHeight(15);
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
+				boardPane.getChildren().add(studentImage);
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.PINK); j++){
 				int xValue;
@@ -482,6 +492,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitHeight(15);
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
+				boardPane.getChildren().add(studentImage);
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.BLUE); j++){
 				int xValue;
@@ -495,6 +506,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitHeight(15);
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
+				boardPane.getChildren().add(studentImage);
 			}
 			int maxTowers;
 			if(msg.getPlayers().length==2) {
@@ -683,16 +695,25 @@ public class BoardController implements Initializable {
 		if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_STUDENT){
 			infoLabel.setText("where do you want to put the student?");
 			hasStudentSelected=true;
-			selectedStudentIndex=Integer.parseInt(student.getId().substring(15));
+			selectedStudentIndex=Integer.parseInt(student.getId().substring(15))+1;
 		}
 	}
 
 	public void moveStudentToIsland(ImageView destinationIsland){
+		hasStudentSelected=false;
+		int destination=Integer.parseInt(destinationIsland.getId().substring(6))+1;
+		MoveStudentMessage moveStudentMessage=new MoveStudentMessage(selectedStudentIndex,destination);
+		fxController.moveStudent(moveStudentMessage);
+	}
+
+	public void moveStudentToDiningRoom(ImageView destinationSchool){
 		if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_STUDENT && hasStudentSelected){
 			hasStudentSelected=false;
-			int destination=Integer.parseInt(destinationIsland.getId().substring(6));
-			MoveStudentMessage moveStudentMessage=new MoveStudentMessage(selectedStudentIndex,destination);
-			fxController.moveStudent(moveStudentMessage);
+			int destination=Integer.parseInt(destinationSchool.getId().substring(6));
+			if(msg.getActivePlayerId()==msg.getPlayers()[destination].getPlayerId()) {
+				MoveStudentMessage moveStudentMessage = new MoveStudentMessage(selectedStudentIndex, 0);
+				fxController.moveStudent(moveStudentMessage);
+			}
 		}
 	}
 
@@ -765,10 +786,27 @@ public class BoardController implements Initializable {
 		motherNatures.add(mothernature10);
 		motherNatures.add(mothernature11);
 
+		schools.add(school0);
+		schools.add(school1);
+		schools.add(school2);
 		for(ImageView i: islands){
 			i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 				public void handle(MouseEvent e){
-					moveStudentToIsland((ImageView)e.getSource());
+					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_STUDENT && hasStudentSelected) {
+						moveStudentToIsland((ImageView) e.getSource());
+						e.consume();
+					}
+					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_MN){
+						//todo:moveMotherNature((ImageView)e.getSource());
+						e.consume();
+					}
+				}
+			});
+		}
+		for(ImageView i: schools){
+			i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent e){
+					moveStudentToDiningRoom((ImageView)e.getSource());
 					e.consume();
 				}
 			});
