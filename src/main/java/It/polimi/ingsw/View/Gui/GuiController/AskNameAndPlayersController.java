@@ -30,7 +30,7 @@ public class AskNameAndPlayersController {
 
 	public void getAnswers(ActionEvent event){
 		StartMessage startMessage=new StartMessage(NumberOfPlayers,GameMode);
-		fxController.setGameOptions(startMessage);
+		fxController.executeAction(startMessage);
 		SceneController.changeScene("fxml/waitingScene.fxml");
 	}
 

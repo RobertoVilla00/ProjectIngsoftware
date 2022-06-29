@@ -17,11 +17,6 @@ public class fxController {
 			SceneController.changeScene("fxml/waitingScene.fxml");
 		}
 	}
-
-	public static void setGameOptions(StartMessage startMessage){
-		gui.sendMessage(startMessage);
-	}
-
 	public static void setBoardController(BoardController boardController){
 		gui.setBoardController(boardController);
 	}
@@ -29,19 +24,7 @@ public class fxController {
 	public static void setNicknameController(AskNameController askNameController){
 		gui.setNicknameController(askNameController);
 	}
-
-	public static void playAssistantCard(AssistantCardMessage assistantCardMessage){
-		gui.sendMessage(assistantCardMessage);
-	}
-	public static void moveStudent(MoveStudentMessage moveStudentMessage){
-		gui.sendMessage(moveStudentMessage);
-	}
-
-	public static void moveMotherNature(MotherNatureMessage motherNatureMessage){
-		gui.sendMessage((motherNatureMessage));
-	}
-
-	public static void takeStudentFromCloud(CloudChoiceMessage cloudChoiceMessage){
-		gui.sendMessage(cloudChoiceMessage);
+	public static void executeAction(Message message){
+		gui.sendMessage(message);
 	}
 }
