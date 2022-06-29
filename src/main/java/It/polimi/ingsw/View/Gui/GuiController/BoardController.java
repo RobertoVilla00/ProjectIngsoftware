@@ -1,10 +1,7 @@
 package It.polimi.ingsw.View.Gui.GuiController;
 
 import It.polimi.ingsw.Controller.GamePhase;
-import It.polimi.ingsw.Message.AssistantCardMessage;
-import It.polimi.ingsw.Message.MotherNatureMessage;
-import It.polimi.ingsw.Message.MoveStudentMessage;
-import It.polimi.ingsw.Message.ShowMatchInfoMessage;
+import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
 import It.polimi.ingsw.View.Cli.StrColor;
 import It.polimi.ingsw.View.Gui.fxController;
@@ -108,11 +105,14 @@ public class BoardController implements Initializable {
 	private List<ImageView> characterCards=new ArrayList<>();
 	private List<ImageView> cardCoins=new ArrayList<>();
 	private List<Label> cardCosts=new ArrayList<>();
+	private List<ImageView> clouds=new ArrayList<>();
 
 
 	private List<List<ImageView>> allEntranceStudent=new ArrayList<>();
 	private List<List<ImageView>> allIslandTowers=new ArrayList<>();
 	private List<List<ImageView>> allCloudsStudent=new ArrayList<>();
+	private List<ImageView> diningRoomStudents= new ArrayList<>();
+
 
 
 	public void showGameInformation(ShowMatchInfoMessage msg, int playerId){
@@ -271,6 +271,11 @@ public class BoardController implements Initializable {
 			motherNatures.get(i).setVisible(false);
 			towers.get(i).setVisible(false);
 			noEntryTiles.get(i).setVisible(false);
+			allStudents.get(0).get(i).setVisible(false);
+			allStudents.get(1).get(i).setVisible(false);
+			allStudents.get(2).get(i).setVisible(false);
+			allStudents.get(3).get(i).setVisible(false);
+			allStudents.get(4).get(i).setVisible(false);
 		}
 		for(int i=0; i<msg.getTable().size();i++) {
 			if (msg.getTable().get(i).GetNoEntryTile()) {
@@ -280,6 +285,10 @@ public class BoardController implements Initializable {
 			}
 			if (msg.getTable().get(i).getNumberOfTowers() != 0) {
 				towers.get(i).setVisible(true);
+				String color=msg.getTable().get(i).getTowersColor().toString().toLowerCase();
+				String towerUrl="Graphical_Assets/Pedine/" + color + "Tower.png";
+				Image towersImage=new Image(towerUrl);
+				towers.get(i).setImage(towersImage);
 				towersNumber.get(i).setVisible(true);
 			} else {
 				towers.get(i).setVisible(false);
@@ -453,6 +462,9 @@ public class BoardController implements Initializable {
 					}
 				});
 			}
+			for(ImageView imageView:diningRoomStudents){
+				boardPane.getChildren().remove(imageView);
+			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.GREEN); j++){
 				int xValue;
 				int yValue;
@@ -466,6 +478,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
+				diningRoomStudents.add(studentImage);
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.RED); j++){
 				int xValue;
@@ -480,6 +493,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
+				diningRoomStudents.add(studentImage);
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.YELLOW); j++){
 				int xValue;
@@ -494,6 +508,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
+				diningRoomStudents.add(studentImage);
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.PINK); j++){
 				int xValue;
@@ -508,6 +523,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
+				diningRoomStudents.add(studentImage);
 			}
 			for(int j = 0; j<msg.getPlayers()[i].getPlayersSchool().getStudentNumber(Color.BLUE); j++){
 				int xValue;
@@ -522,6 +538,7 @@ public class BoardController implements Initializable {
 				studentImage.setFitWidth(15);
 				studentImage.setPreserveRatio(true);
 				boardPane.getChildren().add(studentImage);
+				diningRoomStudents.add(studentImage);
 			}
 			int maxTowers;
 			if(msg.getPlayers().length==2) {
@@ -531,12 +548,12 @@ public class BoardController implements Initializable {
 				maxTowers = 6;
 			}
 			String towerString=new String();
-			switch (i){
+			switch (msg.getPlayers()[i].getPlayerId()){
 				case 0:
-					towerString="Graphical_Assets/Pedine/torreNera.png";
+					towerString="Graphical_Assets/Pedine/torreBianca.png";
 					break;
 				case 1:
-					towerString="Graphical_Assets/Pedine/torreBianca.png";
+					towerString="Graphical_Assets/Pedine/torreNera.png";
 					break;
 				case 2:
 					towerString="Graphical_Assets/Pedine/torreGrigia.png";
@@ -741,6 +758,14 @@ public class BoardController implements Initializable {
 		fxController.moveMotherNature(motherNatureMessage);
 	}
 
+	public void takeStudentFromClouds(ImageView chosenCloud){
+		int cloudIndex=Integer.parseInt(chosenCloud.getId().substring(5))+1;
+		if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.CHOOSE_CLOUD){
+			CloudChoiceMessage cloudChoiceMessage=new CloudChoiceMessage(cloudIndex);
+			fxController.takeStudentFromCloud(cloudChoiceMessage);
+		}
+	}
+
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		assistantChoice.setOnAction(this::playAssistantCard);
@@ -813,6 +838,11 @@ public class BoardController implements Initializable {
 		schools.add(school0);
 		schools.add(school1);
 		schools.add(school2);
+
+		clouds.add(cloud0);
+		clouds.add(cloud1);
+		clouds.add(cloud2);
+		
 		for(ImageView i: islands){
 			i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 				public void handle(MouseEvent e){
@@ -835,5 +865,14 @@ public class BoardController implements Initializable {
 				}
 			});
 		}
+		for(ImageView i: clouds){
+			i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent e){
+					takeStudentFromClouds((ImageView)e.getSource());
+					e.consume();
+				}
+			});
+		}
 	}
 }
+//todo:fixare assistasnt Cards, gestire characterCard;

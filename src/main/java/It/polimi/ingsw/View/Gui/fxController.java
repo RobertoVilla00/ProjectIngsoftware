@@ -41,4 +41,7 @@ public class fxController {
 		gui.sendMessage((motherNatureMessage));
 	}
 
+	public static void takeStudentFromCloud(CloudChoiceMessage cloudChoiceMessage){
+		gui.sendMessage(cloudChoiceMessage);
+	}
 }
