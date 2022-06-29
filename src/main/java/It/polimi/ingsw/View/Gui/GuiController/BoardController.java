@@ -72,7 +72,7 @@ public class BoardController implements Initializable {
 	@FXML
 	Label cardCost0, cardCost1, cardCost2;
 	@FXML
-	ChoiceBox<String> assistantChoice;
+	ChoiceBox<String> assistantChoice, colorChoice;
 	@FXML
 	Label infoLabel;
 
@@ -122,6 +122,7 @@ public class BoardController implements Initializable {
 		this.playerId=playerId;
 		hasStudentSelected=false;
 		hasStudentFromCharacter=false;
+		colorChoice.setVisible(false);
 
 		assistantChoice.setVisible(false);
 
@@ -719,7 +720,7 @@ public class BoardController implements Initializable {
 			}
 			if(msg.getGamePhase()== GamePhase.CHOOSE_CLOUD){
 				if(msg.isExpertMode()){
-					infoLabel.setText("Choose where you want to move Mother Nature or play a character");
+					infoLabel.setText("Choose the cloud you want to take the students from or play a character");
 				}
 				else{
 					infoLabel.setText("Choose the cloud you want to take the students from");
@@ -731,16 +732,17 @@ public class BoardController implements Initializable {
 
 				}
 				if(msg.getExpectedCardMessage()==3){
-
+					infoLabel.setText("Choose the island to resolve");
 				}
 				if(msg.getExpectedCardMessage()==5){
-
+					infoLabel.setText("Choose where to put the no entry tile");
 				}
 				if(msg.getExpectedCardMessage()==10){
 					infoLabel.setText("Choose the Student you want to move");
 				}
 				if(msg.getExpectedCardMessage()==12){
-
+					infoLabel.setText("Choose the color of students you want to discard");
+					colorChoice.setVisible(true);
 				}
 			}
 		}
@@ -767,10 +769,18 @@ public class BoardController implements Initializable {
 	}
 
 	public void moveStudentToIsland(ImageView destinationIsland){
-		hasStudentSelected=false;
-		int destination=Integer.parseInt(destinationIsland.getId().substring(6))+1;
-		MoveStudentMessage moveStudentMessage=new MoveStudentMessage(selectedStudentIndex,destination);
-		fxController.executeAction(moveStudentMessage);
+		if(msg.getGamePhase()==GamePhase.MOVE_STUDENT) {
+			hasStudentSelected = false;
+			int destination = Integer.parseInt(destinationIsland.getId().substring(6)) + 1;
+			MoveStudentMessage moveStudentMessage = new MoveStudentMessage(selectedStudentIndex, destination);
+			fxController.executeAction(moveStudentMessage);
+		}
+		if(msg.getExpectedCardMessage()==1 && hasStudentFromCharacter){
+			hasStudentFromCharacter = false;
+			int destination= Integer.parseInt(destinationIsland.getId().substring(6)) + 1;
+			Card1Message card1Message=new Card1Message(studentFromCharacterIndex,destination);
+			fxController.executeAction(card1Message);
+		}
 	}
 
 	public void moveStudentToDiningRoom(ImageView destinationSchool){
@@ -828,12 +838,31 @@ public class BoardController implements Initializable {
 				}
 			}
 		}
+	}
 
+	public void resolveIsland(ImageView island){
+		int islandIndex= Integer.parseInt(island.getId().substring(6)) + 1;
+		Card3and5Message card3= new Card3and5Message(islandIndex);
+		fxController.executeAction(card3);
+	}
+
+	public void putNoEntryTile(ImageView island){
+		int islandIndex= Integer.parseInt(island.getId().substring(6)) + 1;
+		Card3and5Message card5= new Card3and5Message(islandIndex);
+		fxController.executeAction(card5);
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		assistantChoice.setOnAction(this::playAssistantCard);
+
+		ArrayList<String> colorList=new ArrayList<>();
+		colorList.add("BLUE");
+		colorList.add("RED");
+		colorList.add("GREEN");
+		colorList.add("YELLOW");
+		colorList.add("PINK");
+		colorChoice.getItems().addAll(colorList);
 
 		islands.add(Island0);
 		islands.add(Island1);
@@ -928,6 +957,21 @@ public class BoardController implements Initializable {
 					}
 					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_MN){
 						moveMotherNature((ImageView)e.getSource());
+						e.consume();
+					}
+					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.CHARACTER_CARD && msg.getExpectedCardMessage()==1
+							&& hasStudentFromCharacter){
+						moveStudentToIsland((ImageView) e.getSource());
+						e.consume();
+					}
+
+					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.CHARACTER_CARD && msg.getExpectedCardMessage()==3){
+						resolveIsland((ImageView) e.getSource());
+						e.consume();
+					}
+
+					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.CHARACTER_CARD && msg.getExpectedCardMessage()==5){
+						putNoEntryTile((ImageView) e.getSource());
 						e.consume();
 					}
 				}

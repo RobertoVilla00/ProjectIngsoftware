@@ -87,7 +87,7 @@
       <Label fx:id="nickname0" layoutX="20.0" layoutY="468.0" prefHeight="18.0" prefWidth="151.0" text="Label" translateY="34.0" />
       <Label fx:id="nickname1" layoutX="455.0" layoutY="470.0" prefHeight="18.0" prefWidth="151.0" text="Label" translateY="34.0" />
       <Label fx:id="nickname2" layoutX="888.0" layoutY="467.0" prefHeight="18.0" prefWidth="151.0" text="Label" translateX="2.0" translateY="34.0" />
-      <ChoiceBox fx:id="assistantChoice" layoutX="27.0" layoutY="424.0" minHeight="10.0" minWidth="50.0" prefHeight="10.0" prefWidth="50.0" translateX="-10.0" translateY="65.0" />
+      <ChoiceBox fx:id="assistantChoice" layoutX="27.0" layoutY="408.0" minHeight="10.0" minWidth="50.0" prefHeight="26.0" prefWidth="151.0" translateX="-10.0" translateY="65.0" />
       <ImageView fx:id="assistant0" fitHeight="90.0" fitWidth="35.0" layoutX="37.0" layoutY="685.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" translateY="34.0">
          <image>
             <Image url="@../Graphical_Assets/Assistenti/retro/CarteTOT_back_1@3x.png" />
@@ -213,62 +213,62 @@
       </ImageView>
       <ImageView fx:id="noEntryTile0" fitHeight="150.0" fitWidth="30.0" layoutX="305.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile1" fitHeight="150.0" fitWidth="30.0" layoutX="451.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile2" fitHeight="150.0" fitWidth="30.0" layoutX="599.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile3" fitHeight="150.0" fitWidth="30.0" layoutX="736.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile4" fitHeight="150.0" fitWidth="30.0" layoutX="859.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile5" fitHeight="150.0" fitWidth="30.0" layoutX="859.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile6" fitHeight="150.0" fitWidth="30.0" layoutX="746.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile7" fitHeight="150.0" fitWidth="30.0" layoutX="614.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile8" fitHeight="150.0" fitWidth="30.0" layoutX="461.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile9" fitHeight="150.0" fitWidth="30.0" layoutX="328.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile11" fitHeight="150.0" fitWidth="30.0" layoutX="223.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="noEntryTile10" fitHeight="150.0" fitWidth="30.0" layoutX="220.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Graphical_Assets/Pedine/noEntry.png" />
+            <Image url="@../Graphical_Assets/Pedine/No.png" />
          </image>
       </ImageView>
       <ImageView fx:id="mothernature0" fitHeight="150.0" fitWidth="30.0" layoutX="274.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
@@ -513,5 +513,6 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="colorChoice" layoutX="20.0" layoutY="78.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
