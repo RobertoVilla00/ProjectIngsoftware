@@ -19,6 +19,9 @@ public class Cli extends Observable implements View, Observer {
 	private Scanner in = new Scanner(System.in);
 	private ShowMatchInfoMessage msg;
 	private int PlayerId;
+	private String error;
+	boolean errorStatus;
+	boolean gameStarted;
 
 	/**
 	 * The constructor of the Cli.
@@ -721,6 +724,10 @@ public class Cli extends Observable implements View, Observer {
 	 */
 	@Override
 	public void askInformation() {
+		if(errorStatus){
+			printError(error);
+			errorStatus=false;
+		}
 
 		String nextLine;
 
@@ -913,7 +920,7 @@ public class Cli extends Observable implements View, Observer {
 	 * @param error: the error.
 	 */
 	public void printError(String error) {
-		out.println(error);
+		out.println(StrColor.ANSI_RED+error+StrColor.ANSI_RESET);
 	}
 
 	/**
@@ -973,6 +980,7 @@ public class Cli extends Observable implements View, Observer {
 	public void update(Message message) {
 		switch (message.getMessageContent()) {
 			case SHOWMATCHINFO:
+				if(!gameStarted) gameStarted=true;
 				this.setMsg((ShowMatchInfoMessage) message);
 				showGameInformation();
 				askInformation();
@@ -989,7 +997,11 @@ public class Cli extends Observable implements View, Observer {
 			case ERROR:
 				ErrorMessage errorMessage = (ErrorMessage) message;
 				String error = errorMessage.getError();
-				printError(error);
+				if(!gameStarted) printError(error);
+				else{
+					errorStatus=true;
+					this.error = error;
+				}
 				break;
 			case PLAYERS:
 				askPlayers();

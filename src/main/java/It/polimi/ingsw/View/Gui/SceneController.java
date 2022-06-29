@@ -61,6 +61,9 @@ public class SceneController {
 			if(Objects.equals(fxml, "fxml/askName.fxml")){
 				fxController.setNicknameController(fxmlLoader.getController());
 			}
+			if(Objects.equals(fxml, "fxml/endGameScene.fxml")){
+				fxController.setEndGameController(fxmlLoader.getController());
+			}
 			stage.getScene().setRoot(pane);
 		} catch (IOException e) {
 			e.printStackTrace();

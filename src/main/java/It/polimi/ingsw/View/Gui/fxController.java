@@ -3,6 +3,7 @@ package It.polimi.ingsw.View.Gui;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.View.Gui.GuiController.AskNameController;
 import It.polimi.ingsw.View.Gui.GuiController.BoardController;
+import It.polimi.ingsw.View.Gui.GuiController.EndGameController;
 
 public class fxController {
 	private static Gui gui;
@@ -26,5 +27,9 @@ public class fxController {
 	}
 	public static void executeAction(Message message){
 		gui.sendMessage(message);
+	}
+
+	public static void setEndGameController(EndGameController endGameController){
+		gui.setEndGameController(endGameController);
 	}
 }

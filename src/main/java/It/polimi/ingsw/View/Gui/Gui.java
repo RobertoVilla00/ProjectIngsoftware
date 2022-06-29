@@ -1,12 +1,11 @@
 package It.polimi.ingsw.View.Gui;
 
-import It.polimi.ingsw.Message.Message;
-import It.polimi.ingsw.Message.PlayerIdMessage;
-import It.polimi.ingsw.Message.ShowMatchInfoMessage;
+import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
 import It.polimi.ingsw.View.Gui.GuiController.AskNameController;
 import It.polimi.ingsw.View.Gui.GuiController.BoardController;
+import It.polimi.ingsw.View.Gui.GuiController.EndGameController;
 import It.polimi.ingsw.View.View;
 import javafx.application.Platform;
 
@@ -17,6 +16,7 @@ public class Gui extends Observable implements View, Observer {
 	private boolean gameStarted=false;
 	private BoardController boardController;
 	private AskNameController askNameController;
+	private EndGameController endGameController;
 	private boolean wrongName=false;
 
 	public Gui(){
@@ -69,6 +69,24 @@ public class Gui extends Observable implements View, Observer {
 		});
 
 	}
+	public void showError(String error){
+		if(gameStarted) {
+			Platform.runLater(() -> {
+				boardController.showError(error);
+			});
+		}
+	}
+
+	public void setEndGameController(EndGameController endGameController) {
+		this.endGameController=endGameController;
+	}
+
+	public void setWinner(EndgameMessage endgameMessage){
+		Platform.runLater(()->{
+			SceneController.changeScene("fxml/endGameScene.fxml");
+			endGameController.displayWinner(endgameMessage);
+		});
+	}
 
 	@Override
 	public void update(Message message) {
@@ -89,6 +107,13 @@ public class Gui extends Observable implements View, Observer {
 				askPlayers();
 				break;
 			case ERROR:
+				ErrorMessage errorMessage = (ErrorMessage) message;
+				String error = errorMessage.getError();
+				showError(error);
+				break;
+			case ENDGAME:
+				EndgameMessage endgameMessage=(EndgameMessage) message;
+				setWinner(endgameMessage);
 				break;
 		}
 	}

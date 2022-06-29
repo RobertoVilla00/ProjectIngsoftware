@@ -75,6 +75,8 @@ public class BoardController implements Initializable {
 	ChoiceBox<String> assistantChoice, colorChoice;
 	@FXML
 	Label infoLabel;
+	@FXML
+	Label errorLabel;
 
 	private int playerId;
 	private ShowMatchInfoMessage msg;
@@ -683,9 +685,12 @@ public class BoardController implements Initializable {
 	public void playAssistantCard(ActionEvent event){
 		try {
 			String assistantCard = assistantChoice.getValue();
-			int cardIndex= assistantChoice.getItems().indexOf(assistantCard)+1;
-			AssistantCardMessage assistantCardMessage = new AssistantCardMessage(cardIndex);
-			fxController.executeAction(assistantCardMessage);
+			if(assistantCard!=null) {
+				int cardIndex = assistantChoice.getItems().indexOf(assistantCard) + 1;
+				AssistantCardMessage assistantCardMessage = new AssistantCardMessage(cardIndex);
+				errorLabel.setVisible(false);
+				fxController.executeAction(assistantCardMessage);
+			}
 		}
 		catch (NullPointerException nullPointerException){
 			//catch the value change to null
@@ -796,7 +801,11 @@ public class BoardController implements Initializable {
 
 	public void moveMotherNature(ImageView destinationIsland){
 		int destination=Integer.parseInt(destinationIsland.getId().substring(6));
-		MotherNatureMessage motherNatureMessage = new MotherNatureMessage(((destination)-msg.getMotherNaturePosition())%(msg.getTable().size()));
+		int numberOfSteps=((destination)-msg.getMotherNaturePosition())%(msg.getTable().size());
+		if(numberOfSteps<0){
+			numberOfSteps=numberOfSteps+(msg.getTable().size());
+		}
+		MotherNatureMessage motherNatureMessage = new MotherNatureMessage(numberOfSteps);
 		fxController.executeAction(motherNatureMessage);
 	}
 
@@ -852,9 +861,23 @@ public class BoardController implements Initializable {
 		fxController.executeAction(card5);
 	}
 
+
+	public void removeColor(ActionEvent event){
+		try {
+			String color = colorChoice.getValue();
+			Card12Message card12Message = new Card12Message(color);
+			errorLabel.setVisible(false);
+			fxController.executeAction(card12Message);
+		}
+		catch (NullPointerException nullPointerException){
+			//catch the value change to null
+		}
+	}
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		assistantChoice.setOnAction(this::playAssistantCard);
+		colorChoice.setOnAction(this::removeColor);
+		errorLabel.setVisible(false);
 
 		ArrayList<String> colorList=new ArrayList<>();
 		colorList.add("BLUE");
@@ -953,25 +976,30 @@ public class BoardController implements Initializable {
 				public void handle(MouseEvent e){
 					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_STUDENT && hasStudentSelected) {
 						moveStudentToIsland((ImageView) e.getSource());
+						errorLabel.setVisible(false);
 						e.consume();
 					}
 					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_MN){
 						moveMotherNature((ImageView)e.getSource());
+						errorLabel.setVisible(false);
 						e.consume();
 					}
 					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.CHARACTER_CARD && msg.getExpectedCardMessage()==1
 							&& hasStudentFromCharacter){
 						moveStudentToIsland((ImageView) e.getSource());
+						errorLabel.setVisible(false);
 						e.consume();
 					}
 
 					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.CHARACTER_CARD && msg.getExpectedCardMessage()==3){
 						resolveIsland((ImageView) e.getSource());
+						errorLabel.setVisible(false);
 						e.consume();
 					}
 
 					if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.CHARACTER_CARD && msg.getExpectedCardMessage()==5){
 						putNoEntryTile((ImageView) e.getSource());
+						errorLabel.setVisible(false);
 						e.consume();
 					}
 				}
@@ -981,6 +1009,7 @@ public class BoardController implements Initializable {
 			i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 				public void handle(MouseEvent e){
 					moveStudentToDiningRoom((ImageView)e.getSource());
+					errorLabel.setVisible(false);
 					e.consume();
 				}
 			});
@@ -989,6 +1018,7 @@ public class BoardController implements Initializable {
 			i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 				public void handle(MouseEvent e){
 					takeStudentFromClouds((ImageView)e.getSource());
+					errorLabel.setVisible(false);
 					e.consume();
 				}
 			});
@@ -997,11 +1027,18 @@ public class BoardController implements Initializable {
 			i.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 				public void handle(MouseEvent e){
 					playCharacterCard((ImageView)e.getSource());
+					errorLabel.setVisible(false);
 					e.consume();
 				}
 			});
 		}
 
 	}
+
+	public void showError(String error){
+		if(playerId==msg.getActivePlayerId()) {
+			errorLabel.setVisible(true);
+			errorLabel.setText(error);
+		}
+	}
 }
-//todo:gestire characterCard;

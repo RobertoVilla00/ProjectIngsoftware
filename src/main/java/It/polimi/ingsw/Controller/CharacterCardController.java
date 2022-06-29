@@ -193,6 +193,7 @@ public class CharacterCardController {
 						card.RemoveStudent(message.getStudentIndex());
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).getPlayersSchool().AddStudentToDiningRoom(StudentColor);
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).RemoveCoins(card.getCardCost());
+						card.AddStudent();
 						Game.getMatch().getPlayerById(Game.getActivePlayer()).setPlayedCharacterCard(true);
 						Game.CheckTeacherControl(StudentColor, Game.getMatch().getPlayerById(Game.getActivePlayer()));
 						card.IncreaseCardCost();

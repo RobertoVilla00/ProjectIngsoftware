@@ -558,14 +558,8 @@ public class Match extends Observable implements Serializable {
 	 */
 	public void InitializeCharacterCardOnTable() {
 		CharacterDeck = new CharacterCardDeck(this);
-		CharacterCardOnTable[0]=CharacterDeck.SelectCard(3);
-		/*Cards1and10 cardd= (Cards1and10) CharacterCardOnTable[0];
-		for (int j = 0; j < 4; j++) {
-			cardd.AddStudent();
-		}*/
-		//TODO: rimuovere e sistemare la i mettendola a 0
 		CharacterDeck.ShuffleCharacterCardDeck();
-		for (int i = 1; i < 3; i++) {
+		for (int i = 0; i < 3; i++) {
 			CharacterCardOnTable[i] = CharacterDeck.SelectCard(0);
 			if (CharacterCardOnTable[i].getIdCharacterCard() == 1 || CharacterCardOnTable[i].getIdCharacterCard() == 10) {
 				Cards1and10 card = (Cards1and10) CharacterCardOnTable[i];
