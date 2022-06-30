@@ -69,7 +69,11 @@ public class Server {
 			List<Connection> keys = new ArrayList<>(waitConnection.keySet());
 			boolean UsedName = false;
 			String name;
-			NicknameMessage msg = (NicknameMessage) c.ReadMessage();
+			NicknameMessage msg;
+			do{
+				msg=(NicknameMessage)c.ReadSpecificMessage(MessageContent.NICKNAME);
+			}
+			while (msg==null);
 			name = msg.getNickname();
 			System.out.println("ho letto " + name);
 			do {
@@ -77,7 +81,11 @@ public class Server {
 					ErrorMessage errorMessage = new ErrorMessage("The name is already taken!");
 					c.AsyncSend(errorMessage);
 					c.AsyncSend(msg);
-					NicknameMessage nicknameMessage = (NicknameMessage) c.ReadMessage();
+					NicknameMessage nicknameMessage;
+					do{
+						nicknameMessage=(NicknameMessage)c.ReadSpecificMessage(MessageContent.NICKNAME);
+					}
+					while (nicknameMessage==null);
 					name = nicknameMessage.getNickname();
 					System.out.println("ho letto " + name);
 				}
@@ -95,7 +103,11 @@ public class Server {
 				PlayersMessage playersMessage = new PlayersMessage();
 				c1.AsyncSend(playersMessage);
 				controller = new RoundController();
-				StartMessage startMessage = (StartMessage) c.ReadMessage();
+				StartMessage startMessage;
+				do{
+					startMessage=(StartMessage) c.ReadSpecificMessage(MessageContent.START);
+				}
+				while (startMessage==null);
 				numberOfPlayer = startMessage.getNumberOfPlayers();
 				try {
 					controller.MessageHandler(startMessage);
@@ -111,7 +123,7 @@ public class Server {
 			}
 		} else {
 			AddConnection(c);
-			DeregisterConnection(c);
+			//DeregisterConnection(c);
 		}
 
 	}
@@ -156,7 +168,7 @@ public class Server {
 	 * It used to close all the connections.
 	 */
 	public void CloseAll(){
-		connections.forEach(x-> {
+	/*	connections.forEach(x-> {
 			x.setActive(false);
 			x.AsyncSend(new ClosedConnectionMessage());
 			try {
@@ -165,6 +177,11 @@ public class Server {
 				e.printStackTrace();
 			}
 			x.Close();
-		});
+		});*/
+		for(Connection c : connections){
+			c.AsyncSend(new ClosedConnectionMessage());
+			c.setActive(false);
+			connections.remove(c);
+		}
 	}
 }

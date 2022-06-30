@@ -12,6 +12,8 @@ import java.util.NoSuchElementException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static java.lang.System.exit;
+
 
 /**
  * The class that representing the connection.
@@ -42,10 +44,14 @@ public class Connection extends Observable implements Runnable {
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if(isAlive) isAlive = false;
-				else server.CloseAll();
+				if(isAlive){
+					isAlive = false;
+				}
+				else{
+					exit(0);
+				}
 			}
-		}, 7500);
+		}, 10000,10000);
 
 		in = new ObjectInputStream(socket.getInputStream());
 	}
@@ -103,6 +109,23 @@ public class Connection extends Observable implements Runnable {
 		return (Message) inputObject;
 	}
 
+	public Message ReadSpecificMessage(MessageContent content) throws NoSuchElementException, IOException {
+		Object inputObject = null;
+		try {
+			inputObject = in.readObject();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Message message = (Message) inputObject;
+		if(message.getMessageContent()==content) return message;
+		else{
+			isAlive = true;
+			return null;
+		}
+	}
+
+
 	/**
 	 * It used to close the connection.
 	 */
@@ -131,6 +154,7 @@ public class Connection extends Observable implements Runnable {
 	 */
 	public void run() {
 		try {
+			System.out.println("ahahahh");
 			out = new ObjectOutputStream(socket.getOutputStream());
 			server.Lobby(this);
 			while (isActive()) {
@@ -138,6 +162,7 @@ public class Connection extends Observable implements Runnable {
 			}
 		}
 		catch (SocketException e){
+			exit(0);
 			e.printStackTrace();
 		}
 		catch (IOException e) {
@@ -154,14 +179,13 @@ public class Connection extends Observable implements Runnable {
 		try {
 			synchronized (lock) {
 				Message message = ReadMessage();
-				if(message.getMessageContent() == MessageContent.PING) isAlive = true;
+				if(message.getMessageContent() == MessageContent.PING){
+					isAlive = true;
+				}
 				server.handleReceivedMessage(message);
 			}
 		}
 		catch (IOException e) {
-			System.out.println("A Client disconnected. Closing the Connections");
-			this.Close();
-			server.CloseAll();
 		}
 	}
 

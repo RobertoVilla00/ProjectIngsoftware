@@ -11,8 +11,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.lang.System.exit;
 
@@ -28,6 +31,7 @@ public class Client extends Observable implements Observer {
 	private boolean active = true;
 	private ObjectInputStream inputStream;
 	private ObjectOutputStream outputStream;
+	private Timer timer;
 
 	/**
 	 * The constructor of the client.
@@ -46,7 +50,13 @@ public class Client extends Observable implements Observer {
 		outputStream = new ObjectOutputStream(socket.getOutputStream());
 		outputStream.flush();
 		inputStream = new ObjectInputStream(socket.getInputStream());
-
+		this.timer= new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				sendMessage(new PingMessage());
+			}
+		}, 0,7500);
 	}
 
 	/**
@@ -103,9 +113,10 @@ public class Client extends Observable implements Observer {
 			outputStream.flush();
 			outputStream.reset();
 		} catch (IOException e) {
-			e.printStackTrace();
-
+			System.out.println("A player disconnected, closing the game");
+			exit(0);
 		}
+
 	}
 
 	/**
@@ -118,31 +129,15 @@ public class Client extends Observable implements Observer {
 		Scanner stdin = new Scanner(System.in);
 		try {
 			Thread t0 = asyncReadFromSocket(inputStream);
-			Thread t1 = new Thread(){
-				@Override
-				public void run() {
-					while (true){
-						try {
-							sleep(10000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						sendMessage(new PingMessage());
-					}
-				}
-			};
-			t1.start();
 			t0.join();
 		} catch (InterruptedException | NoSuchElementException e) {
 			System.out.println("Connection closed from the client side");
 		}
 		finally {
-			System.out.println("A player disconnected, closing the Game");
 			stdin.close();
 			inputStream.close();
 			socketOut.close();
 			socket.close();
-			exit(0);
 		}
 	}
 
