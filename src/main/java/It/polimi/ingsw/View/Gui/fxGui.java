@@ -24,7 +24,7 @@ public class fxGui extends Application {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setWidth(1280);
-			stage.setHeight(800);
+			stage.setHeight(837);
 			stage.setResizable(false);
 			stage.setTitle("ERIANTYS");
 			stage.show();

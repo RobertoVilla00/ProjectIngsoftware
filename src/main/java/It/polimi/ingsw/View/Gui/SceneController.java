@@ -30,7 +30,7 @@ public class SceneController {
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setWidth(1280);
-			stage.setHeight(950);
+			stage.setHeight(837);
 			stage.setResizable(false);
 			stage.setTitle("ERIANTYS");
 			stage.show();
