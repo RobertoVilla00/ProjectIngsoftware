@@ -53,11 +53,6 @@ public class ShowMatchInfoMessage extends Message{
         return Teachers;
     }
 
-    public void setTeachers(ArrayList<Teacher> teachers) {
-        Teachers = teachers;
-    }
-
-
     /**
      * Return true if the mode is expert, false if not.
      * @return the mode of the game.
@@ -66,9 +61,6 @@ public class ShowMatchInfoMessage extends Message{
         return ExpertMode;
     }
 
-    public void setExpertMode(boolean expertMode) {
-        ExpertMode = expertMode;
-    }
 
     /**
      * Return the array of Character Cards.
@@ -86,14 +78,6 @@ public class ShowMatchInfoMessage extends Message{
         return MotherNaturePosition;
     }
 
-    public void setMotherNaturePosition(int motherNaturePosition) {
-        MotherNaturePosition = motherNaturePosition;
-    }
-
-    public void setCharacterCards(CharacterCard[] characterCards) {
-        CharacterCards = characterCards;
-    }
-
     /**
      * Return the ArrayList of clouds.
      * @return the ArrayList of clouds.
@@ -102,9 +86,6 @@ public class ShowMatchInfoMessage extends Message{
         return Clouds;
     }
 
-    public void setClouds(ArrayList<Cloud> clouds) {
-        Clouds = clouds;
-    }
 
     /**
      * Return the Array of players.
@@ -130,9 +111,6 @@ public class ShowMatchInfoMessage extends Message{
         return Table;
     }
 
-    public void setTable(ArrayList<Island> table) {
-        Table = table;
-    }
 
     /**
      * Return the phase of the game.
@@ -142,9 +120,6 @@ public class ShowMatchInfoMessage extends Message{
         return gamePhase;
     }
 
-    public void setGamePhase(GamePhase gamePhase) {
-        this.gamePhase = gamePhase;
-    }
 
     /**
      * Return the id of the active player.
@@ -154,9 +129,6 @@ public class ShowMatchInfoMessage extends Message{
         return ActivePlayerId;
     }
 
-    public void setActivePlayerId(int activePlayerId) {
-        ActivePlayerId = activePlayerId;
-    }
 
     /**
      * Return the number of the expected card.
@@ -164,10 +136,6 @@ public class ShowMatchInfoMessage extends Message{
      */
     public int getExpectedCardMessage() {
         return ExpectedCardMessage;
-    }
-
-    public void setExpectedCardMessage(int expectedCardMessage) {
-        ExpectedCardMessage = expectedCardMessage;
     }
 
 

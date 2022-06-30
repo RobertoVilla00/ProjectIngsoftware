@@ -153,7 +153,10 @@ public class Connection extends Observable implements Runnable {
 	}
 
 
-
+	/**
+	 * It used to set the connection to active.
+	 * @param value: a boolean indicating if the connection is active or inactive.
+	 */
 	public void setActive(boolean value){
 		this.active=value;
 	}

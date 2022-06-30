@@ -1,8 +1,5 @@
 package It.polimi.ingsw.Model;
 
-
-import java.io.Serializable;
-
 /**
  * Enum of the color of the students.
  */

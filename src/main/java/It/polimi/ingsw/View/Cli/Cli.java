@@ -70,12 +70,10 @@ public class Cli extends Observable implements View, Observer {
 			e.printStackTrace();
 		}
 
-		int schoolSpace = 20;
 		int defaultSpace = 25;
 		int studentCnt = 0;
 		int towerCnt = 0;
 		int toRemove = 0;
-		int cardCnt = 0;
 		int nicknameSpace = 33;
 
 		StringBuilder str = new StringBuilder();
@@ -949,6 +947,9 @@ public class Cli extends Observable implements View, Observer {
 		notifyObserver(startMessage);
 	}
 
+	/**
+	 * @return the integer which is inserted by the command line.
+	 */
 	public int getInt(){
 		while(true){
 			try{

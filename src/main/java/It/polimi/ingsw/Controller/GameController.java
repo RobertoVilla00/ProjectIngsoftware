@@ -5,12 +5,7 @@ import It.polimi.ingsw.Exceptions.NoActivePlayerException;
 import It.polimi.ingsw.Exceptions.NoEntryTilesException;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
-import It.polimi.ingsw.Observer.Observer;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Observable;
 
 /**
  * The controller of the main methods of the game.
@@ -99,7 +94,7 @@ public class GameController {
 	/**
 	 * It checks if the student who moved the student takes possession of the professor.
 	 *
-	 * @param color:                a color of a teacher.
+	 * @param color: color of a teacher.
 	 * @param playerPlacingStudent: the player who places a student.
 	 */
 	public void CheckTeacherControl(Color color, Player playerPlacingStudent) {
@@ -194,7 +189,7 @@ public class GameController {
 	 * It moves the student depending on the destination on the island or to the dining room.
 	 *
 	 * @param moveStudentMessage: contains the id of the active player, the index of student in the Entrance and the destination of the student.
-	 * @throws InvalidInputException:   in case of invalid destination, if the dining room is full or if the index of student is invalid.
+	 * @throws InvalidInputException: in case of invalid destination, if the dining room is full or if the index of student is invalid.
 	 * @throws NoActivePlayerException: in case there is no active player.
 	 */
 	public void MoveStudent(MoveStudentMessage moveStudentMessage) throws InvalidInputException, NoActivePlayerException {
@@ -226,7 +221,7 @@ public class GameController {
 	 * It moves mother nature depending on the number of steps received as a parameter.
 	 *
 	 * @param motherNatureMessage: it contains the number of steps mother nature must perform.
-	 * @throws InvalidInputException:   in case of a negative number of steps, if the number of steps is zero or if the number of steps is too high.
+	 * @throws InvalidInputException: in case of a negative number of steps, if the number of steps is zero or if the number of steps is too high.
 	 * @throws NoActivePlayerException: in case there is no active player.
 	 */
 	public void MoveMotherNature(MotherNatureMessage motherNatureMessage) throws InvalidInputException, NoActivePlayerException {
@@ -245,7 +240,7 @@ public class GameController {
 	 * It invokes the method that moves students from cloud given by parameter to Entrance.
 	 *
 	 * @param cloudChoiceMessage: contains the index of a cloud.
-	 * @throws InvalidInputException:   in case of an invalid cloud index.
+	 * @throws InvalidInputException: in case of an invalid cloud index.
 	 * @throws NoActivePlayerException: in case there is no active player.
 	 */
 	public void ChooseCloud(CloudChoiceMessage cloudChoiceMessage) throws InvalidInputException, NoActivePlayerException {
@@ -263,7 +258,7 @@ public class GameController {
 	 * This method allows you to play an assistant card.
 	 *
 	 * @param assistantCardMessage: contains the index of the assistant card to be played.
-	 * @throws InvalidInputException:   in case of the card's index is invalid or if the assistant card selected is not playable.
+	 * @throws InvalidInputException: in case of the card's index is invalid or if the assistant card selected is not playable.
 	 * @throws NoActivePlayerException: in case there is no active player.
 	 */
 	public void PlayAssistantCard(AssistantCardMessage assistantCardMessage) throws InvalidInputException, NoActivePlayerException {
@@ -433,7 +428,7 @@ public class GameController {
 	 *
 	 * @param cardMessage: contains the index of the Character Card to be played.
 	 * @return a number. 0 if the Id of the card is 4,6 or 9, otherwise it returns the id of the card.
-	 * @throws InvalidInputException:   in case the index of the Character Card is invalid.
+	 * @throws InvalidInputException: in case the index of the Character Card is invalid.
 	 * @throws NoActivePlayerException: in case there is no active player.
 	 */
 	public int PlayCharacterCard(CharacterCardMessage cardMessage) throws InvalidInputException, NoActivePlayerException {
@@ -484,8 +479,8 @@ public class GameController {
 	 * @param id:  the id of a Character Card.
 	 * @param msg: the message to forward.
 	 * @throws NoActivePlayerException: in case there is no active player.
-	 * @throws InvalidInputException:   in case the index of the card is invalid.
-	 * @throws NoEntryTilesException:   in case there are no prohibition cards.
+	 * @throws InvalidInputException: in case the index of the card is invalid.
+	 * @throws NoEntryTilesException: in case there are no prohibition cards.
 	 */
 	public void PlayCharacterCardById(int id, Message msg) throws NoActivePlayerException, InvalidInputException, NoEntryTilesException {
 		if (id == 1) {

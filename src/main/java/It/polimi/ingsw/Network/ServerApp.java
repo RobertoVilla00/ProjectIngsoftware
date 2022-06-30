@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Main of the server app
+ * Main of the server app.
  */
 
 public class ServerApp {

@@ -1,7 +1,6 @@
 package It.polimi.ingsw.Message;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The message for the end of the game.

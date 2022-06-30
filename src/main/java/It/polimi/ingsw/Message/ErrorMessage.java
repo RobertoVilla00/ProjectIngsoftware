@@ -17,6 +17,11 @@ public class ErrorMessage extends Message {
 		this.error = error;
 	}
 
+	/**
+	 * The constructor for the error message.
+	 * @param error: the string corresponding to an error.
+	 * @param PlayerId: the id of the player.
+	 */
 	public ErrorMessage(String error, int PlayerId) {
 		super(MessageContent.ERROR);
 		this.error = error;

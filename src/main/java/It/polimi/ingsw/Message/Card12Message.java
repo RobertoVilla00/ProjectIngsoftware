@@ -1,6 +1,5 @@
 package It.polimi.ingsw.Message;
 
-import It.polimi.ingsw.Exceptions.InvalidInputException;
 import It.polimi.ingsw.Model.Color;
 
 /**

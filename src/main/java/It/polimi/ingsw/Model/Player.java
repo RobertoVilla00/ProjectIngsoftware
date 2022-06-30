@@ -41,7 +41,7 @@ public class Player implements Comparable<Player>, Serializable {
 	 * Constructor of the class player.
 	 *
 	 * @param playerColor: the color of the tower of the player.
-	 * @param playerId:    the id of the player.
+	 * @param playerId: the id of the player.
 	 */
 	public Player(TowerColor playerColor, int playerId) {
 		PlayerId = playerId;
@@ -231,7 +231,7 @@ public class Player implements Comparable<Player>, Serializable {
 	}
 
 	/**
-	 * This method is used to set the IsActive attribute to false to indicate that the player is inactive during his turn.
+	 * This method is used to set the IsActive attribute to false in order to indicate that the player is inactive during his turn.
 	 */
 	public void setInactive() {
 		this.IsActive = false;

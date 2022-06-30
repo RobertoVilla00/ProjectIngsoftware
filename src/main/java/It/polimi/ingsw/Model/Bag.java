@@ -15,7 +15,7 @@ public class Bag implements Serializable {
 
 
 	/**
-	 * Constructor of the bag.It fill the bag with a number of each color students indicate by the parameter dimension.
+	 * Constructor of the bag. It fills the bag with a number of each color students indicate by the parameter dimension.
 	 *
 	 * @param dimension: the dimension of the bag.
 	 */

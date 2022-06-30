@@ -3,7 +3,6 @@ package It.polimi.ingsw.View.Gui.GuiController;
 import It.polimi.ingsw.Controller.GamePhase;
 import It.polimi.ingsw.Message.*;
 import It.polimi.ingsw.Model.*;
-import It.polimi.ingsw.View.Cli.StrColor;
 import It.polimi.ingsw.View.Gui.fxController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +19,9 @@ import java.net.URL;
 import java.util.*;
 
 
+/**
+ * The controller of the board.
+ */
 public class BoardController implements Initializable {
 
 	@FXML
@@ -119,6 +121,10 @@ public class BoardController implements Initializable {
 	private List<List<ImageView>> allCharacterImage=new ArrayList<>();
 
 
+	/**
+	 * @param msg: it receives the message containing the info of the game.
+	 * @param playerId: it receives the id of the player.
+	 */
 	public void showGameInformation(ShowMatchInfoMessage msg, int playerId){
 		this.msg=msg;
 		this.playerId=playerId;
@@ -241,7 +247,7 @@ public class BoardController implements Initializable {
 			}
 		}
 
-		//hide the imageviews of expert mode elements during normal game
+		//hide the image views of expert mode elements during normal game
 		if(!msg.isExpertMode()){
 			character0.setVisible(false);
 			character1.setVisible(false);
@@ -318,7 +324,7 @@ public class BoardController implements Initializable {
 			towersNumber.get(i).setText(String.valueOf(msg.getTable().get(i).getNumberOfTowers()));
 		}
 
-		//showClouds
+		//show Clouds
 		for(int i=0;i<allCloudsStudent.size();i++){
 			for(ImageView imageView:allCloudsStudent.get(i)){
 				boardPane.getChildren().remove(imageView);
@@ -682,6 +688,10 @@ public class BoardController implements Initializable {
 
 	}
 
+	/**
+	 * It used to play an Assistant Card depending on the choice of the player.
+	 * @param event: it receives an action event.
+	 */
 	public void playAssistantCard(ActionEvent event){
 		try {
 			String assistantCard = assistantChoice.getValue();
@@ -698,8 +708,11 @@ public class BoardController implements Initializable {
 	}
 
 
-
-
+	/**
+	 * It used to ask information to the active player depending on the phase of the game and tell the other player to wait.
+	 * @param msg: it receives the message containing the info of the game.
+	 * @param PlayerId: the id of the player.
+	 */
 	//ask information to the active player, tell the others to wait
 	public void askInformation(ShowMatchInfoMessage msg, int PlayerId){
 		if(msg.getActivePlayerId()==PlayerId){
@@ -757,6 +770,10 @@ public class BoardController implements Initializable {
 	}
 
 
+	/**
+	 * It used to select a student from the Entrance.
+	 * @param student: it receives an Image View.
+	 */
 	public void selectStudent(ImageView student){
 		int index=0;
 		for(int i=0; i<msg.getPlayers().length;i++){
@@ -773,6 +790,10 @@ public class BoardController implements Initializable {
 		}
 	}
 
+	/**
+	 * It used to move a student to the selected island.
+	 * @param destinationIsland: the Image View of the destination island.
+	 */
 	public void moveStudentToIsland(ImageView destinationIsland){
 		if(msg.getGamePhase()==GamePhase.MOVE_STUDENT) {
 			hasStudentSelected = false;
@@ -788,6 +809,10 @@ public class BoardController implements Initializable {
 		}
 	}
 
+	/**
+	 * It used to move a student to the selected school.
+	 * @param destinationSchool: the Image View of the destination school.
+	 */
 	public void moveStudentToDiningRoom(ImageView destinationSchool){
 		if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_STUDENT && hasStudentSelected){
 			hasStudentSelected=false;
@@ -799,6 +824,10 @@ public class BoardController implements Initializable {
 		}
 	}
 
+	/**
+	 * It used to move mother nature to the selected island.
+	 * @param destinationIsland: the Image View of destination island.
+	 */
 	public void moveMotherNature(ImageView destinationIsland){
 		int destination=Integer.parseInt(destinationIsland.getId().substring(6));
 		int numberOfSteps=((destination)-msg.getMotherNaturePosition())%(msg.getTable().size());
@@ -809,6 +838,10 @@ public class BoardController implements Initializable {
 		fxController.executeAction(motherNatureMessage);
 	}
 
+	/**
+	 * It used to take students from the cloud selected.
+	 * @param chosenCloud: the Image View of the cloud selected.
+	 */
 	public void takeStudentFromClouds(ImageView chosenCloud){
 		int cloudIndex=Integer.parseInt(chosenCloud.getId().substring(5))+1;
 		if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.CHOOSE_CLOUD){
@@ -817,6 +850,10 @@ public class BoardController implements Initializable {
 		}
 	}
 
+	/**
+	 * It used to play a Character Card.
+	 * @param character: the Image View of a Character Card.
+	 */
 	public void playCharacterCard(ImageView character){
 		int characterIndex=Integer.parseInt(character.getId().substring(9))+1;
 		if(msg.getActivePlayerId()==playerId && msg.getGamePhase()==GamePhase.MOVE_STUDENT || msg.getGamePhase()==GamePhase.MOVE_MN
@@ -826,6 +863,10 @@ public class BoardController implements Initializable {
 		}
 	}
 
+	/**
+	 * It used to select a student from a Character Card.
+	 * @param student: the Image View of the student selected from the Character Card.
+	 */
 	public void selectCardStudent(ImageView student){
 		if (msg.getActivePlayerId() == playerId && msg.getGamePhase() == GamePhase.CHARACTER_CARD && (msg.getExpectedCardMessage()==1 ||
 				msg.getExpectedCardMessage()==10)){
@@ -849,12 +890,20 @@ public class BoardController implements Initializable {
 		}
 	}
 
+	/**
+	 * It used to choose an island for the Character Cards 3 and 5.
+	 * @param island: the Image View of the island selected.
+	 */
 	public void resolveIsland(ImageView island){
 		int islandIndex= Integer.parseInt(island.getId().substring(6)) + 1;
 		Card3and5Message card3= new Card3and5Message(islandIndex);
 		fxController.executeAction(card3);
 	}
 
+	/**
+	 * It used to put the prohibition cards for Character Cards 3 and 5.
+	 * @param island: the Image View of the island selected.
+	 */
 	public void putNoEntryTile(ImageView island){
 		int islandIndex= Integer.parseInt(island.getId().substring(6)) + 1;
 		Card3and5Message card5= new Card3and5Message(islandIndex);
@@ -862,6 +911,10 @@ public class BoardController implements Initializable {
 	}
 
 
+	/**
+	 * It used to remove color for Character Card 12.
+	 * @param event: it receives an action event.
+	 */
 	public void removeColor(ActionEvent event){
 		try {
 			String color = colorChoice.getValue();
@@ -873,6 +926,12 @@ public class BoardController implements Initializable {
 			//catch the value change to null
 		}
 	}
+
+	/**
+	 * It used to initialize the controller after its root element has been completely processed.
+	 * @param url: the location used to resolve relative paths for the root object.
+	 * @param resourceBundle: the resources used to localize the root object.
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		assistantChoice.setOnAction(this::playAssistantCard);
@@ -1035,6 +1094,10 @@ public class BoardController implements Initializable {
 
 	}
 
+	/**
+	 * It used to show the error to active player.
+	 * @param error: the string containing the error message.
+	 */
 	public void showError(String error){
 		if(playerId==msg.getActivePlayerId()) {
 			errorLabel.setVisible(true);

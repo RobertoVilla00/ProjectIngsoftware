@@ -24,16 +24,6 @@ public class Observable {
 
 
 	/**
-	 * It removes an observer.
-	 * @param obs: the observer to be removed.
-	 */
-	public void removeObserver(Observer obs) {
-
-		observers.remove(obs);
-	}
-
-
-	/**
 	 * It notifies all the current observers through the update method.
 	 * @param message: the message that is forward to observers.
 	 */

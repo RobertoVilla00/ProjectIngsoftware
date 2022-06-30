@@ -29,7 +29,7 @@ public class RoundController {
 
 	/**
 	 * This method takes care of managing the messages received.
-	 * @param msg: the message
+	 * @param msg: the message.
 	 * @throws NoActivePlayerException: in case there is no active player.
 	 * @throws InvalidInputException: in case a value that the player insert is invalid.
 	 * @throws WrongMessageException: in case there is an error in the game.

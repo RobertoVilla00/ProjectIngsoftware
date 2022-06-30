@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Main of the client app
+ * Main of the client app.
  */
 
 public class ClientApp {

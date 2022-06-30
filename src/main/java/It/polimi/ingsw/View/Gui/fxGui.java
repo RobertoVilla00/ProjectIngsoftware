@@ -1,26 +1,27 @@
 package It.polimi.ingsw.View.Gui;
 
-import It.polimi.ingsw.View.Gui.GuiController.BoardController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
+/**
+ * The main class of the Gui which implements the method start.
+ */
 public class fxGui extends Application {
 
 
+	/**
+	 * It used to create the stage of the game and set the main characteristics.
+	 * @param stage: it receives the stage of the game.
+	 */
 	@Override
 	public void start(Stage stage){
 		try{
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartScene.fxml"));
 			Scene scene = new Scene(root);
-			//String css= this.getClass().getResource("/CSS/Style.css").toExternalForm();
-			//scene.getStylesheets().add(css);
 			stage.setScene(scene);
 			stage.setWidth(1280);
 			stage.setHeight(800);

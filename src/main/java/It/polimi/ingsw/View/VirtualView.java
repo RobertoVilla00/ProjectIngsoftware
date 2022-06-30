@@ -28,15 +28,17 @@ public class VirtualView implements View, Observer {
 		connection.AsyncSend(message);
 	}
 
-	public void startGame() {
-
-	}
-
+	/**
+	 * It used to show all the information about the game.
+	 */
 	@Override
 	public void showGameInformation() {
 
 	}
 
+	/**
+	 * It used to ask information about the game.
+	 */
 	@Override
 	public void askInformation() {
 

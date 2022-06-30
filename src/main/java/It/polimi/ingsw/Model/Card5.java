@@ -1,7 +1,6 @@
 package It.polimi.ingsw.Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * This is the class of the Character Card with Id 5, which extends the Character Card class.

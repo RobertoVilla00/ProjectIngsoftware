@@ -1,7 +1,5 @@
 package It.polimi.ingsw.Message;
 
-import It.polimi.ingsw.Model.CharacterCard;
-
 /**
  * The message for Character Card.
  */

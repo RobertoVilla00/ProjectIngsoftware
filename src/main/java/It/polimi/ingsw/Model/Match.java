@@ -47,12 +47,12 @@ public class Match extends Observable implements Serializable {
 
 	/**
 	 * Constructor of the class Match. This method manages the start of the game, takes care of filling the bag with the students,
-	 * filling the Entrance of the school for each player, preparing the table of islands, clouds, schools,
+	 * filling  Entrance of the school for each player, preparing the table of islands, clouds, schools,
 	 * initializing the players, the professors, the Character Card.
-	 * Handles the case in which there are 2 or 3 players or you choose to play with the variant for experts.
+	 * Handles the case in which there are 2 or 3 players, or you choose to play with the variant for experts.
 	 *
 	 * @param numberOfPlayers: the number of players (2 or 3) in the game.
-	 * @param GameMode:        1 for the variant for experts, 0 for classic game.
+	 * @param GameMode: 1 for the variant for experts, 0 for classic game.
 	 */
 	public Match(int numberOfPlayers, int GameMode) {
 		this.NumberOfPlayers = numberOfPlayers;
@@ -230,7 +230,7 @@ public class Match extends Observable implements Serializable {
 	/**
 	 * It used when a player want to play an Assistant Card invoking the method PlayAssistantCard in the class Player.
 	 *
-	 * @param CardIndex:   the index of an Assistant Card.
+	 * @param CardIndex: the index of an Assistant Card.
 	 * @param PlayerIndex: the index of the player in the array Players who play the Assistant Card.
 	 */
 	public void PlayAssistantCard(int CardIndex, int PlayerIndex) {
@@ -239,10 +239,10 @@ public class Match extends Observable implements Serializable {
 
 	/**
 	 * It used when you need to unify two islands after a player builds two towers of the same color on two adjacent islands.
-	 * It unify the two islands, moves all students, towers, mother nature to a single island
+	 * It unifies the two islands, moves all students, towers, mother nature to a single island
 	 * and removes from the ArrayList Table the island that has been unified.
 	 *
-	 * @param IslandIndex:        the index of an island in the ArrayList table.
+	 * @param IslandIndex: the index of an island in the ArrayList table.
 	 * @param IslandToMergeIndex: the index of an island in the ArrayList table.
 	 */
 	public void MergeIslands(int IslandIndex, int IslandToMergeIndex) {
@@ -293,7 +293,7 @@ public class Match extends Observable implements Serializable {
 
 	/**
 	 * It used when the player have to move Mother Nature.
-	 * It increase the position of Mother Nature by the number received as parameter.
+	 * It increases the position of Mother Nature by the number received as parameter.
 	 * To secure the circularity of the table, when the number indicating the position of Mother Nature is Greater or equal
 	 * to the size of table, it decreases the position of Mother Nature by the size of the table.
 	 *
@@ -310,7 +310,7 @@ public class Match extends Observable implements Serializable {
 	 * It used to move students from the cloud given by parameter to the Entrance of the player given by parameter.
 	 *
 	 * @param PlayerId: the index of the player.
-	 * @param CloudIndex:  the index of the cloud.
+	 * @param CloudIndex: the index of the cloud.
 	 */
 	public void MoveStudentsFromCloudToEntrance(int PlayerId, int CloudIndex) {
 		Color StudentColor;
@@ -529,7 +529,7 @@ public class Match extends Observable implements Serializable {
 	/**
 	 * It sets the attribute PlaysCard6 to the value given by parameter.
 	 *
-	 * @param value: it is a boolean.
+	 * @param value: it is a boolean value.
 	 */
 	public void setPlaysCard6(boolean value) {
 		PlaysCard6 = value;
@@ -571,10 +571,10 @@ public class Match extends Observable implements Serializable {
 	}
 
 	/**
-	 * Return the number of teachers controlled by a certain player
+	 * Return the number of teachers controlled by a certain player.
 	 *
-	 * @param player the player we want to know how many teachers control
-	 * @return the number of teachers controlled by player
+	 * @param player: the player we want to know how many teachers control.
+	 * @return the number of teachers controlled by player.
 	 */
 	public int getTeachersOfPlayer(Player player) {
 		int numberOfTeachers = 0;

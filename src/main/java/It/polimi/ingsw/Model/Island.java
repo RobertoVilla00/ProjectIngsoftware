@@ -39,7 +39,7 @@ public class Island implements Serializable {
 	}
 
 	/**
-	 * Increment by one the number of student of this color in this island.
+	 * Increment by one the number of student of this color on this island.
 	 *
 	 * @param StudentColor: the color of a student.
 	 */
@@ -64,7 +64,7 @@ public class Island implements Serializable {
 	}
 
 	/**
-	 * Return the number of green students in this island.
+	 * Return the number of green students on this island.
 	 *
 	 * @return the number of green students.
 	 */
@@ -73,7 +73,7 @@ public class Island implements Serializable {
 	}
 
 	/**
-	 * Return the number of red students in this island.
+	 * Return the number of red students on this island.
 	 *
 	 * @return the number of red Students.
 	 */
@@ -82,7 +82,7 @@ public class Island implements Serializable {
 	}
 
 	/**
-	 * Return the number of yellow students in this island.
+	 * Return the number of yellow students on this island.
 	 *
 	 * @return the number of yellow Students.
 	 */
@@ -91,7 +91,7 @@ public class Island implements Serializable {
 	}
 
 	/**
-	 * Return the number of pink students in this island.
+	 * Return the number of pink students on this island.
 	 *
 	 * @return the number of pink Students.
 	 */
@@ -100,7 +100,7 @@ public class Island implements Serializable {
 	}
 
 	/**
-	 * Return the number of blue students in this island.
+	 * Return the number of blue students on this island.
 	 *
 	 * @return the number of blue Students.
 	 */
@@ -109,7 +109,7 @@ public class Island implements Serializable {
 	}
 
 	/**
-	 * Return the number of towers in this island.
+	 * Return the number of towers on this island.
 	 *
 	 * @return the number of towers.
 	 */
@@ -168,16 +168,16 @@ public class Island implements Serializable {
 	}
 
 	/**
-	 * Increment the number of towers in this island by one.
+	 * Increment the number of towers on this island by one.
 	 */
 	public void IncreaseTower() {
 		NumberOfTowers++;
 	}
 
 	/**
-	 * Return the number of towers in this island.
+	 * Return the number of towers on this island.
 	 *
-	 * @return the number of towers in this island.
+	 * @return the number of towers on this island.
 	 */
 	public int CountTowers() {
 		return NumberOfTowers;

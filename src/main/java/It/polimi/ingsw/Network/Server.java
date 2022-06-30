@@ -10,6 +10,7 @@ import It.polimi.ingsw.View.VirtualView;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -45,6 +46,10 @@ public class Server {
 		connections.add(c);
 	}
 
+	/**
+	 * It used to remove the connection from the list of connections.
+	 * @param c: the connection.
+	 */
 	public synchronized void DeregisterConnection(Connection c) {
 		connections.remove(c);
 	}
@@ -117,7 +122,6 @@ public class Server {
 	 */
 	public void run() {
 		int connections = 0;
-		//System.out.println("Server Listening on port: " + Port);
 		while (true) {
 			try {
 				Socket socket = serverSocket.accept();
@@ -125,7 +129,8 @@ public class Server {
 				connections++;
 				Connection connection = new Connection(socket, this);
 				executor.submit(connection);
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				System.err.println("Connection error");
 			}
 		}
@@ -148,6 +153,9 @@ public class Server {
 	}
 
 
+	/**
+	 * It used to close all the connections.
+	 */
 	public void CloseAll(){
 		connections.forEach(x-> {
 			x.setActive(false);
