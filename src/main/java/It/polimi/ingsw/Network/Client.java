@@ -18,6 +18,9 @@ import java.net.SocketException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
+
 /**
  * The class that represents the client.
  */
@@ -105,6 +108,7 @@ public class Client extends Observable implements Observer {
 			outputStream.reset();
 		} catch (IOException e) {
 			e.printStackTrace();
+
 		}
 	}
 
@@ -138,13 +142,14 @@ public class Client extends Observable implements Observer {
 			t0.join();
 		} catch (InterruptedException | NoSuchElementException e) {
 			System.out.println("Connection closed from the client side");
-		} finally {
+		}
+		finally {
 			System.out.println("A player disconnected, closing the Game");
-
 			stdin.close();
 			inputStream.close();
 			socketOut.close();
 			socket.close();
+			exit(0);
 		}
 	}
 
