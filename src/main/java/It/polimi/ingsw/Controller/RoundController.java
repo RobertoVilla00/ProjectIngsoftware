@@ -144,7 +144,6 @@ public class RoundController {
 				Game.FillClouds();
 				this.gamePhase = GamePhase.ASSISTANT_CARD;
 				Game.getMatch().setGamePhase(this.gamePhase);
-				//Game.getMatch().CreateMessage();
 				break;
 
 			case ASSISTANT_CARD:
