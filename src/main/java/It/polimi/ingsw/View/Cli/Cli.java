@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 /**
  * The class that represents the Cli.
  */
@@ -821,7 +823,7 @@ public class Cli extends Observable implements View, Observer {
 					}
 				} else {
 					out.println("How many steps do you want Mother Nature to make?");
-					int steps = Integer.parseInt(in.nextLine());
+					int steps = getInt();
 					MotherNatureMessage motherNatureMessage = new MotherNatureMessage(steps);
 					notifyObserver(motherNatureMessage);
 				}
@@ -965,11 +967,13 @@ public class Cli extends Observable implements View, Observer {
 	 * @param message: the message which is received.
 	 */
 	public void endGame(EndgameMessage message){
-		//todo:stampa di tutti i vincitori
+		StringBuilder str = new StringBuilder();
 		for(String winner : message.getWinners()){
-			System.out.println(StrColor.ANSI_GREEN+winner+", "+StrColor.ANSI_RESET);
+			str.append(winner+", ");
 		}
-		System.out.println(StrColor.ANSI_GREEN+"YOU WON!"+StrColor.ANSI_RESET);
+		str.append("YOU WIN!");
+		System.out.println(StrColor.ANSI_GREEN+str.toString()+StrColor.ANSI_RESET);
+		exit(0);
 	}
 
 	/**
@@ -1009,7 +1013,7 @@ public class Cli extends Observable implements View, Observer {
 			case ENDGAME:
 				EndgameMessage endgameMessage=(EndgameMessage) message;
 				endGame(endgameMessage);
-				break;				//todo:far finire il programma
+				break;
 		}
 	}
 }
