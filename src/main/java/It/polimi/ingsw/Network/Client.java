@@ -2,15 +2,24 @@ package It.polimi.ingsw.Network;
 
 import It.polimi.ingsw.Message.Message;
 import It.polimi.ingsw.Message.MessageContent;
+import It.polimi.ingsw.Message.PingMessage;
+import It.polimi.ingsw.Model.Match;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
+import It.polimi.ingsw.View.Gui.fxGui;
+import javafx.application.Application;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import static java.lang.System.exit;
+
 
 /**
  * The class that represents the client.
@@ -52,10 +61,6 @@ public class Client extends Observable implements Observer {
 		return active;
 	}
 
-	/**
-	 * It used to set the player to active or inactive.
-	 * @param active: boolean indicating if the client is active or not.
-	 */
 	public synchronized void setActive(boolean active) {
 		this.active = active;
 	}
@@ -103,6 +108,7 @@ public class Client extends Observable implements Observer {
 			outputStream.reset();
 		} catch (IOException e) {
 			e.printStackTrace();
+
 		}
 	}
 
@@ -112,20 +118,38 @@ public class Client extends Observable implements Observer {
 	 */
 	public void run() throws IOException {
 		System.out.println("Connection Established");
+		//ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
 		PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
 		Scanner stdin = new Scanner(System.in);
 		try {
 			Thread t0 = asyncReadFromSocket(inputStream);
+			Thread t1 = new Thread(){
+				@Override
+				public void run() {
+					while (true){
+						try {
+							sleep(10000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						sendMessage(new PingMessage());
+					}
+				}
+			};
+			t1.start();
+            /*Thread t1 = asyncWriteToSocket(stdin, socketOut);
+            t1.join();*/
 			t0.join();
 		} catch (InterruptedException | NoSuchElementException e) {
 			System.out.println("Connection closed from the client side");
-		} finally {
+		}
+		finally {
 			System.out.println("A player disconnected, closing the Game");
-
 			stdin.close();
 			inputStream.close();
 			socketOut.close();
 			socket.close();
+			exit(0);
 		}
 	}
 

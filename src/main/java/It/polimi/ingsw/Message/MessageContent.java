@@ -19,5 +19,6 @@ public enum MessageContent {
 	ERROR,
 	PLAYERS,
 	ENDGAME,
+	PING,
 	CLOSEDCONNECTION;
 }
