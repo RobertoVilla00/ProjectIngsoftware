@@ -6,6 +6,8 @@ Gruppo GC57
  Giacomo Scortecci, 
  Roberto Villa
  
+ <a href="url"><img src="/src/main/resources/Graphical_Assets/gioco.png" align="center" height="450" width="600" ></a>
+ 
  Legend
  ------
   🟩 Implemented &emsp; 🟥 Not Implemented        
