@@ -17,7 +17,7 @@ Basic Rules  | 🟩
 Complete Rules  | 🟩
 Network | 🟩
 CLI | 🟩
-GUI  | 🟥
+GUI  | 🟩
 Multiple Games  | 🟥
 Persistence  | 🟥
 All Character Cards  | 🟥
