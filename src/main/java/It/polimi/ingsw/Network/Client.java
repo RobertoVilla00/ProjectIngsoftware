@@ -2,6 +2,7 @@ package It.polimi.ingsw.Network;
 
 import It.polimi.ingsw.Message.Message;
 import It.polimi.ingsw.Message.MessageContent;
+import It.polimi.ingsw.Message.PingMessage;
 import It.polimi.ingsw.Model.Match;
 import It.polimi.ingsw.Observer.Observable;
 import It.polimi.ingsw.Observer.Observer;
@@ -118,6 +119,20 @@ public class Client extends Observable implements Observer {
 		Scanner stdin = new Scanner(System.in);
 		try {
 			Thread t0 = asyncReadFromSocket(inputStream);
+			Thread t1 = new Thread(){
+				@Override
+				public void run() {
+					while (true){
+						try {
+							sleep(10000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						sendMessage(new PingMessage());
+					}
+				}
+			};
+			t1.start();
             /*Thread t1 = asyncWriteToSocket(stdin, socketOut);
             t1.join();*/
 			t0.join();

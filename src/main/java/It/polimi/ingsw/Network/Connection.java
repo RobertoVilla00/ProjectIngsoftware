@@ -2,13 +2,15 @@ package It.polimi.ingsw.Network;
 
 
 import It.polimi.ingsw.Message.Message;
+import It.polimi.ingsw.Message.MessageContent;
 import It.polimi.ingsw.Observer.Observable;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.NoSuchElementException;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -22,7 +24,8 @@ public class Connection extends Observable implements Runnable {
 	private Server server;
 	private boolean active = true;
 	private Object lock;
-
+	private Timer timer;
+	private boolean isAlive;
 
 	/**
 	 * The constructor of the connection.
@@ -34,6 +37,15 @@ public class Connection extends Observable implements Runnable {
 		this.socket = socket;
 		this.server = server;
 		this.lock = new Object();
+		this.isAlive = true;
+		this.timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if(isAlive) isAlive = false;
+				else server.CloseAll();
+			}
+		}, 7500);
 
 		in = new ObjectInputStream(socket.getInputStream());
 	}
@@ -142,6 +154,7 @@ public class Connection extends Observable implements Runnable {
 		try {
 			synchronized (lock) {
 				Message message = ReadMessage();
+				if(message.getMessageContent() == MessageContent.PING) isAlive = true;
 				server.handleReceivedMessage(message);
 			}
 		}
@@ -151,7 +164,6 @@ public class Connection extends Observable implements Runnable {
 			server.CloseAll();
 		}
 	}
-
 
 
 	public void setActive(boolean value){
