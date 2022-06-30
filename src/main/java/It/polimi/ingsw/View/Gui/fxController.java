@@ -25,9 +25,7 @@ public class fxController {
 	 */
 	public static void setName(NicknameMessage nicknameMessage){
 		gui.sendMessage(nicknameMessage);
-		if(gui.getPlayerId()!=0){
-			SceneController.changeScene("fxml/waitingScene.fxml");
-		}
+		SceneController.changeScene("fxml/waitingScene.fxml");
 	}
 
 	/**

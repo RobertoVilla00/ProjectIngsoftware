@@ -9,6 +9,8 @@ import It.polimi.ingsw.View.Gui.GuiController.EndGameController;
 import It.polimi.ingsw.View.View;
 import javafx.application.Platform;
 
+import static java.lang.Thread.sleep;
+
 /**
  * The main class of the Gui.
  */
@@ -20,7 +22,7 @@ public class Gui extends Observable implements View, Observer {
 	private BoardController boardController;
 	private AskNameController askNameController;
 	private EndGameController endGameController;
-	private boolean wrongName=false;
+
 
 	/**
 	 * It is the constructor of the class Gui which is used to create the fxController.
@@ -84,6 +86,11 @@ public class Gui extends Observable implements View, Observer {
 	 */
 	public void askPlayers(){
 		Platform.runLater(()->{
+			try {
+				sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			SceneController.changeScene("fxml/askNameAndPlayers.fxml");
 		});
 
@@ -93,11 +100,10 @@ public class Gui extends Observable implements View, Observer {
 	 * It used to create the scene which ask the name of the players.
 	 */
 	public void askNickname(){
-		Platform.runLater(()->{
+		Platform.runLater(() -> {
 			SceneController.changeScene("fxml/askName.fxml");
 			askNameController.askCorrectName();
 		});
-
 	}
 
 	/**

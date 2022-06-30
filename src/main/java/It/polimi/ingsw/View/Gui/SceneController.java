@@ -34,6 +34,7 @@ public class SceneController {
 			stage.setResizable(false);
 			stage.setTitle("ERIANTYS");
 			stage.show();
+			fxController.setNicknameController(loader.getController());
 		}
 		catch (IOException exception) {
 			exception.printStackTrace();

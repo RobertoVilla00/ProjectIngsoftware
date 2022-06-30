@@ -154,7 +154,6 @@ public class Connection extends Observable implements Runnable {
 	 */
 	public void run() {
 		try {
-			System.out.println("ahahahh");
 			out = new ObjectOutputStream(socket.getOutputStream());
 			server.Lobby(this);
 			while (isActive()) {
@@ -173,7 +172,7 @@ public class Connection extends Observable implements Runnable {
 	}
 
 	/**
-	 * It used to invoke the ReadMessage and the handleReceivedMessage on the server.
+	 * It is used to invoke the ReadMessage and the handleReceivedMessage on the server.
 	 */
 	private void handleConnection() {
 		try {
