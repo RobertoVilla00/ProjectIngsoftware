@@ -61,6 +61,7 @@ public class Server {
 	 */
 	public synchronized void Lobby(Connection c) throws IOException {
 		System.out.println("nella lobby");
+		c.setEnteredLobby(true);
 		if (connections.size() == 0 || connections.size() < numberOfPlayer) {
 			AddConnection(c);
 			PlayerIdMessage playerIdMessage = new PlayerIdMessage(connections.size() - 1);
@@ -123,7 +124,6 @@ public class Server {
 			}
 		} else {
 			AddConnection(c);
-			//DeregisterConnection(c);
 		}
 
 	}
@@ -160,28 +160,6 @@ public class Server {
 			e.printStackTrace();
 		} catch (WrongMessageException e) {
 			e.printStackTrace();
-		}
-	}
-
-
-	/**
-	 * It used to close all the connections.
-	 */
-	public void CloseAll(){
-	/*	connections.forEach(x-> {
-			x.setActive(false);
-			x.AsyncSend(new ClosedConnectionMessage());
-			try {
-				sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			x.Close();
-		});*/
-		for(Connection c : connections){
-			c.AsyncSend(new ClosedConnectionMessage());
-			c.setActive(false);
-			connections.remove(c);
 		}
 	}
 }

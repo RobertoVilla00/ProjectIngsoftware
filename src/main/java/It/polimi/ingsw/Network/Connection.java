@@ -28,6 +28,7 @@ public class Connection extends Observable implements Runnable {
 	private Object lock;
 	private Timer timer;
 	private boolean isAlive;
+	private boolean enteredLobby;
 
 	/**
 	 * The constructor of the connection.
@@ -41,6 +42,8 @@ public class Connection extends Observable implements Runnable {
 		this.lock = new Object();
 		this.isAlive = true;
 		this.timer = new Timer();
+		this.enteredLobby=false;
+
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -48,7 +51,10 @@ public class Connection extends Observable implements Runnable {
 					isAlive = false;
 				}
 				else{
-					exit(0);
+					if(enteredLobby) {
+						System.out.println("Connection timed out");
+						exit(0);
+					}
 				}
 			}
 		}, 10000,10000);
@@ -162,7 +168,6 @@ public class Connection extends Observable implements Runnable {
 		}
 		catch (SocketException e){
 			exit(0);
-			e.printStackTrace();
 		}
 		catch (IOException e) {
 			System.err.println(e.getMessage());
@@ -195,6 +200,10 @@ public class Connection extends Observable implements Runnable {
 	 */
 	public void setActive(boolean value){
 		this.active=value;
+	}
+
+	public void setEnteredLobby(boolean value){
+		this.enteredLobby=value;
 	}
 }
 
