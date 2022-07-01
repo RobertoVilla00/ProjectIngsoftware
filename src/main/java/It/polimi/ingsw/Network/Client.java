@@ -11,7 +11,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Timer;
@@ -67,6 +66,10 @@ public class Client extends Observable implements Observer {
 		return active;
 	}
 
+    /**
+     * It used to set a player active or inactive.
+     * @param active: boolean indicating if a player is active or inactive.
+     */
 	public synchronized void setActive(boolean active) {
 		this.active = active;
 	}

@@ -115,6 +115,13 @@ public class Connection extends Observable implements Runnable {
 		return (Message) inputObject;
 	}
 
+	/**
+	 * It used to read a message from the Object Input Stream.
+	 * @param content: the content of a message.
+	 * @return the message received.
+	 * @throws NoSuchElementException: if the element being requested does not exists.
+	 * @throws IOException: signals that an i/o exception has occurred.
+	 */
 	public Message ReadSpecificMessage(MessageContent content) throws NoSuchElementException, IOException {
 		Object inputObject = null;
 		try {
@@ -150,9 +157,7 @@ public class Connection extends Observable implements Runnable {
 	 */
 	public void Close() {
 		closeConnection();
-		System.out.println("Deregistering client.. ");
 		server.DeregisterConnection(this);
-		System.out.println("Done!");
 	}
 
 	/**
@@ -202,6 +207,10 @@ public class Connection extends Observable implements Runnable {
 		this.active=value;
 	}
 
+	/**
+	 * It set true if a player is entered in the lobby.
+	 * @param value: boolean indicating if a player is entered in the lobby.
+	 */
 	public void setEnteredLobby(boolean value){
 		this.enteredLobby=value;
 	}

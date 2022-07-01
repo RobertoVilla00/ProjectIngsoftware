@@ -14,8 +14,6 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static java.lang.Thread.sleep;
-
 /**
  * The server class that starts a Socket Server.
  */
