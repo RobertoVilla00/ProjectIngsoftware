@@ -46,8 +46,8 @@ java -jar Client.jar
 
 Javadocs
 ----
-The javadocs are available here
-    <a href="deliverables" target="_blank">javadocs</a>
+The javadocs and UML are available here
+    <a href="deliverables" target="_blank">deliverables.</a>
 
 Test Coverage
 ---
