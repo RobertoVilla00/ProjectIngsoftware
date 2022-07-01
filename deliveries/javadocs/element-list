@@ -1,0 +1,10 @@
+It.polimi.ingsw.Controller
+It.polimi.ingsw.Exceptions
+It.polimi.ingsw.Message
+It.polimi.ingsw.Model
+It.polimi.ingsw.Network
+It.polimi.ingsw.Observer
+It.polimi.ingsw.View
+It.polimi.ingsw.View.Cli
+It.polimi.ingsw.View.Gui
+It.polimi.ingsw.View.Gui.GuiController
